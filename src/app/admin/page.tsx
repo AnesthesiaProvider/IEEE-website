@@ -246,13 +246,13 @@ export default function AdminPage() {
   const getStatusBadge = (status: ApplicationStatus) => {
     switch (status) {
       case "Selected":
-        return "bg-emerald-500/20 text-emerald-300 border-emerald-500/40";
+        return "bg-[#7A1833]/40 text-[#F5F1F5] border-[#8F2450]";
       case "Shortlisted":
-        return "bg-cyan-500/20 text-cyan-300 border-cyan-500/40";
+        return "bg-[#632C70]/30 text-[#E07AB0] border-[#914B91]";
       case "Rejected":
-        return "bg-rose-500/20 text-rose-300 border-rose-500/40";
+        return "bg-[#18131B] text-[#756B7A] border-[#2A202D]";
       default:
-        return "bg-amber-500/20 text-amber-300 border-amber-500/40";
+        return "bg-[#4A1028]/40 text-[#D8D0DA] border-[#5C2948]";
     }
   };
 
@@ -260,7 +260,7 @@ export default function AdminPage() {
   if (isAuthenticated === null) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center">
-        <div className="w-8 h-8 rounded-full border-2 border-violet-500 border-t-transparent animate-spin" />
+        <div className="w-8 h-8 rounded-full border-2 border-[#C75491] border-t-transparent animate-spin" />
       </div>
     );
   }
@@ -272,34 +272,34 @@ export default function AdminPage() {
     return (
       <div className="min-h-[75vh] flex items-center justify-center px-4 py-16">
         <div className="glow-orb-purple w-96 h-96 top-20 -left-20" />
-        <div className="glow-orb-cyan w-96 h-96 top-40 -right-20" />
+        <div className="glow-orb-wine w-96 h-96 top-40 -right-20" />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative z-10 max-w-md w-full rounded-3xl bg-slate-900/90 border border-violet-500/30 backdrop-blur-2xl p-8 shadow-2xl space-y-6"
+          className="relative z-10 max-w-md w-full rounded-3xl bg-[#18131B]/95 border border-[#39283D] backdrop-blur-2xl p-8 shadow-2xl space-y-6"
         >
           <div className="text-center space-y-2">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-violet-600 to-cyan-500 p-0.5 mx-auto flex items-center justify-center">
-              <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
-                <Lock className="w-6 h-6 text-violet-400" />
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#7A1833] via-[#8F2450] to-[#C75491] p-0.5 mx-auto flex items-center justify-center">
+              <div className="w-full h-full bg-[#121015] rounded-[14px] flex items-center justify-center">
+                <Lock className="w-6 h-6 text-[#C75491]" />
               </div>
             </div>
-            <h1 className="text-2xl font-bold text-white">Admin Authentication</h1>
-            <p className="text-xs text-slate-400">
+            <h1 className="text-2xl font-bold text-[#F5F1F5]">Admin Authentication</h1>
+            <p className="text-xs text-[#A79EAB]">
               Enter the chapter administrator passkey to access the Junior Core recruitment portal.
             </p>
           </div>
 
           {authError && (
-            <div className="p-3 rounded-xl bg-rose-950/60 border border-rose-500/30 text-rose-300 text-xs text-center">
+            <div className="p-3 rounded-xl bg-[#4A1028]/60 border border-[#8F2450] text-[#E07AB0] text-xs text-center">
               {authError}
             </div>
           )}
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1.5">
+              <label className="block text-xs font-medium text-[#D8D0DA] mb-1.5">
                 Administrator Password
               </label>
               <input
@@ -308,14 +308,14 @@ export default function AdminPage() {
                 onChange={(e) => setPasswordInput(e.target.value)}
                 placeholder="••••••••••••"
                 required
-                className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-white/10 text-white text-sm focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500"
+                className="w-full px-4 py-2.5 rounded-xl bg-[#121015] border border-[#2A202D] text-[#F5F1F5] placeholder-[#756B7A] text-sm focus:outline-none focus:border-[#C75491] focus:ring-1 focus:ring-[#C75491]"
               />
             </div>
 
             <button
               type="submit"
               disabled={isLoggingIn}
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 disabled:opacity-60 text-white font-semibold text-sm shadow-lg shadow-violet-600/30 transition-all flex items-center justify-center space-x-2"
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-[#5A1025] via-[#8F2450] to-[#7B3F8C] hover:from-[#7A1833] hover:via-[#C75491] hover:to-[#914B91] disabled:opacity-60 text-[#F5F1F5] font-semibold text-sm shadow-lg shadow-[#4A1028]/50 transition-all flex items-center justify-center space-x-2"
             >
               {isLoggingIn ? (
                 <>
@@ -341,15 +341,15 @@ export default function AdminPage() {
   return (
     <div className="relative py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
       {/* Top Header Bar */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#2A202D] pb-6">
         <div>
           <div className="flex items-center space-x-2">
-            <span className="px-2.5 py-0.5 rounded-full bg-violet-950 text-violet-300 border border-violet-500/30 text-[11px] font-semibold">
+            <span className="px-2.5 py-0.5 rounded-full bg-[#18131B] text-[#C75491] border border-[#39283D] text-[11px] font-semibold">
               Admin Portal
             </span>
-            <span className="text-xs text-slate-400">• IEEE WIE Bennett University</span>
+            <span className="text-xs text-[#A79EAB]">• IEEE WIE Bennett University</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#F5F1F5] mt-1">
             Junior Core Applications Management
           </h1>
         </div>
@@ -358,7 +358,7 @@ export default function AdminPage() {
           <button
             onClick={fetchApplications}
             disabled={isLoading}
-            className="p-2.5 rounded-xl bg-slate-900 border border-white/10 text-slate-300 hover:text-white hover:bg-slate-800 transition-colors"
+            className="p-2.5 rounded-xl bg-[#121015] border border-[#2A202D] text-[#D8D0DA] hover:text-[#F5F1F5] hover:bg-[#18131B] hover:border-[#39283D] transition-colors"
             title="Refresh List"
           >
             <RefreshCw className={`w-4 h-4 ${isLoading ? "animate-spin" : ""}`} />
@@ -366,15 +366,15 @@ export default function AdminPage() {
 
           <button
             onClick={handleExportCSV}
-            className="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-white/10 text-slate-200 text-xs font-semibold flex items-center space-x-2 transition-colors"
+            className="px-4 py-2.5 rounded-xl bg-[#121015] hover:bg-[#18131B] border border-[#2A202D] hover:border-[#39283D] text-[#D8D0DA] text-xs font-semibold flex items-center space-x-2 transition-colors"
           >
-            <Download className="w-4 h-4 text-cyan-400" />
+            <Download className="w-4 h-4 text-[#C75491]" />
             <span>Export CSV</span>
           </button>
 
           <button
             onClick={handleLogout}
-            className="px-4 py-2.5 rounded-xl bg-rose-950/40 hover:bg-rose-900/50 border border-rose-500/30 text-rose-300 text-xs font-semibold flex items-center space-x-2 transition-colors"
+            className="px-4 py-2.5 rounded-xl bg-[#4A1028]/30 hover:bg-[#4A1028]/60 border border-[#5C2948] text-[#E07AB0] text-xs font-semibold flex items-center space-x-2 transition-colors"
           >
             <LogOut className="w-4 h-4" />
             <span>Sign Out</span>
@@ -384,43 +384,43 @@ export default function AdminPage() {
 
       {/* Notification Toast Alert */}
       {actionMessage && (
-        <div className="p-3 rounded-xl bg-emerald-950/70 border border-emerald-500/40 text-emerald-300 text-xs font-medium flex items-center space-x-2">
-          <CheckCircle2 className="w-4 h-4 shrink-0" />
+        <div className="p-3 rounded-xl bg-[#18131B] border border-[#5C2948] text-[#E07AB0] text-xs font-medium flex items-center space-x-2">
+          <CheckCircle2 className="w-4 h-4 shrink-0 text-[#C75491]" />
           <span>{actionMessage}</span>
         </div>
       )}
 
       {/* Analytics Metric Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div className="rounded-2xl bg-slate-900/80 border border-white/8 p-5 space-y-1">
-          <div className="text-xs font-medium text-slate-400">Total Applications</div>
-          <div className="text-2xl sm:text-3xl font-bold text-white">{totalCount}</div>
+        <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
+          <div className="text-xs font-medium text-[#A79EAB]">Total Applications</div>
+          <div className="text-2xl sm:text-3xl font-bold text-[#F5F1F5]">{totalCount}</div>
         </div>
-        <div className="rounded-2xl bg-slate-900/80 border border-white/8 p-5 space-y-1">
-          <div className="text-xs font-medium text-cyan-400">Shortlisted</div>
-          <div className="text-2xl sm:text-3xl font-bold text-cyan-300">{shortlistedCount}</div>
+        <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
+          <div className="text-xs font-medium text-[#C75491]">Shortlisted</div>
+          <div className="text-2xl sm:text-3xl font-bold text-[#E07AB0]">{shortlistedCount}</div>
         </div>
-        <div className="rounded-2xl bg-slate-900/80 border border-white/8 p-5 space-y-1">
-          <div className="text-xs font-medium text-emerald-400">Selected</div>
-          <div className="text-2xl sm:text-3xl font-bold text-emerald-300">{selectedCount}</div>
+        <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
+          <div className="text-xs font-medium text-[#D05A9E]">Selected</div>
+          <div className="text-2xl sm:text-3xl font-bold text-[#F5F1F5]">{selectedCount}</div>
         </div>
-        <div className="rounded-2xl bg-slate-900/80 border border-white/8 p-5 space-y-1">
-          <div className="text-xs font-medium text-amber-400">Pending Review</div>
-          <div className="text-2xl sm:text-3xl font-bold text-amber-300">{pendingCount}</div>
+        <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
+          <div className="text-xs font-medium text-[#A79EAB]">Pending Review</div>
+          <div className="text-2xl sm:text-3xl font-bold text-[#D8D0DA]">{pendingCount}</div>
         </div>
       </div>
 
       {/* Search and Filters Bar */}
-      <div className="rounded-2xl bg-slate-900/70 border border-white/10 p-4 flex flex-col md:flex-row gap-3 items-center justify-between">
+      <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-4 flex flex-col md:flex-row gap-3 items-center justify-between">
         {/* Search */}
         <div className="relative w-full md:w-80">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A79EAB]" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search by name, enrollment, email..."
-            className="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-950 border border-white/10 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-violet-500"
+            className="w-full pl-10 pr-4 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] placeholder-[#756B7A] text-xs focus:outline-none focus:border-[#C75491]"
           />
         </div>
 
@@ -430,7 +430,7 @@ export default function AdminPage() {
           <select
             value={domainFilter}
             onChange={(e) => setDomainFilter(e.target.value)}
-            className="px-3 py-2 rounded-xl bg-slate-950 border border-white/10 text-white text-xs focus:outline-none focus:border-violet-500"
+            className="px-3 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] text-xs focus:outline-none focus:border-[#C75491]"
           >
             <option value="All">All Domains</option>
             <option value="Technical">Technical</option>
@@ -449,7 +449,7 @@ export default function AdminPage() {
           <select
             value={yearFilter}
             onChange={(e) => setYearFilter(e.target.value)}
-            className="px-3 py-2 rounded-xl bg-slate-950 border border-white/10 text-white text-xs focus:outline-none focus:border-violet-500"
+            className="px-3 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] text-xs focus:outline-none focus:border-[#C75491]"
           >
             <option value="All">All Years</option>
             <option value="1st Year">1st Year</option>
@@ -462,7 +462,7 @@ export default function AdminPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-3 py-2 rounded-xl bg-slate-950 border border-white/10 text-white text-xs focus:outline-none focus:border-violet-500"
+            className="px-3 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] text-xs focus:outline-none focus:border-[#C75491]"
           >
             <option value="All">All Statuses</option>
             <option value="Pending">Pending</option>
@@ -474,10 +474,10 @@ export default function AdminPage() {
       </div>
 
       {/* Applications Data Table */}
-      <div className="rounded-2xl bg-slate-900/80 border border-white/10 overflow-hidden shadow-xl">
+      <div className="rounded-2xl bg-[#121015] border border-[#2A202D] overflow-hidden shadow-xl">
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs text-slate-300">
-            <thead className="bg-slate-950/80 text-slate-400 uppercase tracking-wider font-semibold border-b border-white/10">
+          <table className="w-full text-left text-xs text-[#D8D0DA]">
+            <thead className="bg-[#18131B] text-[#A79EAB] uppercase tracking-wider font-semibold border-b border-[#2A202D]">
               <tr>
                 <th className="py-3.5 px-4">Applicant</th>
                 <th className="py-3.5 px-4">Enrollment</th>
@@ -488,7 +488,7 @@ export default function AdminPage() {
                 <th className="py-3.5 px-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5">
+            <tbody className="divide-y divide-[#2A202D]">
               {filteredApplications.length > 0 ? (
                 filteredApplications.map((app) => (
                   <tr
@@ -497,20 +497,20 @@ export default function AdminPage() {
                     onClick={() => setSelectedApplicant(app)}
                   >
                     <td className="py-3.5 px-4">
-                      <div className="font-bold text-white hover:text-cyan-300 transition-colors">
+                      <div className="font-bold text-[#F5F1F5] hover:text-[#C75491] transition-colors">
                         {app.fullName}
                       </div>
-                      <div className="text-[11px] text-slate-400">{app.email}</div>
+                      <div className="text-[11px] text-[#A79EAB]">{app.email}</div>
                     </td>
-                    <td className="py-3.5 px-4 font-mono text-cyan-300 font-semibold">
+                    <td className="py-3.5 px-4 font-mono text-[#E07AB0] font-semibold">
                       {app.enrollmentNumber}
                     </td>
                     <td className="py-3.5 px-4">
-                      <div>{app.course} ({app.branch})</div>
-                      <div className="text-[11px] text-slate-400">{app.year} • {app.semester}</div>
+                      <div className="text-[#F5F1F5]">{app.course} ({app.branch})</div>
+                      <div className="text-[11px] text-[#A79EAB]">{app.year} • {app.semester}</div>
                     </td>
                     <td className="py-3.5 px-4">
-                      <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-white font-medium">
+                      <span className="px-2.5 py-1 rounded-md bg-[#18131B] border border-[#39283D] text-[#F5F1F5] font-medium">
                         {app.domain}
                       </span>
                     </td>
@@ -520,7 +520,7 @@ export default function AdminPage() {
                         onChange={(e) =>
                           handleStatusChange(app.id, e.target.value as ApplicationStatus)
                         }
-                        className={`px-2.5 py-1 rounded-full text-[11px] font-semibold border focus:outline-none cursor-pointer bg-slate-950 ${getStatusBadge(
+                        className={`px-2.5 py-1 rounded-full text-[11px] font-semibold border focus:outline-none cursor-pointer bg-[#0D0B0F] ${getStatusBadge(
                           app.status
                         )}`}
                       >
@@ -531,7 +531,7 @@ export default function AdminPage() {
                         ))}
                       </select>
                     </td>
-                    <td className="py-3.5 px-4 text-slate-400 whitespace-nowrap">
+                    <td className="py-3.5 px-4 text-[#A79EAB] whitespace-nowrap">
                       {new Date(app.createdAt).toLocaleDateString("en-IN", {
                         day: "numeric",
                         month: "short",
@@ -541,14 +541,14 @@ export default function AdminPage() {
                       <div className="flex items-center justify-end space-x-1">
                         <button
                           onClick={() => setSelectedApplicant(app)}
-                          className="p-1.5 text-slate-400 hover:text-cyan-400 rounded-lg hover:bg-white/5"
+                          className="p-1.5 text-[#A79EAB] hover:text-[#C75491] rounded-lg hover:bg-white/5 transition-colors"
                           title="View Details"
                         >
                           <Eye className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => handleDelete(app.id)}
-                          className="p-1.5 text-slate-400 hover:text-rose-400 rounded-lg hover:bg-white/5"
+                          className="p-1.5 text-[#A79EAB] hover:text-[#E07AB0] rounded-lg hover:bg-[#4A1028]/30 transition-colors"
                           title="Delete Application"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -559,7 +559,7 @@ export default function AdminPage() {
                 ))
               ) : (
                 <tr>
-                  <td colSpan={7} className="py-12 text-center text-slate-400">
+                  <td colSpan={7} className="py-12 text-center text-[#A79EAB]">
                     No applications match the current query or filters.
                   </td>
                 </tr>
@@ -579,26 +579,26 @@ export default function AdminPage() {
         >
           <div className="space-y-6 text-sm">
             {/* Header info */}
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#2A202D] pb-4">
               <div>
-                <h3 className="text-xl font-bold text-white">{selectedApplicant.fullName}</h3>
-                <p className="text-xs text-cyan-300 font-mono">
+                <h3 className="text-xl font-bold text-[#F5F1F5]">{selectedApplicant.fullName}</h3>
+                <p className="text-xs text-[#E07AB0] font-mono">
                   {selectedApplicant.enrollmentNumber} • {selectedApplicant.email} • {selectedApplicant.phone}
                 </p>
-                <p className="text-xs text-slate-400 mt-0.5">
+                <p className="text-xs text-[#A79EAB] mt-0.5">
                   {selectedApplicant.course} in {selectedApplicant.branch} ({selectedApplicant.year}, {selectedApplicant.semester})
                 </p>
               </div>
 
               {/* Status changer in modal */}
               <div className="flex items-center space-x-2">
-                <span className="text-xs text-slate-400">Status:</span>
+                <span className="text-xs text-[#A79EAB]">Status:</span>
                 <select
                   value={selectedApplicant.status}
                   onChange={(e) =>
                     handleStatusChange(selectedApplicant.id, e.target.value as ApplicationStatus)
                   }
-                  className={`px-3 py-1.5 rounded-full text-xs font-semibold border bg-slate-950 focus:outline-none ${getStatusBadge(
+                  className={`px-3 py-1.5 rounded-full text-xs font-semibold border bg-[#0D0B0F] focus:outline-none ${getStatusBadge(
                     selectedApplicant.status
                   )}`}
                 >
@@ -613,10 +613,10 @@ export default function AdminPage() {
 
             {/* Motivation */}
             <div className="space-y-1.5">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-violet-400">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#C75491]">
                 Why do you want to join IEEE WIE?
               </h4>
-              <p className="p-3.5 rounded-xl bg-slate-950/70 border border-white/5 text-slate-200 leading-relaxed whitespace-pre-line text-xs">
+              <p className="p-3.5 rounded-xl bg-[#121015] border border-[#2A202D] text-[#D8D0DA] leading-relaxed whitespace-pre-line text-xs">
                 {selectedApplicant.whyJoin}
               </p>
             </div>
@@ -624,19 +624,19 @@ export default function AdminPage() {
             {/* Skills & Experience */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-cyan-400">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#C75491]">
                   Skills & Tools
                 </h4>
-                <p className="p-3.5 rounded-xl bg-slate-950/70 border border-white/5 text-slate-200 text-xs">
+                <p className="p-3.5 rounded-xl bg-[#121015] border border-[#2A202D] text-[#D8D0DA] text-xs">
                   {selectedApplicant.skills}
                 </p>
               </div>
 
               <div className="space-y-1.5">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-pink-400">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#D05A9E]">
                   Previous Experience
                 </h4>
-                <p className="p-3.5 rounded-xl bg-slate-950/70 border border-white/5 text-slate-200 text-xs">
+                <p className="p-3.5 rounded-xl bg-[#121015] border border-[#2A202D] text-[#D8D0DA] text-xs">
                   {selectedApplicant.previousExperience || "None specified"}
                 </p>
               </div>
@@ -644,7 +644,7 @@ export default function AdminPage() {
 
             {/* Links */}
             <div className="space-y-1.5">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#A79EAB]">
                 Portfolio & Profiles
               </h4>
               <div className="flex flex-wrap gap-2">
@@ -653,7 +653,7 @@ export default function AdminPage() {
                     href={selectedApplicant.portfolioUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-slate-800 text-cyan-300 border border-white/10 text-xs hover:bg-slate-700"
+                    className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-[#18131B] text-[#E07AB0] border border-[#39283D] text-xs hover:border-[#5C2948] transition-colors"
                   >
                     <span>Portfolio</span>
                     <ExternalLink className="w-3.5 h-3.5" />
@@ -664,7 +664,7 @@ export default function AdminPage() {
                     href={selectedApplicant.linkedinUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-slate-800 text-blue-300 border border-white/10 text-xs hover:bg-slate-700"
+                    className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-[#18131B] text-[#C75491] border border-[#39283D] text-xs hover:border-[#5C2948] transition-colors"
                   >
                     <span>LinkedIn</span>
                     <ExternalLink className="w-3.5 h-3.5" />
@@ -675,7 +675,7 @@ export default function AdminPage() {
                     href={selectedApplicant.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-slate-800 text-violet-300 border border-white/10 text-xs hover:bg-slate-700"
+                    className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-[#18131B] text-[#D05A9E] border border-[#39283D] text-xs hover:border-[#5C2948] transition-colors"
                   >
                     <span>GitHub</span>
                     <ExternalLink className="w-3.5 h-3.5" />
@@ -684,7 +684,7 @@ export default function AdminPage() {
                 {!selectedApplicant.portfolioUrl &&
                   !selectedApplicant.linkedinUrl &&
                   !selectedApplicant.githubUrl && (
-                    <span className="text-xs text-slate-500">No profile links provided.</span>
+                    <span className="text-xs text-[#756B7A]">No profile links provided.</span>
                   )}
               </div>
             </div>
@@ -692,23 +692,23 @@ export default function AdminPage() {
             {/* Additional info */}
             {selectedApplicant.additionalInfo && (
               <div className="space-y-1.5">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#A79EAB]">
                   Additional Notes
                 </h4>
-                <p className="text-xs text-slate-300 bg-slate-950/50 p-3 rounded-xl border border-white/5">
+                <p className="text-xs text-[#D8D0DA] bg-[#121015] p-3 rounded-xl border border-[#2A202D]">
                   {selectedApplicant.additionalInfo}
                 </p>
               </div>
             )}
 
             {/* Bottom action row */}
-            <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-              <span className="text-xs text-slate-500">
+            <div className="pt-4 border-t border-[#2A202D] flex items-center justify-between">
+              <span className="text-xs text-[#756B7A]">
                 Submitted: {new Date(selectedApplicant.createdAt).toLocaleString()}
               </span>
               <button
                 onClick={() => handleDelete(selectedApplicant.id)}
-                className="px-4 py-1.5 rounded-lg bg-rose-950/40 text-rose-300 hover:bg-rose-900/60 border border-rose-500/30 text-xs font-medium flex items-center space-x-1.5"
+                className="px-4 py-1.5 rounded-lg bg-[#4A1028]/30 text-[#E07AB0] hover:bg-[#4A1028]/60 border border-[#5C2948] text-xs font-medium flex items-center space-x-1.5 transition-colors"
               >
                 <Trash2 className="w-3.5 h-3.5" />
                 <span>Delete</span>

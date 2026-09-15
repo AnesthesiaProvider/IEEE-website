@@ -29,7 +29,7 @@ export function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? "bg-[#080B14]/85 backdrop-blur-xl border-b border-white/8 py-3 shadow-lg shadow-black/30"
+          ? "bg-[#121015]/90 backdrop-blur-xl border-b border-[#2A202D] py-3 shadow-lg shadow-black/40"
           : "bg-transparent py-5"
       }`}
     >
@@ -42,9 +42,9 @@ export function Navbar() {
             aria-label="IEEE Women in Engineering Bennett University Home"
           >
             {/* Custom IEEE WIE Emblem */}
-            <div className="relative w-10 h-10 rounded-xl bg-gradient-to-tr from-violet-600 via-indigo-600 to-cyan-400 p-[1.5px] shadow-lg shadow-violet-600/20 group-hover:shadow-violet-600/40 transition-shadow">
-              <div className="w-full h-full rounded-[10px] bg-slate-950 flex items-center justify-center">
-                <span className="font-extrabold text-sm tracking-tighter bg-gradient-to-r from-violet-300 via-white to-cyan-300 bg-clip-text text-transparent">
+            <div className="relative w-10 h-10 rounded-xl bg-gradient-to-tr from-[#5A1025] via-[#8F2450] to-[#914B91] p-[1.5px] shadow-lg shadow-[#7A1833]/25 group-hover:shadow-[#8F2450]/40 transition-shadow">
+              <div className="w-full h-full rounded-[10px] bg-[#121015] flex items-center justify-center">
+                <span className="font-extrabold text-sm tracking-tighter bg-gradient-to-r from-[#F5F1F5] via-[#D05A9E] to-[#E07AB0] bg-clip-text text-transparent">
                   WIE
                 </span>
               </div>
@@ -52,21 +52,21 @@ export function Navbar() {
 
             <div className="flex flex-col">
               <div className="flex items-center space-x-1.5">
-                <span className="font-bold text-base tracking-tight text-white group-hover:text-cyan-300 transition-colors">
+                <span className="font-bold text-base tracking-tight text-[#F5F1F5] group-hover:text-[#D05A9E] transition-colors">
                   IEEE WIE
                 </span>
-                <span className="text-[10px] font-semibold uppercase px-1.5 py-0.5 rounded bg-violet-950/80 border border-violet-500/30 text-violet-300">
+                <span className="text-[10px] font-semibold uppercase px-1.5 py-0.5 rounded bg-[#18131B] border border-[#39283D] text-[#C75491]">
                   BU
                 </span>
               </div>
-              <span className="text-[11px] text-slate-400 font-medium tracking-wide">
+              <span className="text-[11px] text-[#A79EAB] font-medium tracking-wide">
                 Bennett University
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center space-x-1 bg-slate-900/60 border border-white/8 backdrop-blur-md px-4 py-1.5 rounded-full">
+          <nav className="hidden md:flex items-center space-x-1 bg-[#121015]/80 border border-[#2A202D] backdrop-blur-md px-4 py-1.5 rounded-full">
             {siteConfig.navigation.map((item) => {
               const isActive = pathname === item.href;
               return (
@@ -75,14 +75,14 @@ export function Navbar() {
                   href={item.href}
                   className={`relative px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
                     isActive
-                      ? "text-white font-semibold"
-                      : "text-slate-300 hover:text-white hover:bg-white/5"
+                      ? "text-[#F5F1F5] font-semibold"
+                      : "text-[#D8D0DA] hover:text-[#F5F1F5] hover:bg-white/5"
                   }`}
                 >
                   {isActive && (
                     <motion.div
                       layoutId="nav-active-pill"
-                      className="absolute inset-0 rounded-full bg-violet-600/30 border border-violet-500/40 -z-10"
+                      className="absolute inset-0 rounded-full bg-[#7A1833]/30 border border-[#5C2948] -z-10"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -96,7 +96,7 @@ export function Navbar() {
           <div className="hidden md:flex items-center space-x-4">
             <Link
               href="/admin"
-              className="p-2 text-slate-400 hover:text-white transition-colors"
+              className="p-2 text-[#A79EAB] hover:text-[#F5F1F5] transition-colors"
               title="Admin Portal"
               aria-label="Admin Portal"
             >
@@ -105,11 +105,11 @@ export function Navbar() {
 
             <Link
               href="/junior-core"
-              className="relative group inline-flex items-center space-x-2 px-5 py-2.5 rounded-full font-semibold text-xs tracking-wide uppercase overflow-hidden shadow-lg shadow-violet-600/25 transition-all duration-300 hover:shadow-violet-600/50 hover:scale-[1.02] focus:outline-none"
+              className="relative group inline-flex items-center space-x-2 px-5 py-2.5 rounded-full font-semibold text-xs tracking-wide uppercase overflow-hidden shadow-lg shadow-[#7A1833]/30 transition-all duration-300 hover:shadow-[#8F2450]/50 hover:scale-[1.02] focus:outline-none"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-500 transition-all duration-300 group-hover:opacity-90" />
-              <span className="relative z-10 text-white flex items-center space-x-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-cyan-200" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#5A1025] via-[#7A1833] via-[#8F2450] to-[#7B3F8C] transition-all duration-300 group-hover:from-[#7A1833] group-hover:to-[#914B91]" />
+              <span className="relative z-10 text-[#F5F1F5] flex items-center space-x-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-[#E07AB0]" />
                 <span>Join Junior Core</span>
                 <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
@@ -120,7 +120,7 @@ export function Navbar() {
           <div className="flex md:hidden items-center space-x-2">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-xl bg-slate-900/80 border border-white/10 text-slate-300 hover:text-white focus:outline-none"
+              className="p-2 rounded-xl bg-[#121015]/90 border border-[#2A202D] text-[#D8D0DA] hover:text-[#F5F1F5] focus:outline-none"
               aria-label="Toggle Navigation Menu"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -137,7 +137,7 @@ export function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
-            className="md:hidden bg-[#080B14]/95 border-b border-white/10 backdrop-blur-2xl overflow-hidden px-4 pt-3 pb-6 space-y-4"
+            className="md:hidden bg-[#121015]/98 border-b border-[#2A202D] backdrop-blur-2xl overflow-hidden px-4 pt-3 pb-6 space-y-4"
           >
             <div className="flex flex-col space-y-1">
               {siteConfig.navigation.map((item) => {
@@ -148,31 +148,31 @@ export function Navbar() {
                     href={item.href}
                     className={`px-4 py-3 rounded-xl text-base font-medium flex items-center justify-between ${
                       isActive
-                        ? "bg-violet-600/20 text-white border border-violet-500/30"
-                        : "text-slate-300 hover:bg-white/5"
+                        ? "bg-[#7A1833]/25 text-[#F5F1F5] border border-[#5C2948]"
+                        : "text-[#D8D0DA] hover:bg-white/5"
                     }`}
                   >
                     <span>{item.name}</span>
-                    {isActive && <div className="w-2 h-2 rounded-full bg-cyan-400" />}
+                    {isActive && <div className="w-2 h-2 rounded-full bg-[#D05A9E]" />}
                   </Link>
                 );
               })}
             </div>
 
-            <div className="pt-3 border-t border-white/10 flex flex-col space-y-3">
+            <div className="pt-3 border-t border-[#2A202D] flex flex-col space-y-3">
               <Link
                 href="/junior-core"
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-600 text-white font-semibold text-center text-sm shadow-md flex items-center justify-center space-x-2"
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-[#5A1025] via-[#8F2450] to-[#7B3F8C] hover:from-[#7A1833] hover:to-[#914B91] text-[#F5F1F5] font-semibold text-center text-sm shadow-md shadow-[#7A1833]/25 flex items-center justify-center space-x-2"
               >
-                <Sparkles className="w-4 h-4 text-cyan-200" />
+                <Sparkles className="w-4 h-4 text-[#E07AB0]" />
                 <span>Apply for Junior Core</span>
               </Link>
 
               <Link
                 href="/admin"
-                className="w-full py-2.5 rounded-xl bg-slate-900 border border-white/10 text-slate-300 text-xs font-medium text-center flex items-center justify-center space-x-2"
+                className="w-full py-2.5 rounded-xl bg-[#18131B] border border-[#2A202D] text-[#D8D0DA] text-xs font-medium text-center flex items-center justify-center space-x-2"
               >
-                <ShieldCheck className="w-4 h-4 text-slate-400" />
+                <ShieldCheck className="w-4 h-4 text-[#A79EAB]" />
                 <span>Admin Login Portal</span>
               </Link>
             </div>

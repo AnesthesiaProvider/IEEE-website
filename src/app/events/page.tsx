@@ -29,23 +29,23 @@ export default function EventsPage() {
   return (
     <div className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
       {/* Dynamic ambient glows */}
-      <div className="glow-orb-cyan w-96 h-96 top-12 -left-20" />
+      <div className="glow-orb-wine w-96 h-96 top-12 -left-20" />
       <div className="glow-orb-purple w-96 h-96 top-96 -right-20" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header Section */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-xs font-semibold text-cyan-300 backdrop-blur-md">
-            <Calendar className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#18131B] border border-[#39283D] text-xs font-semibold text-[#C75491] backdrop-blur-md">
+            <Calendar className="w-3.5 h-3.5 text-[#D05A9E]" />
             <span>Chapter Activities & Timeline</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-[#F5F1F5] tracking-tight">
             Events & Hackathons
           </h1>
 
-          <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
+          <p className="text-[#D8D0DA] text-base sm:text-lg leading-relaxed">
             From overnight coding sprints to expert leadership roundtables, discover opportunities to grow your network and craft impactful technology.
           </p>
         </div>
@@ -60,8 +60,8 @@ export default function EventsPage() {
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-all duration-200 ${
                   isActive
-                    ? "bg-gradient-to-r from-violet-600 to-cyan-600 text-white shadow-lg shadow-violet-600/30 border border-violet-400"
-                    : "bg-slate-900/80 text-slate-300 hover:text-white border border-white/10 hover:bg-slate-800"
+                    ? "bg-gradient-to-r from-[#5A1025] to-[#7B3F8C] text-[#F5F1F5] shadow-lg shadow-[#7A1833]/30 border border-[#8F2450]"
+                    : "bg-[#121015] text-[#D8D0DA] hover:text-[#F5F1F5] border border-[#2A202D] hover:bg-[#18131B]"
                 }`}
               >
                 {cat}
@@ -72,9 +72,9 @@ export default function EventsPage() {
 
         {/* Section 1: Upcoming Events */}
         <div className="mb-20 space-y-8">
-          <div className="flex items-center space-x-3 border-b border-white/10 pb-4">
-            <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+          <div className="flex items-center space-x-3 border-b border-[#2A202D] pb-4">
+            <div className="w-2.5 h-2.5 rounded-full bg-[#D05A9E] animate-pulse" />
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#F5F1F5] tracking-tight">
               Upcoming Events
             </h2>
           </div>
@@ -97,12 +97,12 @@ export default function EventsPage() {
               </AnimatePresence>
             </motion.div>
           ) : (
-            <div className="p-12 text-center rounded-2xl bg-slate-900/50 border border-white/10 space-y-3">
-              <AlertCircle className="w-8 h-8 text-amber-400 mx-auto" />
-              <p className="text-base font-semibold text-white">
+            <div className="p-12 text-center rounded-2xl bg-[#121015]/70 border border-[#2A202D] space-y-3">
+              <AlertCircle className="w-8 h-8 text-[#C75491] mx-auto" />
+              <p className="text-base font-semibold text-[#F5F1F5]">
                 No upcoming events right now in this category.
               </p>
-              <p className="text-xs text-slate-400 max-w-md mx-auto">
+              <p className="text-xs text-[#A79EAB] max-w-md mx-auto">
                 Follow IEEE WIE Bennett University on social channels for upcoming announcements and registration releases.
               </p>
             </div>
@@ -111,9 +111,9 @@ export default function EventsPage() {
 
         {/* Section 2: Past Events Archive */}
         <div className="space-y-8">
-          <div className="flex items-center space-x-3 border-b border-white/10 pb-4">
-            <Calendar className="w-5 h-5 text-slate-400" />
-            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+          <div className="flex items-center space-x-3 border-b border-[#2A202D] pb-4">
+            <Calendar className="w-5 h-5 text-[#914B91]" />
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#F5F1F5] tracking-tight">
               Past Events & Milestones
             </h2>
           </div>
@@ -136,7 +136,7 @@ export default function EventsPage() {
               </AnimatePresence>
             </motion.div>
           ) : (
-            <div className="p-8 text-center rounded-2xl bg-slate-900/40 border border-white/5 text-slate-400 text-sm">
+            <div className="p-8 text-center rounded-2xl bg-[#121015]/40 border border-[#2A202D] text-[#A79EAB] text-sm">
               No past events recorded for this category.
             </div>
           )}

@@ -18,17 +18,17 @@ export async function sendApplicationConfirmationEmail(
       <head>
         <meta charset="utf-8">
         <style>
-          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #080B14; color: #F1F5F9; padding: 24px; margin: 0; }
-          .container { max-width: 600px; margin: 0 auto; background: #0F172A; border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 16px; padding: 32px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
-          .badge { display: inline-block; background: rgba(139, 92, 246, 0.15); color: #C084FC; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid rgba(139, 92, 246, 0.3); margin-bottom: 16px; }
-          h1 { color: #FFFFFF; font-size: 24px; font-weight: 700; margin: 0 0 12px; }
-          p { color: #94A3B8; font-size: 15px; line-height: 1.6; margin: 0 0 16px; }
-          .details-card { background: rgba(30, 41, 59, 0.7); border-radius: 12px; padding: 20px; border: 1px solid rgba(255, 255, 255, 0.08); margin: 24px 0; }
-          .detail-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); font-size: 14px; }
+          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #0D0B0F; color: #F5F1F5; padding: 24px; margin: 0; }
+          .container { max-width: 600px; margin: 0 auto; background: #121015; border: 1px solid #39283D; border-radius: 16px; padding: 32px; box-shadow: 0 10px 25px rgba(0,0,0,0.7); }
+          .badge { display: inline-block; background: #18131B; color: #E07AB0; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid #5C2948; margin-bottom: 16px; }
+          h1 { color: #F5F1F5; font-size: 24px; font-weight: 700; margin: 0 0 12px; }
+          p { color: #D8D0DA; font-size: 15px; line-height: 1.6; margin: 0 0 16px; }
+          .details-card { background: #18131B; border-radius: 12px; padding: 20px; border: 1px solid #2A202D; margin: 24px 0; }
+          .detail-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #2A202D; font-size: 14px; }
           .detail-row:last-child { border-bottom: none; }
-          .label { color: #64748B; font-weight: 500; }
-          .value { color: #F8FAFC; font-weight: 600; }
-          .footer { font-size: 12px; color: #64748B; text-align: center; margin-top: 32px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 16px; }
+          .label { color: #A79EAB; font-weight: 500; }
+          .value { color: #F5F1F5; font-weight: 600; }
+          .footer { font-size: 12px; color: #756B7A; text-align: center; margin-top: 32px; border-top: 1px solid #2A202D; padding-top: 16px; }
         </style>
       </head>
       <body>
@@ -50,7 +50,7 @@ export async function sendApplicationConfirmationEmail(
             </div>
             <div class="detail-row">
               <span class="label">Interested Domain:</span>
-              <span class="value" style="color: #38BDF8;">${app.domain}</span>
+              <span class="value" style="color: #C75491;">${app.domain}</span>
             </div>
             <div class="detail-row">
               <span class="label">Submission Date:</span>
@@ -62,7 +62,7 @@ export async function sendApplicationConfirmationEmail(
             </div>
             <div class="detail-row">
               <span class="label">Application Status:</span>
-              <span class="value" style="color: #FBBF24;">${app.status}</span>
+              <span class="value" style="color: #E07AB0;">${app.status}</span>
             </div>
           </div>
 

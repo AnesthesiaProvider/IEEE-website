@@ -6,31 +6,31 @@ import { siteConfig } from "@/data/siteConfig";
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-white/8 bg-[#05070D] text-slate-400 overflow-hidden">
+    <footer className="relative border-t border-[#2A202D] bg-[#0D0B0F] text-[#A79EAB] overflow-hidden">
       {/* Subtle ambient lighting */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-24 bg-gradient-to-b from-violet-600/10 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-24 bg-gradient-to-b from-[#7A1833]/15 via-[#632C70]/5 to-transparent pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-16 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 lg:gap-12">
           {/* Brand & Mission Column */}
           <div className="md:col-span-2 space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-violet-600 via-indigo-600 to-cyan-400 p-[1.5px]">
-                <div className="w-full h-full rounded-[10px] bg-slate-950 flex items-center justify-center font-bold text-xs text-white">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#5A1025] via-[#8F2450] to-[#914B91] p-[1.5px]">
+                <div className="w-full h-full rounded-[10px] bg-[#121015] flex items-center justify-center font-bold text-xs text-[#F5F1F5]">
                   WIE
                 </div>
               </div>
               <div>
-                <h4 className="font-bold text-base text-white tracking-tight">
+                <h4 className="font-bold text-base text-[#F5F1F5] tracking-tight">
                   IEEE Women in Engineering
                 </h4>
-                <p className="text-xs text-violet-400 font-medium">
+                <p className="text-xs text-[#C75491] font-medium">
                   Bennett University Student Affinity Group
                 </p>
               </div>
             </div>
 
-            <p className="text-sm text-slate-400 max-w-md leading-relaxed">
+            <p className="text-sm text-[#A79EAB] max-w-md leading-relaxed">
               Empowering women in engineering and technology across Bennett University through hands-on technical workshops, competitive hackathons, research publications, and an inspiring peer network.
             </p>
 
@@ -41,7 +41,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="IEEE WIE BU Instagram"
-                className="p-2.5 rounded-xl bg-slate-900/80 border border-white/8 text-slate-400 hover:text-pink-400 hover:border-pink-500/30 transition-all hover:scale-105"
+                className="p-2.5 rounded-xl bg-[#121015] border border-[#2A202D] text-[#A79EAB] hover:text-[#D05A9E] hover:border-[#D05A9E]/40 transition-all hover:scale-105"
               >
                 <InstagramIcon className="w-4 h-4" />
               </a>
@@ -50,7 +50,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="IEEE WIE BU LinkedIn"
-                className="p-2.5 rounded-xl bg-slate-900/80 border border-white/8 text-slate-400 hover:text-cyan-400 hover:border-cyan-500/30 transition-all hover:scale-105"
+                className="p-2.5 rounded-xl bg-[#121015] border border-[#2A202D] text-[#A79EAB] hover:text-[#914B91] hover:border-[#914B91]/40 transition-all hover:scale-105"
               >
                 <LinkedinIcon className="w-4 h-4" />
               </a>
@@ -59,14 +59,14 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="IEEE WIE BU GitHub"
-                className="p-2.5 rounded-xl bg-slate-900/80 border border-white/8 text-slate-400 hover:text-violet-400 hover:border-violet-500/30 transition-all hover:scale-105"
+                className="p-2.5 rounded-xl bg-[#121015] border border-[#2A202D] text-[#A79EAB] hover:text-[#E07AB0] hover:border-[#E07AB0]/40 transition-all hover:scale-105"
               >
                 <GithubIcon className="w-4 h-4" />
               </a>
               <a
                 href={`mailto:${siteConfig.socials.email}`}
                 aria-label="Email IEEE WIE BU"
-                className="p-2.5 rounded-xl bg-slate-900/80 border border-white/8 text-slate-400 hover:text-white hover:border-white/20 transition-all hover:scale-105"
+                className="p-2.5 rounded-xl bg-[#121015] border border-[#2A202D] text-[#A79EAB] hover:text-[#F5F1F5] hover:border-[#5C2948] transition-all hover:scale-105"
               >
                 <Mail className="w-4 h-4" />
               </a>
@@ -75,34 +75,34 @@ export function Footer() {
 
           {/* Quick Navigation */}
           <div>
-            <h5 className="font-semibold text-sm text-white uppercase tracking-wider mb-4">
+            <h5 className="font-semibold text-sm text-[#F5F1F5] uppercase tracking-wider mb-4">
               Explore
             </h5>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link href="/" className="hover:text-cyan-300 transition-colors">
+                <Link href="/" className="text-[#D8D0DA] hover:text-[#E07AB0] transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/team" className="hover:text-cyan-300 transition-colors">
+                <Link href="/team" className="text-[#D8D0DA] hover:text-[#E07AB0] transition-colors">
                   Senior Core Team
                 </Link>
               </li>
               <li>
-                <Link href="/events" className="hover:text-cyan-300 transition-colors">
+                <Link href="/events" className="text-[#D8D0DA] hover:text-[#E07AB0] transition-colors">
                   Events & Hackathons
                 </Link>
               </li>
               <li>
-                <Link href="/join" className="hover:text-cyan-300 transition-colors">
+                <Link href="/join" className="text-[#D8D0DA] hover:text-[#E07AB0] transition-colors">
                   Join Community
                 </Link>
               </li>
               <li>
                 <Link
                   href="/junior-core"
-                  className="text-violet-400 hover:text-violet-300 font-medium flex items-center space-x-1"
+                  className="text-[#D05A9E] hover:text-[#E07AB0] font-medium flex items-center space-x-1"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>Join Junior Core</span>
@@ -113,14 +113,14 @@ export function Footer() {
 
           {/* Location & University Information */}
           <div>
-            <h5 className="font-semibold text-sm text-white uppercase tracking-wider mb-4">
+            <h5 className="font-semibold text-sm text-[#F5F1F5] uppercase tracking-wider mb-4">
               Campus Chapter
             </h5>
-            <div className="space-y-2 text-sm text-slate-400">
-              <p className="font-medium text-slate-300">Bennett University</p>
+            <div className="space-y-2 text-sm text-[#A79EAB]">
+              <p className="font-medium text-[#F5F1F5]">Bennett University</p>
               <p>Plot Nos 8-11, TechZone II</p>
               <p>Greater Noida, Uttar Pradesh 201310</p>
-              <p className="pt-2 text-xs text-slate-500">
+              <p className="pt-2 text-xs text-[#756B7A]">
                 Official student affinity group affiliated with IEEE UP Section.
               </p>
             </div>
@@ -128,13 +128,13 @@ export function Footer() {
         </div>
 
         {/* Bottom copyright line */}
-        <div className="mt-12 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+        <div className="mt-12 pt-8 border-t border-[#2A202D] flex flex-col sm:flex-row items-center justify-between text-xs text-[#756B7A] gap-4">
           <p>
             &copy; 2026 IEEE WIE Bennett University. All rights reserved.
           </p>
           <div className="flex items-center space-x-1">
             <span>Engineered with passion by</span>
-            <span className="text-violet-400 font-medium">IEEE WIE BU Technical Team</span>
+            <span className="text-[#C75491] font-medium">IEEE WIE BU Technical Team</span>
           </div>
         </div>
       </div>

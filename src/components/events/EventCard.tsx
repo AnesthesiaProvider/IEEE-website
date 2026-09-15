@@ -16,9 +16,9 @@ export function EventCard({ event }: EventCardProps) {
 
   return (
     <>
-      <div className="group relative flex flex-col rounded-2xl bg-slate-900/80 border border-white/8 backdrop-blur-xl overflow-hidden transition-all duration-300 hover:border-violet-500/40 hover:-translate-y-1 hover:shadow-[0_12px_32px_-12px_rgba(139,92,246,0.3)]">
+      <div className="group relative flex flex-col rounded-2xl bg-[#121015]/90 border border-[#2A202D] backdrop-blur-xl overflow-hidden transition-all duration-300 hover:border-[#5C2948] hover:-translate-y-1 hover:shadow-[0_12px_32px_-12px_rgba(122,24,51,0.25)]">
         {/* Event Poster Header */}
-        <div className="relative w-full h-48 sm:h-52 overflow-hidden bg-slate-800">
+        <div className="relative w-full h-48 sm:h-52 overflow-hidden bg-[#18131B]">
           <Image
             src={event.image}
             alt={event.title}
@@ -26,22 +26,22 @@ export function EventCard({ event }: EventCardProps) {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0D0B0F] via-[#0D0B0F]/30 to-transparent" />
 
           {/* Category Tag */}
-          <div className="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-full border border-violet-500/30 text-xs font-semibold text-violet-300">
+          <div className="absolute top-3 left-3 bg-[#121015]/90 backdrop-blur-md px-3 py-1 rounded-full border border-[#5C2948] text-xs font-semibold text-[#E07AB0]">
             {event.category}
           </div>
 
           {/* Status Badge */}
           <div className="absolute top-3 right-3">
             {event.status === "upcoming" ? (
-              <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[11px] font-semibold">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-pulse" />
+              <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-[#4A1028]/70 text-[#F5F1F5] border border-[#8F2450] text-[11px] font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#D05A9E] mr-1.5 animate-pulse" />
                 Upcoming
               </span>
             ) : (
-              <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-slate-800/80 text-slate-300 border border-white/10 text-[11px] font-semibold">
+              <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-[#18131B] text-[#A79EAB] border border-[#2A202D] text-[11px] font-semibold">
                 Completed
               </span>
             )}
@@ -52,17 +52,17 @@ export function EventCard({ event }: EventCardProps) {
         <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
           <div className="space-y-3">
             {/* Meta info row */}
-            <div className="flex flex-wrap items-center gap-y-1 gap-x-4 text-xs text-slate-400 font-medium">
-              <div className="flex items-center space-x-1.5 text-cyan-300">
+            <div className="flex flex-wrap items-center gap-y-1 gap-x-4 text-xs text-[#A79EAB] font-medium">
+              <div className="flex items-center space-x-1.5 text-[#C75491]">
                 <Calendar className="w-3.5 h-3.5" />
                 <span>{event.date}</span>
               </div>
               <div className="flex items-center space-x-1.5">
-                <MapPin className="w-3.5 h-3.5 text-slate-500" />
+                <MapPin className="w-3.5 h-3.5 text-[#756B7A]" />
                 <span className="truncate max-w-[180px]">{event.venue}</span>
               </div>
               {event.participantsCount && (
-                <div className="flex items-center space-x-1.5 text-violet-300">
+                <div className="flex items-center space-x-1.5 text-[#914B91]">
                   <Users className="w-3.5 h-3.5" />
                   <span>{event.participantsCount}+ attendees</span>
                 </div>
@@ -70,12 +70,12 @@ export function EventCard({ event }: EventCardProps) {
             </div>
 
             {/* Title */}
-            <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors leading-snug">
+            <h3 className="text-xl font-bold text-[#F5F1F5] group-hover:text-[#E07AB0] transition-colors leading-snug">
               {event.title}
             </h3>
 
             {/* Short Description */}
-            <p className="text-sm text-slate-300 line-clamp-2 leading-relaxed">
+            <p className="text-sm text-[#D8D0DA] line-clamp-2 leading-relaxed">
               {event.shortDescription}
             </p>
 
@@ -84,7 +84,7 @@ export function EventCard({ event }: EventCardProps) {
               {event.tags.slice(0, 3).map((tag) => (
                 <span
                   key={tag}
-                  className="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400"
+                  className="px-2 py-0.5 rounded-md bg-[#18131B] border border-[#2A202D] text-[11px] text-[#A79EAB]"
                 >
                   #{tag}
                 </span>
@@ -93,10 +93,10 @@ export function EventCard({ event }: EventCardProps) {
           </div>
 
           {/* Action Buttons */}
-          <div className="pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+          <div className="pt-3 border-t border-[#2A202D] flex items-center justify-between gap-3">
             <button
               onClick={() => setIsDetailsOpen(true)}
-              className="text-xs font-semibold text-slate-300 hover:text-white transition-colors flex items-center space-x-1"
+              className="text-xs font-semibold text-[#D8D0DA] hover:text-[#E07AB0] transition-colors flex items-center space-x-1"
             >
               <span>View Details</span>
               <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
@@ -106,7 +106,7 @@ export function EventCard({ event }: EventCardProps) {
               {event.galleryImages && event.galleryImages.length > 0 && (
                 <button
                   onClick={() => setIsGalleryOpen(true)}
-                  className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium border border-white/10 flex items-center space-x-1.5 transition-colors"
+                  className="px-3 py-1.5 rounded-lg bg-[#18131B] hover:bg-[#2A202D] text-[#D8D0DA] text-xs font-medium border border-[#2A202D] flex items-center space-x-1.5 transition-colors"
                 >
                   <ImageIcon className="w-3.5 h-3.5" />
                   <span>Gallery</span>
@@ -118,7 +118,7 @@ export function EventCard({ event }: EventCardProps) {
                   href={event.registrationLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-1.5 rounded-lg bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white text-xs font-semibold shadow-md shadow-violet-600/25 flex items-center space-x-1.5 transition-all"
+                  className="px-4 py-1.5 rounded-lg bg-gradient-to-r from-[#5A1025] via-[#8F2450] to-[#7B3F8C] hover:from-[#7A1833] hover:to-[#914B91] text-[#F5F1F5] text-xs font-semibold shadow-md shadow-[#7A1833]/30 flex items-center space-x-1.5 transition-all"
                 >
                   <span>Register</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -137,25 +137,25 @@ export function EventCard({ event }: EventCardProps) {
         maxWidth="max-w-3xl"
       >
         <div className="space-y-5">
-          <div className="relative w-full h-56 rounded-xl overflow-hidden bg-slate-800">
+          <div className="relative w-full h-56 rounded-xl overflow-hidden bg-[#18131B]">
             <Image src={event.image} alt={event.title} fill className="object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0D0B0F] via-transparent to-transparent opacity-80" />
             <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-              <span className="px-3 py-1 rounded-full bg-violet-600/80 text-white text-xs font-semibold backdrop-blur-md">
+              <span className="px-3 py-1 rounded-full bg-[#7A1833]/80 text-[#F5F1F5] text-xs font-semibold backdrop-blur-md">
                 {event.category}
               </span>
-              <span className="text-xs text-slate-200 bg-black/60 px-3 py-1 rounded-full backdrop-blur-md">
+              <span className="text-xs text-[#D8D0DA] bg-[#0D0B0F]/80 px-3 py-1 rounded-full border border-[#2A202D] backdrop-blur-md">
                 {event.date} {event.time && `• ${event.time}`}
               </span>
             </div>
           </div>
 
           <div className="space-y-2">
-            <div className="flex items-center space-x-2 text-sm text-cyan-300">
+            <div className="flex items-center space-x-2 text-sm text-[#C75491]">
               <MapPin className="w-4 h-4" />
               <span>{event.venue}</span>
             </div>
-            <p className="text-slate-300 text-sm leading-relaxed whitespace-pre-line">
+            <p className="text-[#D8D0DA] text-sm leading-relaxed whitespace-pre-line">
               {event.fullDescription}
             </p>
           </div>
@@ -164,7 +164,7 @@ export function EventCard({ event }: EventCardProps) {
             {event.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-2.5 py-1 rounded-full bg-slate-800 border border-white/10 text-xs text-slate-300"
+                className="px-2.5 py-1 rounded-full bg-[#18131B] border border-[#2A202D] text-xs text-[#A79EAB]"
               >
                 #{tag}
               </span>
@@ -172,12 +172,12 @@ export function EventCard({ event }: EventCardProps) {
           </div>
 
           {event.registrationOpen && event.registrationLink && (
-            <div className="pt-4 border-t border-white/10 flex justify-end">
+            <div className="pt-4 border-t border-[#2A202D] flex justify-end">
               <a
                 href={event.registrationLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white text-sm font-semibold shadow-lg shadow-violet-600/30 inline-flex items-center space-x-2"
+                className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#5A1025] via-[#8F2450] to-[#7B3F8C] hover:from-[#7A1833] hover:to-[#914B91] text-[#F5F1F5] text-sm font-semibold shadow-lg shadow-[#7A1833]/30 inline-flex items-center space-x-2"
               >
                 <span>Register for this Event</span>
                 <ExternalLink className="w-4 h-4" />
@@ -199,7 +199,7 @@ export function EventCard({ event }: EventCardProps) {
             {event.galleryImages.map((img, idx) => (
               <div
                 key={idx}
-                className="relative h-56 rounded-xl overflow-hidden bg-slate-800 border border-white/10"
+                className="relative h-56 rounded-xl overflow-hidden bg-[#18131B] border border-[#2A202D]"
               >
                 <Image
                   src={img}
