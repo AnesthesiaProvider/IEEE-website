@@ -5,22 +5,22 @@ import confetti from "canvas-confetti";
 import {
   Users,
   Plus,
+  Minus,
   Trash2,
   CheckCircle2,
   AlertCircle,
-  Sparkles,
-  ShieldAlert,
   Flame,
-  UserCheck,
   Send,
+  Phone,
+  User,
+  Hash,
 } from "lucide-react";
 import { Modal } from "@/components/ui/Modal";
 
 interface TeamMemberInput {
   name: string;
   enrollmentNumber: string;
-  email?: string;
-  phone?: string;
+  phone: string;
 }
 
 interface ApocalypseRegistrationModalProps {
@@ -34,8 +34,8 @@ export function ApocalypseRegistrationModal({
 }: ApocalypseRegistrationModalProps) {
   const [teamName, setTeamName] = useState("");
   const [members, setMembers] = useState<TeamMemberInput[]>([
-    { name: "", enrollmentNumber: "", email: "", phone: "" }, // Leader (Member 1)
-    { name: "", enrollmentNumber: "" }, // Member 2
+    { name: "", enrollmentNumber: "", phone: "" },
+    { name: "", enrollmentNumber: "", phone: "" },
   ]);
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -44,25 +44,41 @@ export function ApocalypseRegistrationModal({
   const [submittedData, setSubmittedData] = useState<{
     id: string;
     teamName: string;
-    membersCount: number;
+    members: TeamMemberInput[];
     createdAt: string;
   } | null>(null);
 
-  // Add a member (up to max 4)
-  const handleAddMember = () => {
+  // Add candidate (+) button up to max 4
+  const handleAddCandidate = () => {
     if (members.length < 4) {
-      setMembers([...members, { name: "", enrollmentNumber: "" }]);
+      setMembers((prev) => [...prev, { name: "", enrollmentNumber: "", phone: "" }]);
     }
   };
 
-  // Remove member (down to min 2)
-  const handleRemoveMember = (index: number) => {
+  // Subtract candidate (-) button down to min 2
+  const handleSubtractCandidate = () => {
+    if (members.length > 2) {
+      const updated = members.slice(0, -1);
+      setMembers(updated);
+
+      // Clear any errors for the removed index
+      const removedIndex = members.length - 1;
+      const newErrors = { ...errors };
+      delete newErrors[`name_${removedIndex}`];
+      delete newErrors[`enroll_${removedIndex}`];
+      delete newErrors[`phone_${removedIndex}`];
+      setErrors(newErrors);
+    }
+  };
+
+  // Remove specific member if more than 2
+  const handleRemoveCandidate = (index: number) => {
     if (members.length > 2) {
       setMembers(members.filter((_, i) => i !== index));
-      // Clear associated field errors
       const newErrors = { ...errors };
       delete newErrors[`name_${index}`];
       delete newErrors[`enroll_${index}`];
+      delete newErrors[`phone_${index}`];
       setErrors(newErrors);
     }
   };
@@ -72,7 +88,6 @@ export function ApocalypseRegistrationModal({
     updated[index] = { ...updated[index], [field]: value };
     setMembers(updated);
 
-    // Clear error for that field
     if (errors[`${field}_${index}`]) {
       const newErrors = { ...errors };
       delete newErrors[`${field}_${index}`];
@@ -84,7 +99,7 @@ export function ApocalypseRegistrationModal({
     const errs: Record<string, string> = {};
 
     if (!teamName.trim() || teamName.trim().length < 2) {
-      errs.teamName = "Please provide a team name (at least 2 characters).";
+      errs.teamName = "Please provide your team name (at least 2 characters).";
     }
 
     if (members.length < 2) {
@@ -98,28 +113,24 @@ export function ApocalypseRegistrationModal({
     const seenEnrolls = new Set<string>();
 
     members.forEach((m, idx) => {
-      const isLeader = idx === 0;
+      const memberNumber = idx + 1;
 
       if (!m.name.trim() || m.name.trim().length < 2) {
-        errs[`name_${idx}`] = "Please enter full name.";
+        errs[`name_${idx}`] = `Member ${memberNumber}'s name is required.`;
       }
 
       const cleanEnroll = m.enrollmentNumber.trim().toUpperCase();
       if (!cleanEnroll || cleanEnroll.length < 5) {
-        errs[`enroll_${idx}`] = "Valid enrollment number required (e.g. E23CSEU0123).";
+        errs[`enroll_${idx}`] = `Member ${memberNumber}'s enrollment number is required (e.g. E23CSEU0123).`;
       } else if (seenEnrolls.has(cleanEnroll)) {
-        errs[`enroll_${idx}`] = "Duplicate enrollment number in this team.";
+        errs[`enroll_${idx}`] = `Duplicate enrollment number in team.`;
       } else {
         seenEnrolls.add(cleanEnroll);
       }
 
-      if (isLeader) {
-        if (!m.email?.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m.email.trim())) {
-          errs.leaderEmail = "Leader must provide a valid email address.";
-        }
-        if (!m.phone?.trim() || m.phone.replace(/[^0-9]/g, "").length < 10) {
-          errs.leaderPhone = "Leader must provide a valid 10-digit phone number.";
-        }
+      const cleanPhone = m.phone.replace(/[^0-9]/g, "");
+      if (!m.phone.trim() || cleanPhone.length < 10) {
+        errs[`phone_${idx}`] = `Member ${memberNumber}'s 10-digit phone number is required.`;
       }
     });
 
@@ -143,8 +154,7 @@ export function ApocalypseRegistrationModal({
         members: members.map((m, idx) => ({
           name: m.name.trim(),
           enrollmentNumber: m.enrollmentNumber.trim().toUpperCase(),
-          email: m.email?.trim() || undefined,
-          phone: m.phone?.trim() || undefined,
+          phone: m.phone.trim(),
           isLeader: idx === 0,
         })),
       };
@@ -163,7 +173,7 @@ export function ApocalypseRegistrationModal({
         return;
       }
 
-      // Celebrate success
+      // Confetti celebration
       confetti({
         particleCount: 80,
         spread: 70,
@@ -174,7 +184,7 @@ export function ApocalypseRegistrationModal({
       setSubmittedData({
         id: data.registration.id,
         teamName: data.registration.teamName,
-        membersCount: data.registration.membersCount,
+        members: [...members],
         createdAt: data.registration.createdAt,
       });
     } catch (err) {
@@ -188,8 +198,8 @@ export function ApocalypseRegistrationModal({
   const handleReset = () => {
     setTeamName("");
     setMembers([
-      { name: "", enrollmentNumber: "", email: "", phone: "" },
-      { name: "", enrollmentNumber: "" },
+      { name: "", enrollmentNumber: "", phone: "" },
+      { name: "", enrollmentNumber: "", phone: "" },
     ]);
     setErrors({});
     setSubmitError(null);
@@ -222,14 +232,14 @@ export function ApocalypseRegistrationModal({
               Official Registration Confirmed
             </span>
             <h3 className="text-2xl font-bold text-[#F5F1F5]">
-              Squad &quot;{submittedData.teamName}&quot; Registered!
+              Team &quot;{submittedData.teamName}&quot; Registered!
             </h3>
             <p className="text-xs text-[#A79EAB] max-w-md mx-auto">
-              Your team has been successfully entered into the official Apocalypse 2026 tournament bracket.
+              Your squad has been successfully entered into the official Apocalypse 2026 roster.
             </p>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#121015] border border-[#2A202D] text-left text-xs space-y-2.5 max-w-md mx-auto">
+          <div className="p-4 rounded-xl bg-[#121015] border border-[#2A202D] text-left text-xs space-y-3 max-w-md mx-auto">
             <div className="flex justify-between items-center pb-2 border-b border-[#2A202D]">
               <span className="text-[#A79EAB]">Registration ID:</span>
               <span className="font-mono text-[#E07AB0] font-bold">{submittedData.id}</span>
@@ -240,20 +250,27 @@ export function ApocalypseRegistrationModal({
             </div>
             <div className="flex justify-between items-center pb-2 border-b border-[#2A202D]">
               <span className="text-[#A79EAB]">Total Members:</span>
-              <span className="font-semibold text-[#C75491]">{submittedData.membersCount} Persons</span>
+              <span className="font-semibold text-[#C75491]">{submittedData.members.length} Candidates</span>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="text-[#A79EAB]">Event Date:</span>
-              <span className="font-semibold text-[#F5F1F5]">23 SEP 2026 • Bennett University</span>
-            </div>
-          </div>
 
-          <div className="p-3 rounded-xl bg-[#18131B] border border-[#39283D] text-xs text-[#D8D0DA] max-w-md mx-auto">
-            <p className="flex items-center justify-center space-x-1.5 text-[#E07AB0] font-medium mb-1">
-              <Flame className="w-3.5 h-3.5" />
-              <span>Next Steps: Event Day Briefing</span>
-            </p>
-            Further instructions, round timings, and rulebook will be dispatched to the Team Leader&apos;s registered email.
+            {/* Members summary */}
+            <div className="space-y-1.5 pt-1">
+              <span className="text-[#A79EAB] font-bold uppercase text-[10px] tracking-wider block">
+                Registered Candidates:
+              </span>
+              {submittedData.members.map((m, i) => (
+                <div
+                  key={i}
+                  className="flex items-center justify-between p-2 rounded-lg bg-[#18131B] border border-[#2A202D] text-[11px]"
+                >
+                  <span className="font-medium text-[#F5F1F5]">
+                    {i + 1}. {m.name}
+                  </span>
+                  <span className="font-mono text-[#C75491]">{m.enrollmentNumber}</span>
+                  <span className="text-[#A79EAB]">{m.phone}</span>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="pt-2 flex justify-center gap-3">
@@ -274,27 +291,6 @@ export function ApocalypseRegistrationModal({
       ) : (
         /* Registration Form */
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Top Banner */}
-          <div className="p-3.5 rounded-2xl bg-gradient-to-r from-[#4A1028]/30 via-[#632C70]/20 to-[#121015] border border-[#5C2948]/50 flex items-center justify-between gap-3">
-            <div className="flex items-center space-x-2.5">
-              <div className="w-9 h-9 rounded-xl bg-[#18131B] border border-[#5C2948] flex items-center justify-center text-[#E07AB0] shrink-0">
-                <Flame className="w-4 h-4" />
-              </div>
-              <div>
-                <p className="text-xs font-bold text-[#F5F1F5]">
-                  Apocalypse Arena Team Format
-                </p>
-                <p className="text-[11px] text-[#A79EAB]">
-                  Min 2 persons &bull; Max 4 persons per team
-                </p>
-              </div>
-            </div>
-
-            <span className="px-2.5 py-1 rounded-full bg-[#18131B] border border-[#39283D] text-[11px] font-semibold text-[#E07AB0] whitespace-nowrap">
-              {members.length} / 4 Members
-            </span>
-          </div>
-
           {/* Submission Error Banner */}
           {submitError && (
             <div className="p-3 rounded-xl bg-[#4A1028]/50 border border-[#8F2450] text-[#E07AB0] text-xs flex items-start space-x-2">
@@ -305,12 +301,12 @@ export function ApocalypseRegistrationModal({
 
           {errors.general && (
             <div className="p-3 rounded-xl bg-[#4A1028]/50 border border-[#8F2450] text-[#E07AB0] text-xs flex items-center space-x-2">
-              <ShieldAlert className="w-4 h-4 shrink-0" />
+              <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{errors.general}</span>
             </div>
           )}
 
-          {/* Team Name Input */}
+          {/* 1. Team Name Input */}
           <div className="space-y-1.5">
             <label className="block text-xs font-bold uppercase tracking-wider text-[#D8D0DA]">
               Team Name <span className="text-[#E07AB0]">*</span>
@@ -334,151 +330,143 @@ export function ApocalypseRegistrationModal({
             )}
           </div>
 
-          {/* Dynamic Members List */}
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#A79EAB]">
-                Squad Roster ({members.length} Members)
-              </h4>
-              {members.length < 4 && (
-                <button
-                  type="button"
-                  onClick={handleAddMember}
-                  className="inline-flex items-center space-x-1.5 text-xs font-semibold text-[#E07AB0] hover:text-[#F5F1F5] transition-colors"
-                >
-                  <Plus className="w-3.5 h-3.5" />
-                  <span>Add Member ({members.length + 1} of 4)</span>
-                </button>
-              )}
+          {/* 2. Number of Candidates Stepper with Add (+) and Subtract (-) Buttons */}
+          <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#121015] border border-[#2A202D]">
+            <div>
+              <div className="flex items-center space-x-2">
+                <Users className="w-4 h-4 text-[#E07AB0]" />
+                <span className="text-xs font-bold text-[#F5F1F5]">Number of Candidates</span>
+              </div>
+              <span className="text-[11px] text-[#A79EAB] mt-0.5 block">
+                Minimum 2 candidates &bull; Maximum 4 candidates
+              </span>
             </div>
 
-            <div className="space-y-3.5">
-              {members.map((member, idx) => {
-                const isLeader = idx === 0;
+            {/* Stepper with - and + */}
+            <div className="flex items-center space-x-2 bg-[#0D0B0F] p-1 rounded-xl border border-[#39283D]">
+              <button
+                type="button"
+                onClick={handleSubtractCandidate}
+                disabled={members.length <= 2}
+                className="w-8 h-8 rounded-lg bg-[#18131B] hover:bg-[#2A202D] active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-[#18131B] text-[#E07AB0] hover:text-[#F5F1F5] flex items-center justify-center font-bold text-lg transition-all"
+                title="Subtract candidate (min 2)"
+                aria-label="Subtract candidate"
+              >
+                <Minus className="w-4 h-4" />
+              </button>
 
-                return (
-                  <div
-                    key={idx}
-                    className="p-4 rounded-2xl bg-[#121015] border border-[#2A202D] space-y-3 relative group hover:border-[#39283D] transition-colors"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-2">
-                        <span className="w-5 h-5 rounded-full bg-[#18131B] border border-[#39283D] text-[11px] font-bold text-[#E07AB0] flex items-center justify-center">
-                          {idx + 1}
-                        </span>
-                        <span className="text-xs font-bold text-[#F5F1F5]">
-                          {isLeader ? "Team Leader (Member 1)" : `Team Member ${idx + 1}`}
-                        </span>
-                        {isLeader && (
-                          <span className="px-2 py-0.5 rounded-full bg-[#4A1028]/40 border border-[#5C2948] text-[10px] text-[#E07AB0] font-semibold">
-                            Primary Contact
-                          </span>
-                        )}
-                      </div>
+              <div className="px-3 min-w-[76px] text-center">
+                <span className="font-mono text-sm font-bold text-[#F5F1F5]">
+                  {members.length}
+                </span>
+                <span className="text-[10px] text-[#A79EAB] block">
+                  {members.length === 1 ? "Member" : "Members"}
+                </span>
+              </div>
 
-                      {/* Remove button (only allowed for member 3 and 4) */}
-                      {!isLeader && idx >= 2 && (
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveMember(idx)}
-                          className="p-1.5 rounded-lg text-[#756B7A] hover:text-[#E07AB0] hover:bg-[#4A1028]/30 transition-colors"
-                          title="Remove Member"
-                        >
-                          <Trash2 className="w-3.5 h-3.5" />
-                        </button>
-                      )}
-                    </div>
-
-                    {/* Member Name and Enrollment Row */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <div className="space-y-1">
-                        <label className="block text-[11px] font-medium text-[#D8D0DA]">
-                          Full Name <span className="text-[#E07AB0]">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          value={member.name}
-                          onChange={(e) => updateMember(idx, "name", e.target.value)}
-                          placeholder="Student Name"
-                          className="w-full px-3.5 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] placeholder-[#756B7A] text-xs focus:outline-none focus:border-[#C75491]"
-                        />
-                        {errors[`name_${idx}`] && (
-                          <p className="text-[10px] text-[#E07AB0]">{errors[`name_${idx}`]}</p>
-                        )}
-                      </div>
-
-                      <div className="space-y-1">
-                        <label className="block text-[11px] font-medium text-[#D8D0DA]">
-                          Enrollment Number <span className="text-[#E07AB0]">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          value={member.enrollmentNumber}
-                          onChange={(e) =>
-                            updateMember(idx, "enrollmentNumber", e.target.value)
-                          }
-                          placeholder="e.g. E23CSEU0123"
-                          className="w-full px-3.5 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] placeholder-[#756B7A] text-xs font-mono uppercase focus:outline-none focus:border-[#C75491]"
-                        />
-                        {errors[`enroll_${idx}`] && (
-                          <p className="text-[10px] text-[#E07AB0]">{errors[`enroll_${idx}`]}</p>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Leader Contact Details (Email & Phone) */}
-                    {isLeader && (
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 border-t border-[#2A202D]/60">
-                        <div className="space-y-1">
-                          <label className="block text-[11px] font-medium text-[#D8D0DA]">
-                            Leader Email (for event updates) <span className="text-[#E07AB0]">*</span>
-                          </label>
-                          <input
-                            type="email"
-                            value={member.email || ""}
-                            onChange={(e) => updateMember(idx, "email", e.target.value)}
-                            placeholder="student@bennett.edu.in"
-                            className="w-full px-3.5 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] placeholder-[#756B7A] text-xs focus:outline-none focus:border-[#C75491]"
-                          />
-                          {errors.leaderEmail && (
-                            <p className="text-[10px] text-[#E07AB0]">{errors.leaderEmail}</p>
-                          )}
-                        </div>
-
-                        <div className="space-y-1">
-                          <label className="block text-[11px] font-medium text-[#D8D0DA]">
-                            Leader WhatsApp / Phone <span className="text-[#E07AB0]">*</span>
-                          </label>
-                          <input
-                            type="tel"
-                            value={member.phone || ""}
-                            onChange={(e) => updateMember(idx, "phone", e.target.value)}
-                            placeholder="+91 9876543210"
-                            className="w-full px-3.5 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] placeholder-[#756B7A] text-xs focus:outline-none focus:border-[#C75491]"
-                          />
-                          {errors.leaderPhone && (
-                            <p className="text-[10px] text-[#E07AB0]">{errors.leaderPhone}</p>
-                          )}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+              <button
+                type="button"
+                onClick={handleAddCandidate}
+                disabled={members.length >= 4}
+                className="w-8 h-8 rounded-lg bg-[#18131B] hover:bg-[#2A202D] active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-[#18131B] text-[#E07AB0] hover:text-[#F5F1F5] flex items-center justify-center font-bold text-lg transition-all"
+                title="Add candidate (max 4)"
+                aria-label="Add candidate"
+              >
+                <Plus className="w-4 h-4" />
+              </button>
             </div>
           </div>
 
-          {/* Add member button helper if less than 4 */}
-          {members.length < 4 && (
-            <button
-              type="button"
-              onClick={handleAddMember}
-              className="w-full py-2.5 rounded-xl border border-dashed border-[#39283D] hover:border-[#5C2948] bg-[#121015]/60 hover:bg-[#18131B] text-xs font-semibold text-[#D8D0DA] hover:text-[#E07AB0] flex items-center justify-center space-x-2 transition-all"
-            >
-              <Plus className="w-4 h-4" />
-              <span>Add Member {members.length + 1} (Max 4 Members)</span>
-            </button>
-          )}
+          {/* 3. Members Form Fields (Candidate Name, Enrollment Number, Phone Number) */}
+          <div className="space-y-4">
+            <div className="space-y-3.5">
+              {members.map((member, idx) => (
+                <div
+                  key={idx}
+                  className="p-4 rounded-2xl bg-[#121015] border border-[#2A202D] space-y-3 relative group hover:border-[#39283D] transition-colors"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <span className="w-5 h-5 rounded-full bg-[#18131B] border border-[#39283D] text-[11px] font-bold text-[#E07AB0] flex items-center justify-center">
+                        {idx + 1}
+                      </span>
+                      <span className="text-xs font-bold text-[#F5F1F5]">
+                        Candidate {idx + 1}
+                      </span>
+                    </div>
+
+                    {/* Quick remove button if more than 2 members */}
+                    {members.length > 2 && (
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveCandidate(idx)}
+                        className="p-1 rounded-lg text-[#756B7A] hover:text-[#E07AB0] hover:bg-[#4A1028]/30 transition-colors"
+                        title="Remove Candidate"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
+
+                  {/* 3 Fields: Name, Enrollment Number, Phone Number */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {/* Member's Name */}
+                    <div className="space-y-1">
+                      <label className="block text-[11px] font-medium text-[#D8D0DA]">
+                        Member Name <span className="text-[#E07AB0]">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={member.name}
+                        onChange={(e) => updateMember(idx, "name", e.target.value)}
+                        placeholder="Candidate Name"
+                        className="w-full px-3 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] placeholder-[#756B7A] text-xs focus:outline-none focus:border-[#C75491]"
+                      />
+                      {errors[`name_${idx}`] && (
+                        <p className="text-[10px] text-[#E07AB0]">{errors[`name_${idx}`]}</p>
+                      )}
+                    </div>
+
+                    {/* Member Enrollment Number */}
+                    <div className="space-y-1">
+                      <label className="block text-[11px] font-medium text-[#D8D0DA]">
+                        Enrollment Number <span className="text-[#E07AB0]">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={member.enrollmentNumber}
+                        onChange={(e) =>
+                          updateMember(idx, "enrollmentNumber", e.target.value)
+                        }
+                        placeholder="e.g. E23CSEU0123"
+                        className="w-full px-3 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] placeholder-[#756B7A] text-xs font-mono uppercase focus:outline-none focus:border-[#C75491]"
+                      />
+                      {errors[`enroll_${idx}`] && (
+                        <p className="text-[10px] text-[#E07AB0]">{errors[`enroll_${idx}`]}</p>
+                      )}
+                    </div>
+
+                    {/* Member Phone Number */}
+                    <div className="space-y-1">
+                      <label className="block text-[11px] font-medium text-[#D8D0DA]">
+                        Phone Number <span className="text-[#E07AB0]">*</span>
+                      </label>
+                      <input
+                        type="tel"
+                        value={member.phone}
+                        onChange={(e) => updateMember(idx, "phone", e.target.value)}
+                        placeholder="10-digit number"
+                        className="w-full px-3 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] placeholder-[#756B7A] text-xs focus:outline-none focus:border-[#C75491]"
+                      />
+                      {errors[`phone_${idx}`] && (
+                        <p className="text-[10px] text-[#E07AB0]">{errors[`phone_${idx}`]}</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
           {/* Action Row */}
           <div className="pt-3 border-t border-[#2A202D] flex items-center justify-between gap-3">

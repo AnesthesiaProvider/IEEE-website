@@ -278,12 +278,10 @@ export default function AdminPage() {
       "Registration ID",
       "Team Name",
       "Total Members",
-      "Member Number",
-      "Role",
+      "Candidate Index",
       "Member Name",
       "Enrollment Number",
-      "Leader Email",
-      "Leader Phone",
+      "Phone Number",
       "Submitted At",
     ];
 
@@ -301,10 +299,8 @@ export default function AdminPage() {
           escapeCsv(team.teamName),
           escapeCsv(String(team.members.length)),
           escapeCsv(String(idx + 1)),
-          escapeCsv(idx === 0 ? "Leader" : "Member"),
           escapeCsv(member.name),
           escapeCsv(member.enrollmentNumber),
-          escapeCsv(member.email || ""),
           escapeCsv(member.phone || ""),
           escapeCsv(team.createdAt),
         ]);
@@ -785,88 +781,72 @@ export default function AdminPage() {
               <table className="w-full text-left text-xs text-[#D8D0DA]">
                 <thead className="bg-[#18131B] text-[#A79EAB] uppercase tracking-wider font-semibold border-b border-[#2A202D]">
                   <tr>
-                    <th className="py-3.5 px-4">Squad Name</th>
-                    <th className="py-3.5 px-4">Size</th>
-                    <th className="py-3.5 px-4">Team Leader</th>
-                    <th className="py-3.5 px-4">Leader Contact</th>
-                    <th className="py-3.5 px-4">Roster Overview</th>
+                    <th className="py-3.5 px-4">Team Name</th>
+                    <th className="py-3.5 px-4">Candidates</th>
+                    <th className="py-3.5 px-4">Roster (Name &bull; Enrollment &bull; Phone)</th>
                     <th className="py-3.5 px-4">Date</th>
                     <th className="py-3.5 px-4 text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#2A202D]">
                   {filteredApocalypseTeams.length > 0 ? (
-                    filteredApocalypseTeams.map((team) => {
-                      const leader = team.members[0];
-
-                      return (
-                        <tr
-                          key={team.id}
-                          className="hover:bg-white/[0.02] transition-colors cursor-pointer"
-                          onClick={() => setSelectedTeam(team)}
-                        >
-                          <td className="py-3.5 px-4">
-                            <div className="font-bold text-[#F5F1F5] hover:text-[#C75491] transition-colors flex items-center space-x-1.5">
-                              <Flame className="w-3.5 h-3.5 text-[#E07AB0]" />
-                              <span>{team.teamName}</span>
-                            </div>
-                            <div className="text-[11px] text-[#A79EAB] font-mono">{team.id}</div>
-                          </td>
-                          <td className="py-3.5 px-4">
-                            <span className="px-2.5 py-1 rounded-full bg-[#18131B] border border-[#39283D] text-[#E07AB0] font-semibold text-[11px]">
-                              {team.members.length} Members
-                            </span>
-                          </td>
-                          <td className="py-3.5 px-4">
-                            <div className="font-semibold text-[#F5F1F5]">{leader?.name || "N/A"}</div>
-                            <div className="text-[11px] font-mono text-[#C75491]">
-                              {leader?.enrollmentNumber || ""}
-                            </div>
-                          </td>
-                          <td className="py-3.5 px-4">
-                            <div className="text-[11px] text-[#D8D0DA]">{leader?.email || "No email"}</div>
-                            <div className="text-[11px] text-[#A79EAB]">{leader?.phone || ""}</div>
-                          </td>
-                          <td className="py-3.5 px-4">
-                            <div className="flex flex-wrap gap-1 max-w-xs">
-                              {team.members.map((m, i) => (
-                                <span
-                                  key={i}
-                                  className="px-2 py-0.5 rounded bg-[#18131B] border border-[#2A202D] text-[10px] text-[#D8D0DA]"
-                                  title={`${m.name} (${m.enrollmentNumber})`}
-                                >
-                                  {m.name.split(" ")[0]} ({m.enrollmentNumber})
-                                </span>
-                              ))}
-                            </div>
-                          </td>
-                          <td className="py-3.5 px-4 text-[#A79EAB] whitespace-nowrap">
-                            {new Date(team.createdAt).toLocaleDateString("en-IN", {
-                              day: "numeric",
-                              month: "short",
-                            })}
-                          </td>
-                          <td className="py-3.5 px-4 text-right" onClick={(e) => e.stopPropagation()}>
-                            <div className="flex items-center justify-end space-x-1">
-                              <button
-                                onClick={() => setSelectedTeam(team)}
-                                className="p-1.5 text-[#A79EAB] hover:text-[#C75491] rounded-lg hover:bg-white/5 transition-colors"
-                                title="View Roster"
-                              >
-                                <Eye className="w-4 h-4" />
-                              </button>
-                              <button
-                                onClick={() => handleDeleteTeam(team.id)}
-                                className="p-1.5 text-[#A79EAB] hover:text-[#E07AB0] rounded-lg hover:bg-[#4A1028]/30 transition-colors"
-                                title="Delete Team"
-                              >
-                                <Trash2 className="w-4 h-4" />
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                      );
-                    })
+                    filteredApocalypseTeams.map((team) => (
+                      <tr
+                        key={team.id}
+                        className="hover:bg-white/[0.02] transition-colors cursor-pointer"
+                        onClick={() => setSelectedTeam(team)}
+                      >
+                        <td className="py-3.5 px-4">
+                          <div className="font-bold text-[#F5F1F5] hover:text-[#C75491] transition-colors flex items-center space-x-1.5">
+                            <Flame className="w-3.5 h-3.5 text-[#E07AB0]" />
+                            <span>{team.teamName}</span>
+                          </div>
+                          <div className="text-[11px] text-[#A79EAB] font-mono">{team.id}</div>
+                        </td>
+                        <td className="py-3.5 px-4">
+                          <span className="px-2.5 py-1 rounded-full bg-[#18131B] border border-[#39283D] text-[#E07AB0] font-semibold text-[11px]">
+                            {team.members.length} Candidates
+                          </span>
+                        </td>
+                        <td className="py-3.5 px-4">
+                          <div className="space-y-1">
+                            {team.members.map((m, i) => (
+                              <div key={i} className="flex items-center space-x-2 text-[11px]">
+                                <span className="font-medium text-[#F5F1F5]">{m.name}</span>
+                                <span className="text-[#A79EAB]">&bull;</span>
+                                <span className="font-mono text-[#C75491]">{m.enrollmentNumber}</span>
+                                <span className="text-[#A79EAB]">&bull;</span>
+                                <span className="text-[#D8D0DA]">{m.phone}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </td>
+                        <td className="py-3.5 px-4 text-[#A79EAB] whitespace-nowrap">
+                          {new Date(team.createdAt).toLocaleDateString("en-IN", {
+                            day: "numeric",
+                            month: "short",
+                          })}
+                        </td>
+                        <td className="py-3.5 px-4 text-right" onClick={(e) => e.stopPropagation()}>
+                          <div className="flex items-center justify-end space-x-1">
+                            <button
+                              onClick={() => setSelectedTeam(team)}
+                              className="p-1.5 text-[#A79EAB] hover:text-[#C75491] rounded-lg hover:bg-white/5 transition-colors"
+                              title="View Roster"
+                            >
+                              <Eye className="w-4 h-4" />
+                            </button>
+                            <button
+                              onClick={() => handleDeleteTeam(team.id)}
+                              className="p-1.5 text-[#A79EAB] hover:text-[#E07AB0] rounded-lg hover:bg-[#4A1028]/30 transition-colors"
+                              title="Delete Team"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))
                   ) : (
                     <tr>
                       <td colSpan={7} className="py-12 text-center text-[#A79EAB]">
@@ -1068,42 +1048,31 @@ export default function AdminPage() {
               </h4>
 
               <div className="space-y-2.5">
-                {selectedTeam.members.map((member, idx) => {
-                  const isLeader = idx === 0 || member.isLeader;
-
-                  return (
-                    <div
-                      key={idx}
-                      className="p-3.5 rounded-xl bg-[#121015] border border-[#2A202D] flex flex-col sm:flex-row sm:items-center justify-between gap-2"
-                    >
-                      <div className="flex items-center space-x-3">
-                        <span className="w-6 h-6 rounded-full bg-[#18131B] border border-[#39283D] text-xs font-bold text-[#E07AB0] flex items-center justify-center shrink-0">
-                          {idx + 1}
-                        </span>
-                        <div>
-                          <div className="font-bold text-[#F5F1F5] flex items-center space-x-2">
-                            <span>{member.name}</span>
-                            {isLeader && (
-                              <span className="px-2 py-0.2 rounded-full bg-[#4A1028]/60 text-[#E07AB0] border border-[#5C2948] text-[10px] font-semibold">
-                                Team Leader
-                              </span>
-                            )}
-                          </div>
-                          <div className="text-xs font-mono text-[#C75491]">
-                            {member.enrollmentNumber}
-                          </div>
+                {selectedTeam.members.map((member, idx) => (
+                  <div
+                    key={idx}
+                    className="p-3.5 rounded-xl bg-[#121015] border border-[#2A202D] flex flex-col sm:flex-row sm:items-center justify-between gap-2"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <span className="w-6 h-6 rounded-full bg-[#18131B] border border-[#39283D] text-xs font-bold text-[#E07AB0] flex items-center justify-center shrink-0">
+                        {idx + 1}
+                      </span>
+                      <div>
+                        <div className="font-bold text-[#F5F1F5]">
+                          {member.name}
+                        </div>
+                        <div className="text-xs font-mono text-[#C75491]">
+                          {member.enrollmentNumber}
                         </div>
                       </div>
-
-                      {isLeader && (member.email || member.phone) && (
-                        <div className="text-left sm:text-right text-xs text-[#D8D0DA]">
-                          {member.email && <div>{member.email}</div>}
-                          {member.phone && <div className="text-[#A79EAB]">{member.phone}</div>}
-                        </div>
-                      )}
                     </div>
-                  );
-                })}
+
+                    <div className="text-left sm:text-right text-xs">
+                      <span className="text-[#A79EAB] block text-[10px]">Phone Number</span>
+                      <span className="text-[#F5F1F5] font-mono">{member.phone}</span>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 

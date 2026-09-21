@@ -10,8 +10,8 @@ const memberSchema = z.object({
   enrollmentNumber: z
     .string()
     .min(5, "Please enter a valid Bennett University enrollment number (e.g. E23CSEU0123)."),
-  email: z.string().email("Please provide a valid email address.").optional().or(z.literal("")),
-  phone: z.string().min(10, "Phone number must be at least 10 digits.").optional().or(z.literal("")),
+  phone: z.string().min(10, "Phone number must be at least 10 digits."),
+  email: z.string().optional(),
   isLeader: z.boolean().optional(),
 });
 
