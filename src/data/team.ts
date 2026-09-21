@@ -32,13 +32,13 @@ export const seniorCoreTeam: TeamMember[] = [
   },
   {
     id: "vice-chairperson",
-    name: "Medha Rana", // [PLACEHOLDER - Replace with actual Vice Chairperson Name]
+    name: "Medha Rana",
     role: "Vice Chairperson",
     domain: "Leadership",
-    image: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?q=80&w=800&auto=format&fit=crop",
+    image: "/images/team/medha-rana.jpg",
     bio: "Managing cross-departmental operations, external chapter alliances, and fostering hands-on engineering research and mentorship circles.",
     yearAndBranch: "B.Tech CSE, 3rd Year",
-    linkedin: "https://https://www.linkedin.com/in/medha-rana-43b74a37a",
+    linkedin: "https://www.linkedin.com/in/medha-rana-43b74a37a",
     github: "https://github.com/placeholder-vicechair",
     email: "S25CSEU2398@bennett.edu.in",
   },
