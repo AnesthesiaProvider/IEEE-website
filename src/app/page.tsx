@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -16,12 +16,14 @@ import {
   Rocket,
   ChevronRight,
   CheckCircle2,
+  Flame,
 } from "lucide-react";
 import { FuturisticHeroCanvas } from "@/components/ui/FuturisticHeroCanvas";
 import { StatCounter } from "@/components/ui/StatCounter";
 import { TeamCard } from "@/components/team/TeamCard";
 import { EventCard } from "@/components/events/EventCard";
 import { RecruitmentCountdown } from "@/components/home/RecruitmentCountdown";
+import { ApocalypseRegistrationModal } from "@/components/events/ApocalypseRegistrationModal";
 import { seniorCoreTeam } from "@/data/team";
 import { chapterEvents } from "@/data/events";
 import { impactStats } from "@/data/stats";
@@ -71,6 +73,21 @@ const aboutPillars = [
 export default function HomePage() {
   const previewTeam = seniorCoreTeam.slice(0, 4);
   const previewEvents = chapterEvents.filter((e) => e.status === "upcoming").slice(0, 3);
+  const [isApocalypseModalOpen, setIsApocalypseModalOpen] = useState(false);
+  const [hasRegisteredOnDevice, setHasRegisteredOnDevice] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const stored = localStorage.getItem("apocalypse_registered_team");
+        if (stored) {
+          setHasRegisteredOnDevice(true);
+        }
+      } catch {
+        // Ignore
+      }
+    }
+  }, [isApocalypseModalOpen]);
 
   return (
     <div className="relative overflow-hidden">
@@ -137,13 +154,17 @@ export default function HomePage() {
                 <ArrowRight className="w-4 h-4" />
               </Link>
 
-              <Link
-                href="/events"
-                className="px-7 py-3.5 rounded-full bg-[#121015] hover:bg-[#18131B] text-[#D8D0DA] hover:text-[#F5F1F5] font-semibold text-sm border border-[#2A202D] hover:border-[#5C2948] backdrop-blur-md transition-all duration-300 flex items-center space-x-2"
+              <button
+                type="button"
+                onClick={() => setIsApocalypseModalOpen(true)}
+                className="px-7 py-3.5 rounded-full bg-[#121015] hover:bg-[#18131B] text-[#D8D0DA] hover:text-[#F5F1F5] font-semibold text-sm border border-[#5C2948] hover:border-[#8F2450] backdrop-blur-md transition-all duration-300 hover:scale-[1.03] flex items-center space-x-2.5 shadow-lg shadow-[#7A1833]/20 cursor-pointer group"
               >
-                <span>Explore Events</span>
-                <ChevronRight className="w-4 h-4 text-[#A79EAB]" />
-              </Link>
+                <Flame className="w-4 h-4 text-[#E07AB0] group-hover:text-[#F5A8C8] transition-colors" />
+                <span>
+                  {hasRegisteredOnDevice ? "View Apocalypse Team" : "Register for Apocalypse"}
+                </span>
+                <ArrowRight className="w-4 h-4 text-[#C75491] group-hover:translate-x-1 transition-transform" />
+              </button>
             </div>
           </motion.div>
         </div>
@@ -364,6 +385,12 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Direct Apocalypse 2026 Registration Modal */}
+      <ApocalypseRegistrationModal
+        isOpen={isApocalypseModalOpen}
+        onClose={() => setIsApocalypseModalOpen(false)}
+      />
 
     </div>
   );
