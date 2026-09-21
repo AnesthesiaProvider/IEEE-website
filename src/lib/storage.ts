@@ -30,6 +30,56 @@ const APOCALYPSE_FILE = path.join(WRITABLE_DATA_DIR, "apocalypse-registrations.j
 let memoryApplicationsCache: JuniorCoreApplication[] | null = null;
 let memoryApocalypseCache: ApocalypseRegistration[] | null = null;
 
+// =============================================================================
+// Cloud Persistence via Vercel KV / Upstash Redis REST API
+// =============================================================================
+const KV_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+const KV_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+
+async function kvGet<T>(key: string): Promise<T | null> {
+  if (!KV_URL || !KV_TOKEN) return null;
+  try {
+    const res = await fetch(`${KV_URL}/get/${key}`, {
+      headers: { Authorization: `Bearer ${KV_TOKEN}` },
+      cache: "no-store",
+    });
+    if (!res.ok) return null;
+    const json = await res.json();
+    if (!json || json.result === null || json.result === undefined) return null;
+    if (typeof json.result === "string") {
+      try {
+        return JSON.parse(json.result);
+      } catch {
+        return json.result as unknown as T;
+      }
+    }
+    return json.result as T;
+  } catch (err) {
+    console.error(`Error reading from KV key "${key}":`, err);
+    return null;
+  }
+}
+
+async function kvSet<T>(key: string, value: T): Promise<boolean> {
+  if (!KV_URL || !KV_TOKEN) return false;
+  try {
+    const serialized = typeof value === "string" ? value : JSON.stringify(value);
+    const res = await fetch(`${KV_URL}/set/${key}`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${KV_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(serialized),
+      cache: "no-store",
+    });
+    return res.ok;
+  } catch (err) {
+    console.error(`Error writing to KV key "${key}":`, err);
+    return false;
+  }
+}
+
 
 // Sample initial applications so the admin dashboard has preview data right away
 const INITIAL_APPLICATIONS: JuniorCoreApplication[] = [
@@ -128,6 +178,14 @@ async function ensureDataFile(): Promise<void> {
 }
 
 export async function readApplications(): Promise<JuniorCoreApplication[]> {
+  if (KV_URL && KV_TOKEN) {
+    const cloud = await kvGet<JuniorCoreApplication[]>("ieee_junior_core_applications");
+    if (cloud && Array.isArray(cloud)) {
+      memoryApplicationsCache = cloud;
+      return cloud;
+    }
+  }
+
   await ensureDataFile();
   try {
     const raw = await fs.readFile(APPLICATIONS_FILE, "utf-8");
@@ -145,6 +203,11 @@ export async function readApplications(): Promise<JuniorCoreApplication[]> {
 
 export async function writeApplications(apps: JuniorCoreApplication[]): Promise<void> {
   memoryApplicationsCache = apps;
+
+  if (KV_URL && KV_TOKEN) {
+    await kvSet("ieee_junior_core_applications", apps);
+  }
+
   await ensureDataFile();
   try {
     const tempFile = `${APPLICATIONS_FILE}.tmp.${Date.now()}`;
@@ -275,6 +338,14 @@ async function ensureApocalypseFile(): Promise<void> {
 }
 
 export async function readApocalypseRegistrations(): Promise<ApocalypseRegistration[]> {
+  if (KV_URL && KV_TOKEN) {
+    const cloud = await kvGet<ApocalypseRegistration[]>("ieee_apocalypse_registrations");
+    if (cloud && Array.isArray(cloud)) {
+      memoryApocalypseCache = cloud;
+      return cloud;
+    }
+  }
+
   await ensureApocalypseFile();
   try {
     const data = await fs.readFile(APOCALYPSE_FILE, "utf-8");
@@ -292,6 +363,11 @@ export async function readApocalypseRegistrations(): Promise<ApocalypseRegistrat
 
 export async function writeApocalypseRegistrations(registrations: ApocalypseRegistration[]): Promise<void> {
   memoryApocalypseCache = registrations;
+
+  if (KV_URL && KV_TOKEN) {
+    await kvSet("ieee_apocalypse_registrations", registrations);
+  }
+
   await ensureApocalypseFile();
   try {
     const tempFile = `${APOCALYPSE_FILE}.tmp.${Date.now()}`;
