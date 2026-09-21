@@ -21,6 +21,7 @@ import { FuturisticHeroCanvas } from "@/components/ui/FuturisticHeroCanvas";
 import { StatCounter } from "@/components/ui/StatCounter";
 import { TeamCard } from "@/components/team/TeamCard";
 import { EventCard } from "@/components/events/EventCard";
+import { RecruitmentCountdown } from "@/components/home/RecruitmentCountdown";
 import { seniorCoreTeam } from "@/data/team";
 import { chapterEvents } from "@/data/events";
 import { impactStats } from "@/data/stats";
@@ -77,90 +78,88 @@ export default function HomePage() {
       <div className="glow-orb-wine w-96 h-96 top-20 -left-20" />
       <div className="glow-orb-purple w-[450px] h-[450px] top-80 -right-20" />
 
+      {/* Background Interactive Technological Network Simulation */}
+      <div className="absolute inset-x-0 top-0 h-[1050px] sm:h-[1150px] lg:h-[1350px] overflow-hidden pointer-events-none -z-0 opacity-60">
+        <FuturisticHeroCanvas />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0D0B0F]/30 to-[#0D0B0F] pointer-events-none" />
+      </div>
+
       {/* ========================================================================= */}
       {/* 1. HERO SECTION                                                           */}
       {/* ========================================================================= */}
-      <section className="relative pt-8 pb-16 md:pt-14 md:pb-24 lg:pt-20 lg:pb-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-            
-            {/* Left Column: Typography & CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="lg:col-span-7 space-y-6 text-left"
-            >
-              {/* Badge */}
-              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#18131B] border border-[#39283D] text-xs font-semibold text-[#C75491] backdrop-blur-md shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-[#D05A9E] animate-pulse" />
-                <span>IEEE WIE • Bennett University</span>
+      <section className="relative z-10 pt-12 pb-16 md:pt-20 md:pb-20 lg:pt-24 lg:pb-24">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="space-y-6 flex flex-col items-center"
+          >
+            {/* Badge */}
+            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#18131B] border border-[#39283D] text-xs font-semibold text-[#C75491] backdrop-blur-md shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-[#D05A9E] animate-pulse" />
+              <span>IEEE WIE • Bennett University</span>
+            </div>
+
+            {/* Main Heading */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#F5F1F5] leading-[1.1]">
+              Empowering Women. <br />
+              <span className="bg-gradient-to-r from-[#F5F1F5] via-[#E07AB0] to-[#914B91] bg-clip-text text-transparent">
+                Engineering the Future.
+              </span>
+            </h1>
+
+            {/* Supporting Description */}
+            <p className="text-base sm:text-lg text-[#D8D0DA] max-w-2xl leading-relaxed">
+              IEEE Women in Engineering at Bennett University is a community of innovators, creators, leaders, and future engineers working together to learn, build, and inspire.
+            </p>
+
+            {/* Key Bullet Highlights */}
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-1 text-sm text-[#D8D0DA]">
+              <div className="flex items-center space-x-2 bg-[#18131B]/60 px-4 py-2 rounded-full border border-[#2A202D]">
+                <CheckCircle2 className="w-4 h-4 text-[#C75491] shrink-0" />
+                <span>National Hackathons & Tech Conferences</span>
               </div>
-
-              {/* Main Heading */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#F5F1F5] leading-[1.1]">
-                Empowering Women. <br />
-                <span className="bg-gradient-to-r from-[#F5F1F5] via-[#E07AB0] to-[#914B91] bg-clip-text text-transparent">
-                  Engineering the Future.
-                </span>
-              </h1>
-
-              {/* Supporting Description */}
-              <p className="text-base sm:text-lg text-[#D8D0DA] max-w-2xl leading-relaxed">
-                IEEE Women in Engineering at Bennett University is a community of innovators, creators, leaders, and future engineers working together to learn, build, and inspire.
-              </p>
-
-              {/* Key Bullet Highlights */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-sm text-[#D8D0DA]">
-                <div className="flex items-center space-x-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#C75491] shrink-0" />
-                  <span>National Hackathons & Tech Conferences</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#914B91] shrink-0" />
-                  <span>Industry Mentorship & Research Circles</span>
-                </div>
+              <div className="flex items-center space-x-2 bg-[#18131B]/60 px-4 py-2 rounded-full border border-[#2A202D]">
+                <CheckCircle2 className="w-4 h-4 text-[#914B91] shrink-0" />
+                <span>Industry Mentorship & Research Circles</span>
               </div>
+            </div>
 
-              {/* Action Buttons */}
-              <div className="pt-4 flex flex-wrap items-center gap-4">
-                <Link
-                  href="/junior-core"
-                  className="px-7 py-3.5 rounded-full bg-gradient-to-r from-[#5A1025] via-[#7A1833] via-[#8F2450] to-[#7B3F8C] hover:from-[#7A1833] hover:to-[#914B91] text-[#F5F1F5] font-semibold text-sm shadow-xl shadow-[#7A1833]/30 flex items-center space-x-2 transition-all duration-300 hover:scale-[1.03]"
-                >
-                  <Sparkles className="w-4 h-4 text-[#E07AB0]" />
-                  <span>Join Junior Core</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
+            {/* Action Buttons */}
+            <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
+              <Link
+                href="/junior-core"
+                className="px-7 py-3.5 rounded-full bg-gradient-to-r from-[#5A1025] via-[#7A1833] via-[#8F2450] to-[#7B3F8C] hover:from-[#7A1833] hover:to-[#914B91] text-[#F5F1F5] font-semibold text-sm shadow-xl shadow-[#7A1833]/30 flex items-center space-x-2 transition-all duration-300 hover:scale-[1.03]"
+              >
+                <Sparkles className="w-4 h-4 text-[#E07AB0]" />
+                <span>Join Junior Core</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
 
-                <Link
-                  href="/events"
-                  className="px-7 py-3.5 rounded-full bg-[#121015] hover:bg-[#18131B] text-[#D8D0DA] hover:text-[#F5F1F5] font-semibold text-sm border border-[#2A202D] hover:border-[#5C2948] backdrop-blur-md transition-all duration-300 flex items-center space-x-2"
-                >
-                  <span>Explore Events</span>
-                  <ChevronRight className="w-4 h-4 text-[#A79EAB]" />
-                </Link>
-              </div>
-            </motion.div>
-
-            {/* Right Column: Futuristic Connected Node Canvas */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="lg:col-span-5 relative"
-            >
-              <FuturisticHeroCanvas />
-            </motion.div>
-
-          </div>
+              <Link
+                href="/events"
+                className="px-7 py-3.5 rounded-full bg-[#121015] hover:bg-[#18131B] text-[#D8D0DA] hover:text-[#F5F1F5] font-semibold text-sm border border-[#2A202D] hover:border-[#5C2948] backdrop-blur-md transition-all duration-300 flex items-center space-x-2"
+              >
+                <span>Explore Events</span>
+                <ChevronRight className="w-4 h-4 text-[#A79EAB]" />
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* 2. ABOUT IEEE WIE SECTION                                                 */}
+      {/* 2. JUNIOR CORE RECRUITMENT COUNTDOWN (WAITLIST)                           */}
       {/* ========================================================================= */}
-      <section className="relative py-20 bg-[#121015]/40 border-y border-[#2A202D]">
+      <div className="relative z-10">
+        <RecruitmentCountdown />
+      </div>
+
+      {/* ========================================================================= */}
+      {/* 3. ABOUT IEEE WIE SECTION                                                 */}
+      {/* ========================================================================= */}
+      <section className="relative z-10 py-20 bg-[#121015]/40 border-y border-[#2A202D]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">

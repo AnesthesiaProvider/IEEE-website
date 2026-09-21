@@ -37,9 +37,27 @@ export type EventCategory =
   | "Speaker Sessions"
   | "Community";
 
+export interface EventEpisode {
+  episode: string;
+  title: string;
+  description: string;
+}
+
+export interface EventJudge {
+  name: string;
+  role: string;
+  company: string;
+}
+
+export interface EventSpeaker {
+  name?: string;
+  role: string;
+}
+
 export interface ChapterEvent {
   id: string;
   title: string;
+  subtitle?: string;
   slug: string;
   category: "Workshops" | "Technical" | "Competitions" | "Networking" | "Speaker Sessions" | "Community";
   status: "upcoming" | "past";
@@ -54,6 +72,10 @@ export interface ChapterEvent {
   participantsCount?: number;
   galleryImages?: string[];
   tags: string[];
+  highlights?: string[];
+  episodes?: EventEpisode[];
+  judges?: EventJudge[];
+  speakers?: EventSpeaker[];
 }
 
 export interface ImpactStat {

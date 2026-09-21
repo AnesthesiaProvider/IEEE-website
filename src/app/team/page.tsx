@@ -7,13 +7,7 @@ import { TeamCard } from "@/components/team/TeamCard";
 import { seniorCoreTeam } from "@/data/team";
 
 const domains = [
-  "All",
-  "Leadership",
-  "Technical",
-  "Events",
-  "Design",
-  "PR & Marketing",
-  "Content & Media",
+  "Leadership"
 ] as const;
 
 export default function TeamPage() {
@@ -37,7 +31,7 @@ export default function TeamPage() {
       <div className="glow-orb-wine w-96 h-96 top-96 -right-20" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Header Title Section */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#18131B] border border-[#39283D] text-xs font-semibold text-[#C75491] backdrop-blur-md">
@@ -64,11 +58,10 @@ export default function TeamPage() {
                 <button
                   key={domain}
                   onClick={() => setSelectedDomain(domain)}
-                  className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 ${
-                    isActive
-                      ? "bg-gradient-to-r from-[#5A1025] to-[#7B3F8C] text-[#F5F1F5] shadow-lg shadow-[#7A1833]/30 border border-[#8F2450]"
-                      : "bg-[#121015] text-[#D8D0DA] hover:text-[#F5F1F5] border border-[#2A202D] hover:bg-[#18131B] hover:border-[#39283D]"
-                  }`}
+                  className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 ${isActive
+                    ? "bg-gradient-to-r from-[#5A1025] to-[#7B3F8C] text-[#F5F1F5] shadow-lg shadow-[#7A1833]/30 border border-[#8F2450]"
+                    : "bg-[#121015] text-[#D8D0DA] hover:text-[#F5F1F5] border border-[#2A202D] hover:bg-[#18131B] hover:border-[#39283D]"
+                    }`}
                 >
                   {domain}
                 </button>

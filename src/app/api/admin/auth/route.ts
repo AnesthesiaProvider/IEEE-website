@@ -1,21 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 const COOKIE_NAME = "wie_admin_session";
-const SESSION_TOKEN = process.env.ADMIN_SESSION_SECRET || "wie_bu_auth_session";
+const getSessionToken = () => process.env.ADMIN_SESSION_SECRET || "wie_bu_auth_session";
 
 export async function POST(request: NextRequest) {
   try {
+    const adminPassword = process.env.ADMIN_PASSWORD || "wieBU@2026";
+    const sessionToken = getSessionToken();
+
     const { password } = await request.json();
 
-    if (!ADMIN_PASSWORD) {
+    if (!adminPassword) {
       return NextResponse.json(
         { success: false, error: "Admin authentication is not configured in environment variables." },
         { status: 500 }
       );
     }
 
-    if (password !== ADMIN_PASSWORD) {
+    if (password !== adminPassword) {
       return NextResponse.json(
         { success: false, error: "Invalid administrator passkey." },
         { status: 401 }
@@ -29,7 +31,7 @@ export async function POST(request: NextRequest) {
 
     response.cookies.set({
       name: COOKIE_NAME,
-      value: SESSION_TOKEN,
+      value: sessionToken,
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
@@ -38,7 +40,8 @@ export async function POST(request: NextRequest) {
     });
 
     return response;
-  } catch {
+  } catch (err) {
+    console.error("Auth POST error:", err);
     return NextResponse.json(
       { success: false, error: "Server authentication error." },
       { status: 500 }
@@ -48,7 +51,7 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   const sessionCookie = request.cookies.get(COOKIE_NAME);
-  const isAuthenticated = sessionCookie?.value === SESSION_TOKEN;
+  const isAuthenticated = sessionCookie?.value === getSessionToken();
   return NextResponse.json({ isAuthenticated });
 }
 

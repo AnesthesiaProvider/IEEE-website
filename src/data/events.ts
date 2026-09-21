@@ -13,126 +13,191 @@ import { ChapterEvent } from "@/lib/types";
 export const chapterEvents: ChapterEvent[] = [
   // --- UPCOMING EVENTS ---
   {
-    id: "she-builds-hackathon-2026",
-    title: "SheBuilds: 36-Hour National Hackathon", // [DEMO/PLACEHOLDER]
-    slug: "she-builds-hackathon",
+    id: "club-carnival",
+    title: "Club Carnival",
+    subtitle: "Find Your People",
+    slug: "club-carnival",
+    category: "Networking",
+    status: "upcoming",
+    date: "Semester Kickoff",
+    time: "Campus Hours",
+    venue: "Bennett University Campus",
+    shortDescription:
+      "Kickstart the semester with a vibrant showcase of clubs, communities and opportunities. Explore. Interact. Be a part of the Bennett life!",
+    fullDescription:
+      "Find Your People.\n\nKickstart the semester with a vibrant showcase of clubs, communities and opportunities. Explore. Interact. Be a part of the Bennett life!\n\nMeet the IEEE WIE team, discover hands-on technical initiatives, connect with student leaders, and explore opportunities to grow your network and career right from campus.",
+    image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=1000&auto=format&fit=crop",
+    registrationOpen: true,
+    registrationLink: "https://forms.google.com",
+    tags: ["Club Carnival", "Community", "Find Your People", "Bennett Life", "Networking"],
+  },
+  {
+    id: "apocalypse-2026",
+    title: "Apocalypse",
+    subtitle: "Step Into the Unexpected",
+    slug: "apocalypse",
     category: "Competitions",
     status: "upcoming",
-    date: "28 OCT 2026",
-    time: "10:00 AM IST",
-    venue: "Tinkering Lab / Auditorium, Bennett University",
+    date: "23 SEP 2026",
+    time: "To Be Announced",
+    venue: "Bennett University",
     shortDescription:
-      "A premier flagship hackathon bringing together passionate coders and designers to engineer tech solutions for social impact and sustainability.",
+      "An adrenaline-filled experience with challenges, surprises and memories you’ll be talking about long after it ends. Are you ready?",
     fullDescription:
-      "SheBuilds is IEEE WIE Bennett University's annual flagship hackathon welcoming undergraduate developers across India. With tracks spanning Generative AI, HealthTech, CyberSecurity, and Sustainable Smart Cities, participants collaborate in teams of 2-4 with hands-on mentorship from senior industry engineers.",
-    image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=1000&auto=format&fit=crop",
+      "Step Into the Unexpected.\n\nAn adrenaline-filled experience with challenges, surprises and memories you’ll be talking about long after it ends. Are you ready?\n\nPrepare for an intense, high-energy competition designed to test quick thinking, teamwork, and resilience under pressure. Gather your squad and step into the arena.",
+    image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1000&auto=format&fit=crop",
     registrationOpen: true,
-    registrationLink: "https://unstop.com", // [DEMO LINK]
-    tags: ["Hackathon", "AI/ML", "Web3", "Cash Prizes", "Mentorship"],
+    registrationLink: "https://forms.google.com",
+    tags: ["Apocalypse", "Challenges", "Competition", "Adrenaline", "Campus Quest"],
   },
   {
-    id: "genai-agents-workshop",
-    title: "Autonomous AI Agents & LLMs Masterclass", // [DEMO/PLACEHOLDER]
-    slug: "autonomous-ai-agents-workshop",
-    category: "Workshops",
+    id: "ieee-day-2026",
+    title: "IEEE Day",
+    subtitle: "Celebrate. Collaborate. Create.",
+    slug: "ieee-day",
+    category: "Technical",
     status: "upcoming",
-    date: "12 NOV 2026",
-    time: "02:30 PM - 05:30 PM IST",
-    venue: "Lab Block C - 302, Bennett University",
+    date: "06 OCT 2026",
+    time: "Full Day Celebration",
+    venue: "Bennett University",
     shortDescription:
-      "An intensive hands-on workshop guiding students to build autonomous multi-agent systems using modern Python frameworks.",
+      "A day to celebrate technology, innovation and the global IEEE community. Inspiring talks, engaging sessions and opportunities to connect with like-minded peers.",
     fullDescription:
-      "Dive into agentic workflows, tool execution, memory architectures, and real-world deployment. Learn how top tech companies build agents that inspect codebases, execute APIs, and solve complex automation challenges.",
-    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1000&auto=format&fit=crop",
+      "Celebrate. Collaborate. Create.\n\nA day to celebrate technology, innovation and the global IEEE community. Inspiring talks, engaging sessions and opportunities to connect with like-minded peers.\n\nJoin IEEE WIE Bennett University as we commemorate IEEE Day with keynote addresses, interactive tech showcases, community networking, and celebrations honoring the worldwide spirit of engineering for humanity.",
+    image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1000&auto=format&fit=crop",
     registrationOpen: true,
-    registrationLink: "https://forms.google.com", // [DEMO LINK]
-    tags: ["Workshop", "Python", "Generative AI", "Hands-on"],
-  },
-  {
-    id: "women-in-tech-leadership-panel",
-    title: "Pioneering Paths: Women Tech Leaders Panel", // [DEMO/PLACEHOLDER]
-    slug: "women-in-tech-leadership-panel",
-    category: "Speaker Sessions",
-    status: "upcoming",
-    date: "25 NOV 2026",
-    time: "04:00 PM - 06:00 PM IST",
-    venue: "Virtual via Zoom / Hybrid BU Studio",
-    shortDescription:
-      "Inspiring fireside chat featuring distinguished female engineers and engineering directors from global technology leaders.",
-    fullDescription:
-      "Hear candid stories, career roadmaps, interview preparation strategies, and leadership wisdom from women who shattered glass ceilings in cloud engineering, chip design, and quantitative software systems.",
-    image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=1000&auto=format&fit=crop",
-    registrationOpen: true,
-    registrationLink: "https://forms.google.com", // [DEMO LINK]
-    tags: ["Leadership", "Panel", "Career Growth", "Networking"],
+    registrationLink: "https://forms.google.com",
+    tags: ["IEEE Day", "Technology", "Innovation", "Global Community", "Celebrate"],
   },
 
   // --- PAST EVENTS ---
   {
-    id: "code-craft-webdev-bootcamp",
-    title: "CodeCraft: Modern Fullstack Bootcamp", // [DEMO/PLACEHOLDER]
-    slug: "code-craft-fullstack-bootcamp",
+    id: "ai-summit",
+    title: "AI Summit",
+    subtitle: "Exploring the Future of Artificial Intelligence",
+    slug: "ai-summit",
     category: "Technical",
     status: "past",
-    date: "14 AUG 2026",
-    time: "3 Days Interactive",
-    venue: "Computer Center 1, BU",
+    date: "Completed",
+    time: "Flagship Summit",
+    venue: "Bennett University",
     shortDescription:
-      "3-day intensive cohort on Next.js, TypeScript, PostgreSQL, and scalable UI engineering completed by 150+ students.",
+      "An engaging initiative focused on exploring the growing impact and possibilities of Artificial Intelligence with university and chapter leadership.",
     fullDescription:
-      "From blank repository to full production deployment on Vercel. Participants built reactive web applications with relational databases, authentication guards, and interactive animations.",
-    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1000&auto=format&fit=crop",
+      "The AI Summit was an engaging initiative by IEEE WIE at Bennett University, focused on exploring the growing impact and possibilities of Artificial Intelligence.\n\nThe event brought together students, university leadership and IEEE WIE leadership for meaningful discussions around AI and the opportunities emerging with this rapidly evolving technology.\n\nThe summit featured the Dean of Bennett University and the Chairperson of IEEE WIE, who shared their perspectives and insights with the student community.",
+    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1000&auto=format&fit=crop",
     registrationOpen: false,
-    participantsCount: 165,
-    tags: ["Fullstack", "Next.js", "TypeScript", "Vercel"],
+    tags: ["AI", "Artificial Intelligence", "Leadership", "Future of Tech", "Bennett University"],
+    highlights: [
+      "Insightful discussions around Artificial Intelligence",
+      "Interaction with university leadership",
+      "Perspectives from IEEE WIE leadership",
+      "Exposure to emerging opportunities in AI",
+      "Student interaction and engagement",
+    ],
+    speakers: [
+      { role: "Dean of Bennett University" },
+      { role: "Chairperson, IEEE WIE" },
+    ],
     galleryImages: [
-      "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1000&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1000&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1000&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1000&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=1000&auto=format&fit=crop",
     ],
   },
   {
-    id: "hardware-iot-hacknight",
-    title: "Embedded Odyssey: IoT & Robotics Sprint", // [DEMO/PLACEHOLDER]
-    slug: "embedded-odyssey-iot-hacknight",
+    id: "internship-series-1",
+    title: "Internship Series 1.0",
+    subtitle: "From Preparation to Possibilities.",
+    slug: "internship-series-1",
     category: "Workshops",
     status: "past",
-    date: "22 JUL 2026",
-    time: "Overnight Workshop",
-    venue: "Electronics & Microcontroller Lab, BU",
+    date: "3 Episodes",
+    time: "Comprehensive Cohort",
+    venue: "Bennett University",
     shortDescription:
-      "Hands-on sensor telemetry, ESP32 microcontrollers, and circuit prototyping in an overnight engineering sprint.",
+      "A three-episode initiative designed to help students understand what it takes to become internship-ready through practical guidance and mock rounds.",
     fullDescription:
-      "Participants wired sensor arrays, flashed real-time operating systems, and visualized telemetry dashboards over MQTT channels, concluding with a live hardware demo shootout.",
-    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1000&auto=format&fit=crop",
+      "Internship Series 1.0 was a three-episode initiative designed to help students understand what it takes to become internship-ready.\n\nThe series focused on practical guidance, essential skills and the realities of technical interviews, giving students a clearer understanding of what companies look for beyond academic performance.",
+    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1000&auto=format&fit=crop",
     registrationOpen: false,
-    participantsCount: 92,
-    tags: ["IoT", "Hardware", "Robotics", "ESP32"],
+    tags: ["Internships", "Career Guidance", "Technical Interviews", "Mock Round", "Resume Prep"],
+    highlights: [
+      "3 Episodes",
+      "Career Guidance",
+      "Mock Technical Round",
+      "Practical Insights",
+    ],
+    episodes: [
+      {
+        episode: "Episode 01",
+        title: "Know What It Takes",
+        description:
+          "The first episode focused on understanding the skills and competencies students need to develop to prepare themselves for internship opportunities.",
+      },
+      {
+        episode: "Episode 02",
+        title: "Experience the Technical Round",
+        description:
+          "Students got a glimpse of the technical interview process through a mock technical round. The session was designed to give participants a basic idea of how technical interviews work and how they can prepare for them.",
+      },
+      {
+        episode: "Episode 03",
+        title: "Insights Beyond the Classroom",
+        description:
+          "The final episode featured Shashwant, former President of DCC, who shared additional insights and perspectives on internships, career preparation and the professional journey ahead.",
+      },
+    ],
     galleryImages: [
-      "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1000&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1581092335397-9583fe92d232?q=80&w=1000&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1000&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1000&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1000&auto=format&fit=crop",
     ],
   },
   {
-    id: "wie-connect-mixer",
-    title: "WIE Connect: Alumni & Senior Mentorship Mixer", // [DEMO/PLACEHOLDER]
-    slug: "wie-connect-mentorship-mixer",
-    category: "Networking",
+    id: "innovation-expo-1",
+    title: "Innovation Expo 1.0",
+    subtitle: "Where Ideas Meet Impact.",
+    slug: "innovation-expo-1",
+    category: "Competitions",
     status: "past",
-    date: "05 MAY 2026",
-    time: "05:00 PM - 07:30 PM",
-    venue: "Central Amphitheatre, Bennett University",
+    date: "Flagship Expo",
+    time: "Project Pitch & Demo",
+    venue: "Bennett University",
     shortDescription:
-      "An evening of cross-year peer bonding, resume review clinics, and internship roadmap roundtables.",
+      "Flagship innovation-focused event providing students with a platform to take their ideas beyond the classroom and pitch to industry judges.",
     fullDescription:
-      "Bridging the transition from student to software engineer. Over 200 freshmen and sophomores paired with seniors who cracked FAANG and top product firm internships for 1-on-1 resume feedback.",
-    image: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=1000&auto=format&fit=crop",
+      "Innovation Expo 1.0 was the flagship innovation-focused event by IEEE WIE at Bennett University, providing students with a platform to take their ideas beyond the classroom.\n\nStudents presented their startup ideas and technology-driven solutions, showcasing how emerging technologies such as Artificial Intelligence could be integrated into solutions for real-world problems.\n\nThe event featured three external judges, giving participants the opportunity to pitch their ideas directly to professionals and receive valuable feedback.",
+    image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=1000&auto=format&fit=crop",
     registrationOpen: false,
-    participantsCount: 210,
-    tags: ["Networking", "Mentorship", "Alumni", "Career"],
+    tags: ["Innovation", "Startup Pitch", "AI Solutions", "External Judges", "Impact"],
+    highlights: [
+      "💡 Ideas: Students presented innovative concepts and startup ideas aimed at solving real-world problems.",
+      "🤖 Technology: Participants demonstrated how technologies such as AI could strengthen and transform their solutions.",
+      "🎤 Pitching: Students got hands-on experience pitching their ideas and communicating their vision to an external panel.",
+      "👨‍⚖️ Expert Evaluation: Three external judges evaluated the ideas and provided feedback from a professional perspective.",
+    ],
+    judges: [
+      {
+        name: "Aman Raghuvanshi",
+        role: "Product Analyst",
+        company: "American Express (AMEX)",
+      },
+      {
+        name: "Roubin Singh",
+        role: "Lead Engineer",
+        company: "Samsung",
+      },
+      {
+        name: "Swara Chachad",
+        role: "Product Designer",
+        company: "ixigo",
+      },
+    ],
     galleryImages: [
+      "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=1000&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=1000&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=1000&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1000&auto=format&fit=crop",
     ],
   },
 ];

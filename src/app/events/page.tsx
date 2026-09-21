@@ -12,6 +12,7 @@ const categories: EventCategory[] = [
   "Workshops",
   "Technical",
   "Competitions",
+  "Speaker Sessions",
   "Networking",
 ];
 

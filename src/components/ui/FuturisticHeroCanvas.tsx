@@ -13,7 +13,11 @@ interface Node {
   baseY: number;
 }
 
-export function FuturisticHeroCanvas() {
+interface FuturisticHeroCanvasProps {
+  className?: string;
+}
+
+export function FuturisticHeroCanvas({ className = "" }: FuturisticHeroCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -27,13 +31,13 @@ export function FuturisticHeroCanvas() {
     let height = (canvas.height = canvas.parentElement?.clientHeight || 600);
 
     const colors = ["#7A1833", "#8F2450", "#632C70", "#914B91", "#C75491", "#D05A9E"];
-    const nodeCount = Math.min(Math.floor((width * height) / 12000), 55);
+    const nodeCount = Math.min(Math.floor((width * height) / 14000), 75);
     const maxDistance = 140;
 
     let mouse = {
       x: -1000,
       y: -1000,
-      radius: 120,
+      radius: 130,
     };
 
     const nodes: Node[] = [];
@@ -70,8 +74,8 @@ export function FuturisticHeroCanvas() {
     };
 
     window.addEventListener("resize", handleResize);
-    canvas.addEventListener("mousemove", handleMouseMove);
-    canvas.addEventListener("mouseleave", handleMouseLeave);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseleave", handleMouseLeave);
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
@@ -152,25 +156,25 @@ export function FuturisticHeroCanvas() {
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener("resize", handleResize);
-      canvas.removeEventListener("mousemove", handleMouseMove);
-      canvas.removeEventListener("mouseleave", handleMouseLeave);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, []);
 
   return (
-    <div className="relative w-full h-[380px] sm:h-[460px] lg:h-[540px] flex items-center justify-center">
+    <div className={`relative w-full h-full flex items-center justify-center pointer-events-none ${className}`}>
       {/* Glow backing */}
-      <div className="absolute inset-0 bg-radial from-[#7A1833]/15 via-[#632C70]/10 to-transparent blur-2xl pointer-events-none" />
+      <div className="absolute inset-0 bg-radial from-[#7A1833]/15 via-[#632C70]/10 to-transparent blur-3xl pointer-events-none" />
 
       {/* Decorative IEEE WIE central emblem ring */}
-      <div className="absolute w-56 h-56 sm:w-72 sm:h-72 rounded-full border border-[#5C2948]/30 animate-[spin_40s_linear_infinite] pointer-events-none flex items-center justify-center">
-        <div className="w-44 h-44 sm:w-56 sm:h-56 rounded-full border border-dashed border-[#914B91]/35 animate-[spin_25s_linear_infinite_reverse]" />
+      <div className="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full border border-[#5C2948]/25 animate-[spin_45s_linear_infinite] pointer-events-none flex items-center justify-center opacity-50">
+        <div className="w-56 h-56 sm:w-72 sm:h-72 rounded-full border border-dashed border-[#914B91]/30 animate-[spin_30s_linear_infinite_reverse]" />
       </div>
 
       {/* Interactive canvas */}
       <canvas
         ref={canvasRef}
-        className="w-full h-full cursor-crosshair relative z-10"
+        className="w-full h-full pointer-events-none relative z-0"
         aria-label="Interactive Technological Network Simulation"
       />
     </div>
