@@ -15,8 +15,7 @@ export const siteConfig: SiteConfig = {
   aboutText:
     "IEEE Women in Engineering is a global community dedicated to inspiring and empowering women in engineering and technology. At Bennett University, we bring this vision to campus through technical events, workshops, leadership opportunities, collaborative projects, networking, and a community that encourages students to build fearlessly.",
   socials: {
-    // REPLACE WITH OFFICIAL CHAPTER HANDLES WHEN ACTIVE
-    instagram: "https://instagram.com/ieeewie_bu",
+    instagram: "https://www.instagram.com/wieieee.bu/",
     linkedin: "https://linkedin.com/company/ieee-wie-bennett-university",
     github: "https://github.com/ieee-wie-bu",
     email: "wie.ieee@bennett.edu.in",
