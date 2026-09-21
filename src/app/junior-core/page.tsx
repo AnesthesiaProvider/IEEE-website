@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
@@ -19,8 +19,19 @@ import {
   FileText,
   Link2,
   Check,
+  Smartphone,
+  ShieldAlert,
+  Copy,
 } from "lucide-react";
 import { ApplicationDomain } from "@/lib/types";
+
+interface SavedApplicationData {
+  id: string;
+  fullName: string;
+  enrollmentNumber: string;
+  domain: string;
+  createdAt?: string;
+}
 
 const domainOptions: { label: ApplicationDomain; desc: string }[] = [
   { label: "Technical", desc: "Fullstack web dev, AI/ML, cloud systems, and open-source tooling." },
@@ -60,12 +71,26 @@ export default function JuniorCorePage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [submittedData, setSubmittedData] = useState<{
-    id: string;
-    fullName: string;
-    enrollmentNumber: string;
-    domain: string;
-  } | null>(null);
+  const [submittedData, setSubmittedData] = useState<SavedApplicationData | null>(null);
+  const [existingDeviceApplication, setExistingDeviceApplication] = useState<SavedApplicationData | null>(null);
+  const [copiedRef, setCopiedRef] = useState(false);
+
+  // Check if an application was already submitted on this phone / device
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const stored = localStorage.getItem("junior_core_application");
+        if (stored) {
+          const parsed: SavedApplicationData = JSON.parse(stored);
+          if (parsed && parsed.id && parsed.enrollmentNumber) {
+            setExistingDeviceApplication(parsed);
+          }
+        }
+      } catch (err) {
+        console.warn("Could not read junior_core_application from localStorage:", err);
+      }
+    }
+  }, []);
 
   const validate = () => {
     const errs: Record<string, string> = {};
@@ -108,9 +133,28 @@ export default function JuniorCorePage() {
     return Object.keys(errs).length === 0;
   };
 
+  const copyRefId = (id: string) => {
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(id);
+      setCopiedRef(true);
+      setTimeout(() => setCopiedRef(false), 2000);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitError(null);
+
+    // Device-level restriction: only 1 application per phone/device
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem("junior_core_application");
+      if (stored) {
+        setSubmitError(
+          "An application has already been submitted from this phone/device. Only one Junior Core application is allowed per device."
+        );
+        return;
+      }
+    }
 
     if (!validate()) {
       const firstErrorEl = document.querySelector(".field-error");
@@ -137,6 +181,23 @@ export default function JuniorCorePage() {
         return;
       }
 
+      const savedApp: SavedApplicationData = {
+        id: result.application.id,
+        fullName: formData.fullName,
+        enrollmentNumber: formData.enrollmentNumber.toUpperCase(),
+        domain: formData.domain,
+        createdAt: result.application.createdAt || new Date().toISOString(),
+      };
+
+      // Lock device: save submission to localStorage
+      try {
+        if (typeof window !== "undefined") {
+          localStorage.setItem("junior_core_application", JSON.stringify(savedApp));
+        }
+      } catch (err) {
+        console.warn("Could not save to localStorage:", err);
+      }
+
       // Success celebration with brand palette!
       try {
         confetti({
@@ -149,12 +210,8 @@ export default function JuniorCorePage() {
         // ignore if canvas unavailable
       }
 
-      setSubmittedData({
-        id: result.application.id,
-        fullName: formData.fullName,
-        enrollmentNumber: formData.enrollmentNumber.toUpperCase(),
-        domain: formData.domain,
-      });
+      setSubmittedData(savedApp);
+      setExistingDeviceApplication(savedApp);
     } catch {
       setSubmitError("Network connection error. Please try again in a moment.");
     } finally {
@@ -163,7 +220,7 @@ export default function JuniorCorePage() {
   };
 
   // =========================================================================
-  // SUCCESS CONFIRMATION SCREEN
+  // SUCCESS CONFIRMATION SCREEN (Fresh Submission)
   // =========================================================================
   if (submittedData) {
     return (
@@ -191,7 +248,7 @@ export default function JuniorCorePage() {
               Application Submitted Successfully!
             </h1>
             <p className="text-sm text-[#D8D0DA] leading-relaxed">
-              Thank you for applying to the <strong>IEEE WIE Bennett University Junior Core Team</strong>. Our team will review your application and get back to you.
+              Thank you for applying to the <strong>IEEE WIE Bennett University Junior Core Team</strong>. This submission is linked to this device (1 submission per phone active).
             </p>
           </div>
 
@@ -209,14 +266,111 @@ export default function JuniorCorePage() {
               <span className="text-[#A79EAB]">Selected Domain:</span>
               <span className="font-semibold text-[#C75491]">{submittedData.domain}</span>
             </div>
-            <div className="flex justify-between pt-2">
+            <div className="flex justify-between items-center pt-2">
               <span className="text-[#A79EAB]">Application Reference:</span>
-              <span className="font-mono text-[#D8D0DA]">{submittedData.id}</span>
+              <div className="flex items-center space-x-1.5">
+                <span className="font-mono text-[#D8D0DA] font-semibold">{submittedData.id}</span>
+                <button
+                  type="button"
+                  onClick={() => copyRefId(submittedData.id)}
+                  className="p-1 rounded hover:bg-[#18131B] text-[#A79EAB] hover:text-[#E07AB0] transition-colors"
+                  title="Copy Reference ID"
+                >
+                  {copiedRef ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                </button>
+              </div>
             </div>
           </div>
 
           <p className="text-xs text-[#A79EAB]">
             A confirmation has been logged. Shortlisted applicants will receive follow-up interview notifications.
+          </p>
+
+          <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
+              href="/"
+              className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#5A1025] via-[#8F2450] to-[#7B3F8C] hover:from-[#7A1833] hover:to-[#914B91] text-[#F5F1F5] font-semibold text-sm shadow-lg shadow-[#7A1833]/30 transition-all text-center"
+            >
+              Back to Home
+            </Link>
+            <Link
+              href="/events"
+              className="px-6 py-3 rounded-xl bg-[#18131B] hover:bg-[#2A202D] text-[#D8D0DA] text-sm font-semibold border border-[#2A202D] transition-colors text-center"
+            >
+              Explore Upcoming Events
+            </Link>
+          </div>
+        </motion.div>
+      </div>
+    );
+  }
+
+  // =========================================================================
+  // DEVICE ALREADY SUBMITTED SCREEN
+  // =========================================================================
+  if (existingDeviceApplication) {
+    return (
+      <div className="relative min-h-[75vh] flex items-center justify-center py-16 px-4">
+        <div className="glow-orb-wine w-96 h-96 top-20 -left-20" />
+        <div className="glow-orb-purple w-96 h-96 top-40 -right-20" />
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="relative z-10 max-w-xl w-full rounded-3xl bg-[#18131B]/95 border border-[#5C2948] backdrop-blur-2xl p-8 sm:p-12 text-center shadow-2xl space-y-6"
+        >
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#7A1833] via-[#8F2450] to-[#C75491] p-0.5 mx-auto shadow-lg shadow-[#7A1833]/30 flex items-center justify-center">
+            <div className="w-full h-full bg-[#121015] rounded-[14px] flex items-center justify-center">
+              <Smartphone className="w-8 h-8 text-[#E07AB0]" />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <span className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-[#E07AB0] bg-[#18131B] px-3.5 py-1 rounded-full border border-[#5C2948] space-x-1.5">
+              <ShieldAlert className="w-3.5 h-3.5 mr-1 text-[#E07AB0]" />
+              1 Application Per Phone Enforced
+            </span>
+            <h1 className="text-3xl font-extrabold text-[#F5F1F5]">
+              Application Already Submitted
+            </h1>
+            <p className="text-sm text-[#D8D0DA] leading-relaxed">
+              An application has already been submitted from this phone/device for applicant <strong>{existingDeviceApplication.fullName}</strong>. To ensure fair recruitment, each applicant may only submit once per phone.
+            </p>
+          </div>
+
+          {/* Applicant Receipt Card */}
+          <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 text-left space-y-2.5 text-xs sm:text-sm">
+            <div className="flex justify-between border-b border-[#2A202D] pb-2">
+              <span className="text-[#A79EAB]">Applicant Name:</span>
+              <span className="font-semibold text-[#F5F1F5]">{existingDeviceApplication.fullName}</span>
+            </div>
+            <div className="flex justify-between border-b border-[#2A202D] py-2">
+              <span className="text-[#A79EAB]">Enrollment No:</span>
+              <span className="font-semibold text-[#E07AB0] font-mono">{existingDeviceApplication.enrollmentNumber}</span>
+            </div>
+            <div className="flex justify-between border-b border-[#2A202D] py-2">
+              <span className="text-[#A79EAB]">Selected Domain:</span>
+              <span className="font-semibold text-[#C75491]">{existingDeviceApplication.domain}</span>
+            </div>
+            <div className="flex justify-between items-center pt-2">
+              <span className="text-[#A79EAB]">Application Reference:</span>
+              <div className="flex items-center space-x-1.5">
+                <span className="font-mono text-[#D8D0DA] font-semibold">{existingDeviceApplication.id}</span>
+                <button
+                  type="button"
+                  onClick={() => copyRefId(existingDeviceApplication.id)}
+                  className="p-1 rounded hover:bg-[#18131B] text-[#A79EAB] hover:text-[#E07AB0] transition-colors"
+                  title="Copy Reference ID"
+                >
+                  {copiedRef ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <p className="text-xs text-[#756B7A] max-w-md mx-auto">
+            Need to update your submitted information? Please contact the IEEE WIE Bennett University core team at wie.ieee@bennett.edu.in.
           </p>
 
           <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
@@ -263,6 +417,17 @@ export default function JuniorCorePage() {
           <p className="text-[#D8D0DA] text-base sm:text-lg leading-relaxed">
             Your opportunity to learn, contribute, lead, and grow with IEEE WIE Bennett University.
           </p>
+        </div>
+
+        {/* Device Restriction Policy Banner */}
+        <div className="mb-8 p-4 rounded-2xl bg-[#18131B] border border-[#5C2948] text-xs text-[#D8D0DA] flex items-start space-x-3">
+          <Smartphone className="w-4 h-4 text-[#E07AB0] shrink-0 mt-0.5" />
+          <div>
+            <span className="font-semibold text-[#F5F1F5] block">Device Restriction Notice</span>
+            <span className="text-[#A79EAB]">
+              Only 1 application can be submitted from this phone/device. Please ensure your enrollment number, domain preference, and phone number are correct before submitting.
+            </span>
+          </div>
         </div>
 
         {/* Global Submission Error Alert */}

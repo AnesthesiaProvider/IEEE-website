@@ -121,6 +121,16 @@ export async function checkDuplicateEnrollment(enrollmentNumber: string): Promis
   return apps.some((app) => app.enrollmentNumber.trim().toUpperCase() === normalized);
 }
 
+export async function checkDuplicateJuniorCorePhone(phone: string): Promise<boolean> {
+  const apps = await readApplications();
+  const cleanPhone = phone.replace(/[^0-9]/g, "").slice(-10);
+  if (cleanPhone.length < 10) return false;
+  return apps.some((app) => {
+    const existing = (app.phone || "").replace(/[^0-9]/g, "").slice(-10);
+    return existing === cleanPhone;
+  });
+}
+
 export async function saveApplication(
   data: Omit<JuniorCoreApplication, "id" | "createdAt" | "updatedAt" | "status">
 ): Promise<{ success: boolean; data?: JuniorCoreApplication; error?: string }> {
@@ -130,6 +140,14 @@ export async function saveApplication(
       return {
         success: false,
         error: `An application with enrollment number "${data.enrollmentNumber}" has already been submitted.`,
+      };
+    }
+
+    const isDuplicatePhone = await checkDuplicateJuniorCorePhone(data.phone);
+    if (isDuplicatePhone) {
+      return {
+        success: false,
+        error: `An application with phone number "${data.phone}" has already been submitted. Only one Junior Core application is allowed per phone number.`,
       };
     }
 

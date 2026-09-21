@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { saveApplication, checkDuplicateEnrollment } from "@/lib/storage";
+import {
+  saveApplication,
+  checkDuplicateEnrollment,
+  checkDuplicateJuniorCorePhone,
+} from "@/lib/storage";
 import { sendApplicationConfirmationEmail } from "@/lib/email";
 import { ApplicationDomain } from "@/lib/types";
 
@@ -72,6 +76,18 @@ export async function POST(request: NextRequest) {
         {
           success: false,
           error: `An application with enrollment number ${data.enrollmentNumber.toUpperCase()} has already been submitted. If you need to revise your submission, please reach out to wie.ieee@bennett.edu.in.`,
+        },
+        { status: 409 }
+      );
+    }
+
+    // Check duplicate phone number
+    const isDuplicatePhone = await checkDuplicateJuniorCorePhone(data.phone);
+    if (isDuplicatePhone) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: `An application with phone number ${data.phone} has already been submitted. Only one Junior Core application is allowed per phone number.`,
         },
         { status: 409 }
       );
