@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import confetti from "canvas-confetti";
 import {
   Users,
@@ -14,6 +14,10 @@ import {
   Phone,
   User,
   Hash,
+  Smartphone,
+  Copy,
+  Check,
+  ShieldAlert,
 } from "lucide-react";
 import { Modal } from "@/components/ui/Modal";
 
@@ -21,6 +25,13 @@ interface TeamMemberInput {
   name: string;
   enrollmentNumber: string;
   phone: string;
+}
+
+interface SavedTeamData {
+  id: string;
+  teamName: string;
+  members: TeamMemberInput[];
+  createdAt: string;
 }
 
 interface ApocalypseRegistrationModalProps {
@@ -41,12 +52,26 @@ export function ApocalypseRegistrationModal({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [submittedData, setSubmittedData] = useState<{
-    id: string;
-    teamName: string;
-    members: TeamMemberInput[];
-    createdAt: string;
-  } | null>(null);
+  const [submittedData, setSubmittedData] = useState<SavedTeamData | null>(null);
+  const [existingDeviceRegistration, setExistingDeviceRegistration] = useState<SavedTeamData | null>(null);
+  const [copiedId, setCopiedId] = useState(false);
+
+  // Check if this phone / browser has already registered a team
+  useEffect(() => {
+    if (typeof window !== "undefined" && isOpen) {
+      try {
+        const stored = localStorage.getItem("apocalypse_registered_team");
+        if (stored) {
+          const parsed: SavedTeamData = JSON.parse(stored);
+          if (parsed && parsed.id && parsed.teamName) {
+            setExistingDeviceRegistration(parsed);
+          }
+        }
+      } catch (e) {
+        console.warn("Could not read apocalypse_registered_team from storage", e);
+      }
+    }
+  }, [isOpen]);
 
   // Add candidate (+) button up to max 4
   const handleAddCandidate = () => {
@@ -111,6 +136,7 @@ export function ApocalypseRegistrationModal({
     }
 
     const seenEnrolls = new Set<string>();
+    const seenPhones = new Set<string>();
 
     members.forEach((m, idx) => {
       const memberNumber = idx + 1;
@@ -128,9 +154,13 @@ export function ApocalypseRegistrationModal({
         seenEnrolls.add(cleanEnroll);
       }
 
-      const cleanPhone = m.phone.replace(/[^0-9]/g, "");
+      const cleanPhone = m.phone.replace(/[^0-9]/g, "").slice(-10);
       if (!m.phone.trim() || cleanPhone.length < 10) {
         errs[`phone_${idx}`] = `Member ${memberNumber}'s 10-digit phone number is required.`;
+      } else if (seenPhones.has(cleanPhone)) {
+        errs[`phone_${idx}`] = `Duplicate phone number in team. Each candidate must have a unique phone number.`;
+      } else {
+        seenPhones.add(cleanPhone);
       }
     });
 
@@ -138,9 +168,28 @@ export function ApocalypseRegistrationModal({
     return Object.keys(errs).length === 0;
   };
 
+  const copyRegistrationId = (id: string) => {
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(id);
+      setCopiedId(true);
+      setTimeout(() => setCopiedId(false), 2000);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitError(null);
+
+    // Enforce 1 registration per phone client-side
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem("apocalypse_registered_team");
+      if (stored) {
+        setSubmitError(
+          "A team has already been registered from this phone. Only one team registration is allowed per device."
+        );
+        return;
+      }
+    }
 
     if (!validate()) {
       return;
@@ -173,6 +222,22 @@ export function ApocalypseRegistrationModal({
         return;
       }
 
+      const savedData: SavedTeamData = {
+        id: data.registration.id,
+        teamName: data.registration.teamName,
+        members: [...members],
+        createdAt: data.registration.createdAt,
+      };
+
+      // Lock device: save registration to localStorage
+      try {
+        if (typeof window !== "undefined") {
+          localStorage.setItem("apocalypse_registered_team", JSON.stringify(savedData));
+        }
+      } catch (err) {
+        console.warn("Could not save registration to localStorage:", err);
+      }
+
       // Confetti celebration
       confetti({
         particleCount: 80,
@@ -181,12 +246,8 @@ export function ApocalypseRegistrationModal({
         colors: ["#7A1833", "#C75491", "#914B91", "#E07AB0", "#FFFFFF"],
       });
 
-      setSubmittedData({
-        id: data.registration.id,
-        teamName: data.registration.teamName,
-        members: [...members],
-        createdAt: data.registration.createdAt,
-      });
+      setSubmittedData(savedData);
+      setExistingDeviceRegistration(savedData);
     } catch (err) {
       console.error("Submission error:", err);
       setSubmitError("Network error occurred. Please try again.");
@@ -203,7 +264,6 @@ export function ApocalypseRegistrationModal({
     ]);
     setErrors({});
     setSubmitError(null);
-    setSubmittedData(null);
   };
 
   const handleClose = () => {
@@ -219,7 +279,7 @@ export function ApocalypseRegistrationModal({
       maxWidth="max-w-2xl"
     >
       {submittedData ? (
-        /* Confirmation Screen */
+        /* Fresh Confirmation Screen */
         <div className="space-y-6 py-2 text-center">
           <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#7A1833] via-[#8F2450] to-[#C75491] p-0.5 mx-auto flex items-center justify-center shadow-lg shadow-[#7A1833]/40">
             <div className="w-full h-full bg-[#121015] rounded-full flex items-center justify-center">
@@ -235,14 +295,24 @@ export function ApocalypseRegistrationModal({
               Team &quot;{submittedData.teamName}&quot; Registered!
             </h3>
             <p className="text-xs text-[#A79EAB] max-w-md mx-auto">
-              Your squad has been successfully entered into the official Apocalypse 2026 roster.
+              Your squad has been registered for Apocalypse 2026. This registration is linked to this phone (1 registration per phone limit active).
             </p>
           </div>
 
           <div className="p-4 rounded-xl bg-[#121015] border border-[#2A202D] text-left text-xs space-y-3 max-w-md mx-auto">
             <div className="flex justify-between items-center pb-2 border-b border-[#2A202D]">
               <span className="text-[#A79EAB]">Registration ID:</span>
-              <span className="font-mono text-[#E07AB0] font-bold">{submittedData.id}</span>
+              <div className="flex items-center space-x-1.5">
+                <span className="font-mono text-[#E07AB0] font-bold">{submittedData.id}</span>
+                <button
+                  type="button"
+                  onClick={() => copyRegistrationId(submittedData.id)}
+                  className="p-1 rounded hover:bg-[#18131B] text-[#A79EAB] hover:text-[#E07AB0] transition-colors"
+                  title="Copy ID"
+                >
+                  {copiedId ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                </button>
+              </div>
             </div>
             <div className="flex justify-between items-center pb-2 border-b border-[#2A202D]">
               <span className="text-[#A79EAB]">Team Name:</span>
@@ -280,17 +350,101 @@ export function ApocalypseRegistrationModal({
             >
               Done & Close
             </button>
+          </div>
+        </div>
+      ) : existingDeviceRegistration ? (
+        /* Device Already Registered Screen */
+        <div className="space-y-6 py-2 text-center">
+          <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#7A1833] via-[#8F2450] to-[#C75491] p-0.5 mx-auto flex items-center justify-center shadow-lg shadow-[#7A1833]/40">
+            <div className="w-full h-full bg-[#121015] rounded-full flex items-center justify-center">
+              <Smartphone className="w-8 h-8 text-[#E07AB0]" />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#18131B] border border-[#5C2948] text-xs font-semibold text-[#E07AB0] space-x-1.5">
+              <ShieldAlert className="w-3.5 h-3.5 mr-1 text-[#E07AB0]" />
+              1 Team Per Phone Enforced
+            </span>
+            <h3 className="text-2xl font-bold text-[#F5F1F5]">
+              Team &quot;{existingDeviceRegistration.teamName}&quot; Already Registered
+            </h3>
+            <p className="text-xs text-[#A79EAB] max-w-md mx-auto leading-relaxed">
+              A team has already been registered from this phone. Per Apocalypse 2026 rules, only one team registration is permitted per device/phone.
+            </p>
+          </div>
+
+          {/* Registered Team Card */}
+          <div className="p-4 rounded-xl bg-[#121015] border border-[#2A202D] text-left text-xs space-y-3 max-w-md mx-auto">
+            <div className="flex justify-between items-center pb-2 border-b border-[#2A202D]">
+              <span className="text-[#A79EAB]">Registration ID:</span>
+              <div className="flex items-center space-x-1.5">
+                <span className="font-mono text-[#E07AB0] font-bold">{existingDeviceRegistration.id}</span>
+                <button
+                  type="button"
+                  onClick={() => copyRegistrationId(existingDeviceRegistration.id)}
+                  className="p-1 rounded hover:bg-[#18131B] text-[#A79EAB] hover:text-[#E07AB0] transition-colors"
+                  title="Copy ID"
+                >
+                  {copiedId ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                </button>
+              </div>
+            </div>
+            <div className="flex justify-between items-center pb-2 border-b border-[#2A202D]">
+              <span className="text-[#A79EAB]">Team Name:</span>
+              <span className="font-semibold text-[#F5F1F5]">{existingDeviceRegistration.teamName}</span>
+            </div>
+            <div className="flex justify-between items-center pb-2 border-b border-[#2A202D]">
+              <span className="text-[#A79EAB]">Total Members:</span>
+              <span className="font-semibold text-[#C75491]">{existingDeviceRegistration.members.length} Candidates</span>
+            </div>
+
+            {/* Members summary */}
+            <div className="space-y-1.5 pt-1">
+              <span className="text-[#A79EAB] font-bold uppercase text-[10px] tracking-wider block">
+                Registered Candidates:
+              </span>
+              {existingDeviceRegistration.members.map((m, i) => (
+                <div
+                  key={i}
+                  className="flex items-center justify-between p-2 rounded-lg bg-[#18131B] border border-[#2A202D] text-[11px]"
+                >
+                  <span className="font-medium text-[#F5F1F5]">
+                    {i + 1}. {m.name}
+                  </span>
+                  <span className="font-mono text-[#C75491]">{m.enrollmentNumber}</span>
+                  <span className="text-[#A79EAB]">{m.phone}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <p className="text-[11px] text-[#756B7A] max-w-sm mx-auto">
+            Need to update candidate information? Please reach out directly to the IEEE WIE Bennett University organizing committee.
+          </p>
+
+          <div className="pt-2 flex justify-center">
             <button
-              onClick={handleReset}
-              className="px-5 py-2.5 rounded-xl bg-[#18131B] hover:bg-[#2A202D] text-[#D8D0DA] border border-[#2A202D] text-xs font-medium transition-colors"
+              onClick={handleClose}
+              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#5A1025] via-[#7A1833] to-[#8F2450] hover:from-[#7A1833] hover:to-[#914B91] text-[#F5F1F5] font-semibold text-xs transition-all shadow-md shadow-[#7A1833]/30"
             >
-              Register Another Team
+              Close
             </button>
           </div>
         </div>
       ) : (
         /* Registration Form */
         <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Policy Banner */}
+          <div className="p-3 rounded-xl bg-[#18131B] border border-[#5C2948] text-xs text-[#D8D0DA] flex items-start space-x-2.5">
+            <Smartphone className="w-4 h-4 text-[#E07AB0] shrink-0 mt-0.5" />
+            <div>
+              <span className="font-semibold text-[#F5F1F5] block">Device Restriction Policy</span>
+              <span className="text-[#A79EAB]">
+                Only 1 team registration is allowed per phone. Please ensure team and candidate details are final before submitting.
+              </span>
+            </div>
+          </div>
           {/* Submission Error Banner */}
           {submitError && (
             <div className="p-3 rounded-xl bg-[#4A1028]/50 border border-[#8F2450] text-[#E07AB0] text-xs flex items-start space-x-2">

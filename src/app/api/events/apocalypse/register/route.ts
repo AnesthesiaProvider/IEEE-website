@@ -52,10 +52,24 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check duplicate team name or duplicate member enrollment across existing registrations
+    // Check duplicate phone numbers within the submitted team itself
+    const submittedPhones = members.map((m) => m.phone.replace(/[^0-9]/g, "").slice(-10));
+    const uniquePhones = new Set(submittedPhones);
+    if (uniquePhones.size !== submittedPhones.length) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Duplicate phone numbers detected within your team. Each member must provide their own phone number.",
+        },
+        { status: 400 }
+      );
+    }
+
+    // Check duplicate team name, duplicate member enrollment, or duplicate phone number across existing registrations
     const duplicateCheck = await checkDuplicateApocalypseTeamOrMember(
       teamName,
-      submittedEnrolls
+      submittedEnrolls,
+      submittedPhones
     );
 
     if (duplicateCheck.duplicateTeam) {
@@ -73,6 +87,16 @@ export async function POST(request: NextRequest) {
         {
           success: false,
           error: `Student with enrollment number ${duplicateCheck.duplicateEnrollment} is already registered in another team.`,
+        },
+        { status: 409 }
+      );
+    }
+
+    if (duplicateCheck.duplicatePhone) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: `The phone number ${duplicateCheck.duplicatePhone} is already registered with another team. Only one team registration is allowed per phone number.`,
         },
         { status: 409 }
       );

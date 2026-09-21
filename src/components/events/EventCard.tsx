@@ -1,8 +1,19 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { Calendar, MapPin, Users, ExternalLink, ArrowRight, Image as ImageIcon, Sparkles, Award, Layers } from "lucide-react";
+import {
+  Calendar,
+  MapPin,
+  Users,
+  ExternalLink,
+  ArrowRight,
+  Image as ImageIcon,
+  Sparkles,
+  Award,
+  Layers,
+  CheckCircle2,
+} from "lucide-react";
 import { ChapterEvent } from "@/lib/types";
 import { Modal } from "@/components/ui/Modal";
 import { ApocalypseRegistrationModal } from "@/components/events/ApocalypseRegistrationModal";
@@ -15,8 +26,22 @@ export function EventCard({ event }: EventCardProps) {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [isApocalypseModalOpen, setIsApocalypseModalOpen] = useState(false);
+  const [hasRegisteredOnDevice, setHasRegisteredOnDevice] = useState(false);
 
   const isApocalypseEvent = event.id === "apocalypse-2026" || event.slug === "apocalypse";
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && isApocalypseEvent) {
+      try {
+        const stored = localStorage.getItem("apocalypse_registered_team");
+        if (stored) {
+          setHasRegisteredOnDevice(true);
+        }
+      } catch {
+        // Ignore localStorage error
+      }
+    }
+  }, [isApocalypseEvent, isApocalypseModalOpen]);
 
 
   return (
@@ -127,13 +152,23 @@ export function EventCard({ event }: EventCardProps) {
 
               {event.registrationOpen && (
                 isApocalypseEvent ? (
-                  <button
-                    onClick={() => setIsApocalypseModalOpen(true)}
-                    className="px-4 py-1.5 rounded-lg bg-gradient-to-r from-[#5A1025] via-[#8F2450] to-[#7B3F8C] hover:from-[#7A1833] hover:to-[#914B91] text-[#F5F1F5] text-xs font-semibold shadow-md shadow-[#7A1833]/30 flex items-center space-x-1.5 transition-all"
-                  >
-                    <Users className="w-3.5 h-3.5 text-[#E07AB0]" />
-                    <span>Register Team</span>
-                  </button>
+                  hasRegisteredOnDevice ? (
+                    <button
+                      onClick={() => setIsApocalypseModalOpen(true)}
+                      className="px-3.5 py-1.5 rounded-lg bg-[#18131B] hover:bg-[#2A202D] text-[#E07AB0] border border-[#5C2948] text-xs font-semibold shadow-md flex items-center space-x-1.5 transition-all"
+                    >
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#E07AB0]" />
+                      <span>Team Registered</span>
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => setIsApocalypseModalOpen(true)}
+                      className="px-4 py-1.5 rounded-lg bg-gradient-to-r from-[#5A1025] via-[#8F2450] to-[#7B3F8C] hover:from-[#7A1833] hover:to-[#914B91] text-[#F5F1F5] text-xs font-semibold shadow-md shadow-[#7A1833]/30 flex items-center space-x-1.5 transition-all"
+                    >
+                      <Users className="w-3.5 h-3.5 text-[#E07AB0]" />
+                      <span>Register Team</span>
+                    </button>
+                  )
                 ) : event.registrationLink ? (
                   <a
                     href={event.registrationLink}
@@ -303,16 +338,29 @@ export function EventCard({ event }: EventCardProps) {
 
             {event.registrationOpen && (
               isApocalypseEvent ? (
-                <button
-                  onClick={() => {
-                    setIsDetailsOpen(false);
-                    setIsApocalypseModalOpen(true);
-                  }}
-                  className="px-6 py-2 rounded-xl bg-gradient-to-r from-[#5A1025] via-[#8F2450] to-[#7B3F8C] hover:from-[#7A1833] hover:to-[#914B91] text-[#F5F1F5] text-xs font-semibold shadow-lg shadow-[#7A1833]/30 inline-flex items-center space-x-2 transition-all"
-                >
-                  <Users className="w-3.5 h-3.5 text-[#E07AB0]" />
-                  <span>Register Squad (2–4 Members)</span>
-                </button>
+                hasRegisteredOnDevice ? (
+                  <button
+                    onClick={() => {
+                      setIsDetailsOpen(false);
+                      setIsApocalypseModalOpen(true);
+                    }}
+                    className="px-6 py-2 rounded-xl bg-[#18131B] hover:bg-[#2A202D] border border-[#5C2948] text-[#E07AB0] text-xs font-semibold shadow-md inline-flex items-center space-x-2 transition-all"
+                  >
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#E07AB0]" />
+                    <span>View Registered Squad</span>
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      setIsDetailsOpen(false);
+                      setIsApocalypseModalOpen(true);
+                    }}
+                    className="px-6 py-2 rounded-xl bg-gradient-to-r from-[#5A1025] via-[#8F2450] to-[#7B3F8C] hover:from-[#7A1833] hover:to-[#914B91] text-[#F5F1F5] text-xs font-semibold shadow-lg shadow-[#7A1833]/30 inline-flex items-center space-x-2 transition-all"
+                  >
+                    <Users className="w-3.5 h-3.5 text-[#E07AB0]" />
+                    <span>Register Squad (2–4 Members)</span>
+                  </button>
+                )
               ) : event.registrationLink ? (
                 <a
                   href={event.registrationLink}

@@ -224,8 +224,9 @@ export async function writeApocalypseRegistrations(registrations: ApocalypseRegi
 
 export async function checkDuplicateApocalypseTeamOrMember(
   teamName: string,
-  enrollmentNumbers: string[]
-): Promise<{ duplicateTeam: boolean; duplicateEnrollment?: string }> {
+  enrollmentNumbers: string[],
+  phoneNumbers: string[] = []
+): Promise<{ duplicateTeam: boolean; duplicateEnrollment?: string; duplicatePhone?: string }> {
   const registrations = await readApocalypseRegistrations();
   
   // Check team name
@@ -247,8 +248,25 @@ export async function checkDuplicateApocalypseTeamOrMember(
     }
   }
 
+  // Check phone numbers across all existing registered teams (normalize to last 10 digits)
+  const cleanPhones = phoneNumbers
+    .map((p) => p.replace(/[^0-9]/g, "").slice(-10))
+    .filter((p) => p.length >= 10);
+
+  for (const reg of registrations) {
+    for (const mem of reg.members) {
+      if (mem.phone) {
+        const existingPhone = mem.phone.replace(/[^0-9]/g, "").slice(-10);
+        if (cleanPhones.includes(existingPhone)) {
+          return { duplicateTeam: false, duplicatePhone: mem.phone };
+        }
+      }
+    }
+  }
+
   return { duplicateTeam: false };
 }
+
 
 export async function saveApocalypseRegistration(
   data: Omit<ApocalypseRegistration, "id" | "createdAt">
