@@ -20,10 +20,10 @@ import { TeamMember } from "@/lib/types";
 export const seniorCoreTeam: TeamMember[] = [
   {
     id: "chairperson",
-    name: "Pihu Chowdhary", // [PLACEHOLDER - Replace with actual Chairperson Name]
+    name: "Pihu Chowdhury",
     role: "Chairperson",
     domain: "Leadership",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop",
+    image: "/images/team/pihu-chowdhury.jpg",
     bio: "Driving the strategic vision of IEEE WIE BU, spearheading technical inclusivity initiatives, and nurturing an empowered community of student builders.",
     yearAndBranch: "B.Tech CSE, 4th Year",
     linkedin: "https://linkedin.com/in/placeholder-chairperson",
