@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Calendar, MapPin, Users, ExternalLink, ArrowRight, Image as ImageIcon, Sparkles, Award, Layers } from "lucide-react";
 import { ChapterEvent } from "@/lib/types";
 import { Modal } from "@/components/ui/Modal";
+import { ApocalypseRegistrationModal } from "@/components/events/ApocalypseRegistrationModal";
 
 interface EventCardProps {
   event: ChapterEvent;
@@ -13,6 +14,10 @@ interface EventCardProps {
 export function EventCard({ event }: EventCardProps) {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [isApocalypseModalOpen, setIsApocalypseModalOpen] = useState(false);
+
+  const isApocalypseEvent = event.id === "apocalypse-2026" || event.slug === "apocalypse";
+
 
   return (
     <>
@@ -120,16 +125,26 @@ export function EventCard({ event }: EventCardProps) {
                 </button>
               )}
 
-              {event.registrationOpen && event.registrationLink && (
-                <a
-                  href={event.registrationLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-1.5 rounded-lg bg-gradient-to-r from-[#5A1025] via-[#8F2450] to-[#7B3F8C] hover:from-[#7A1833] hover:to-[#914B91] text-[#F5F1F5] text-xs font-semibold shadow-md shadow-[#7A1833]/30 flex items-center space-x-1.5 transition-all"
-                >
-                  <span>Register</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
+              {event.registrationOpen && (
+                isApocalypseEvent ? (
+                  <button
+                    onClick={() => setIsApocalypseModalOpen(true)}
+                    className="px-4 py-1.5 rounded-lg bg-gradient-to-r from-[#5A1025] via-[#8F2450] to-[#7B3F8C] hover:from-[#7A1833] hover:to-[#914B91] text-[#F5F1F5] text-xs font-semibold shadow-md shadow-[#7A1833]/30 flex items-center space-x-1.5 transition-all"
+                  >
+                    <Users className="w-3.5 h-3.5 text-[#E07AB0]" />
+                    <span>Register Team</span>
+                  </button>
+                ) : event.registrationLink ? (
+                  <a
+                    href={event.registrationLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-1.5 rounded-lg bg-gradient-to-r from-[#5A1025] via-[#8F2450] to-[#7B3F8C] hover:from-[#7A1833] hover:to-[#914B91] text-[#F5F1F5] text-xs font-semibold shadow-md shadow-[#7A1833]/30 flex items-center space-x-1.5 transition-all"
+                  >
+                    <span>Register</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                ) : null
               )}
             </div>
           </div>
@@ -286,16 +301,29 @@ export function EventCard({ event }: EventCardProps) {
               </button>
             )}
 
-            {event.registrationOpen && event.registrationLink && (
-              <a
-                href={event.registrationLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-2 rounded-xl bg-gradient-to-r from-[#5A1025] via-[#8F2450] to-[#7B3F8C] hover:from-[#7A1833] hover:to-[#914B91] text-[#F5F1F5] text-xs font-semibold shadow-lg shadow-[#7A1833]/30 inline-flex items-center space-x-2"
-              >
-                <span>Register for this Event</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
+            {event.registrationOpen && (
+              isApocalypseEvent ? (
+                <button
+                  onClick={() => {
+                    setIsDetailsOpen(false);
+                    setIsApocalypseModalOpen(true);
+                  }}
+                  className="px-6 py-2 rounded-xl bg-gradient-to-r from-[#5A1025] via-[#8F2450] to-[#7B3F8C] hover:from-[#7A1833] hover:to-[#914B91] text-[#F5F1F5] text-xs font-semibold shadow-lg shadow-[#7A1833]/30 inline-flex items-center space-x-2 transition-all"
+                >
+                  <Users className="w-3.5 h-3.5 text-[#E07AB0]" />
+                  <span>Register Squad (2–4 Members)</span>
+                </button>
+              ) : event.registrationLink ? (
+                <a
+                  href={event.registrationLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-2 rounded-xl bg-gradient-to-r from-[#5A1025] via-[#8F2450] to-[#7B3F8C] hover:from-[#7A1833] hover:to-[#914B91] text-[#F5F1F5] text-xs font-semibold shadow-lg shadow-[#7A1833]/30 inline-flex items-center space-x-2"
+                >
+                  <span>Register for this Event</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              ) : null
             )}
           </div>
         </div>
@@ -325,6 +353,14 @@ export function EventCard({ event }: EventCardProps) {
             ))}
           </div>
         </Modal>
+      )}
+
+      {/* Apocalypse Team Registration Modal */}
+      {isApocalypseEvent && (
+        <ApocalypseRegistrationModal
+          isOpen={isApocalypseModalOpen}
+          onClose={() => setIsApocalypseModalOpen(false)}
+        />
       )}
     </>
   );

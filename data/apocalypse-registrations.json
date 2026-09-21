@@ -1,0 +1,24 @@
+[
+  {
+    "id": "APOC-749201-NOVA",
+    "teamName": "CyberValkyries",
+    "members": [
+      {
+        "name": "Tanvi Sharma",
+        "enrollmentNumber": "E23CSEU0345",
+        "email": "tsharma_cse23@bennett.edu.in",
+        "phone": "+91 9876543210",
+        "isLeader": true
+      },
+      {
+        "name": "Pooja Mehta",
+        "enrollmentNumber": "E23CSEU0412"
+      },
+      {
+        "name": "Ananya Joshi",
+        "enrollmentNumber": "E24ECEU0098"
+      }
+    ],
+    "createdAt": "2026-09-20T14:30:00.000Z"
+  }
+]

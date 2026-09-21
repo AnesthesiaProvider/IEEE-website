@@ -1,9 +1,11 @@
 import fs from "fs/promises";
 import path from "path";
-import { JuniorCoreApplication, ApplicationStatus } from "./types";
+import { JuniorCoreApplication, ApplicationStatus, ApocalypseRegistration } from "./types";
 
 const DATA_DIR = path.join(process.cwd(), "data");
 const APPLICATIONS_FILE = path.join(DATA_DIR, "applications.json");
+const APOCALYPSE_FILE = path.join(DATA_DIR, "apocalypse-registrations.json");
+
 
 // Sample initial applications so the admin dashboard has preview data right away
 const INITIAL_APPLICATIONS: JuniorCoreApplication[] = [
@@ -186,3 +188,100 @@ export async function deleteApplication(id: string): Promise<{ success: boolean;
     return { success: false, error: message };
   }
 }
+
+// ---------------------------------------------------------------------------
+// Apocalypse 2026 Team Registrations
+// ---------------------------------------------------------------------------
+
+async function ensureApocalypseFile(): Promise<void> {
+  try {
+    await fs.mkdir(DATA_DIR, { recursive: true });
+    try {
+      await fs.access(APOCALYPSE_FILE);
+    } catch {
+      await fs.writeFile(APOCALYPSE_FILE, JSON.stringify([], null, 2), "utf-8");
+    }
+  } catch (err) {
+    console.error("Failed to initialize Apocalypse storage:", err);
+  }
+}
+
+export async function readApocalypseRegistrations(): Promise<ApocalypseRegistration[]> {
+  await ensureApocalypseFile();
+  try {
+    const data = await fs.readFile(APOCALYPSE_FILE, "utf-8");
+    return JSON.parse(data) as ApocalypseRegistration[];
+  } catch (err) {
+    console.error("Error reading Apocalypse registrations:", err);
+    return [];
+  }
+}
+
+export async function writeApocalypseRegistrations(registrations: ApocalypseRegistration[]): Promise<void> {
+  await ensureApocalypseFile();
+  await fs.writeFile(APOCALYPSE_FILE, JSON.stringify(registrations, null, 2), "utf-8");
+}
+
+export async function checkDuplicateApocalypseTeamOrMember(
+  teamName: string,
+  enrollmentNumbers: string[]
+): Promise<{ duplicateTeam: boolean; duplicateEnrollment?: string }> {
+  const registrations = await readApocalypseRegistrations();
+  
+  // Check team name
+  const teamExists = registrations.some(
+    (r) => r.teamName.trim().toLowerCase() === teamName.trim().toLowerCase()
+  );
+  if (teamExists) {
+    return { duplicateTeam: true };
+  }
+
+  // Check enrollment numbers across all existing registered teams
+  const cleanEnrolls = enrollmentNumbers.map((e) => e.trim().toUpperCase());
+  for (const reg of registrations) {
+    for (const mem of reg.members) {
+      const existingEnroll = mem.enrollmentNumber.trim().toUpperCase();
+      if (cleanEnrolls.includes(existingEnroll)) {
+        return { duplicateTeam: false, duplicateEnrollment: existingEnroll };
+      }
+    }
+  }
+
+  return { duplicateTeam: false };
+}
+
+export async function saveApocalypseRegistration(
+  data: Omit<ApocalypseRegistration, "id" | "createdAt">
+): Promise<{ success: boolean; data?: ApocalypseRegistration; error?: string }> {
+  try {
+    const registrations = await readApocalypseRegistrations();
+    const newRegistration: ApocalypseRegistration = {
+      ...data,
+      id: `APOC-${Date.now().toString().slice(-6)}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`,
+      createdAt: new Date().toISOString(),
+    };
+
+    registrations.unshift(newRegistration);
+    await writeApocalypseRegistrations(registrations);
+    return { success: true, data: newRegistration };
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Failed to save Apocalypse registration.";
+    return { success: false, error: message };
+  }
+}
+
+export async function deleteApocalypseRegistration(id: string): Promise<{ success: boolean; error?: string }> {
+  try {
+    const registrations = await readApocalypseRegistrations();
+    const filtered = registrations.filter((r) => r.id !== id);
+    if (filtered.length === registrations.length) {
+      return { success: false, error: "Registration not found." };
+    }
+    await writeApocalypseRegistrations(filtered);
+    return { success: true };
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Failed to delete registration.";
+    return { success: false, error: message };
+  }
+}
+

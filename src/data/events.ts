@@ -44,11 +44,11 @@ export const chapterEvents: ChapterEvent[] = [
     shortDescription:
       "An adrenaline-filled experience with challenges, surprises and memories you’ll be talking about long after it ends. Are you ready?",
     fullDescription:
-      "Step Into the Unexpected.\n\nAn adrenaline-filled experience with challenges, surprises and memories you’ll be talking about long after it ends. Are you ready?\n\nPrepare for an intense, high-energy competition designed to test quick thinking, teamwork, and resilience under pressure. Gather your squad and step into the arena.",
+      "Step Into the Unexpected.\n\nAn adrenaline-filled experience with challenges, surprises and memories you’ll be talking about long after it ends. Are you ready?\n\nPrepare for an intense, high-energy competition designed to test quick thinking, teamwork, and resilience under pressure. Gather your squad (minimum 2, maximum 4 members) and step into the arena.",
     image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1000&auto=format&fit=crop",
     registrationOpen: true,
-    registrationLink: "https://forms.google.com",
-    tags: ["Apocalypse", "Challenges", "Competition", "Adrenaline", "Campus Quest"],
+    registrationLink: "#register-team",
+    tags: ["Apocalypse", "Challenges", "Competition", "Squad (2-4)", "Adrenaline"],
   },
   {
     id: "ieee-day-2026",

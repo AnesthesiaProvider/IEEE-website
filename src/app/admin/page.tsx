@@ -19,8 +19,10 @@ import {
   ChevronRight,
   RefreshCw,
   Sparkles,
+  Flame,
+  UserCheck,
 } from "lucide-react";
-import { JuniorCoreApplication, ApplicationStatus } from "@/lib/types";
+import { JuniorCoreApplication, ApplicationStatus, ApocalypseRegistration } from "@/lib/types";
 import { Modal } from "@/components/ui/Modal";
 
 const statusOptions: ApplicationStatus[] = ["Pending", "Shortlisted", "Selected", "Rejected"];
@@ -31,7 +33,10 @@ export default function AdminPage() {
   const [authError, setAuthError] = useState("");
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
-  // Dashboard Data
+  // Tab State
+  const [activeTab, setActiveTab] = useState<"junior-core" | "apocalypse">("junior-core");
+
+  // Junior Core Dashboard Data
   const [applications, setApplications] = useState<JuniorCoreApplication[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -41,6 +46,12 @@ export default function AdminPage() {
   const [selectedApplicant, setSelectedApplicant] = useState<JuniorCoreApplication | null>(null);
   const [actionMessage, setActionMessage] = useState<string | null>(null);
 
+  // Apocalypse Dashboard Data
+  const [apocalypseRegistrations, setApocalypseRegistrations] = useState<ApocalypseRegistration[]>([]);
+  const [apocalypseSearch, setApocalypseSearch] = useState("");
+  const [selectedTeam, setSelectedTeam] = useState<ApocalypseRegistration | null>(null);
+
+
   // Check auth session
   const checkAuth = useCallback(async () => {
     try {
@@ -49,6 +60,7 @@ export default function AdminPage() {
       setIsAuthenticated(data.isAuthenticated);
       if (data.isAuthenticated) {
         fetchApplications();
+        fetchApocalypseRegistrations();
       }
     } catch {
       setIsAuthenticated(false);
@@ -75,6 +87,19 @@ export default function AdminPage() {
     }
   };
 
+  // Fetch Apocalypse team registrations
+  const fetchApocalypseRegistrations = async () => {
+    try {
+      const res = await fetch("/api/admin/apocalypse");
+      const data = await res.json();
+      if (data.success) {
+        setApocalypseRegistrations(data.registrations);
+      }
+    } catch (err) {
+      console.error("Error fetching Apocalypse registrations:", err);
+    }
+  };
+
   // Login handler
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -97,6 +122,7 @@ export default function AdminPage() {
 
       setIsAuthenticated(true);
       fetchApplications();
+      fetchApocalypseRegistrations();
     } catch {
       setAuthError("Network error. Please try again.");
     } finally {
@@ -222,6 +248,80 @@ export default function AdminPage() {
     document.body.removeChild(link);
   };
 
+  // Delete Apocalypse team handler
+  const handleDeleteTeam = async (id: string) => {
+    if (!confirm("Are you sure you want to permanently delete this Apocalypse team registration?")) return;
+
+    try {
+      const res = await fetch(`/api/admin/apocalypse?id=${id}`, {
+        method: "DELETE",
+      });
+
+      if (res.ok) {
+        setApocalypseRegistrations((prev) => prev.filter((team) => team.id !== id));
+        if (selectedTeam?.id === id) {
+          setSelectedTeam(null);
+        }
+        setActionMessage("Apocalypse team registration deleted.");
+        setTimeout(() => setActionMessage(null), 3000);
+      }
+    } catch (err) {
+      console.error("Failed to delete Apocalypse team:", err);
+    }
+  };
+
+  // Export Apocalypse teams to CSV
+  const handleExportApocalypseCSV = () => {
+    if (apocalypseRegistrations.length === 0) return;
+
+    const headers = [
+      "Registration ID",
+      "Team Name",
+      "Total Members",
+      "Member Number",
+      "Role",
+      "Member Name",
+      "Enrollment Number",
+      "Leader Email",
+      "Leader Phone",
+      "Submitted At",
+    ];
+
+    const escapeCsv = (val?: string) => {
+      if (!val) return '""';
+      const clean = String(val).replace(/"/g, '""');
+      return `"${clean}"`;
+    };
+
+    const rows: string[][] = [];
+    apocalypseRegistrations.forEach((team) => {
+      team.members.forEach((member, idx) => {
+        rows.push([
+          escapeCsv(team.id),
+          escapeCsv(team.teamName),
+          escapeCsv(String(team.members.length)),
+          escapeCsv(String(idx + 1)),
+          escapeCsv(idx === 0 ? "Leader" : "Member"),
+          escapeCsv(member.name),
+          escapeCsv(member.enrollmentNumber),
+          escapeCsv(member.email || ""),
+          escapeCsv(member.phone || ""),
+          escapeCsv(team.createdAt),
+        ]);
+      });
+    });
+
+    const csvContent = [headers.join(","), ...rows.map((r) => r.join(","))].join("\r\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", `IEEE_WIE_BU_Apocalypse_Teams_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   // Filtering applications
   const filteredApplications = applications.filter((app) => {
     const matchesSearch =
@@ -236,11 +336,36 @@ export default function AdminPage() {
     return matchesSearch && matchesDomain && matchesYear && matchesStatus;
   });
 
-  // Metrics summary
+  // Filtering Apocalypse teams
+  const filteredApocalypseTeams = apocalypseRegistrations.filter((team) => {
+    const q = apocalypseSearch.toLowerCase();
+    const matchesTeamName = team.teamName.toLowerCase().includes(q);
+    const matchesMembers = team.members.some(
+      (m) =>
+        m.name.toLowerCase().includes(q) ||
+        m.enrollmentNumber.toLowerCase().includes(q) ||
+        (m.email && m.email.toLowerCase().includes(q))
+    );
+    return matchesTeamName || matchesMembers;
+  });
+
+  // Junior Core Metrics summary
   const totalCount = applications.length;
   const shortlistedCount = applications.filter((a) => a.status === "Shortlisted").length;
   const selectedCount = applications.filter((a) => a.status === "Selected").length;
   const pendingCount = applications.filter((a) => a.status === "Pending").length;
+
+  // Apocalypse Metrics summary
+  const totalApocalypseTeams = apocalypseRegistrations.length;
+  const totalApocalypseParticipants = apocalypseRegistrations.reduce(
+    (acc, t) => acc + t.members.length,
+    0
+  );
+  const avgTeamSize =
+    totalApocalypseTeams > 0
+      ? (totalApocalypseParticipants / totalApocalypseTeams).toFixed(1)
+      : "0";
+
 
   // Status color helper
   const getStatusBadge = (status: ApplicationStatus) => {
@@ -350,26 +475,31 @@ export default function AdminPage() {
             <span className="text-xs text-[#A79EAB]">• IEEE WIE Bennett University</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-[#F5F1F5] mt-1">
-            Junior Core Applications Management
+            {activeTab === "junior-core"
+              ? "Junior Core Applications Management"
+              : "Apocalypse 2026 Team Registrations"}
           </h1>
         </div>
 
         <div className="flex items-center space-x-3 self-start md:self-auto">
           <button
-            onClick={fetchApplications}
+            onClick={() => {
+              fetchApplications();
+              fetchApocalypseRegistrations();
+            }}
             disabled={isLoading}
             className="p-2.5 rounded-xl bg-[#121015] border border-[#2A202D] text-[#D8D0DA] hover:text-[#F5F1F5] hover:bg-[#18131B] hover:border-[#39283D] transition-colors"
-            title="Refresh List"
+            title="Refresh All Lists"
           >
             <RefreshCw className={`w-4 h-4 ${isLoading ? "animate-spin" : ""}`} />
           </button>
 
           <button
-            onClick={handleExportCSV}
+            onClick={activeTab === "junior-core" ? handleExportCSV : handleExportApocalypseCSV}
             className="px-4 py-2.5 rounded-xl bg-[#121015] hover:bg-[#18131B] border border-[#2A202D] hover:border-[#39283D] text-[#D8D0DA] text-xs font-semibold flex items-center space-x-2 transition-colors"
           >
             <Download className="w-4 h-4 text-[#C75491]" />
-            <span>Export CSV</span>
+            <span>{activeTab === "junior-core" ? "Export Applications CSV" : "Export Teams CSV"}</span>
           </button>
 
           <button
@@ -382,6 +512,33 @@ export default function AdminPage() {
         </div>
       </div>
 
+      {/* Tab Switcher */}
+      <div className="flex flex-wrap items-center gap-3">
+        <button
+          onClick={() => setActiveTab("junior-core")}
+          className={`px-5 py-2.5 rounded-xl text-xs font-semibold flex items-center space-x-2 transition-all ${
+            activeTab === "junior-core"
+              ? "bg-gradient-to-r from-[#5A1025] to-[#8F2450] text-[#F5F1F5] shadow-lg shadow-[#7A1833]/30 border border-[#8F2450]"
+              : "bg-[#121015] hover:bg-[#18131B] text-[#A79EAB] hover:text-[#F5F1F5] border border-[#2A202D]"
+          }`}
+        >
+          <Users className="w-4 h-4 text-[#E07AB0]" />
+          <span>Junior Core Applications ({applications.length})</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab("apocalypse")}
+          className={`px-5 py-2.5 rounded-xl text-xs font-semibold flex items-center space-x-2 transition-all ${
+            activeTab === "apocalypse"
+              ? "bg-gradient-to-r from-[#5A1025] to-[#8F2450] text-[#F5F1F5] shadow-lg shadow-[#7A1833]/30 border border-[#8F2450]"
+              : "bg-[#121015] hover:bg-[#18131B] text-[#A79EAB] hover:text-[#F5F1F5] border border-[#2A202D]"
+          }`}
+        >
+          <Flame className="w-4 h-4 text-[#E07AB0]" />
+          <span>Apocalypse 2026 Teams ({apocalypseRegistrations.length})</span>
+        </button>
+      </div>
+
       {/* Notification Toast Alert */}
       {actionMessage && (
         <div className="p-3 rounded-xl bg-[#18131B] border border-[#5C2948] text-[#E07AB0] text-xs font-medium flex items-center space-x-2">
@@ -390,186 +547,343 @@ export default function AdminPage() {
         </div>
       )}
 
-      {/* Analytics Metric Cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
-          <div className="text-xs font-medium text-[#A79EAB]">Total Applications</div>
-          <div className="text-2xl sm:text-3xl font-bold text-[#F5F1F5]">{totalCount}</div>
-        </div>
-        <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
-          <div className="text-xs font-medium text-[#C75491]">Shortlisted</div>
-          <div className="text-2xl sm:text-3xl font-bold text-[#E07AB0]">{shortlistedCount}</div>
-        </div>
-        <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
-          <div className="text-xs font-medium text-[#D05A9E]">Selected</div>
-          <div className="text-2xl sm:text-3xl font-bold text-[#F5F1F5]">{selectedCount}</div>
-        </div>
-        <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
-          <div className="text-xs font-medium text-[#A79EAB]">Pending Review</div>
-          <div className="text-2xl sm:text-3xl font-bold text-[#D8D0DA]">{pendingCount}</div>
-        </div>
-      </div>
+      {/* ========================================================================= */}
+      {/* 2A. JUNIOR CORE APPLICATIONS VIEW                                          */}
+      {/* ========================================================================= */}
+      {activeTab === "junior-core" && (
+        <div className="space-y-6">
+          {/* Analytics Metric Cards */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
+              <div className="text-xs font-medium text-[#A79EAB]">Total Applications</div>
+              <div className="text-2xl sm:text-3xl font-bold text-[#F5F1F5]">{totalCount}</div>
+            </div>
+            <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
+              <div className="text-xs font-medium text-[#C75491]">Shortlisted</div>
+              <div className="text-2xl sm:text-3xl font-bold text-[#E07AB0]">{shortlistedCount}</div>
+            </div>
+            <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
+              <div className="text-xs font-medium text-[#D05A9E]">Selected</div>
+              <div className="text-2xl sm:text-3xl font-bold text-[#F5F1F5]">{selectedCount}</div>
+            </div>
+            <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
+              <div className="text-xs font-medium text-[#A79EAB]">Pending Review</div>
+              <div className="text-2xl sm:text-3xl font-bold text-[#D8D0DA]">{pendingCount}</div>
+            </div>
+          </div>
 
-      {/* Search and Filters Bar */}
-      <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-4 flex flex-col md:flex-row gap-3 items-center justify-between">
-        {/* Search */}
-        <div className="relative w-full md:w-80">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A79EAB]" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search by name, enrollment, email..."
-            className="w-full pl-10 pr-4 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] placeholder-[#756B7A] text-xs focus:outline-none focus:border-[#C75491]"
-          />
-        </div>
+          {/* Search and Filters Bar */}
+          <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-4 flex flex-col md:flex-row gap-3 items-center justify-between">
+            {/* Search */}
+            <div className="relative w-full md:w-80">
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A79EAB]" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search by name, enrollment, email..."
+                className="w-full pl-10 pr-4 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] placeholder-[#756B7A] text-xs focus:outline-none focus:border-[#C75491]"
+              />
+            </div>
 
-        {/* Filter Dropdowns */}
-        <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
-          {/* Domain Filter */}
-          <select
-            value={domainFilter}
-            onChange={(e) => setDomainFilter(e.target.value)}
-            className="px-3 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] text-xs focus:outline-none focus:border-[#C75491]"
-          >
-            <option value="All">All Domains</option>
-            <option value="Technical">Technical</option>
-            <option value="Events">Events</option>
-            <option value="Design">Design</option>
-            <option value="Marketing">Marketing</option>
-            <option value="Public Relations">Public Relations</option>
-            <option value="Content">Content</option>
-            <option value="Social Media">Social Media</option>
-            <option value="Operations">Operations</option>
-            <option value="Research">Research</option>
-            <option value="Other">Other</option>
-          </select>
+            {/* Filter Dropdowns */}
+            <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
+              {/* Domain Filter */}
+              <select
+                value={domainFilter}
+                onChange={(e) => setDomainFilter(e.target.value)}
+                className="px-3 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] text-xs focus:outline-none focus:border-[#C75491]"
+              >
+                <option value="All">All Domains</option>
+                <option value="Technical">Technical</option>
+                <option value="Events">Events</option>
+                <option value="Design">Design</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Public Relations">Public Relations</option>
+                <option value="Content">Content</option>
+                <option value="Social Media">Social Media</option>
+                <option value="Operations">Operations</option>
+                <option value="Research">Research</option>
+                <option value="Other">Other</option>
+              </select>
 
-          {/* Year Filter */}
-          <select
-            value={yearFilter}
-            onChange={(e) => setYearFilter(e.target.value)}
-            className="px-3 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] text-xs focus:outline-none focus:border-[#C75491]"
-          >
-            <option value="All">All Years</option>
-            <option value="1st Year">1st Year</option>
-            <option value="2nd Year">2nd Year</option>
-            <option value="3rd Year">3rd Year</option>
-            <option value="4th Year">4th Year</option>
-          </select>
+              {/* Year Filter */}
+              <select
+                value={yearFilter}
+                onChange={(e) => setYearFilter(e.target.value)}
+                className="px-3 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] text-xs focus:outline-none focus:border-[#C75491]"
+              >
+                <option value="All">All Years</option>
+                <option value="1st Year">1st Year</option>
+                <option value="2nd Year">2nd Year</option>
+                <option value="3rd Year">3rd Year</option>
+                <option value="4th Year">4th Year</option>
+              </select>
 
-          {/* Status Filter */}
-          <select
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-3 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] text-xs focus:outline-none focus:border-[#C75491]"
-          >
-            <option value="All">All Statuses</option>
-            <option value="Pending">Pending</option>
-            <option value="Shortlisted">Shortlisted</option>
-            <option value="Selected">Selected</option>
-            <option value="Rejected">Rejected</option>
-          </select>
-        </div>
-      </div>
+              {/* Status Filter */}
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="px-3 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] text-xs focus:outline-none focus:border-[#C75491]"
+              >
+                <option value="All">All Statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="Shortlisted">Shortlisted</option>
+                <option value="Selected">Selected</option>
+                <option value="Rejected">Rejected</option>
+              </select>
+            </div>
+          </div>
 
-      {/* Applications Data Table */}
-      <div className="rounded-2xl bg-[#121015] border border-[#2A202D] overflow-hidden shadow-xl">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs text-[#D8D0DA]">
-            <thead className="bg-[#18131B] text-[#A79EAB] uppercase tracking-wider font-semibold border-b border-[#2A202D]">
-              <tr>
-                <th className="py-3.5 px-4">Applicant</th>
-                <th className="py-3.5 px-4">Enrollment</th>
-                <th className="py-3.5 px-4">Program & Year</th>
-                <th className="py-3.5 px-4">Domain</th>
-                <th className="py-3.5 px-4">Status</th>
-                <th className="py-3.5 px-4">Date</th>
-                <th className="py-3.5 px-4 text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#2A202D]">
-              {filteredApplications.length > 0 ? (
-                filteredApplications.map((app) => (
-                  <tr
-                    key={app.id}
-                    className="hover:bg-white/[0.02] transition-colors cursor-pointer"
-                    onClick={() => setSelectedApplicant(app)}
-                  >
-                    <td className="py-3.5 px-4">
-                      <div className="font-bold text-[#F5F1F5] hover:text-[#C75491] transition-colors">
-                        {app.fullName}
-                      </div>
-                      <div className="text-[11px] text-[#A79EAB]">{app.email}</div>
-                    </td>
-                    <td className="py-3.5 px-4 font-mono text-[#E07AB0] font-semibold">
-                      {app.enrollmentNumber}
-                    </td>
-                    <td className="py-3.5 px-4">
-                      <div className="text-[#F5F1F5]">{app.course} ({app.branch})</div>
-                      <div className="text-[11px] text-[#A79EAB]">{app.year} • {app.semester}</div>
-                    </td>
-                    <td className="py-3.5 px-4">
-                      <span className="px-2.5 py-1 rounded-md bg-[#18131B] border border-[#39283D] text-[#F5F1F5] font-medium">
-                        {app.domain}
-                      </span>
-                    </td>
-                    <td className="py-3.5 px-4" onClick={(e) => e.stopPropagation()}>
-                      <select
-                        value={app.status}
-                        onChange={(e) =>
-                          handleStatusChange(app.id, e.target.value as ApplicationStatus)
-                        }
-                        className={`px-2.5 py-1 rounded-full text-[11px] font-semibold border focus:outline-none cursor-pointer bg-[#0D0B0F] ${getStatusBadge(
-                          app.status
-                        )}`}
-                      >
-                        {statusOptions.map((st) => (
-                          <option key={st} value={st}>
-                            {st}
-                          </option>
-                        ))}
-                      </select>
-                    </td>
-                    <td className="py-3.5 px-4 text-[#A79EAB] whitespace-nowrap">
-                      {new Date(app.createdAt).toLocaleDateString("en-IN", {
-                        day: "numeric",
-                        month: "short",
-                      })}
-                    </td>
-                    <td className="py-3.5 px-4 text-right" onClick={(e) => e.stopPropagation()}>
-                      <div className="flex items-center justify-end space-x-1">
-                        <button
-                          onClick={() => setSelectedApplicant(app)}
-                          className="p-1.5 text-[#A79EAB] hover:text-[#C75491] rounded-lg hover:bg-white/5 transition-colors"
-                          title="View Details"
-                        >
-                          <Eye className="w-4 h-4" />
-                        </button>
-                        <button
-                          onClick={() => handleDelete(app.id)}
-                          className="p-1.5 text-[#A79EAB] hover:text-[#E07AB0] rounded-lg hover:bg-[#4A1028]/30 transition-colors"
-                          title="Delete Application"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </td>
+          {/* Applications Data Table */}
+          <div className="rounded-2xl bg-[#121015] border border-[#2A202D] overflow-hidden shadow-xl">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs text-[#D8D0DA]">
+                <thead className="bg-[#18131B] text-[#A79EAB] uppercase tracking-wider font-semibold border-b border-[#2A202D]">
+                  <tr>
+                    <th className="py-3.5 px-4">Applicant</th>
+                    <th className="py-3.5 px-4">Enrollment</th>
+                    <th className="py-3.5 px-4">Program & Year</th>
+                    <th className="py-3.5 px-4">Domain</th>
+                    <th className="py-3.5 px-4">Status</th>
+                    <th className="py-3.5 px-4">Date</th>
+                    <th className="py-3.5 px-4 text-right">Actions</th>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={7} className="py-12 text-center text-[#A79EAB]">
-                    No applications match the current query or filters.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+                </thead>
+                <tbody className="divide-y divide-[#2A202D]">
+                  {filteredApplications.length > 0 ? (
+                    filteredApplications.map((app) => (
+                      <tr
+                        key={app.id}
+                        className="hover:bg-white/[0.02] transition-colors cursor-pointer"
+                        onClick={() => setSelectedApplicant(app)}
+                      >
+                        <td className="py-3.5 px-4">
+                          <div className="font-bold text-[#F5F1F5] hover:text-[#C75491] transition-colors">
+                            {app.fullName}
+                          </div>
+                          <div className="text-[11px] text-[#A79EAB]">{app.email}</div>
+                        </td>
+                        <td className="py-3.5 px-4 font-mono text-[#E07AB0] font-semibold">
+                          {app.enrollmentNumber}
+                        </td>
+                        <td className="py-3.5 px-4">
+                          <div className="text-[#F5F1F5]">{app.course} ({app.branch})</div>
+                          <div className="text-[11px] text-[#A79EAB]">{app.year} • {app.semester}</div>
+                        </td>
+                        <td className="py-3.5 px-4">
+                          <span className="px-2.5 py-1 rounded-md bg-[#18131B] border border-[#39283D] text-[#F5F1F5] font-medium">
+                            {app.domain}
+                          </span>
+                        </td>
+                        <td className="py-3.5 px-4" onClick={(e) => e.stopPropagation()}>
+                          <select
+                            value={app.status}
+                            onChange={(e) =>
+                              handleStatusChange(app.id, e.target.value as ApplicationStatus)
+                            }
+                            className={`px-2.5 py-1 rounded-full text-[11px] font-semibold border focus:outline-none cursor-pointer bg-[#0D0B0F] ${getStatusBadge(
+                              app.status
+                            )}`}
+                          >
+                            {statusOptions.map((st) => (
+                              <option key={st} value={st}>
+                                {st}
+                              </option>
+                            ))}
+                          </select>
+                        </td>
+                        <td className="py-3.5 px-4 text-[#A79EAB] whitespace-nowrap">
+                          {new Date(app.createdAt).toLocaleDateString("en-IN", {
+                            day: "numeric",
+                            month: "short",
+                          })}
+                        </td>
+                        <td className="py-3.5 px-4 text-right" onClick={(e) => e.stopPropagation()}>
+                          <div className="flex items-center justify-end space-x-1">
+                            <button
+                              onClick={() => setSelectedApplicant(app)}
+                              className="p-1.5 text-[#A79EAB] hover:text-[#C75491] rounded-lg hover:bg-white/5 transition-colors"
+                              title="View Details"
+                            >
+                              <Eye className="w-4 h-4" />
+                            </button>
+                            <button
+                              onClick={() => handleDelete(app.id)}
+                              className="p-1.5 text-[#A79EAB] hover:text-[#E07AB0] rounded-lg hover:bg-[#4A1028]/30 transition-colors"
+                              title="Delete Application"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={7} className="py-12 text-center text-[#A79EAB]">
+                        No applications match the current query or filters.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Applicant Details Modal */}
+      {/* ========================================================================= */}
+      {/* 2B. APOCALYPSE 2026 TEAMS VIEW                                             */}
+      {/* ========================================================================= */}
+      {activeTab === "apocalypse" && (
+        <div className="space-y-6">
+          {/* Apocalypse Metric Cards */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
+              <div className="text-xs font-medium text-[#A79EAB]">Registered Squads</div>
+              <div className="text-2xl sm:text-3xl font-bold text-[#F5F1F5]">{totalApocalypseTeams}</div>
+            </div>
+            <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
+              <div className="text-xs font-medium text-[#C75491]">Total Competitors</div>
+              <div className="text-2xl sm:text-3xl font-bold text-[#E07AB0]">
+                {totalApocalypseParticipants}
+              </div>
+            </div>
+            <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
+              <div className="text-xs font-medium text-[#D05A9E]">Avg. Squad Size</div>
+              <div className="text-2xl sm:text-3xl font-bold text-[#F5F1F5]">{avgTeamSize} Members</div>
+            </div>
+            <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
+              <div className="text-xs font-medium text-[#A79EAB]">Event Schedule</div>
+              <div className="text-xl sm:text-2xl font-bold text-[#D8D0DA]">23 SEP 2026</div>
+            </div>
+          </div>
+
+          {/* Search Bar for Apocalypse */}
+          <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-4 flex flex-col md:flex-row gap-3 items-center justify-between">
+            <div className="relative w-full md:w-96">
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A79EAB]" />
+              <input
+                type="text"
+                value={apocalypseSearch}
+                onChange={(e) => setApocalypseSearch(e.target.value)}
+                placeholder="Search by team name, member, enrollment, email..."
+                className="w-full pl-10 pr-4 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] placeholder-[#756B7A] text-xs focus:outline-none focus:border-[#C75491]"
+              />
+            </div>
+
+            <div className="text-xs text-[#A79EAB]">
+              Showing <span className="font-bold text-[#F5F1F5]">{filteredApocalypseTeams.length}</span> of{" "}
+              {totalApocalypseTeams} squads
+            </div>
+          </div>
+
+          {/* Apocalypse Teams Table */}
+          <div className="rounded-2xl bg-[#121015] border border-[#2A202D] overflow-hidden shadow-xl">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs text-[#D8D0DA]">
+                <thead className="bg-[#18131B] text-[#A79EAB] uppercase tracking-wider font-semibold border-b border-[#2A202D]">
+                  <tr>
+                    <th className="py-3.5 px-4">Squad Name</th>
+                    <th className="py-3.5 px-4">Size</th>
+                    <th className="py-3.5 px-4">Team Leader</th>
+                    <th className="py-3.5 px-4">Leader Contact</th>
+                    <th className="py-3.5 px-4">Roster Overview</th>
+                    <th className="py-3.5 px-4">Date</th>
+                    <th className="py-3.5 px-4 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#2A202D]">
+                  {filteredApocalypseTeams.length > 0 ? (
+                    filteredApocalypseTeams.map((team) => {
+                      const leader = team.members[0];
+
+                      return (
+                        <tr
+                          key={team.id}
+                          className="hover:bg-white/[0.02] transition-colors cursor-pointer"
+                          onClick={() => setSelectedTeam(team)}
+                        >
+                          <td className="py-3.5 px-4">
+                            <div className="font-bold text-[#F5F1F5] hover:text-[#C75491] transition-colors flex items-center space-x-1.5">
+                              <Flame className="w-3.5 h-3.5 text-[#E07AB0]" />
+                              <span>{team.teamName}</span>
+                            </div>
+                            <div className="text-[11px] text-[#A79EAB] font-mono">{team.id}</div>
+                          </td>
+                          <td className="py-3.5 px-4">
+                            <span className="px-2.5 py-1 rounded-full bg-[#18131B] border border-[#39283D] text-[#E07AB0] font-semibold text-[11px]">
+                              {team.members.length} Members
+                            </span>
+                          </td>
+                          <td className="py-3.5 px-4">
+                            <div className="font-semibold text-[#F5F1F5]">{leader?.name || "N/A"}</div>
+                            <div className="text-[11px] font-mono text-[#C75491]">
+                              {leader?.enrollmentNumber || ""}
+                            </div>
+                          </td>
+                          <td className="py-3.5 px-4">
+                            <div className="text-[11px] text-[#D8D0DA]">{leader?.email || "No email"}</div>
+                            <div className="text-[11px] text-[#A79EAB]">{leader?.phone || ""}</div>
+                          </td>
+                          <td className="py-3.5 px-4">
+                            <div className="flex flex-wrap gap-1 max-w-xs">
+                              {team.members.map((m, i) => (
+                                <span
+                                  key={i}
+                                  className="px-2 py-0.5 rounded bg-[#18131B] border border-[#2A202D] text-[10px] text-[#D8D0DA]"
+                                  title={`${m.name} (${m.enrollmentNumber})`}
+                                >
+                                  {m.name.split(" ")[0]} ({m.enrollmentNumber})
+                                </span>
+                              ))}
+                            </div>
+                          </td>
+                          <td className="py-3.5 px-4 text-[#A79EAB] whitespace-nowrap">
+                            {new Date(team.createdAt).toLocaleDateString("en-IN", {
+                              day: "numeric",
+                              month: "short",
+                            })}
+                          </td>
+                          <td className="py-3.5 px-4 text-right" onClick={(e) => e.stopPropagation()}>
+                            <div className="flex items-center justify-end space-x-1">
+                              <button
+                                onClick={() => setSelectedTeam(team)}
+                                className="p-1.5 text-[#A79EAB] hover:text-[#C75491] rounded-lg hover:bg-white/5 transition-colors"
+                                title="View Roster"
+                              >
+                                <Eye className="w-4 h-4" />
+                              </button>
+                              <button
+                                onClick={() => handleDeleteTeam(team.id)}
+                                className="p-1.5 text-[#A79EAB] hover:text-[#E07AB0] rounded-lg hover:bg-[#4A1028]/30 transition-colors"
+                                title="Delete Team"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })
+                  ) : (
+                    <tr>
+                      <td colSpan={7} className="py-12 text-center text-[#A79EAB]">
+                        No Apocalypse squads match your search query.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* 3. JUNIOR CORE APPLICANT DETAILS MODAL                                    */}
+      {/* ========================================================================= */}
       {selectedApplicant && (
         <Modal
           isOpen={true}
@@ -712,6 +1026,98 @@ export default function AdminPage() {
               >
                 <Trash2 className="w-3.5 h-3.5" />
                 <span>Delete</span>
+              </button>
+            </div>
+          </div>
+        </Modal>
+      )}
+
+      {/* ========================================================================= */}
+      {/* 4. APOCALYPSE SQUAD ROSTER MODAL                                          */}
+      {/* ========================================================================= */}
+      {selectedTeam && (
+        <Modal
+          isOpen={true}
+          onClose={() => setSelectedTeam(null)}
+          title={`Squad Details — ${selectedTeam.teamName}`}
+          maxWidth="max-w-2xl"
+        >
+          <div className="space-y-6 text-sm">
+            {/* Header info */}
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#2A202D] pb-4">
+              <div>
+                <div className="flex items-center space-x-2">
+                  <Flame className="w-5 h-5 text-[#E07AB0]" />
+                  <h3 className="text-xl font-bold text-[#F5F1F5]">{selectedTeam.teamName}</h3>
+                </div>
+                <p className="text-xs text-[#A79EAB] font-mono mt-1">
+                  ID: <span className="text-[#E07AB0]">{selectedTeam.id}</span> • Registered:{" "}
+                  {new Date(selectedTeam.createdAt).toLocaleString()}
+                </p>
+              </div>
+
+              <span className="px-3 py-1 rounded-full bg-[#18131B] border border-[#5C2948] text-xs font-semibold text-[#E07AB0]">
+                {selectedTeam.members.length} Competitors (Min 2, Max 4)
+              </span>
+            </div>
+
+            {/* Members List */}
+            <div className="space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#A79EAB]">
+                Squad Roster
+              </h4>
+
+              <div className="space-y-2.5">
+                {selectedTeam.members.map((member, idx) => {
+                  const isLeader = idx === 0 || member.isLeader;
+
+                  return (
+                    <div
+                      key={idx}
+                      className="p-3.5 rounded-xl bg-[#121015] border border-[#2A202D] flex flex-col sm:flex-row sm:items-center justify-between gap-2"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <span className="w-6 h-6 rounded-full bg-[#18131B] border border-[#39283D] text-xs font-bold text-[#E07AB0] flex items-center justify-center shrink-0">
+                          {idx + 1}
+                        </span>
+                        <div>
+                          <div className="font-bold text-[#F5F1F5] flex items-center space-x-2">
+                            <span>{member.name}</span>
+                            {isLeader && (
+                              <span className="px-2 py-0.2 rounded-full bg-[#4A1028]/60 text-[#E07AB0] border border-[#5C2948] text-[10px] font-semibold">
+                                Team Leader
+                              </span>
+                            )}
+                          </div>
+                          <div className="text-xs font-mono text-[#C75491]">
+                            {member.enrollmentNumber}
+                          </div>
+                        </div>
+                      </div>
+
+                      {isLeader && (member.email || member.phone) && (
+                        <div className="text-left sm:text-right text-xs text-[#D8D0DA]">
+                          {member.email && <div>{member.email}</div>}
+                          {member.phone && <div className="text-[#A79EAB]">{member.phone}</div>}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Bottom action row */}
+            <div className="pt-4 border-t border-[#2A202D] flex items-center justify-between">
+              <span className="text-xs text-[#756B7A]">
+                Event: 23 SEP 2026 • Apocalypse Arena
+              </span>
+              <button
+                onClick={() => handleDeleteTeam(selectedTeam.id)}
+                className="px-4 py-1.5 rounded-lg bg-[#4A1028]/30 text-[#E07AB0] hover:bg-[#4A1028]/60 border border-[#5C2948] text-xs font-medium flex items-center space-x-1.5 transition-colors"
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+                <span>Delete Squad</span>
               </button>
             </div>
           </div>

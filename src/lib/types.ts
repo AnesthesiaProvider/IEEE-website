@@ -144,3 +144,19 @@ export interface SiteConfig {
     href: string;
   }[];
 }
+
+export interface ApocalypseTeamMember {
+  name: string;
+  enrollmentNumber: string;
+  email?: string;
+  phone?: string;
+  isLeader?: boolean;
+}
+
+export interface ApocalypseRegistration {
+  id: string;
+  teamName: string;
+  members: ApocalypseTeamMember[];
+  createdAt: string;
+}
+
