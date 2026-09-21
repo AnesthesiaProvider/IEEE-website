@@ -44,10 +44,10 @@ export const seniorCoreTeam: TeamMember[] = [
   },
   {
     id: "General Secretary",
-    name: "Darshil Chaudhary", // [PLACEHOLDER - Replace with actual Secretary Name]
+    name: "Darshil Chaudhary",
     role: "General Secretary",
     domain: "Leadership",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop",
+    image: "/images/team/darshil-chaudhary.jpg",
     bio: "Overseeing chapter communications, documentation, official IEEE reporting, and student council governance coordination.",
     yearAndBranch: "B.Tech ECE, 3rd Year",
     linkedin: "https://linkedin.com/in/placeholder-secretary",
