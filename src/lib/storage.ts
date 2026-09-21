@@ -1,10 +1,34 @@
 import fs from "fs/promises";
 import path from "path";
+import os from "os";
 import { JuniorCoreApplication, ApplicationStatus, ApocalypseRegistration } from "./types";
 
-const DATA_DIR = path.join(process.cwd(), "data");
-const APPLICATIONS_FILE = path.join(DATA_DIR, "applications.json");
-const APOCALYPSE_FILE = path.join(DATA_DIR, "apocalypse-registrations.json");
+// Base directory for read-only repository data
+const REPO_DATA_DIR = path.join(process.cwd(), "data");
+
+// Determine the writable storage directory:
+// On Vercel / AWS Lambda, process.cwd() is in /var/task (read-only).
+// os.tmpdir() (/tmp) is the only writable filesystem in serverless functions.
+function getStorageDirectory(): string {
+  const isServerless = Boolean(
+    process.env.VERCEL ||
+    process.env.AWS_LAMBDA_FUNCTION_NAME ||
+    process.env.LAMBDA_TASK_ROOT ||
+    (typeof process.cwd === "function" && process.cwd().startsWith("/var/task"))
+  );
+  if (isServerless) {
+    return path.join(os.tmpdir(), "ieee-wie-bu-storage");
+  }
+  return REPO_DATA_DIR;
+}
+
+const WRITABLE_DATA_DIR = getStorageDirectory();
+const APPLICATIONS_FILE = path.join(WRITABLE_DATA_DIR, "applications.json");
+const APOCALYPSE_FILE = path.join(WRITABLE_DATA_DIR, "apocalypse-registrations.json");
+
+// In-memory cache fallback for serverless container lifetime
+let memoryApplicationsCache: JuniorCoreApplication[] | null = null;
+let memoryApocalypseCache: ApocalypseRegistration[] | null = null;
 
 
 // Sample initial applications so the admin dashboard has preview data right away
@@ -82,15 +106,21 @@ const INITIAL_APPLICATIONS: JuniorCoreApplication[] = [
 
 async function ensureDataFile(): Promise<void> {
   try {
-    await fs.mkdir(DATA_DIR, { recursive: true });
+    await fs.mkdir(WRITABLE_DATA_DIR, { recursive: true });
     try {
       await fs.access(APPLICATIONS_FILE);
     } catch {
-      await fs.writeFile(
-        APPLICATIONS_FILE,
-        JSON.stringify(INITIAL_APPLICATIONS, null, 2),
-        "utf-8"
-      );
+      let initialData = JSON.stringify(INITIAL_APPLICATIONS, null, 2);
+      try {
+        const repoFile = path.join(REPO_DATA_DIR, "applications.json");
+        const content = await fs.readFile(repoFile, "utf-8");
+        if (content.trim()) {
+          initialData = content;
+        }
+      } catch {
+        // Fallback to INITIAL_APPLICATIONS
+      }
+      await fs.writeFile(APPLICATIONS_FILE, initialData, "utf-8");
     }
   } catch (err) {
     console.error("Failed to initialize storage:", err);
@@ -101,18 +131,28 @@ export async function readApplications(): Promise<JuniorCoreApplication[]> {
   await ensureDataFile();
   try {
     const raw = await fs.readFile(APPLICATIONS_FILE, "utf-8");
-    return JSON.parse(raw);
+    const parsed = JSON.parse(raw);
+    memoryApplicationsCache = parsed;
+    return parsed;
   } catch (err) {
+    if (memoryApplicationsCache) {
+      return memoryApplicationsCache;
+    }
     console.error("Error reading applications:", err);
     return [];
   }
 }
 
 export async function writeApplications(apps: JuniorCoreApplication[]): Promise<void> {
+  memoryApplicationsCache = apps;
   await ensureDataFile();
-  const tempFile = `${APPLICATIONS_FILE}.tmp.${Date.now()}`;
-  await fs.writeFile(tempFile, JSON.stringify(apps, null, 2), "utf-8");
-  await fs.rename(tempFile, APPLICATIONS_FILE);
+  try {
+    const tempFile = `${APPLICATIONS_FILE}.tmp.${Date.now()}`;
+    await fs.writeFile(tempFile, JSON.stringify(apps, null, 2), "utf-8");
+    await fs.rename(tempFile, APPLICATIONS_FILE);
+  } catch {
+    await fs.writeFile(APPLICATIONS_FILE, JSON.stringify(apps, null, 2), "utf-8");
+  }
 }
 
 export async function checkDuplicateEnrollment(enrollmentNumber: string): Promise<boolean> {
@@ -213,11 +253,21 @@ export async function deleteApplication(id: string): Promise<{ success: boolean;
 
 async function ensureApocalypseFile(): Promise<void> {
   try {
-    await fs.mkdir(DATA_DIR, { recursive: true });
+    await fs.mkdir(WRITABLE_DATA_DIR, { recursive: true });
     try {
       await fs.access(APOCALYPSE_FILE);
     } catch {
-      await fs.writeFile(APOCALYPSE_FILE, JSON.stringify([], null, 2), "utf-8");
+      let initialData = JSON.stringify([], null, 2);
+      try {
+        const repoFile = path.join(REPO_DATA_DIR, "apocalypse-registrations.json");
+        const content = await fs.readFile(repoFile, "utf-8");
+        if (content.trim()) {
+          initialData = content;
+        }
+      } catch {
+        // Fallback to empty
+      }
+      await fs.writeFile(APOCALYPSE_FILE, initialData, "utf-8");
     }
   } catch (err) {
     console.error("Failed to initialize Apocalypse storage:", err);
@@ -228,16 +278,28 @@ export async function readApocalypseRegistrations(): Promise<ApocalypseRegistrat
   await ensureApocalypseFile();
   try {
     const data = await fs.readFile(APOCALYPSE_FILE, "utf-8");
-    return JSON.parse(data) as ApocalypseRegistration[];
+    const parsed = JSON.parse(data) as ApocalypseRegistration[];
+    memoryApocalypseCache = parsed;
+    return parsed;
   } catch (err) {
+    if (memoryApocalypseCache) {
+      return memoryApocalypseCache;
+    }
     console.error("Error reading Apocalypse registrations:", err);
     return [];
   }
 }
 
 export async function writeApocalypseRegistrations(registrations: ApocalypseRegistration[]): Promise<void> {
+  memoryApocalypseCache = registrations;
   await ensureApocalypseFile();
-  await fs.writeFile(APOCALYPSE_FILE, JSON.stringify(registrations, null, 2), "utf-8");
+  try {
+    const tempFile = `${APOCALYPSE_FILE}.tmp.${Date.now()}`;
+    await fs.writeFile(tempFile, JSON.stringify(registrations, null, 2), "utf-8");
+    await fs.rename(tempFile, APOCALYPSE_FILE);
+  } catch {
+    await fs.writeFile(APOCALYPSE_FILE, JSON.stringify(registrations, null, 2), "utf-8");
+  }
 }
 
 export async function checkDuplicateApocalypseTeamOrMember(
