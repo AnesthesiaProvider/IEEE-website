@@ -39,11 +39,19 @@ const KV_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST
 async function kvGet<T>(key: string): Promise<T | null> {
   if (!KV_URL || !KV_TOKEN) return null;
   try {
-    const res = await fetch(`${KV_URL}/get/${key}`, {
-      headers: { Authorization: `Bearer ${KV_TOKEN}` },
+    const res = await fetch(KV_URL, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${KV_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(["GET", key]),
       cache: "no-store",
     });
-    if (!res.ok) return null;
+    if (!res.ok) {
+      console.error(`KV GET failed: ${res.status} ${res.statusText}`);
+      return null;
+    }
     const json = await res.json();
     if (!json || json.result === null || json.result === undefined) return null;
     if (typeof json.result === "string") {
@@ -64,15 +72,18 @@ async function kvSet<T>(key: string, value: T): Promise<boolean> {
   if (!KV_URL || !KV_TOKEN) return false;
   try {
     const serialized = typeof value === "string" ? value : JSON.stringify(value);
-    const res = await fetch(`${KV_URL}/set/${key}`, {
+    const res = await fetch(KV_URL, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${KV_TOKEN}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(serialized),
+      body: JSON.stringify(["SET", key, serialized]),
       cache: "no-store",
     });
+    if (!res.ok) {
+      console.error(`KV SET failed: ${res.status} ${res.statusText}`);
+    }
     return res.ok;
   } catch (err) {
     console.error(`Error writing to KV key "${key}":`, err);
