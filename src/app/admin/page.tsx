@@ -473,7 +473,7 @@ export default function AdminPage() {
           <h1 className="text-2xl sm:text-3xl font-extrabold text-[#F5F1F5] mt-1">
             {activeTab === "junior-core"
               ? "Junior Core Applications Management"
-              : "Apocalypse 2026 Team Registrations"}
+              : "Apocalypse WIE X BC3 Team Registrations"}
           </h1>
         </div>
 
@@ -531,7 +531,7 @@ export default function AdminPage() {
           }`}
         >
           <Flame className="w-4 h-4 text-[#E07AB0]" />
-          <span>Apocalypse 2026 Teams ({apocalypseRegistrations.length})</span>
+          <span>Apocalypse WIE X BC3 Teams ({apocalypseRegistrations.length})</span>
         </button>
       </div>
 
@@ -752,7 +752,7 @@ export default function AdminPage() {
             </div>
             <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
               <div className="text-xs font-medium text-[#A79EAB]">Event Schedule</div>
-              <div className="text-xl sm:text-2xl font-bold text-[#D8D0DA]">23 SEP 2026</div>
+              <div className="text-xl sm:text-2xl font-bold text-[#D8D0DA]">24 SEP 2026</div>
             </div>
           </div>
 

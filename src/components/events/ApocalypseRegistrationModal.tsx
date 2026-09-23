@@ -275,7 +275,7 @@ export function ApocalypseRegistrationModal({
     <Modal
       isOpen={isOpen}
       onClose={handleClose}
-      title="Apocalypse 2026 — Team Registration"
+      title="Apocalypse WIE X BC3 — Team Registration"
       maxWidth="max-w-2xl"
     >
       {submittedData ? (
@@ -295,7 +295,7 @@ export function ApocalypseRegistrationModal({
               Team &quot;{submittedData.teamName}&quot; Registered!
             </h3>
             <p className="text-xs text-[#A79EAB] max-w-md mx-auto">
-              Your squad has been registered for Apocalypse 2026. This registration is linked to this phone (1 registration per phone limit active).
+              Your squad has been registered for Apocalypse WIE X BC3. This registration is linked to this phone (1 registration per phone limit active).
             </p>
           </div>
 
@@ -370,7 +370,7 @@ export function ApocalypseRegistrationModal({
               Team &quot;{existingDeviceRegistration.teamName}&quot; Already Registered
             </h3>
             <p className="text-xs text-[#A79EAB] max-w-md mx-auto leading-relaxed">
-              A team has already been registered from this phone. Per Apocalypse 2026 rules, only one team registration is permitted per device/phone.
+              A team has already been registered from this phone. Per Apocalypse WIE X BC3 rules, only one team registration is permitted per device/phone.
             </p>
           </div>
 

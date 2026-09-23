@@ -33,22 +33,22 @@ export const chapterEvents: ChapterEvent[] = [
   },
   {
     id: "apocalypse-2026",
-    title: "Apocalypse",
+    title: "Apocalypse WIE X BC3",
     subtitle: "Step Into the Unexpected",
     slug: "apocalypse",
     category: "Competitions",
     status: "upcoming",
-    date: "23 SEP 2026",
+    date: "24 SEP 2026",
     time: "To Be Announced",
     venue: "Bennett University",
     shortDescription:
       "An adrenaline-filled experience with challenges, surprises and memories you’ll be talking about long after it ends. Are you ready?",
     fullDescription:
       "Step Into the Unexpected.\n\nAn adrenaline-filled experience with challenges, surprises and memories you’ll be talking about long after it ends. Are you ready?\n\nPrepare for an intense, high-energy competition designed to test quick thinking, teamwork, and resilience under pressure. Gather your squad (minimum 2, maximum 4 members) and step into the arena.",
-    image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1000&auto=format&fit=crop",
+    image: "/images/events/apocalypse.png",
     registrationOpen: true,
     registrationLink: "#register-team",
-    tags: ["Apocalypse", "Challenges", "Competition", "Squad (2-4)", "Adrenaline"],
+    tags: ["Apocalypse WIE X BC3", "Challenges", "Competition", "Squad (2-4)", "Adrenaline"],
   },
   {
     id: "ieee-day-2026",

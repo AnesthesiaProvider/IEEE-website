@@ -161,7 +161,7 @@ export default function HomePage() {
               >
                 <Flame className="w-4 h-4 text-[#E07AB0] group-hover:text-[#F5A8C8] transition-colors" />
                 <span>
-                  {hasRegisteredOnDevice ? "View Apocalypse Team" : "Register for Apocalypse"}
+                  {hasRegisteredOnDevice ? "View Apocalypse WIE X BC3 Team" : "Register for Apocalypse WIE X BC3"}
                 </span>
                 <ArrowRight className="w-4 h-4 text-[#C75491] group-hover:translate-x-1 transition-transform" />
               </button>
