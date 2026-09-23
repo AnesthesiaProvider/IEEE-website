@@ -107,13 +107,12 @@ export default function HomePage() {
       {/* 1. HERO SECTION                                                           */}
       {/* ========================================================================= */}
       <section className="relative z-10 pt-12 pb-16 md:pt-20 md:pb-20 lg:pt-24 lg:pb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          
-          {/* Left Corner: AI Summit 3D Interactive Photo Deck */}
-          <div className="hidden lg:block absolute left-0 xl:left-2 2xl:left-6 top-1/2 -translate-y-1/2 z-20 scale-90 xl:scale-100 origin-left">
-            <HeroPhotoDeck />
-          </div>
+        {/* Left Corner: AI Summit 3D Interactive Photo Deck */}
+        <div className="hidden xl:block absolute left-4 2xl:left-10 top-1/2 -translate-y-1/2 z-20">
+          <HeroPhotoDeck />
+        </div>
 
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="max-w-3xl lg:max-w-3xl xl:max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
@@ -185,7 +184,7 @@ export default function HomePage() {
           </div>
 
           {/* Mobile / Tablet Friendly Deck View */}
-          <div className="lg:hidden mt-12 flex justify-center">
+          <div className="xl:hidden mt-12 flex justify-center">
             <HeroPhotoDeck />
           </div>
 
