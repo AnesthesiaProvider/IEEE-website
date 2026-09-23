@@ -6,14 +6,14 @@ import { motion } from "framer-motion";
 import { Sparkles, Maximize2 } from "lucide-react";
 import { Modal } from "@/components/ui/Modal";
 
-export interface SummitPhotoItem {
+export interface PhotoDeckItem {
   id: string;
   image: string;
   title: string;
   tag: string;
 }
 
-const SUMMIT_PHOTOS: SummitPhotoItem[] = [
+const SUMMIT_PHOTOS: PhotoDeckItem[] = [
   {
     id: "summit-1",
     image: "/images/ai-summit/summit-1.jpg",
@@ -40,22 +40,61 @@ const SUMMIT_PHOTOS: SummitPhotoItem[] = [
   },
 ];
 
-// Initial natural "bikhra hua" (scattered) positions so every photo is visibly spread out
-const INITIAL_SCATTER = [
+const INTERNSHIP_PHOTOS: PhotoDeckItem[] = [
+  {
+    id: "internship-1",
+    image: "/images/internship/internship-1.jpg",
+    title: "Internship Series Cohort",
+    tag: "Episode 02 • Campus",
+  },
+  {
+    id: "internship-2",
+    image: "/images/internship/internship-2.jpg",
+    title: "Certificate Felicitation",
+    tag: "Mock Technical Round",
+  },
+  {
+    id: "internship-3",
+    image: "/images/internship/internship-3.jpg",
+    title: "Hands-on Masterclass",
+    tag: "Interactive Workshop",
+  },
+  {
+    id: "internship-4",
+    image: "/images/internship/internship-4.jpg",
+    title: "Outstanding Delegates",
+    tag: "Series 1.0 Completion",
+  },
+];
+
+// Natural scattered ("bikhra hua") positions for left and right corners
+const LEFT_SCATTER = [
   { x: -36, y: -42, rotate: -9, zIndex: 10 },
   { x: 38, y: -26, rotate: 7, zIndex: 20 },
   { x: -30, y: 36, rotate: -5, zIndex: 30 },
   { x: 34, y: 50, rotate: 10, zIndex: 40 },
 ];
 
+const RIGHT_SCATTER = [
+  { x: 36, y: -42, rotate: 8, zIndex: 10 },
+  { x: -38, y: -26, rotate: -7, zIndex: 20 },
+  { x: 30, y: 36, rotate: 6, zIndex: 30 },
+  { x: -34, y: 50, rotate: -10, zIndex: 40 },
+];
+
 interface HeroPhotoDeckProps {
   className?: string;
+  type?: "ai-summit" | "internship";
 }
 
-export function HeroPhotoDeck({ className = "" }: HeroPhotoDeckProps) {
-  const [scatterPositions, setScatterPositions] = useState(INITIAL_SCATTER);
+export function HeroPhotoDeck({ className = "", type = "ai-summit" }: HeroPhotoDeckProps) {
+  const isInternship = type === "internship";
+  const photos = isInternship ? INTERNSHIP_PHOTOS : SUMMIT_PHOTOS;
+  const initialScatter = isInternship ? RIGHT_SCATTER : LEFT_SCATTER;
+
+  const [scatterPositions, setScatterPositions] = useState(initialScatter);
   const [topZIndex, setTopZIndex] = useState(50);
-  const [activeModalPhoto, setActiveModalPhoto] = useState<SummitPhotoItem | null>(null);
+  const [activeModalPhoto, setActiveModalPhoto] = useState<PhotoDeckItem | null>(null);
 
   const bringToFront = (index: number) => {
     const nextZ = topZIndex + 1;
@@ -71,13 +110,13 @@ export function HeroPhotoDeck({ className = "" }: HeroPhotoDeckProps) {
       <div className="mb-2 flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#120E1C]/90 border border-[#712EB7]/50 backdrop-blur-md shadow-lg shadow-[#712EB7]/15">
         <Sparkles className="w-3.5 h-3.5 text-[#C4B5FD] animate-pulse" />
         <span className="text-xs font-semibold text-[#FAF8FD] tracking-wide">
-          AI Summit Moments
+          {isInternship ? "Internship Series" : "AI Summit Moments"}
         </span>
       </div>
 
       {/* Scattered Interactive Playfield Area */}
       <div className="relative w-[320px] sm:w-[350px] h-[370px] sm:h-[400px] flex items-center justify-center">
-        {SUMMIT_PHOTOS.map((photo, index) => {
+        {photos.map((photo, index) => {
           const config = scatterPositions[index];
 
           return (
@@ -86,7 +125,7 @@ export function HeroPhotoDeck({ className = "" }: HeroPhotoDeckProps) {
               drag
               dragMomentum={true}
               dragElastic={false}
-              /* No dragConstraints so the user can drag & throw pictures anywhere including off screen */
+              /* Free unconstrained drag so photos can be moved anywhere on/off screen */
               initial={false}
               animate={{
                 x: config.x,
@@ -130,11 +169,11 @@ export function HeroPhotoDeck({ className = "" }: HeroPhotoDeckProps) {
                     e.stopPropagation();
                     setActiveModalPhoto(photo);
                   }}
-                  className="absolute top-2 right-2 p-1.5 rounded-full bg-[#0A0C15]/80 hover:bg-[#712EB7] text-[#CAC4D1] hover:text-[#FFFFFF] opacity-0 group-hover:opacity-100 transition-all duration-200 shadow-md"
+                  className="absolute top-1.5 right-1.5 p-1 rounded-full bg-[#0A0C15]/80 hover:bg-[#712EB7] text-[#CAC4D1] hover:text-[#FFFFFF] opacity-0 group-hover:opacity-100 transition-all duration-200 shadow-md"
                   title="View full resolution"
                   aria-label="View full resolution"
                 >
-                  <Maximize2 className="w-3.5 h-3.5" />
+                  <Maximize2 className="w-3 h-3" />
                 </button>
               </div>
             </motion.div>

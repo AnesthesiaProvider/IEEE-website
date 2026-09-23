@@ -109,7 +109,12 @@ export default function HomePage() {
       <section className="relative z-10 pt-12 pb-16 md:pt-20 md:pb-20 lg:pt-24 lg:pb-24">
         {/* Left Corner: AI Summit 3D Interactive Photo Deck */}
         <div className="hidden xl:block absolute left-4 2xl:left-10 top-1/2 -translate-y-1/2 z-20">
-          <HeroPhotoDeck />
+          <HeroPhotoDeck type="ai-summit" />
+        </div>
+
+        {/* Right Corner: Internship Series 3D Interactive Photo Deck */}
+        <div className="hidden xl:block absolute right-4 2xl:right-10 top-1/2 -translate-y-1/2 z-20">
+          <HeroPhotoDeck type="internship" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -183,9 +188,10 @@ export default function HomePage() {
             </motion.div>
           </div>
 
-          {/* Mobile / Tablet Friendly Deck View */}
-          <div className="xl:hidden mt-12 flex justify-center">
-            <HeroPhotoDeck />
+          {/* Mobile / Tablet Friendly Decks View */}
+          <div className="xl:hidden mt-12 flex flex-col md:flex-row items-center justify-center gap-10">
+            <HeroPhotoDeck type="ai-summit" />
+            <HeroPhotoDeck type="internship" />
           </div>
 
         </div>
