@@ -14,22 +14,25 @@ export const chapterEvents: ChapterEvent[] = [
   // --- UPCOMING EVENTS ---
   {
     id: "club-carnival",
-    title: "Club Carnival",
-    subtitle: "Find Your People",
+    title: "Club Carnival 2026",
+    subtitle: "WIE IEEE • IEEE Women in Engineering",
     slug: "club-carnival",
     category: "Networking",
     status: "upcoming",
-    date: "Semester Kickoff",
+    date: "Carnival 2026",
     time: "Campus Hours",
     venue: "Bennett University Campus",
     shortDescription:
-      "Kickstart the semester with a vibrant showcase of clubs, communities and opportunities. Explore. Interact. Be a part of the Bennett life!",
+      "Kickstart the semester with a vibrant showcase of clubs, communities and opportunities. Explore. Interact. Be a part of the Bennett life with IEEE WIE!",
     fullDescription:
       "Find Your People.\n\nKickstart the semester with a vibrant showcase of clubs, communities and opportunities. Explore. Interact. Be a part of the Bennett life!\n\nMeet the IEEE WIE team, discover hands-on technical initiatives, connect with student leaders, and explore opportunities to grow your network and career right from campus.",
-    image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=1000&auto=format&fit=crop",
+    image: "/images/events/club-carnival.png",
+    galleryImages: [
+      "/images/events/club-carnival.png",
+    ],
     registrationOpen: true,
-    registrationLink: "https://forms.google.com",
-    tags: ["Club Carnival", "Community", "Find Your People", "Bennett Life", "Networking"],
+    registrationLink: "https://instagram.com/ieee_wie_bu",
+    tags: ["Club Carnival 2026", "WIE IEEE", "Community", "Find Your People", "Bennett Life", "Networking"],
   },
   {
     id: "apocalypse-2026",

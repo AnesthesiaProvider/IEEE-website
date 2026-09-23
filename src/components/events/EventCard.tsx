@@ -71,9 +71,9 @@ export function EventCard({ event }: EventCardProps) {
                 alt={event.title}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0C15] via-[#0A0C15]/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0C15] via-[#0A0C15]/20 to-transparent" />
             </>
           )}
 
@@ -243,14 +243,14 @@ export function EventCard({ event }: EventCardProps) {
               </div>
             </div>
           ) : (
-            <div className="relative w-full h-56 rounded-xl overflow-hidden bg-[#1A1428]">
-              <Image src={event.image} alt={event.title} fill className="object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0C15] via-transparent to-transparent opacity-80" />
-              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                <span className="px-3 py-1 rounded-full bg-[#712EB7]/80 text-[#FAF8FD] text-xs font-semibold backdrop-blur-md">
+            <div className="relative w-full h-80 sm:h-96 rounded-xl overflow-hidden bg-[#0A0C15] border border-[#34224E] flex items-center justify-center">
+              <Image src={event.image} alt={event.title} fill className="object-contain" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0C15]/70 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between pointer-events-none">
+                <span className="px-3 py-1 rounded-full bg-[#712EB7]/90 text-[#FAF8FD] text-xs font-semibold backdrop-blur-md">
                   {event.category}
                 </span>
-                <span className="text-xs text-[#FAF8FD]/90 bg-[#0A0C15]/80 px-3 py-1 rounded-full border border-[#231B32] backdrop-blur-md">
+                <span className="text-xs text-[#FAF8FD]/90 bg-[#0A0C15]/90 px-3 py-1 rounded-full border border-[#231B32] backdrop-blur-md">
                   {event.date} {event.time && `• ${event.time}`}
                 </span>
               </div>
@@ -435,17 +435,19 @@ export function EventCard({ event }: EventCardProps) {
           title={`${event.title} - Event Highlights`}
           maxWidth="max-w-4xl"
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className={event.galleryImages.length === 1 ? "flex justify-center" : "grid grid-cols-1 sm:grid-cols-2 gap-4"}>
             {event.galleryImages.map((img, idx) => (
               <div
                 key={idx}
-                className="relative h-56 rounded-xl overflow-hidden bg-[#1A1428] border border-[#231B32]"
+                className={`relative rounded-xl overflow-hidden bg-[#0A0C15] border border-[#34224E] ${
+                  event.galleryImages!.length === 1 ? "w-full max-w-md h-[560px]" : "h-72 sm:h-80"
+                }`}
               >
                 <Image
                   src={img}
                   alt={`${event.title} moment ${idx + 1}`}
                   fill
-                  className="object-cover hover:scale-105 transition-transform duration-300"
+                  className="object-contain hover:scale-102 transition-transform duration-300"
                 />
               </div>
             ))}
