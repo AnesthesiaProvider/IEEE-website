@@ -24,6 +24,7 @@ import { StatCounter } from "@/components/ui/StatCounter";
 import { TeamCard } from "@/components/team/TeamCard";
 import { EventCard } from "@/components/events/EventCard";
 import { RecruitmentCountdown } from "@/components/home/RecruitmentCountdown";
+import { HeroPhotoDeck } from "@/components/home/HeroPhotoDeck";
 import { ApocalypseRegistrationModal } from "@/components/events/ApocalypseRegistrationModal";
 import { seniorCoreTeam } from "@/data/team";
 import { chapterEvents } from "@/data/events";
@@ -106,74 +107,88 @@ export default function HomePage() {
       {/* 1. HERO SECTION                                                           */}
       {/* ========================================================================= */}
       <section className="relative z-10 pt-12 pb-16 md:pt-20 md:pb-20 lg:pt-24 lg:pb-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="space-y-6 flex flex-col items-center"
-          >
-            {/* Badge */}
-            <div className="inline-flex items-center space-x-2.5 px-4 py-1.5 rounded-full bg-[#1A1428] border border-[#712EB7]/50 text-xs font-semibold text-[#C4B5FD] backdrop-blur-md shadow-sm shadow-[#712EB7]/20">
-              <Image
-                src="/images/wie-logo.png"
-                alt="IEEE WIE Logo"
-                width={18}
-                height={18}
-                className="w-4 h-4 object-contain filter drop-shadow-[0_0_4px_rgba(138,56,212,0.5)]"
-              />
-              <span>IEEE WIE • Bennett University</span>
-            </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          
+          {/* Left Corner: AI Summit 3D Interactive Photo Deck */}
+          <div className="hidden lg:block absolute left-0 xl:left-2 2xl:left-6 top-1/2 -translate-y-1/2 z-20 scale-90 xl:scale-100 origin-left">
+            <HeroPhotoDeck />
+          </div>
 
-            {/* Main Heading */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#FAF8FD] leading-[1.1]">
-              Empowering Women. <br />
-              <span className="bg-gradient-to-r from-[#FAF8FD] via-[#A855F7] to-[#712EB7] bg-clip-text text-transparent">
-                Engineering the Future.
-              </span>
-            </h1>
-
-            {/* Supporting Description */}
-            <p className="text-base sm:text-lg text-[#CAC4D1] max-w-2xl leading-relaxed">
-              IEEE Women in Engineering at Bennett University is a community of innovators, creators, leaders, and future engineers working together to learn, build, and inspire.
-            </p>
-
-            {/* Key Bullet Highlights */}
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-1 text-sm text-[#CAC4D1]">
-              <div className="flex items-center space-x-2 bg-[#1A1428]/60 px-4 py-2 rounded-full border border-[#231B32]">
-                <CheckCircle2 className="w-4 h-4 text-[#712EB7] shrink-0" />
-                <span>National Hackathons & Tech Conferences</span>
+          <div className="max-w-3xl lg:max-w-3xl xl:max-w-4xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="space-y-6 flex flex-col items-center"
+            >
+              {/* Badge */}
+              <div className="inline-flex items-center space-x-2.5 px-4 py-1.5 rounded-full bg-[#1A1428] border border-[#712EB7]/50 text-xs font-semibold text-[#C4B5FD] backdrop-blur-md shadow-sm shadow-[#712EB7]/20">
+                <Image
+                  src="/images/wie-logo.png"
+                  alt="IEEE WIE Logo"
+                  width={18}
+                  height={18}
+                  className="w-4 h-4 object-contain filter drop-shadow-[0_0_4px_rgba(138,56,212,0.5)]"
+                />
+                <span>IEEE WIE • Bennett University</span>
               </div>
-              <div className="flex items-center space-x-2 bg-[#1A1428]/60 px-4 py-2 rounded-full border border-[#231B32]">
-                <CheckCircle2 className="w-4 h-4 text-[#8A38D4] shrink-0" />
-                <span>Industry Mentorship & Research Circles</span>
-              </div>
-            </div>
 
-            {/* Action Buttons */}
-            <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
-              <Link
-                href="/junior-core"
-                className="px-7 py-3.5 rounded-full bg-gradient-to-r from-[#712EB7] via-[#8A38D4] to-[#712EB7] hover:from-[#8A38D4] hover:to-[#A855F7] text-[#FFFFFF] font-semibold text-sm shadow-xl shadow-[#712EB7]/35 flex items-center space-x-2 transition-all duration-300 hover:scale-[1.03]"
-              >
-                <Sparkles className="w-4 h-4 text-[#C4B5FD]" />
-                <span>Join Junior Core</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-
-              <button
-                type="button"
-                onClick={() => setIsApocalypseModalOpen(true)}
-                className="px-7 py-3.5 rounded-full bg-[#120E1C] hover:bg-[#1A1428] text-[#FAF8FD] font-semibold text-sm border border-[#712EB7]/60 hover:border-[#8A38D4] backdrop-blur-md transition-all duration-300 hover:scale-[1.03] flex items-center space-x-2.5 shadow-lg shadow-[#712EB7]/25 cursor-pointer group"
-              >
-                <Flame className="w-4 h-4 text-[#8A38D4] group-hover:text-[#C4B5FD] transition-colors" />
-                <span>
-                  {hasRegisteredOnDevice ? "View Apocalypse WIE X BC3 Team" : "Register for Apocalypse WIE X BC3"}
+              {/* Main Heading */}
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#FAF8FD] leading-[1.1]">
+                Empowering Women. <br />
+                <span className="bg-gradient-to-r from-[#FAF8FD] via-[#A855F7] to-[#712EB7] bg-clip-text text-transparent">
+                  Engineering the Future.
                 </span>
-                <ArrowRight className="w-4 h-4 text-[#712EB7] group-hover:translate-x-1 transition-transform" />
-              </button>
-            </div>
-          </motion.div>
+              </h1>
+
+              {/* Supporting Description */}
+              <p className="text-base sm:text-lg text-[#CAC4D1] max-w-2xl leading-relaxed">
+                IEEE Women in Engineering at Bennett University is a community of innovators, creators, leaders, and future engineers working together to learn, build, and inspire.
+              </p>
+
+              {/* Key Bullet Highlights */}
+              <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-1 text-sm text-[#CAC4D1]">
+                <div className="flex items-center space-x-2 bg-[#1A1428]/60 px-4 py-2 rounded-full border border-[#231B32]">
+                  <CheckCircle2 className="w-4 h-4 text-[#712EB7] shrink-0" />
+                  <span>National Hackathons & Tech Conferences</span>
+                </div>
+                <div className="flex items-center space-x-2 bg-[#1A1428]/60 px-4 py-2 rounded-full border border-[#231B32]">
+                  <CheckCircle2 className="w-4 h-4 text-[#8A38D4] shrink-0" />
+                  <span>Industry Mentorship & Research Circles</span>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
+                <Link
+                  href="/junior-core"
+                  className="px-7 py-3.5 rounded-full bg-gradient-to-r from-[#712EB7] via-[#8A38D4] to-[#712EB7] hover:from-[#8A38D4] hover:to-[#A855F7] text-[#FFFFFF] font-semibold text-sm shadow-xl shadow-[#712EB7]/35 flex items-center space-x-2 transition-all duration-300 hover:scale-[1.03]"
+                >
+                  <Sparkles className="w-4 h-4 text-[#C4B5FD]" />
+                  <span>Join Junior Core</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+
+                <button
+                  type="button"
+                  onClick={() => setIsApocalypseModalOpen(true)}
+                  className="px-7 py-3.5 rounded-full bg-[#120E1C] hover:bg-[#1A1428] text-[#FAF8FD] font-semibold text-sm border border-[#712EB7]/60 hover:border-[#8A38D4] backdrop-blur-md transition-all duration-300 hover:scale-[1.03] flex items-center space-x-2.5 shadow-lg shadow-[#712EB7]/25 cursor-pointer group"
+                >
+                  <Flame className="w-4 h-4 text-[#8A38D4] group-hover:text-[#C4B5FD] transition-colors" />
+                  <span>
+                    {hasRegisteredOnDevice ? "View Apocalypse WIE X BC3 Team" : "Register for Apocalypse WIE X BC3"}
+                  </span>
+                  <ArrowRight className="w-4 h-4 text-[#712EB7] group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Mobile / Tablet Friendly Deck View */}
+          <div className="lg:hidden mt-12 flex justify-center">
+            <HeroPhotoDeck />
+          </div>
+
         </div>
       </section>
 
