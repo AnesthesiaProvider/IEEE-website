@@ -31,37 +31,30 @@ let memoryApplicationsCache: JuniorCoreApplication[] | null = null;
 let memoryApocalypseCache: ApocalypseRegistration[] | null = null;
 
 // =============================================================================
-// Cloud Persistence via Vercel KV / Upstash Redis REST API
+// Cloud Persistence via Vercel KV / Upstash Redis (Official SDK)
 // =============================================================================
-const KV_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
-const KV_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+import { Redis } from "@upstash/redis";
+
+function getRedisClient(): Redis | null {
+  const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) return null;
+  try {
+    return new Redis({ url, token });
+  } catch (err) {
+    console.error("Failed to initialize Redis client:", err);
+    return null;
+  }
+}
+
+const redis = getRedisClient();
 
 async function kvGet<T>(key: string): Promise<T | null> {
-  if (!KV_URL || !KV_TOKEN) return null;
+  if (!redis) return null;
   try {
-    const res = await fetch(KV_URL, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${KV_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(["GET", key]),
-      cache: "no-store",
-    });
-    if (!res.ok) {
-      console.error(`KV GET failed: ${res.status} ${res.statusText}`);
-      return null;
-    }
-    const json = await res.json();
-    if (!json || json.result === null || json.result === undefined) return null;
-    if (typeof json.result === "string") {
-      try {
-        return JSON.parse(json.result);
-      } catch {
-        return json.result as unknown as T;
-      }
-    }
-    return json.result as T;
+    const result = await redis.get<T>(key);
+    if (result === null || result === undefined) return null;
+    return result;
   } catch (err) {
     console.error(`Error reading from KV key "${key}":`, err);
     return null;
@@ -69,22 +62,10 @@ async function kvGet<T>(key: string): Promise<T | null> {
 }
 
 async function kvSet<T>(key: string, value: T): Promise<boolean> {
-  if (!KV_URL || !KV_TOKEN) return false;
+  if (!redis) return false;
   try {
-    const serialized = typeof value === "string" ? value : JSON.stringify(value);
-    const res = await fetch(KV_URL, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${KV_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(["SET", key, serialized]),
-      cache: "no-store",
-    });
-    if (!res.ok) {
-      console.error(`KV SET failed: ${res.status} ${res.statusText}`);
-    }
-    return res.ok;
+    await redis.set(key, value);
+    return true;
   } catch (err) {
     console.error(`Error writing to KV key "${key}":`, err);
     return false;
@@ -189,7 +170,7 @@ async function ensureDataFile(): Promise<void> {
 }
 
 export async function readApplications(): Promise<JuniorCoreApplication[]> {
-  if (KV_URL && KV_TOKEN) {
+  if (redis) {
     const cloud = await kvGet<JuniorCoreApplication[]>("ieee_junior_core_applications");
     if (cloud && Array.isArray(cloud)) {
       memoryApplicationsCache = cloud;
@@ -215,7 +196,7 @@ export async function readApplications(): Promise<JuniorCoreApplication[]> {
 export async function writeApplications(apps: JuniorCoreApplication[]): Promise<void> {
   memoryApplicationsCache = apps;
 
-  if (KV_URL && KV_TOKEN) {
+  if (redis) {
     await kvSet("ieee_junior_core_applications", apps);
   }
 
@@ -349,7 +330,7 @@ async function ensureApocalypseFile(): Promise<void> {
 }
 
 export async function readApocalypseRegistrations(): Promise<ApocalypseRegistration[]> {
-  if (KV_URL && KV_TOKEN) {
+  if (redis) {
     const cloud = await kvGet<ApocalypseRegistration[]>("ieee_apocalypse_registrations");
     if (cloud && Array.isArray(cloud)) {
       memoryApocalypseCache = cloud;
@@ -375,7 +356,7 @@ export async function readApocalypseRegistrations(): Promise<ApocalypseRegistrat
 export async function writeApocalypseRegistrations(registrations: ApocalypseRegistration[]): Promise<void> {
   memoryApocalypseCache = registrations;
 
-  if (KV_URL && KV_TOKEN) {
+  if (redis) {
     await kvSet("ieee_apocalypse_registrations", registrations);
   }
 
