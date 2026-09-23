@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, Heart, Sparkles } from "lucide-react";
 import { InstagramIcon, LinkedinIcon, GithubIcon } from "@/components/ui/SocialIcons";
 import { siteConfig } from "@/data/siteConfig";
@@ -15,9 +16,15 @@ export function Footer() {
           {/* Brand & Mission Column */}
           <div className="md:col-span-2 space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#34224E] via-[#712EB7] to-[#D88CF5] p-[1.5px]">
-                <div className="w-full h-full rounded-[10px] bg-[#0A0C15] flex items-center justify-center font-bold text-xs text-[#FAF8FD]">
-                  WIE
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#34224E] via-[#712EB7] to-[#D88CF5] p-[1.5px] shrink-0">
+                <div className="w-full h-full rounded-[10px] bg-[#0A0C15] flex items-center justify-center p-1">
+                  <Image
+                    src="/images/wie-logo.png"
+                    alt="IEEE Women in Engineering Bennett University"
+                    width={36}
+                    height={36}
+                    className="w-full h-full object-contain filter drop-shadow-[0_0_4px_rgba(216,140,245,0.3)]"
+                  />
                 </div>
               </div>
               <div>

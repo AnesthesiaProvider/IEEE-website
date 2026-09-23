@@ -42,6 +42,11 @@ export const metadata: Metadata = {
     description:
       "IEEE Women in Engineering at Bennett University — empowering students to build fearlessly.",
   },
+  icons: {
+    icon: "/images/wie-logo.png",
+    shortcut: "/favicon.ico",
+    apple: "/images/wie-logo.png",
+  },
   robots: {
     index: true,
     follow: true,

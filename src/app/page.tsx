@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Sparkles,
@@ -113,8 +114,14 @@ export default function HomePage() {
             className="space-y-6 flex flex-col items-center"
           >
             {/* Badge */}
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#1A1428] border border-[#34224E] text-xs font-semibold text-[#D88CF5] backdrop-blur-md shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#712EB7] animate-pulse" />
+            <div className="inline-flex items-center space-x-2.5 px-4 py-1.5 rounded-full bg-[#1A1428] border border-[#34224E] text-xs font-semibold text-[#D88CF5] backdrop-blur-md shadow-sm">
+              <Image
+                src="/images/wie-logo.png"
+                alt="IEEE WIE Logo"
+                width={18}
+                height={18}
+                className="w-4 h-4 object-contain filter drop-shadow-[0_0_3px_rgba(216,140,245,0.4)]"
+              />
               <span>IEEE WIE • Bennett University</span>
             </div>
 

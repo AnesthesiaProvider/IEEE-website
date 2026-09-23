@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sparkles, ArrowRight, ShieldCheck } from "lucide-react";
@@ -42,11 +43,16 @@ export function Navbar() {
             aria-label="IEEE Women in Engineering Bennett University Home"
           >
             {/* Custom IEEE WIE Emblem */}
-            <div className="relative w-10 h-10 rounded-xl bg-gradient-to-tr from-[#34224E] via-[#712EB7] to-[#D88CF5] p-[1.5px] shadow-lg shadow-[#712EB7]/25 group-hover:shadow-[#712EB7]/40 transition-shadow">
-              <div className="w-full h-full rounded-[10px] bg-[#0A0C15] flex items-center justify-center">
-                <span className="font-extrabold text-sm tracking-tighter bg-gradient-to-r from-[#FFFFFF] via-[#D88CF5] to-[#876DBF] bg-clip-text text-transparent">
-                  WIE
-                </span>
+            <div className="relative w-11 h-11 rounded-xl bg-gradient-to-tr from-[#34224E] via-[#712EB7] to-[#D88CF5] p-[1.5px] shadow-lg shadow-[#712EB7]/25 group-hover:shadow-[#712EB7]/40 transition-all duration-300 group-hover:scale-105 shrink-0 overflow-hidden">
+              <div className="w-full h-full rounded-[10px] bg-[#0A0C15] flex items-center justify-center p-1">
+                <Image
+                  src="/images/wie-logo.png"
+                  alt="IEEE WIE Bennett University"
+                  width={38}
+                  height={38}
+                  className="w-full h-full object-contain filter drop-shadow-[0_0_4px_rgba(216,140,245,0.35)]"
+                  priority
+                />
               </div>
             </div>
 
