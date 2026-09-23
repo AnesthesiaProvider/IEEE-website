@@ -34,16 +34,16 @@ export default function TeamPage() {
 
         {/* Header Title Section */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#18131B] border border-[#39283D] text-xs font-semibold text-[#C75491] backdrop-blur-md">
-            <Users className="w-3.5 h-3.5 text-[#D05A9E]" />
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#1A1428] border border-[#34224E] text-xs font-semibold text-[#D88CF5] backdrop-blur-md">
+            <Users className="w-3.5 h-3.5 text-[#D88CF5]" />
             <span>Executive Board & Leads</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-[#F5F1F5] tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-[#FAF8FD] tracking-tight">
             Meet the Senior Core Team
           </h1>
 
-          <p className="text-[#D8D0DA] text-base sm:text-lg leading-relaxed">
+          <p className="text-[#FAF8FD]/80 text-base sm:text-lg leading-relaxed">
             The people building the next generation of IEEE WIE at Bennett University. Dedicated to fostering innovation, mentorship, and technical excellence.
           </p>
         </div>
@@ -59,8 +59,8 @@ export default function TeamPage() {
                   key={domain}
                   onClick={() => setSelectedDomain(domain)}
                   className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 ${isActive
-                    ? "bg-gradient-to-r from-[#5A1025] to-[#7B3F8C] text-[#F5F1F5] shadow-lg shadow-[#7A1833]/30 border border-[#8F2450]"
-                    : "bg-[#121015] text-[#D8D0DA] hover:text-[#F5F1F5] border border-[#2A202D] hover:bg-[#18131B] hover:border-[#39283D]"
+                    ? "bg-gradient-to-r from-[#664BA3] to-[#712EB7] text-[#FFFFFF] shadow-lg shadow-[#712EB7]/30 border border-[#712EB7]"
+                    : "bg-[#120E1C] text-[#CAC4D1] hover:text-[#FAF8FD] border border-[#231B32] hover:bg-[#1A1428] hover:border-[#34224E]"
                     }`}
                 >
                   {domain}
@@ -71,13 +71,13 @@ export default function TeamPage() {
 
           {/* Search Input */}
           <div className="relative w-full md:w-72">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A79EAB]" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#CAC4D1]" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by name, role..."
-              className="w-full pl-10 pr-4 py-2 rounded-xl bg-[#121015] border border-[#2A202D] text-[#F5F1F5] placeholder-[#756B7A] text-xs focus:outline-none focus:border-[#8F2450] focus:ring-1 focus:ring-[#8F2450]/30 transition-all"
+              className="w-full pl-10 pr-4 py-2 rounded-xl bg-[#120E1C] border border-[#231B32] text-[#FAF8FD] placeholder-[#797380] text-xs focus:outline-none focus:border-[#712EB7] focus:ring-1 focus:ring-[#712EB7]/30 transition-all"
             />
           </div>
         </div>
@@ -104,10 +104,10 @@ export default function TeamPage() {
             </AnimatePresence>
           </motion.div>
         ) : (
-          <div className="py-20 text-center space-y-3 bg-[#121015]/60 rounded-2xl border border-[#2A202D]">
-            <Users className="w-10 h-10 text-[#756B7A] mx-auto" />
-            <h3 className="text-lg font-bold text-[#F5F1F5]">No team members found</h3>
-            <p className="text-sm text-[#A79EAB]">
+          <div className="py-20 text-center space-y-3 bg-[#120E1C]/60 rounded-2xl border border-[#231B32]">
+            <Users className="w-10 h-10 text-[#797380] mx-auto" />
+            <h3 className="text-lg font-bold text-[#FAF8FD]">No team members found</h3>
+            <p className="text-sm text-[#CAC4D1]">
               Try modifying your search query or domain filter.
             </p>
           </div>

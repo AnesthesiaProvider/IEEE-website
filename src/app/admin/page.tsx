@@ -367,13 +367,13 @@ export default function AdminPage() {
   const getStatusBadge = (status: ApplicationStatus) => {
     switch (status) {
       case "Selected":
-        return "bg-[#7A1833]/40 text-[#F5F1F5] border-[#8F2450]";
+        return "bg-[#712EB7]/30 text-[#FAF8FD] border-[#712EB7]";
       case "Shortlisted":
-        return "bg-[#632C70]/30 text-[#E07AB0] border-[#914B91]";
+        return "bg-[#34224E]/60 text-[#D88CF5] border-[#664BA3]";
       case "Rejected":
-        return "bg-[#18131B] text-[#756B7A] border-[#2A202D]";
+        return "bg-[#1A1428] text-[#797380] border-[#231B32]";
       default:
-        return "bg-[#4A1028]/40 text-[#D8D0DA] border-[#5C2948]";
+        return "bg-[#1A1428] text-[#CAC4D1] border-[#231B32]";
     }
   };
 
@@ -381,7 +381,7 @@ export default function AdminPage() {
   if (isAuthenticated === null) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center">
-        <div className="w-8 h-8 rounded-full border-2 border-[#C75491] border-t-transparent animate-spin" />
+        <div className="w-8 h-8 rounded-full border-2 border-[#712EB7] border-t-transparent animate-spin" />
       </div>
     );
   }
@@ -398,29 +398,29 @@ export default function AdminPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative z-10 max-w-md w-full rounded-3xl bg-[#18131B]/95 border border-[#39283D] backdrop-blur-2xl p-8 shadow-2xl space-y-6"
+          className="relative z-10 max-w-md w-full rounded-3xl bg-[#1A1428]/95 border border-[#34224E] backdrop-blur-2xl p-8 shadow-2xl space-y-6"
         >
           <div className="text-center space-y-2">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#7A1833] via-[#8F2450] to-[#C75491] p-0.5 mx-auto flex items-center justify-center">
-              <div className="w-full h-full bg-[#121015] rounded-[14px] flex items-center justify-center">
-                <Lock className="w-6 h-6 text-[#C75491]" />
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#664BA3] via-[#712EB7] to-[#D88CF5] p-0.5 mx-auto flex items-center justify-center">
+              <div className="w-full h-full bg-[#120E1C] rounded-[14px] flex items-center justify-center">
+                <Lock className="w-6 h-6 text-[#D88CF5]" />
               </div>
             </div>
-            <h1 className="text-2xl font-bold text-[#F5F1F5]">Admin Authentication</h1>
-            <p className="text-xs text-[#A79EAB]">
+            <h1 className="text-2xl font-bold text-[#FAF8FD]">Admin Authentication</h1>
+            <p className="text-xs text-[#CAC4D1]">
               Enter the chapter administrator passkey to access the Junior Core recruitment portal.
             </p>
           </div>
 
           {authError && (
-            <div className="p-3 rounded-xl bg-[#4A1028]/60 border border-[#8F2450] text-[#E07AB0] text-xs text-center">
+            <div className="p-3 rounded-xl bg-[#34224E]/60 border border-[#712EB7] text-[#D88CF5] text-xs text-center">
               {authError}
             </div>
           )}
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="block text-xs font-medium text-[#D8D0DA] mb-1.5">
+              <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
                 Administrator Password
               </label>
               <input
@@ -429,14 +429,14 @@ export default function AdminPage() {
                 onChange={(e) => setPasswordInput(e.target.value)}
                 placeholder="••••••••••••"
                 required
-                className="w-full px-4 py-2.5 rounded-xl bg-[#121015] border border-[#2A202D] text-[#F5F1F5] placeholder-[#756B7A] text-sm focus:outline-none focus:border-[#C75491] focus:ring-1 focus:ring-[#C75491]"
+                className="w-full px-4 py-2.5 rounded-xl bg-[#120E1C] border border-[#231B32] text-[#FAF8FD] placeholder-[#797380] text-sm focus:outline-none focus:border-[#712EB7] focus:ring-1 focus:ring-[#712EB7]"
               />
             </div>
 
             <button
               type="submit"
               disabled={isLoggingIn}
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-[#5A1025] via-[#8F2450] to-[#7B3F8C] hover:from-[#7A1833] hover:via-[#C75491] hover:to-[#914B91] disabled:opacity-60 text-[#F5F1F5] font-semibold text-sm shadow-lg shadow-[#4A1028]/50 transition-all flex items-center justify-center space-x-2"
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#D88CF5] disabled:opacity-60 text-[#FFFFFF] font-semibold text-sm shadow-lg shadow-[#712EB7]/30 transition-all flex items-center justify-center space-x-2"
             >
               {isLoggingIn ? (
                 <>
@@ -462,15 +462,15 @@ export default function AdminPage() {
   return (
     <div className="relative py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
       {/* Top Header Bar */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#2A202D] pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#231B32] pb-6">
         <div>
           <div className="flex items-center space-x-2">
-            <span className="px-2.5 py-0.5 rounded-full bg-[#18131B] text-[#C75491] border border-[#39283D] text-[11px] font-semibold">
+            <span className="px-2.5 py-0.5 rounded-full bg-[#1A1428] text-[#D88CF5] border border-[#34224E] text-[11px] font-semibold">
               Admin Portal
             </span>
-            <span className="text-xs text-[#A79EAB]">• IEEE WIE Bennett University</span>
+            <span className="text-xs text-[#CAC4D1]">• IEEE WIE Bennett University</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#F5F1F5] mt-1">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#FAF8FD] mt-1">
             {activeTab === "junior-core"
               ? "Junior Core Applications Management"
               : "Apocalypse WIE X BC3 Team Registrations"}
@@ -484,7 +484,7 @@ export default function AdminPage() {
               fetchApocalypseRegistrations();
             }}
             disabled={isLoading}
-            className="p-2.5 rounded-xl bg-[#121015] border border-[#2A202D] text-[#D8D0DA] hover:text-[#F5F1F5] hover:bg-[#18131B] hover:border-[#39283D] transition-colors"
+            className="p-2.5 rounded-xl bg-[#120E1C] border border-[#231B32] text-[#CAC4D1] hover:text-[#FAF8FD] hover:bg-[#1A1428] hover:border-[#34224E] transition-colors"
             title="Refresh All Lists"
           >
             <RefreshCw className={`w-4 h-4 ${isLoading ? "animate-spin" : ""}`} />
@@ -492,15 +492,15 @@ export default function AdminPage() {
 
           <button
             onClick={activeTab === "junior-core" ? handleExportCSV : handleExportApocalypseCSV}
-            className="px-4 py-2.5 rounded-xl bg-[#121015] hover:bg-[#18131B] border border-[#2A202D] hover:border-[#39283D] text-[#D8D0DA] text-xs font-semibold flex items-center space-x-2 transition-colors"
+            className="px-4 py-2.5 rounded-xl bg-[#120E1C] hover:bg-[#1A1428] border border-[#231B32] hover:border-[#34224E] text-[#FAF8FD] text-xs font-semibold flex items-center space-x-2 transition-colors"
           >
-            <Download className="w-4 h-4 text-[#C75491]" />
+            <Download className="w-4 h-4 text-[#D88CF5]" />
             <span>{activeTab === "junior-core" ? "Export Applications CSV" : "Export Teams CSV"}</span>
           </button>
 
           <button
             onClick={handleLogout}
-            className="px-4 py-2.5 rounded-xl bg-[#4A1028]/30 hover:bg-[#4A1028]/60 border border-[#5C2948] text-[#E07AB0] text-xs font-semibold flex items-center space-x-2 transition-colors"
+            className="px-4 py-2.5 rounded-xl bg-[#34224E]/40 hover:bg-[#34224E]/70 border border-[#664BA3] text-[#D88CF5] text-xs font-semibold flex items-center space-x-2 transition-colors"
           >
             <LogOut className="w-4 h-4" />
             <span>Sign Out</span>
@@ -514,11 +514,11 @@ export default function AdminPage() {
           onClick={() => setActiveTab("junior-core")}
           className={`px-5 py-2.5 rounded-xl text-xs font-semibold flex items-center space-x-2 transition-all ${
             activeTab === "junior-core"
-              ? "bg-gradient-to-r from-[#5A1025] to-[#8F2450] text-[#F5F1F5] shadow-lg shadow-[#7A1833]/30 border border-[#8F2450]"
-              : "bg-[#121015] hover:bg-[#18131B] text-[#A79EAB] hover:text-[#F5F1F5] border border-[#2A202D]"
+              ? "bg-gradient-to-r from-[#664BA3] to-[#712EB7] text-[#FFFFFF] shadow-lg shadow-[#712EB7]/30 border border-[#712EB7]"
+              : "bg-[#120E1C] hover:bg-[#1A1428] text-[#CAC4D1] hover:text-[#FAF8FD] border border-[#231B32]"
           }`}
         >
-          <Users className="w-4 h-4 text-[#E07AB0]" />
+          <Users className="w-4 h-4 text-[#D88CF5]" />
           <span>Junior Core Applications ({applications.length})</span>
         </button>
 
@@ -526,19 +526,19 @@ export default function AdminPage() {
           onClick={() => setActiveTab("apocalypse")}
           className={`px-5 py-2.5 rounded-xl text-xs font-semibold flex items-center space-x-2 transition-all ${
             activeTab === "apocalypse"
-              ? "bg-gradient-to-r from-[#5A1025] to-[#8F2450] text-[#F5F1F5] shadow-lg shadow-[#7A1833]/30 border border-[#8F2450]"
-              : "bg-[#121015] hover:bg-[#18131B] text-[#A79EAB] hover:text-[#F5F1F5] border border-[#2A202D]"
+              ? "bg-gradient-to-r from-[#664BA3] to-[#712EB7] text-[#FFFFFF] shadow-lg shadow-[#712EB7]/30 border border-[#712EB7]"
+              : "bg-[#120E1C] hover:bg-[#1A1428] text-[#CAC4D1] hover:text-[#FAF8FD] border border-[#231B32]"
           }`}
         >
-          <Flame className="w-4 h-4 text-[#E07AB0]" />
+          <Flame className="w-4 h-4 text-[#D88CF5]" />
           <span>Apocalypse WIE X BC3 Teams ({apocalypseRegistrations.length})</span>
         </button>
       </div>
 
       {/* Notification Toast Alert */}
       {actionMessage && (
-        <div className="p-3 rounded-xl bg-[#18131B] border border-[#5C2948] text-[#E07AB0] text-xs font-medium flex items-center space-x-2">
-          <CheckCircle2 className="w-4 h-4 shrink-0 text-[#C75491]" />
+        <div className="p-3 rounded-xl bg-[#1A1428] border border-[#664BA3] text-[#D88CF5] text-xs font-medium flex items-center space-x-2">
+          <CheckCircle2 className="w-4 h-4 shrink-0 text-[#D88CF5]" />
           <span>{actionMessage}</span>
         </div>
       )}
@@ -550,35 +550,35 @@ export default function AdminPage() {
         <div className="space-y-6">
           {/* Analytics Metric Cards */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
-              <div className="text-xs font-medium text-[#A79EAB]">Total Applications</div>
-              <div className="text-2xl sm:text-3xl font-bold text-[#F5F1F5]">{totalCount}</div>
+            <div className="rounded-2xl bg-[#120E1C] border border-[#231B32] p-5 space-y-1">
+              <div className="text-xs font-medium text-[#CAC4D1]">Total Applications</div>
+              <div className="text-2xl sm:text-3xl font-bold text-[#FAF8FD]">{totalCount}</div>
             </div>
-            <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
-              <div className="text-xs font-medium text-[#C75491]">Shortlisted</div>
-              <div className="text-2xl sm:text-3xl font-bold text-[#E07AB0]">{shortlistedCount}</div>
+            <div className="rounded-2xl bg-[#120E1C] border border-[#231B32] p-5 space-y-1">
+              <div className="text-xs font-medium text-[#876DBF]">Shortlisted</div>
+              <div className="text-2xl sm:text-3xl font-bold text-[#D88CF5]">{shortlistedCount}</div>
             </div>
-            <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
-              <div className="text-xs font-medium text-[#D05A9E]">Selected</div>
-              <div className="text-2xl sm:text-3xl font-bold text-[#F5F1F5]">{selectedCount}</div>
+            <div className="rounded-2xl bg-[#120E1C] border border-[#231B32] p-5 space-y-1">
+              <div className="text-xs font-medium text-[#876DBF]">Selected</div>
+              <div className="text-2xl sm:text-3xl font-bold text-[#FAF8FD]">{selectedCount}</div>
             </div>
-            <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
-              <div className="text-xs font-medium text-[#A79EAB]">Pending Review</div>
-              <div className="text-2xl sm:text-3xl font-bold text-[#D8D0DA]">{pendingCount}</div>
+            <div className="rounded-2xl bg-[#120E1C] border border-[#231B32] p-5 space-y-1">
+              <div className="text-xs font-medium text-[#CAC4D1]">Pending Review</div>
+              <div className="text-2xl sm:text-3xl font-bold text-[#FAF8FD]/80">{pendingCount}</div>
             </div>
           </div>
 
           {/* Search and Filters Bar */}
-          <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-4 flex flex-col md:flex-row gap-3 items-center justify-between">
+          <div className="rounded-2xl bg-[#120E1C] border border-[#231B32] p-4 flex flex-col md:flex-row gap-3 items-center justify-between">
             {/* Search */}
             <div className="relative w-full md:w-80">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A79EAB]" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#CAC4D1]" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search by name, enrollment, email..."
-                className="w-full pl-10 pr-4 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] placeholder-[#756B7A] text-xs focus:outline-none focus:border-[#C75491]"
+                className="w-full pl-10 pr-4 py-2 rounded-xl bg-[#0A0C15] border border-[#231B32] text-[#FAF8FD] placeholder-[#797380] text-xs focus:outline-none focus:border-[#712EB7]"
               />
             </div>
 
@@ -588,7 +588,7 @@ export default function AdminPage() {
               <select
                 value={domainFilter}
                 onChange={(e) => setDomainFilter(e.target.value)}
-                className="px-3 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] text-xs focus:outline-none focus:border-[#C75491]"
+                className="px-3 py-2 rounded-xl bg-[#0A0C15] border border-[#231B32] text-[#FAF8FD] text-xs focus:outline-none focus:border-[#712EB7]"
               >
                 <option value="All">All Domains</option>
                 <option value="Technical">Technical</option>
@@ -607,7 +607,7 @@ export default function AdminPage() {
               <select
                 value={yearFilter}
                 onChange={(e) => setYearFilter(e.target.value)}
-                className="px-3 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] text-xs focus:outline-none focus:border-[#C75491]"
+                className="px-3 py-2 rounded-xl bg-[#0A0C15] border border-[#231B32] text-[#FAF8FD] text-xs focus:outline-none focus:border-[#712EB7]"
               >
                 <option value="All">All Years</option>
                 <option value="1st Year">1st Year</option>
@@ -620,7 +620,7 @@ export default function AdminPage() {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="px-3 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] text-xs focus:outline-none focus:border-[#C75491]"
+                className="px-3 py-2 rounded-xl bg-[#0A0C15] border border-[#231B32] text-[#FAF8FD] text-xs focus:outline-none focus:border-[#712EB7]"
               >
                 <option value="All">All Statuses</option>
                 <option value="Pending">Pending</option>
@@ -632,10 +632,10 @@ export default function AdminPage() {
           </div>
 
           {/* Applications Data Table */}
-          <div className="rounded-2xl bg-[#121015] border border-[#2A202D] overflow-hidden shadow-xl">
+          <div className="rounded-2xl bg-[#120E1C] border border-[#231B32] overflow-hidden shadow-xl">
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs text-[#D8D0DA]">
-                <thead className="bg-[#18131B] text-[#A79EAB] uppercase tracking-wider font-semibold border-b border-[#2A202D]">
+              <table className="w-full text-left text-xs text-[#FAF8FD]/90">
+                <thead className="bg-[#1A1428] text-[#CAC4D1] uppercase tracking-wider font-semibold border-b border-[#231B32]">
                   <tr>
                     <th className="py-3.5 px-4">Applicant</th>
                     <th className="py-3.5 px-4">Enrollment</th>
@@ -646,7 +646,7 @@ export default function AdminPage() {
                     <th className="py-3.5 px-4 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#2A202D]">
+                <tbody className="divide-y divide-[#231B32]">
                   {filteredApplications.length > 0 ? (
                     filteredApplications.map((app) => (
                       <tr
@@ -655,20 +655,20 @@ export default function AdminPage() {
                         onClick={() => setSelectedApplicant(app)}
                       >
                         <td className="py-3.5 px-4">
-                          <div className="font-bold text-[#F5F1F5] hover:text-[#C75491] transition-colors">
+                          <div className="font-bold text-[#FAF8FD] hover:text-[#D88CF5] transition-colors">
                             {app.fullName}
                           </div>
-                          <div className="text-[11px] text-[#A79EAB]">{app.email}</div>
+                          <div className="text-[11px] text-[#CAC4D1]">{app.email}</div>
                         </td>
-                        <td className="py-3.5 px-4 font-mono text-[#E07AB0] font-semibold">
+                        <td className="py-3.5 px-4 font-mono text-[#D88CF5] font-semibold">
                           {app.enrollmentNumber}
                         </td>
                         <td className="py-3.5 px-4">
-                          <div className="text-[#F5F1F5]">{app.course} ({app.branch})</div>
-                          <div className="text-[11px] text-[#A79EAB]">{app.year} • {app.semester}</div>
+                          <div className="text-[#FAF8FD]">{app.course} ({app.branch})</div>
+                          <div className="text-[11px] text-[#CAC4D1]">{app.year} • {app.semester}</div>
                         </td>
                         <td className="py-3.5 px-4">
-                          <span className="px-2.5 py-1 rounded-md bg-[#18131B] border border-[#39283D] text-[#F5F1F5] font-medium">
+                          <span className="px-2.5 py-1 rounded-md bg-[#1A1428] border border-[#34224E] text-[#FAF8FD] font-medium">
                             {app.domain}
                           </span>
                         </td>
@@ -678,7 +678,7 @@ export default function AdminPage() {
                             onChange={(e) =>
                               handleStatusChange(app.id, e.target.value as ApplicationStatus)
                             }
-                            className={`px-2.5 py-1 rounded-full text-[11px] font-semibold border focus:outline-none cursor-pointer bg-[#0D0B0F] ${getStatusBadge(
+                            className={`px-2.5 py-1 rounded-full text-[11px] font-semibold border focus:outline-none cursor-pointer bg-[#0A0C15] ${getStatusBadge(
                               app.status
                             )}`}
                           >
@@ -689,7 +689,7 @@ export default function AdminPage() {
                             ))}
                           </select>
                         </td>
-                        <td className="py-3.5 px-4 text-[#A79EAB] whitespace-nowrap">
+                        <td className="py-3.5 px-4 text-[#CAC4D1] whitespace-nowrap">
                           {new Date(app.createdAt).toLocaleDateString("en-IN", {
                             day: "numeric",
                             month: "short",
@@ -699,14 +699,14 @@ export default function AdminPage() {
                           <div className="flex items-center justify-end space-x-1">
                             <button
                               onClick={() => setSelectedApplicant(app)}
-                              className="p-1.5 text-[#A79EAB] hover:text-[#C75491] rounded-lg hover:bg-white/5 transition-colors"
+                              className="p-1.5 text-[#CAC4D1] hover:text-[#D88CF5] rounded-lg hover:bg-white/5 transition-colors"
                               title="View Details"
                             >
                               <Eye className="w-4 h-4" />
                             </button>
                             <button
                               onClick={() => handleDelete(app.id)}
-                              className="p-1.5 text-[#A79EAB] hover:text-[#E07AB0] rounded-lg hover:bg-[#4A1028]/30 transition-colors"
+                              className="p-1.5 text-[#CAC4D1] hover:text-[#D88CF5] rounded-lg hover:bg-[#34224E]/40 transition-colors"
                               title="Delete Application"
                             >
                               <Trash2 className="w-4 h-4" />
@@ -717,7 +717,7 @@ export default function AdminPage() {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan={7} className="py-12 text-center text-[#A79EAB]">
+                      <td colSpan={7} className="py-12 text-center text-[#CAC4D1]">
                         No applications match the current query or filters.
                       </td>
                     </tr>
@@ -736,50 +736,50 @@ export default function AdminPage() {
         <div className="space-y-6">
           {/* Apocalypse Metric Cards */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
-              <div className="text-xs font-medium text-[#A79EAB]">Registered Squads</div>
-              <div className="text-2xl sm:text-3xl font-bold text-[#F5F1F5]">{totalApocalypseTeams}</div>
+            <div className="rounded-2xl bg-[#120E1C] border border-[#231B32] p-5 space-y-1">
+              <div className="text-xs font-medium text-[#CAC4D1]">Registered Squads</div>
+              <div className="text-2xl sm:text-3xl font-bold text-[#FAF8FD]">{totalApocalypseTeams}</div>
             </div>
-            <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
-              <div className="text-xs font-medium text-[#C75491]">Total Competitors</div>
-              <div className="text-2xl sm:text-3xl font-bold text-[#E07AB0]">
+            <div className="rounded-2xl bg-[#120E1C] border border-[#231B32] p-5 space-y-1">
+              <div className="text-xs font-medium text-[#876DBF]">Total Competitors</div>
+              <div className="text-2xl sm:text-3xl font-bold text-[#D88CF5]">
                 {totalApocalypseParticipants}
               </div>
             </div>
-            <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
-              <div className="text-xs font-medium text-[#D05A9E]">Avg. Squad Size</div>
-              <div className="text-2xl sm:text-3xl font-bold text-[#F5F1F5]">{avgTeamSize} Members</div>
+            <div className="rounded-2xl bg-[#120E1C] border border-[#231B32] p-5 space-y-1">
+              <div className="text-xs font-medium text-[#876DBF]">Avg. Squad Size</div>
+              <div className="text-2xl sm:text-3xl font-bold text-[#FAF8FD]">{avgTeamSize} Members</div>
             </div>
-            <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 space-y-1">
-              <div className="text-xs font-medium text-[#A79EAB]">Event Schedule</div>
-              <div className="text-xl sm:text-2xl font-bold text-[#D8D0DA]">24 SEP 2026</div>
+            <div className="rounded-2xl bg-[#120E1C] border border-[#231B32] p-5 space-y-1">
+              <div className="text-xs font-medium text-[#CAC4D1]">Event Schedule</div>
+              <div className="text-xl sm:text-2xl font-bold text-[#FAF8FD]/90">24 SEP 2026</div>
             </div>
           </div>
 
           {/* Search Bar for Apocalypse */}
-          <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-4 flex flex-col md:flex-row gap-3 items-center justify-between">
+          <div className="rounded-2xl bg-[#120E1C] border border-[#231B32] p-4 flex flex-col md:flex-row gap-3 items-center justify-between">
             <div className="relative w-full md:w-96">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A79EAB]" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#CAC4D1]" />
               <input
                 type="text"
                 value={apocalypseSearch}
                 onChange={(e) => setApocalypseSearch(e.target.value)}
                 placeholder="Search by team name, member, enrollment, email..."
-                className="w-full pl-10 pr-4 py-2 rounded-xl bg-[#0D0B0F] border border-[#2A202D] text-[#F5F1F5] placeholder-[#756B7A] text-xs focus:outline-none focus:border-[#C75491]"
+                className="w-full pl-10 pr-4 py-2 rounded-xl bg-[#0A0C15] border border-[#231B32] text-[#FAF8FD] placeholder-[#797380] text-xs focus:outline-none focus:border-[#712EB7]"
               />
             </div>
 
-            <div className="text-xs text-[#A79EAB]">
-              Showing <span className="font-bold text-[#F5F1F5]">{filteredApocalypseTeams.length}</span> of{" "}
+            <div className="text-xs text-[#CAC4D1]">
+              Showing <span className="font-bold text-[#FAF8FD]">{filteredApocalypseTeams.length}</span> of{" "}
               {totalApocalypseTeams} squads
             </div>
           </div>
 
           {/* Apocalypse Teams Table */}
-          <div className="rounded-2xl bg-[#121015] border border-[#2A202D] overflow-hidden shadow-xl">
+          <div className="rounded-2xl bg-[#120E1C] border border-[#231B32] overflow-hidden shadow-xl">
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs text-[#D8D0DA]">
-                <thead className="bg-[#18131B] text-[#A79EAB] uppercase tracking-wider font-semibold border-b border-[#2A202D]">
+              <table className="w-full text-left text-xs text-[#FAF8FD]/90">
+                <thead className="bg-[#1A1428] text-[#CAC4D1] uppercase tracking-wider font-semibold border-b border-[#231B32]">
                   <tr>
                     <th className="py-3.5 px-4">Team Name</th>
                     <th className="py-3.5 px-4">Candidates</th>
@@ -788,7 +788,7 @@ export default function AdminPage() {
                     <th className="py-3.5 px-4 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#2A202D]">
+                <tbody className="divide-y divide-[#231B32]">
                   {filteredApocalypseTeams.length > 0 ? (
                     filteredApocalypseTeams.map((team) => (
                       <tr
@@ -797,14 +797,14 @@ export default function AdminPage() {
                         onClick={() => setSelectedTeam(team)}
                       >
                         <td className="py-3.5 px-4">
-                          <div className="font-bold text-[#F5F1F5] hover:text-[#C75491] transition-colors flex items-center space-x-1.5">
-                            <Flame className="w-3.5 h-3.5 text-[#E07AB0]" />
+                          <div className="font-bold text-[#FAF8FD] hover:text-[#D88CF5] transition-colors flex items-center space-x-1.5">
+                            <Flame className="w-3.5 h-3.5 text-[#D88CF5]" />
                             <span>{team.teamName}</span>
                           </div>
-                          <div className="text-[11px] text-[#A79EAB] font-mono">{team.id}</div>
+                          <div className="text-[11px] text-[#CAC4D1] font-mono">{team.id}</div>
                         </td>
                         <td className="py-3.5 px-4">
-                          <span className="px-2.5 py-1 rounded-full bg-[#18131B] border border-[#39283D] text-[#E07AB0] font-semibold text-[11px]">
+                          <span className="px-2.5 py-1 rounded-full bg-[#1A1428] border border-[#34224E] text-[#D88CF5] font-semibold text-[11px]">
                             {team.members.length} Candidates
                           </span>
                         </td>
@@ -812,16 +812,16 @@ export default function AdminPage() {
                           <div className="space-y-1">
                             {team.members.map((m, i) => (
                               <div key={i} className="flex items-center space-x-2 text-[11px]">
-                                <span className="font-medium text-[#F5F1F5]">{m.name}</span>
-                                <span className="text-[#A79EAB]">&bull;</span>
-                                <span className="font-mono text-[#C75491]">{m.enrollmentNumber}</span>
-                                <span className="text-[#A79EAB]">&bull;</span>
-                                <span className="text-[#D8D0DA]">{m.phone}</span>
+                                <span className="font-medium text-[#FAF8FD]">{m.name}</span>
+                                <span className="text-[#797380]">&bull;</span>
+                                <span className="font-mono text-[#D88CF5]">{m.enrollmentNumber}</span>
+                                <span className="text-[#797380]">&bull;</span>
+                                <span className="text-[#CAC4D1]">{m.phone}</span>
                               </div>
                             ))}
                           </div>
                         </td>
-                        <td className="py-3.5 px-4 text-[#A79EAB] whitespace-nowrap">
+                        <td className="py-3.5 px-4 text-[#CAC4D1] whitespace-nowrap">
                           {new Date(team.createdAt).toLocaleDateString("en-IN", {
                             day: "numeric",
                             month: "short",
@@ -831,14 +831,14 @@ export default function AdminPage() {
                           <div className="flex items-center justify-end space-x-1">
                             <button
                               onClick={() => setSelectedTeam(team)}
-                              className="p-1.5 text-[#A79EAB] hover:text-[#C75491] rounded-lg hover:bg-white/5 transition-colors"
+                              className="p-1.5 text-[#CAC4D1] hover:text-[#D88CF5] rounded-lg hover:bg-white/5 transition-colors"
                               title="View Roster"
                             >
                               <Eye className="w-4 h-4" />
                             </button>
                             <button
                               onClick={() => handleDeleteTeam(team.id)}
-                              className="p-1.5 text-[#A79EAB] hover:text-[#E07AB0] rounded-lg hover:bg-[#4A1028]/30 transition-colors"
+                              className="p-1.5 text-[#CAC4D1] hover:text-[#D88CF5] rounded-lg hover:bg-[#34224E]/40 transition-colors"
                               title="Delete Team"
                             >
                               <Trash2 className="w-4 h-4" />
@@ -849,7 +849,7 @@ export default function AdminPage() {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan={7} className="py-12 text-center text-[#A79EAB]">
+                      <td colSpan={7} className="py-12 text-center text-[#CAC4D1]">
                         No Apocalypse squads match your search query.
                       </td>
                     </tr>
@@ -873,26 +873,26 @@ export default function AdminPage() {
         >
           <div className="space-y-6 text-sm">
             {/* Header info */}
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#2A202D] pb-4">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#231B32] pb-4">
               <div>
-                <h3 className="text-xl font-bold text-[#F5F1F5]">{selectedApplicant.fullName}</h3>
-                <p className="text-xs text-[#E07AB0] font-mono">
+                <h3 className="text-xl font-bold text-[#FAF8FD]">{selectedApplicant.fullName}</h3>
+                <p className="text-xs text-[#D88CF5] font-mono">
                   {selectedApplicant.enrollmentNumber} • {selectedApplicant.email} • {selectedApplicant.phone}
                 </p>
-                <p className="text-xs text-[#A79EAB] mt-0.5">
+                <p className="text-xs text-[#CAC4D1] mt-0.5">
                   {selectedApplicant.course} in {selectedApplicant.branch} ({selectedApplicant.year}, {selectedApplicant.semester})
                 </p>
               </div>
 
               {/* Status changer in modal */}
               <div className="flex items-center space-x-2">
-                <span className="text-xs text-[#A79EAB]">Status:</span>
+                <span className="text-xs text-[#CAC4D1]">Status:</span>
                 <select
                   value={selectedApplicant.status}
                   onChange={(e) =>
                     handleStatusChange(selectedApplicant.id, e.target.value as ApplicationStatus)
                   }
-                  className={`px-3 py-1.5 rounded-full text-xs font-semibold border bg-[#0D0B0F] focus:outline-none ${getStatusBadge(
+                  className={`px-3 py-1.5 rounded-full text-xs font-semibold border bg-[#0A0C15] focus:outline-none ${getStatusBadge(
                     selectedApplicant.status
                   )}`}
                 >
@@ -907,10 +907,10 @@ export default function AdminPage() {
 
             {/* Motivation */}
             <div className="space-y-1.5">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#C75491]">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#D88CF5]">
                 Why do you want to join IEEE WIE?
               </h4>
-              <p className="p-3.5 rounded-xl bg-[#121015] border border-[#2A202D] text-[#D8D0DA] leading-relaxed whitespace-pre-line text-xs">
+              <p className="p-3.5 rounded-xl bg-[#120E1C] border border-[#231B32] text-[#FAF8FD]/90 leading-relaxed whitespace-pre-line text-xs">
                 {selectedApplicant.whyJoin}
               </p>
             </div>
@@ -918,19 +918,19 @@ export default function AdminPage() {
             {/* Skills & Experience */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-[#C75491]">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#D88CF5]">
                   Skills & Tools
                 </h4>
-                <p className="p-3.5 rounded-xl bg-[#121015] border border-[#2A202D] text-[#D8D0DA] text-xs">
+                <p className="p-3.5 rounded-xl bg-[#120E1C] border border-[#231B32] text-[#FAF8FD]/90 text-xs">
                   {selectedApplicant.skills}
                 </p>
               </div>
 
               <div className="space-y-1.5">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-[#D05A9E]">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#876DBF]">
                   Previous Experience
                 </h4>
-                <p className="p-3.5 rounded-xl bg-[#121015] border border-[#2A202D] text-[#D8D0DA] text-xs">
+                <p className="p-3.5 rounded-xl bg-[#120E1C] border border-[#231B32] text-[#FAF8FD]/90 text-xs">
                   {selectedApplicant.previousExperience || "None specified"}
                 </p>
               </div>
@@ -938,7 +938,7 @@ export default function AdminPage() {
 
             {/* Links */}
             <div className="space-y-1.5">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#A79EAB]">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#CAC4D1]">
                 Portfolio & Profiles
               </h4>
               <div className="flex flex-wrap gap-2">
@@ -947,7 +947,7 @@ export default function AdminPage() {
                     href={selectedApplicant.portfolioUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-[#18131B] text-[#E07AB0] border border-[#39283D] text-xs hover:border-[#5C2948] transition-colors"
+                    className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-[#1A1428] text-[#D88CF5] border border-[#34224E] text-xs hover:border-[#664BA3] transition-colors"
                   >
                     <span>Portfolio</span>
                     <ExternalLink className="w-3.5 h-3.5" />
@@ -958,7 +958,7 @@ export default function AdminPage() {
                     href={selectedApplicant.linkedinUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-[#18131B] text-[#C75491] border border-[#39283D] text-xs hover:border-[#5C2948] transition-colors"
+                    className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-[#1A1428] text-[#876DBF] border border-[#34224E] text-xs hover:border-[#664BA3] transition-colors"
                   >
                     <span>LinkedIn</span>
                     <ExternalLink className="w-3.5 h-3.5" />
@@ -969,7 +969,7 @@ export default function AdminPage() {
                     href={selectedApplicant.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-[#18131B] text-[#D05A9E] border border-[#39283D] text-xs hover:border-[#5C2948] transition-colors"
+                    className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-[#1A1428] text-[#876DBF] border border-[#34224E] text-xs hover:border-[#664BA3] transition-colors"
                   >
                     <span>GitHub</span>
                     <ExternalLink className="w-3.5 h-3.5" />
@@ -978,7 +978,7 @@ export default function AdminPage() {
                 {!selectedApplicant.portfolioUrl &&
                   !selectedApplicant.linkedinUrl &&
                   !selectedApplicant.githubUrl && (
-                    <span className="text-xs text-[#756B7A]">No profile links provided.</span>
+                    <span className="text-xs text-[#797380]">No profile links provided.</span>
                   )}
               </div>
             </div>
@@ -986,23 +986,23 @@ export default function AdminPage() {
             {/* Additional info */}
             {selectedApplicant.additionalInfo && (
               <div className="space-y-1.5">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-[#A79EAB]">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#CAC4D1]">
                   Additional Notes
                 </h4>
-                <p className="text-xs text-[#D8D0DA] bg-[#121015] p-3 rounded-xl border border-[#2A202D]">
+                <p className="text-xs text-[#FAF8FD]/90 bg-[#120E1C] p-3 rounded-xl border border-[#231B32]">
                   {selectedApplicant.additionalInfo}
                 </p>
               </div>
             )}
 
             {/* Bottom action row */}
-            <div className="pt-4 border-t border-[#2A202D] flex items-center justify-between">
-              <span className="text-xs text-[#756B7A]">
+            <div className="pt-4 border-t border-[#231B32] flex items-center justify-between">
+              <span className="text-xs text-[#797380]">
                 Submitted: {new Date(selectedApplicant.createdAt).toLocaleString()}
               </span>
               <button
                 onClick={() => handleDelete(selectedApplicant.id)}
-                className="px-4 py-1.5 rounded-lg bg-[#4A1028]/30 text-[#E07AB0] hover:bg-[#4A1028]/60 border border-[#5C2948] text-xs font-medium flex items-center space-x-1.5 transition-colors"
+                className="px-4 py-1.5 rounded-lg bg-[#34224E]/40 text-[#D88CF5] hover:bg-[#34224E]/70 border border-[#664BA3] text-xs font-medium flex items-center space-x-1.5 transition-colors"
               >
                 <Trash2 className="w-3.5 h-3.5" />
                 <span>Delete</span>
@@ -1024,26 +1024,26 @@ export default function AdminPage() {
         >
           <div className="space-y-6 text-sm">
             {/* Header info */}
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#2A202D] pb-4">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#231B32] pb-4">
               <div>
                 <div className="flex items-center space-x-2">
-                  <Flame className="w-5 h-5 text-[#E07AB0]" />
-                  <h3 className="text-xl font-bold text-[#F5F1F5]">{selectedTeam.teamName}</h3>
+                  <Flame className="w-5 h-5 text-[#D88CF5]" />
+                  <h3 className="text-xl font-bold text-[#FAF8FD]">{selectedTeam.teamName}</h3>
                 </div>
-                <p className="text-xs text-[#A79EAB] font-mono mt-1">
-                  ID: <span className="text-[#E07AB0]">{selectedTeam.id}</span> • Registered:{" "}
+                <p className="text-xs text-[#CAC4D1] font-mono mt-1">
+                  ID: <span className="text-[#D88CF5]">{selectedTeam.id}</span> • Registered:{" "}
                   {new Date(selectedTeam.createdAt).toLocaleString()}
                 </p>
               </div>
 
-              <span className="px-3 py-1 rounded-full bg-[#18131B] border border-[#5C2948] text-xs font-semibold text-[#E07AB0]">
+              <span className="px-3 py-1 rounded-full bg-[#1A1428] border border-[#664BA3] text-xs font-semibold text-[#D88CF5]">
                 {selectedTeam.members.length} Competitors (Min 2, Max 4)
               </span>
             </div>
 
             {/* Members List */}
             <div className="space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#A79EAB]">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#CAC4D1]">
                 Squad Roster
               </h4>
 
@@ -1051,25 +1051,25 @@ export default function AdminPage() {
                 {selectedTeam.members.map((member, idx) => (
                   <div
                     key={idx}
-                    className="p-3.5 rounded-xl bg-[#121015] border border-[#2A202D] flex flex-col sm:flex-row sm:items-center justify-between gap-2"
+                    className="p-3.5 rounded-xl bg-[#120E1C] border border-[#231B32] flex flex-col sm:flex-row sm:items-center justify-between gap-2"
                   >
                     <div className="flex items-center space-x-3">
-                      <span className="w-6 h-6 rounded-full bg-[#18131B] border border-[#39283D] text-xs font-bold text-[#E07AB0] flex items-center justify-center shrink-0">
+                      <span className="w-6 h-6 rounded-full bg-[#1A1428] border border-[#34224E] text-xs font-bold text-[#D88CF5] flex items-center justify-center shrink-0">
                         {idx + 1}
                       </span>
                       <div>
-                        <div className="font-bold text-[#F5F1F5]">
+                        <div className="font-bold text-[#FAF8FD]">
                           {member.name}
                         </div>
-                        <div className="text-xs font-mono text-[#C75491]">
+                        <div className="text-xs font-mono text-[#D88CF5]">
                           {member.enrollmentNumber}
                         </div>
                       </div>
                     </div>
 
                     <div className="text-left sm:text-right text-xs">
-                      <span className="text-[#A79EAB] block text-[10px]">Phone Number</span>
-                      <span className="text-[#F5F1F5] font-mono">{member.phone}</span>
+                      <span className="text-[#CAC4D1] block text-[10px]">Phone Number</span>
+                      <span className="text-[#FAF8FD] font-mono">{member.phone}</span>
                     </div>
                   </div>
                 ))}
@@ -1077,13 +1077,13 @@ export default function AdminPage() {
             </div>
 
             {/* Bottom action row */}
-            <div className="pt-4 border-t border-[#2A202D] flex items-center justify-between">
-              <span className="text-xs text-[#756B7A]">
+            <div className="pt-4 border-t border-[#231B32] flex items-center justify-between">
+              <span className="text-xs text-[#797380]">
                 Event: 23 SEP 2026 • Apocalypse Arena
               </span>
               <button
                 onClick={() => handleDeleteTeam(selectedTeam.id)}
-                className="px-4 py-1.5 rounded-lg bg-[#4A1028]/30 text-[#E07AB0] hover:bg-[#4A1028]/60 border border-[#5C2948] text-xs font-medium flex items-center space-x-1.5 transition-colors"
+                className="px-4 py-1.5 rounded-lg bg-[#34224E]/40 text-[#D88CF5] hover:bg-[#34224E]/70 border border-[#664BA3] text-xs font-medium flex items-center space-x-1.5 transition-colors"
               >
                 <Trash2 className="w-3.5 h-3.5" />
                 <span>Delete Squad</span>

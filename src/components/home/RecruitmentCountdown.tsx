@@ -73,41 +73,41 @@ export function RecruitmentCountdown() {
       className="relative py-12 sm:py-16 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-b from-[#18131B]/95 via-[#141018]/90 to-[#0D0B0F]/95 border border-[#4A1D36] shadow-2xl backdrop-blur-xl p-6 sm:p-10 lg:p-12 text-center">
+        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-b from-[#1D162A]/95 via-[#161024]/90 to-[#0A0C15]/95 border border-[#34224E] shadow-2xl backdrop-blur-xl p-6 sm:p-10 lg:p-12 text-center">
           {/* Ambient Glow Accents */}
-          <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-[#7A1833]/25 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-24 right-10 w-72 h-72 bg-[#632C70]/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-[#712EB7]/25 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-24 right-10 w-72 h-72 bg-[#34224E]/20 rounded-full blur-3xl pointer-events-none" />
 
           {/* Section Content */}
           <div className="relative z-10 max-w-3xl mx-auto space-y-6">
             
             {/* Catchphrase / Urgency Flame Badge */}
-            <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#2A0E18]/80 border border-[#8F2450]/70 text-[#FF8CB4] text-xs sm:text-sm font-bold tracking-wide shadow-lg shadow-[#7A1833]/20 animate-pulse">
-              <Flame className="w-4 h-4 text-[#FF5376] fill-[#FF5376] animate-bounce" />
+            <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#1D162A]/80 border border-[#712EB7]/70 text-[#D88CF5] text-xs sm:text-sm font-bold tracking-wide shadow-lg shadow-[#712EB7]/20 animate-pulse">
+              <Flame className="w-4 h-4 text-[#D88CF5] fill-[#D88CF5] animate-bounce" />
               <span>🔥 LESS THAN 50 SEATS LEFT FOR JUNIOR CORE!</span>
             </div>
 
             {/* Main Headings */}
             <div className="space-y-3">
-              <span className="block text-xs font-extrabold uppercase tracking-widest text-[#E07AB0]">
+              <span className="block text-xs font-extrabold uppercase tracking-widest text-[#D88CF5]">
                 Bennett University Chapter
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#F5F1F5] tracking-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#FAF8FD] tracking-tight">
                 JUNIOR CORE RECRUITMENT
               </h2>
-              <p className="text-sm sm:text-base text-[#D8D0DA] max-w-xl mx-auto leading-relaxed">
+              <p className="text-sm sm:text-base text-[#CAC4D1] max-w-xl mx-auto leading-relaxed">
                 &ldquo;Your opportunity to become a part of IEEE WIE Bennett University.&rdquo;
               </p>
             </div>
 
             {/* Countdown Grid or Closed Banner */}
             {isMounted && timeLeft.isExpired ? (
-              <div className="p-6 sm:p-8 rounded-2xl bg-[#1A121A] border border-[#5C2948] max-w-lg mx-auto space-y-3">
-                <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#2E121E] border border-[#7A1833] text-[#FF7A99] text-xs font-bold uppercase tracking-wider">
+              <div className="p-6 sm:p-8 rounded-2xl bg-[#1A1428] border border-[#34224E] max-w-lg mx-auto space-y-3">
+                <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#1D162A] border border-[#712EB7] text-[#D88CF5] text-xs font-bold uppercase tracking-wider">
                   <Lock className="w-3.5 h-3.5" />
                   <span>APPLICATIONS CLOSED</span>
                 </div>
-                <p className="text-xs sm:text-sm text-[#D8D0DA]">
+                <p className="text-xs sm:text-sm text-[#CAC4D1]">
                   The recruitment deadline for this cohort has passed. Follow our official channels for future openings and community events!
                 </p>
               </div>
@@ -130,15 +130,15 @@ export function RecruitmentCountdown() {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.3, delay: idx * 0.05 }}
-                      className="group relative flex flex-col items-center justify-center p-3 sm:p-5 rounded-2xl bg-[#120F16]/90 border border-[#39283D] shadow-inner transition-all duration-300 hover:border-[#8F2450] hover:shadow-[0_8px_24px_-8px_rgba(122,24,51,0.4)]"
+                      className="group relative flex flex-col items-center justify-center p-3 sm:p-5 rounded-2xl bg-[#120E1C]/90 border border-[#34224E] shadow-inner transition-all duration-300 hover:border-[#712EB7] hover:shadow-[0_8px_24px_-8px_rgba(113,46,183,0.4)]"
                     >
                       {/* Subtle Top Gradient Accent */}
-                      <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#D05A9E]/60 to-transparent rounded-t-2xl" />
+                      <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#D88CF5]/60 to-transparent rounded-t-2xl" />
 
-                      <span className="text-2xl sm:text-4xl lg:text-5xl font-black font-mono tracking-tight text-[#F5F1F5] tabular-nums group-hover:text-[#FF8CB4] transition-colors">
+                      <span className="text-2xl sm:text-4xl lg:text-5xl font-black font-mono tracking-tight text-[#FAF8FD] tabular-nums group-hover:text-[#D88CF5] transition-colors">
                         {unit.value}
                       </span>
-                      <span className="mt-1 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#A79EAB] group-hover:text-[#D8D0DA] transition-colors">
+                      <span className="mt-1 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#797380] group-hover:text-[#CAC4D1] transition-colors">
                         {unit.label}
                       </span>
                     </motion.div>
@@ -146,8 +146,8 @@ export function RecruitmentCountdown() {
                 </div>
 
                 {/* Deadline Notice */}
-                <div className="flex items-center justify-center space-x-2 text-xs text-[#A79EAB]">
-                  <Clock className="w-3.5 h-3.5 text-[#C75491]" />
+                <div className="flex items-center justify-center space-x-2 text-xs text-[#797380]">
+                  <Clock className="w-3.5 h-3.5 text-[#712EB7]" />
                   <span>Applications close on 23 Sept 2026 at 11:59 PM IST</span>
                 </div>
               </div>
@@ -158,7 +158,7 @@ export function RecruitmentCountdown() {
               {isMounted && timeLeft.isExpired ? (
                 <button
                   disabled
-                  className="px-8 py-3.5 rounded-full bg-[#201824] text-[#756B7A] font-semibold text-sm border border-[#39283D] cursor-not-allowed inline-flex items-center space-x-2 opacity-80"
+                  className="px-8 py-3.5 rounded-full bg-[#1A1428] text-[#797380] font-semibold text-sm border border-[#34224E] cursor-not-allowed inline-flex items-center space-x-2 opacity-80"
                 >
                   <Lock className="w-4 h-4" />
                   <span>APPLICATIONS CLOSED</span>
@@ -166,11 +166,11 @@ export function RecruitmentCountdown() {
               ) : (
                 <Link
                   href="/junior-core"
-                  className="relative group inline-flex items-center space-x-2.5 px-8 py-3.5 sm:px-10 sm:py-4 rounded-full font-bold text-sm sm:text-base tracking-wide text-[#F5F1F5] uppercase overflow-hidden shadow-xl shadow-[#7A1833]/40 transition-all duration-300 hover:scale-105 hover:shadow-[#8F2450]/60 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#D05A9E] focus:ring-offset-2 focus:ring-offset-[#0D0B0F]"
+                  className="relative group inline-flex items-center space-x-2.5 px-8 py-3.5 sm:px-10 sm:py-4 rounded-full font-bold text-sm sm:text-base tracking-wide text-[#FAF8FD] uppercase overflow-hidden shadow-xl shadow-[#712EB7]/40 transition-all duration-300 hover:scale-105 hover:shadow-[#712EB7]/60 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#712EB7] focus:ring-offset-2 focus:ring-offset-[#0A0C15]"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#5A1025] via-[#8F2450] to-[#7B3F8C] transition-all duration-300 group-hover:from-[#7A1833] group-hover:to-[#914B91]" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#34224E] via-[#712EB7] to-[#876DBF] transition-all duration-300 group-hover:from-[#712EB7] group-hover:to-[#D88CF5]" />
                   <span className="relative z-10 flex items-center space-x-2">
-                    <Sparkles className="w-4 h-4 text-[#FFB3CE]" />
+                    <Sparkles className="w-4 h-4 text-[#D88CF5]" />
                     <span>APPLY FOR JUNIOR CORE</span>
                     <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </span>

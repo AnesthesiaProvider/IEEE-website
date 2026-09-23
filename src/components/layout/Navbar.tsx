@@ -29,7 +29,7 @@ export function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? "bg-[#121015]/90 backdrop-blur-xl border-b border-[#2A202D] py-3 shadow-lg shadow-black/40"
+          ? "bg-[#0A0C15]/90 backdrop-blur-xl border-b border-[#231B32] py-3 shadow-lg shadow-black/40"
           : "bg-transparent py-5"
       }`}
     >
@@ -42,9 +42,9 @@ export function Navbar() {
             aria-label="IEEE Women in Engineering Bennett University Home"
           >
             {/* Custom IEEE WIE Emblem */}
-            <div className="relative w-10 h-10 rounded-xl bg-gradient-to-tr from-[#5A1025] via-[#8F2450] to-[#914B91] p-[1.5px] shadow-lg shadow-[#7A1833]/25 group-hover:shadow-[#8F2450]/40 transition-shadow">
-              <div className="w-full h-full rounded-[10px] bg-[#121015] flex items-center justify-center">
-                <span className="font-extrabold text-sm tracking-tighter bg-gradient-to-r from-[#F5F1F5] via-[#D05A9E] to-[#E07AB0] bg-clip-text text-transparent">
+            <div className="relative w-10 h-10 rounded-xl bg-gradient-to-tr from-[#34224E] via-[#712EB7] to-[#D88CF5] p-[1.5px] shadow-lg shadow-[#712EB7]/25 group-hover:shadow-[#712EB7]/40 transition-shadow">
+              <div className="w-full h-full rounded-[10px] bg-[#0A0C15] flex items-center justify-center">
+                <span className="font-extrabold text-sm tracking-tighter bg-gradient-to-r from-[#FFFFFF] via-[#D88CF5] to-[#876DBF] bg-clip-text text-transparent">
                   WIE
                 </span>
               </div>
@@ -52,21 +52,21 @@ export function Navbar() {
 
             <div className="flex flex-col">
               <div className="flex items-center space-x-1.5">
-                <span className="font-bold text-base tracking-tight text-[#F5F1F5] group-hover:text-[#D05A9E] transition-colors">
+                <span className="font-bold text-base tracking-tight text-[#FAF8FD] group-hover:text-[#D88CF5] transition-colors">
                   IEEE WIE
                 </span>
-                <span className="text-[10px] font-semibold uppercase px-1.5 py-0.5 rounded bg-[#18131B] border border-[#39283D] text-[#C75491]">
+                <span className="text-[10px] font-semibold uppercase px-1.5 py-0.5 rounded bg-[#1A1428] border border-[#34224E] text-[#D88CF5]">
                   BU
                 </span>
               </div>
-              <span className="text-[11px] text-[#A79EAB] font-medium tracking-wide">
+              <span className="text-[11px] text-[#797380] font-medium tracking-wide">
                 Bennett University
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center space-x-1 bg-[#121015]/80 border border-[#2A202D] backdrop-blur-md px-4 py-1.5 rounded-full">
+          <nav className="hidden md:flex items-center space-x-1 bg-[#0A0C15]/80 border border-[#231B32] backdrop-blur-md px-4 py-1.5 rounded-full">
             {siteConfig.navigation.map((item) => {
               const isActive = pathname === item.href;
               return (
@@ -75,14 +75,14 @@ export function Navbar() {
                   href={item.href}
                   className={`relative px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
                     isActive
-                      ? "text-[#F5F1F5] font-semibold"
-                      : "text-[#D8D0DA] hover:text-[#F5F1F5] hover:bg-white/5"
+                      ? "text-[#FAF8FD] font-semibold"
+                      : "text-[#CAC4D1] hover:text-[#FAF8FD] hover:bg-white/5"
                   }`}
                 >
                   {isActive && (
                     <motion.div
                       layoutId="nav-active-pill"
-                      className="absolute inset-0 rounded-full bg-[#7A1833]/30 border border-[#5C2948] -z-10"
+                      className="absolute inset-0 rounded-full bg-[#712EB7]/30 border border-[#876DBF]/40 -z-10"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -96,7 +96,7 @@ export function Navbar() {
           <div className="hidden md:flex items-center space-x-4">
             <Link
               href="/admin"
-              className="p-2 text-[#A79EAB] hover:text-[#F5F1F5] transition-colors"
+              className="p-2 text-[#797380] hover:text-[#FAF8FD] transition-colors"
               title="Admin Portal"
               aria-label="Admin Portal"
             >
@@ -105,11 +105,11 @@ export function Navbar() {
 
             <Link
               href="/junior-core"
-              className="relative group inline-flex items-center space-x-2 px-5 py-2.5 rounded-full font-semibold text-xs tracking-wide uppercase overflow-hidden shadow-lg shadow-[#7A1833]/30 transition-all duration-300 hover:shadow-[#8F2450]/50 hover:scale-[1.02] focus:outline-none"
+              className="relative group inline-flex items-center space-x-2 px-5 py-2.5 rounded-full font-semibold text-xs tracking-wide uppercase overflow-hidden shadow-lg shadow-[#712EB7]/30 transition-all duration-300 hover:shadow-[#712EB7]/50 hover:scale-[1.02] focus:outline-none"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-[#5A1025] via-[#7A1833] via-[#8F2450] to-[#7B3F8C] transition-all duration-300 group-hover:from-[#7A1833] group-hover:to-[#914B91]" />
-              <span className="relative z-10 text-[#F5F1F5] flex items-center space-x-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-[#E07AB0]" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#34224E] via-[#712EB7] to-[#876DBF] transition-all duration-300 group-hover:from-[#712EB7] group-hover:to-[#D88CF5]" />
+              <span className="relative z-10 text-[#FAF8FD] flex items-center space-x-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-[#D88CF5]" />
                 <span>Join Junior Core</span>
                 <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
@@ -120,7 +120,7 @@ export function Navbar() {
           <div className="flex md:hidden items-center space-x-2">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-xl bg-[#121015]/90 border border-[#2A202D] text-[#D8D0DA] hover:text-[#F5F1F5] focus:outline-none"
+              className="p-2 rounded-xl bg-[#120E1C]/90 border border-[#231B32] text-[#CAC4D1] hover:text-[#FAF8FD] focus:outline-none"
               aria-label="Toggle Navigation Menu"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -137,7 +137,7 @@ export function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
-            className="md:hidden bg-[#121015]/98 border-b border-[#2A202D] backdrop-blur-2xl overflow-hidden px-4 pt-3 pb-6 space-y-4"
+            className="md:hidden bg-[#0A0C15]/98 border-b border-[#231B32] backdrop-blur-2xl overflow-hidden px-4 pt-3 pb-6 space-y-4"
           >
             <div className="flex flex-col space-y-1">
               {siteConfig.navigation.map((item) => {
@@ -148,31 +148,31 @@ export function Navbar() {
                     href={item.href}
                     className={`px-4 py-3 rounded-xl text-base font-medium flex items-center justify-between ${
                       isActive
-                        ? "bg-[#7A1833]/25 text-[#F5F1F5] border border-[#5C2948]"
-                        : "text-[#D8D0DA] hover:bg-white/5"
+                        ? "bg-[#712EB7]/25 text-[#FAF8FD] border border-[#876DBF]/40"
+                        : "text-[#CAC4D1] hover:bg-white/5"
                     }`}
                   >
                     <span>{item.name}</span>
-                    {isActive && <div className="w-2 h-2 rounded-full bg-[#D05A9E]" />}
+                    {isActive && <div className="w-2 h-2 rounded-full bg-[#D88CF5]" />}
                   </Link>
                 );
               })}
             </div>
 
-            <div className="pt-3 border-t border-[#2A202D] flex flex-col space-y-3">
+            <div className="pt-3 border-t border-[#231B32] flex flex-col space-y-3">
               <Link
                 href="/junior-core"
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-[#5A1025] via-[#8F2450] to-[#7B3F8C] hover:from-[#7A1833] hover:to-[#914B91] text-[#F5F1F5] font-semibold text-center text-sm shadow-md shadow-[#7A1833]/25 flex items-center justify-center space-x-2"
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-[#34224E] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#D88CF5] text-[#FAF8FD] font-semibold text-center text-sm shadow-md shadow-[#712EB7]/25 flex items-center justify-center space-x-2"
               >
-                <Sparkles className="w-4 h-4 text-[#E07AB0]" />
+                <Sparkles className="w-4 h-4 text-[#D88CF5]" />
                 <span>Apply for Junior Core</span>
               </Link>
 
               <Link
                 href="/admin"
-                className="w-full py-2.5 rounded-xl bg-[#18131B] border border-[#2A202D] text-[#D8D0DA] text-xs font-medium text-center flex items-center justify-center space-x-2"
+                className="w-full py-2.5 rounded-xl bg-[#1A1428] border border-[#231B32] text-[#CAC4D1] text-xs font-medium text-center flex items-center justify-center space-x-2"
               >
-                <ShieldCheck className="w-4 h-4 text-[#A79EAB]" />
+                <ShieldCheck className="w-4 h-4 text-[#797380]" />
                 <span>Admin Login Portal</span>
               </Link>
             </div>

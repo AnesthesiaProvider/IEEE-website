@@ -37,16 +37,16 @@ export default function EventsPage() {
         
         {/* Header Section */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#18131B] border border-[#39283D] text-xs font-semibold text-[#C75491] backdrop-blur-md">
-            <Calendar className="w-3.5 h-3.5 text-[#D05A9E]" />
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#1A1428] border border-[#34224E] text-xs font-semibold text-[#D88CF5] backdrop-blur-md">
+            <Calendar className="w-3.5 h-3.5 text-[#D88CF5]" />
             <span>Chapter Activities & Timeline</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-[#F5F1F5] tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-[#FAF8FD] tracking-tight">
             Events & Hackathons
           </h1>
 
-          <p className="text-[#D8D0DA] text-base sm:text-lg leading-relaxed">
+          <p className="text-[#FAF8FD]/80 text-base sm:text-lg leading-relaxed">
             From overnight coding sprints to expert leadership roundtables, discover opportunities to grow your network and craft impactful technology.
           </p>
         </div>
@@ -61,8 +61,8 @@ export default function EventsPage() {
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-all duration-200 ${
                   isActive
-                    ? "bg-gradient-to-r from-[#5A1025] to-[#7B3F8C] text-[#F5F1F5] shadow-lg shadow-[#7A1833]/30 border border-[#8F2450]"
-                    : "bg-[#121015] text-[#D8D0DA] hover:text-[#F5F1F5] border border-[#2A202D] hover:bg-[#18131B]"
+                    ? "bg-gradient-to-r from-[#664BA3] to-[#712EB7] text-[#FFFFFF] shadow-lg shadow-[#712EB7]/30 border border-[#712EB7]"
+                    : "bg-[#120E1C] text-[#CAC4D1] hover:text-[#FAF8FD] border border-[#231B32] hover:bg-[#1A1428]"
                 }`}
               >
                 {cat}
@@ -73,9 +73,9 @@ export default function EventsPage() {
 
         {/* Section 1: Upcoming Events */}
         <div className="mb-20 space-y-8">
-          <div className="flex items-center space-x-3 border-b border-[#2A202D] pb-4">
-            <div className="w-2.5 h-2.5 rounded-full bg-[#D05A9E] animate-pulse" />
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#F5F1F5] tracking-tight">
+          <div className="flex items-center space-x-3 border-b border-[#231B32] pb-4">
+            <div className="w-2.5 h-2.5 rounded-full bg-[#D88CF5] animate-pulse" />
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#FAF8FD] tracking-tight">
               Upcoming Events
             </h2>
           </div>
@@ -98,12 +98,12 @@ export default function EventsPage() {
               </AnimatePresence>
             </motion.div>
           ) : (
-            <div className="p-12 text-center rounded-2xl bg-[#121015]/70 border border-[#2A202D] space-y-3">
-              <AlertCircle className="w-8 h-8 text-[#C75491] mx-auto" />
-              <p className="text-base font-semibold text-[#F5F1F5]">
+            <div className="p-12 text-center rounded-2xl bg-[#120E1C]/70 border border-[#231B32] space-y-3">
+              <AlertCircle className="w-8 h-8 text-[#876DBF] mx-auto" />
+              <p className="text-base font-semibold text-[#FAF8FD]">
                 No upcoming events right now in this category.
               </p>
-              <p className="text-xs text-[#A79EAB] max-w-md mx-auto">
+              <p className="text-xs text-[#CAC4D1] max-w-md mx-auto">
                 Follow IEEE WIE Bennett University on social channels for upcoming announcements and registration releases.
               </p>
             </div>
@@ -112,9 +112,9 @@ export default function EventsPage() {
 
         {/* Section 2: Past Events Archive */}
         <div className="space-y-8">
-          <div className="flex items-center space-x-3 border-b border-[#2A202D] pb-4">
-            <Calendar className="w-5 h-5 text-[#914B91]" />
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#F5F1F5] tracking-tight">
+          <div className="flex items-center space-x-3 border-b border-[#231B32] pb-4">
+            <Calendar className="w-5 h-5 text-[#876DBF]" />
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#FAF8FD] tracking-tight">
               Past Events & Milestones
             </h2>
           </div>
@@ -137,7 +137,7 @@ export default function EventsPage() {
               </AnimatePresence>
             </motion.div>
           ) : (
-            <div className="p-8 text-center rounded-2xl bg-[#121015]/40 border border-[#2A202D] text-[#A79EAB] text-sm">
+            <div className="p-8 text-center rounded-2xl bg-[#120E1C]/40 border border-[#231B32] text-[#CAC4D1] text-sm">
               No past events recorded for this category.
             </div>
           )}

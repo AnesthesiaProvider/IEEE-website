@@ -49,7 +49,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0D0B0F",
+  themeColor: "#0A0C15",
   width: "device-width",
   initialScale: 1,
 };
@@ -61,7 +61,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${plusJakartaSans.variable} dark scroll-smooth`}>
-      <body className="min-h-screen flex flex-col bg-[#0D0B0F] text-[#F5F1F5] font-sans selection:bg-[#7A1833]/40 selection:text-[#E07AB0]">
+      <body className="min-h-screen flex flex-col bg-[#0A0C15] text-[#FAF8FD] font-sans selection:bg-[#712EB7]/40 selection:text-[#D88CF5]">
         <Navbar />
         <main className="flex-1 pt-20">{children}</main>
         <Footer />

@@ -58,14 +58,14 @@ export function Modal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 15 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className={`relative w-full ${maxWidth} bg-[#18131B] border border-[#39283D] rounded-2xl shadow-2xl overflow-hidden z-10 my-8`}
+            className={`relative w-full ${maxWidth} bg-[#1A1428] border border-[#34224E] rounded-2xl shadow-2xl overflow-hidden z-10 my-8`}
           >
             {/* Header bar */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-[#2A202D] bg-[#121015]">
-              <h3 className="text-lg font-semibold text-[#F5F1F5] tracking-wide">{title}</h3>
+            <div className="flex items-center justify-between px-6 py-4 border-b border-[#231B32] bg-[#120E1C]">
+              <h3 className="text-lg font-semibold text-[#FAF8FD] tracking-wide">{title}</h3>
               <button
                 onClick={onClose}
-                className="p-1.5 text-[#A79EAB] hover:text-[#F5F1F5] rounded-lg hover:bg-white/5 transition-colors focus:outline-none focus:ring-2 focus:ring-[#7B3F8C]"
+                className="p-1.5 text-[#797380] hover:text-[#FAF8FD] rounded-lg hover:bg-white/5 transition-colors focus:outline-none focus:ring-2 focus:ring-[#712EB7]"
                 aria-label="Close modal"
               >
                 <X className="w-5 h-5" />

@@ -204,7 +204,7 @@ export default function JuniorCorePage() {
           particleCount: 120,
           spread: 70,
           origin: { y: 0.6 },
-          colors: ["#7A1833", "#8F2450", "#632C70", "#914B91", "#C75491", "#D05A9E"],
+          colors: ["#712EB7", "#664BA3", "#876DBF", "#D88CF5", "#FAF8FD"],
         });
       } catch {
         // ignore if canvas unavailable
@@ -232,48 +232,48 @@ export default function JuniorCorePage() {
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="relative z-10 max-w-xl w-full rounded-3xl bg-[#18131B]/95 border border-[#5C2948] backdrop-blur-2xl p-8 sm:p-12 text-center shadow-2xl space-y-6"
+          className="relative z-10 max-w-xl w-full rounded-3xl bg-[#1A1428]/95 border border-[#664BA3] backdrop-blur-2xl p-8 sm:p-12 text-center shadow-2xl space-y-6"
         >
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#7A1833] via-[#8F2450] to-[#C75491] p-0.5 mx-auto shadow-lg shadow-[#7A1833]/30 flex items-center justify-center">
-            <div className="w-full h-full bg-[#121015] rounded-[14px] flex items-center justify-center">
-              <Check className="w-8 h-8 text-[#E07AB0]" />
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#664BA3] via-[#712EB7] to-[#D88CF5] p-0.5 mx-auto shadow-lg shadow-[#712EB7]/30 flex items-center justify-center">
+            <div className="w-full h-full bg-[#120E1C] rounded-[14px] flex items-center justify-center">
+              <Check className="w-8 h-8 text-[#D88CF5]" />
             </div>
           </div>
 
           <div className="space-y-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#F5F1F5] bg-[#4A1028]/70 px-3 py-1 rounded-full border border-[#8F2450]">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#FAF8FD] bg-[#34224E]/70 px-3 py-1 rounded-full border border-[#712EB7]">
               Application Received
             </span>
-            <h1 className="text-3xl font-extrabold text-[#F5F1F5]">
+            <h1 className="text-3xl font-extrabold text-[#FAF8FD]">
               Application Submitted Successfully!
             </h1>
-            <p className="text-sm text-[#D8D0DA] leading-relaxed">
+            <p className="text-sm text-[#FAF8FD]/80 leading-relaxed">
               Thank you for applying to the <strong>IEEE WIE Bennett University Junior Core Team</strong>. This submission is linked to this device (1 submission per phone active).
             </p>
           </div>
 
           {/* Applicant Receipt Card */}
-          <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 text-left space-y-2 text-xs sm:text-sm">
-            <div className="flex justify-between border-b border-[#2A202D] pb-2">
-              <span className="text-[#A79EAB]">Applicant:</span>
-              <span className="font-semibold text-[#F5F1F5]">{submittedData.fullName}</span>
+          <div className="rounded-2xl bg-[#120E1C] border border-[#231B32] p-5 text-left space-y-2 text-xs sm:text-sm">
+            <div className="flex justify-between border-b border-[#231B32] pb-2">
+              <span className="text-[#CAC4D1]">Applicant:</span>
+              <span className="font-semibold text-[#FAF8FD]">{submittedData.fullName}</span>
             </div>
-            <div className="flex justify-between border-b border-[#2A202D] py-2">
-              <span className="text-[#A79EAB]">Enrollment No:</span>
-              <span className="font-semibold text-[#E07AB0]">{submittedData.enrollmentNumber}</span>
+            <div className="flex justify-between border-b border-[#231B32] py-2">
+              <span className="text-[#CAC4D1]">Enrollment No:</span>
+              <span className="font-semibold text-[#D88CF5]">{submittedData.enrollmentNumber}</span>
             </div>
-            <div className="flex justify-between border-b border-[#2A202D] py-2">
-              <span className="text-[#A79EAB]">Selected Domain:</span>
-              <span className="font-semibold text-[#C75491]">{submittedData.domain}</span>
+            <div className="flex justify-between border-b border-[#231B32] py-2">
+              <span className="text-[#CAC4D1]">Selected Domain:</span>
+              <span className="font-semibold text-[#876DBF]">{submittedData.domain}</span>
             </div>
             <div className="flex justify-between items-center pt-2">
-              <span className="text-[#A79EAB]">Application Reference:</span>
+              <span className="text-[#CAC4D1]">Application Reference:</span>
               <div className="flex items-center space-x-1.5">
-                <span className="font-mono text-[#D8D0DA] font-semibold">{submittedData.id}</span>
+                <span className="font-mono text-[#FAF8FD]/90 font-semibold">{submittedData.id}</span>
                 <button
                   type="button"
                   onClick={() => copyRefId(submittedData.id)}
-                  className="p-1 rounded hover:bg-[#18131B] text-[#A79EAB] hover:text-[#E07AB0] transition-colors"
+                  className="p-1 rounded hover:bg-[#1A1428] text-[#CAC4D1] hover:text-[#D88CF5] transition-colors"
                   title="Copy Reference ID"
                 >
                   {copiedRef ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
@@ -282,20 +282,20 @@ export default function JuniorCorePage() {
             </div>
           </div>
 
-          <p className="text-xs text-[#A79EAB]">
+          <p className="text-xs text-[#CAC4D1]">
             A confirmation has been logged. Shortlisted applicants will receive follow-up interview notifications.
           </p>
 
           <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/"
-              className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#5A1025] via-[#8F2450] to-[#7B3F8C] hover:from-[#7A1833] hover:to-[#914B91] text-[#F5F1F5] font-semibold text-sm shadow-lg shadow-[#7A1833]/30 transition-all text-center"
+              className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#D88CF5] text-[#FFFFFF] font-semibold text-sm shadow-lg shadow-[#712EB7]/30 transition-all text-center"
             >
               Back to Home
             </Link>
             <Link
               href="/events"
-              className="px-6 py-3 rounded-xl bg-[#18131B] hover:bg-[#2A202D] text-[#D8D0DA] text-sm font-semibold border border-[#2A202D] transition-colors text-center"
+              className="px-6 py-3 rounded-xl bg-[#1A1428] hover:bg-[#231B32] text-[#FAF8FD] text-sm font-semibold border border-[#231B32] transition-colors text-center"
             >
               Explore Upcoming Events
             </Link>
@@ -318,49 +318,49 @@ export default function JuniorCorePage() {
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="relative z-10 max-w-xl w-full rounded-3xl bg-[#18131B]/95 border border-[#5C2948] backdrop-blur-2xl p-8 sm:p-12 text-center shadow-2xl space-y-6"
+          className="relative z-10 max-w-xl w-full rounded-3xl bg-[#1A1428]/95 border border-[#664BA3] backdrop-blur-2xl p-8 sm:p-12 text-center shadow-2xl space-y-6"
         >
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#7A1833] via-[#8F2450] to-[#C75491] p-0.5 mx-auto shadow-lg shadow-[#7A1833]/30 flex items-center justify-center">
-            <div className="w-full h-full bg-[#121015] rounded-[14px] flex items-center justify-center">
-              <Smartphone className="w-8 h-8 text-[#E07AB0]" />
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#664BA3] via-[#712EB7] to-[#D88CF5] p-0.5 mx-auto shadow-lg shadow-[#712EB7]/30 flex items-center justify-center">
+            <div className="w-full h-full bg-[#120E1C] rounded-[14px] flex items-center justify-center">
+              <Smartphone className="w-8 h-8 text-[#D88CF5]" />
             </div>
           </div>
 
           <div className="space-y-2">
-            <span className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-[#E07AB0] bg-[#18131B] px-3.5 py-1 rounded-full border border-[#5C2948] space-x-1.5">
-              <ShieldAlert className="w-3.5 h-3.5 mr-1 text-[#E07AB0]" />
+            <span className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-[#D88CF5] bg-[#1A1428] px-3.5 py-1 rounded-full border border-[#664BA3] space-x-1.5">
+              <ShieldAlert className="w-3.5 h-3.5 mr-1 text-[#D88CF5]" />
               1 Application Per Phone Enforced
             </span>
-            <h1 className="text-3xl font-extrabold text-[#F5F1F5]">
+            <h1 className="text-3xl font-extrabold text-[#FAF8FD]">
               Application Already Submitted
             </h1>
-            <p className="text-sm text-[#D8D0DA] leading-relaxed">
+            <p className="text-sm text-[#FAF8FD]/80 leading-relaxed">
               An application has already been submitted from this phone/device for applicant <strong>{existingDeviceApplication.fullName}</strong>. To ensure fair recruitment, each applicant may only submit once per phone.
             </p>
           </div>
 
           {/* Applicant Receipt Card */}
-          <div className="rounded-2xl bg-[#121015] border border-[#2A202D] p-5 text-left space-y-2.5 text-xs sm:text-sm">
-            <div className="flex justify-between border-b border-[#2A202D] pb-2">
-              <span className="text-[#A79EAB]">Applicant Name:</span>
-              <span className="font-semibold text-[#F5F1F5]">{existingDeviceApplication.fullName}</span>
+          <div className="rounded-2xl bg-[#120E1C] border border-[#231B32] p-5 text-left space-y-2.5 text-xs sm:text-sm">
+            <div className="flex justify-between border-b border-[#231B32] pb-2">
+              <span className="text-[#CAC4D1]">Applicant Name:</span>
+              <span className="font-semibold text-[#FAF8FD]">{existingDeviceApplication.fullName}</span>
             </div>
-            <div className="flex justify-between border-b border-[#2A202D] py-2">
-              <span className="text-[#A79EAB]">Enrollment No:</span>
-              <span className="font-semibold text-[#E07AB0] font-mono">{existingDeviceApplication.enrollmentNumber}</span>
+            <div className="flex justify-between border-b border-[#231B32] py-2">
+              <span className="text-[#CAC4D1]">Enrollment No:</span>
+              <span className="font-semibold text-[#D88CF5] font-mono">{existingDeviceApplication.enrollmentNumber}</span>
             </div>
-            <div className="flex justify-between border-b border-[#2A202D] py-2">
-              <span className="text-[#A79EAB]">Selected Domain:</span>
-              <span className="font-semibold text-[#C75491]">{existingDeviceApplication.domain}</span>
+            <div className="flex justify-between border-b border-[#231B32] py-2">
+              <span className="text-[#CAC4D1]">Selected Domain:</span>
+              <span className="font-semibold text-[#876DBF]">{existingDeviceApplication.domain}</span>
             </div>
             <div className="flex justify-between items-center pt-2">
-              <span className="text-[#A79EAB]">Application Reference:</span>
+              <span className="text-[#CAC4D1]">Application Reference:</span>
               <div className="flex items-center space-x-1.5">
-                <span className="font-mono text-[#D8D0DA] font-semibold">{existingDeviceApplication.id}</span>
+                <span className="font-mono text-[#FAF8FD]/90 font-semibold">{existingDeviceApplication.id}</span>
                 <button
                   type="button"
                   onClick={() => copyRefId(existingDeviceApplication.id)}
-                  className="p-1 rounded hover:bg-[#18131B] text-[#A79EAB] hover:text-[#E07AB0] transition-colors"
+                  className="p-1 rounded hover:bg-[#1A1428] text-[#CAC4D1] hover:text-[#D88CF5] transition-colors"
                   title="Copy Reference ID"
                 >
                   {copiedRef ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
@@ -369,20 +369,20 @@ export default function JuniorCorePage() {
             </div>
           </div>
 
-          <p className="text-xs text-[#756B7A] max-w-md mx-auto">
+          <p className="text-xs text-[#797380] max-w-md mx-auto">
             Need to update your submitted information? Please contact the IEEE WIE Bennett University core team at wie.ieee@bennett.edu.in.
           </p>
 
           <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/"
-              className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#5A1025] via-[#8F2450] to-[#7B3F8C] hover:from-[#7A1833] hover:to-[#914B91] text-[#F5F1F5] font-semibold text-sm shadow-lg shadow-[#7A1833]/30 transition-all text-center"
+              className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#D88CF5] text-[#FFFFFF] font-semibold text-sm shadow-lg shadow-[#712EB7]/30 transition-all text-center"
             >
               Back to Home
             </Link>
             <Link
               href="/events"
-              className="px-6 py-3 rounded-xl bg-[#18131B] hover:bg-[#2A202D] text-[#D8D0DA] text-sm font-semibold border border-[#2A202D] transition-colors text-center"
+              className="px-6 py-3 rounded-xl bg-[#1A1428] hover:bg-[#231B32] text-[#FAF8FD] text-sm font-semibold border border-[#231B32] transition-colors text-center"
             >
               Explore Upcoming Events
             </Link>
@@ -405,26 +405,26 @@ export default function JuniorCorePage() {
         
         {/* Header Title Section */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#18131B] border border-[#39283D] text-xs font-semibold text-[#C75491] backdrop-blur-md">
-            <Sparkles className="w-3.5 h-3.5 text-[#D05A9E]" />
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#1A1428] border border-[#34224E] text-xs font-semibold text-[#D88CF5] backdrop-blur-md">
+            <Sparkles className="w-3.5 h-3.5 text-[#D88CF5]" />
             <span>Official Chapter Recruitment</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-[#F5F1F5] tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-[#FAF8FD] tracking-tight">
             Join the Junior Core Team
           </h1>
 
-          <p className="text-[#D8D0DA] text-base sm:text-lg leading-relaxed">
+          <p className="text-[#FAF8FD]/80 text-base sm:text-lg leading-relaxed">
             Your opportunity to learn, contribute, lead, and grow with IEEE WIE Bennett University.
           </p>
         </div>
 
         {/* Device Restriction Policy Banner */}
-        <div className="mb-8 p-4 rounded-2xl bg-[#18131B] border border-[#5C2948] text-xs text-[#D8D0DA] flex items-start space-x-3">
-          <Smartphone className="w-4 h-4 text-[#E07AB0] shrink-0 mt-0.5" />
+        <div className="mb-8 p-4 rounded-2xl bg-[#1A1428] border border-[#664BA3] text-xs text-[#FAF8FD]/90 flex items-start space-x-3">
+          <Smartphone className="w-4 h-4 text-[#D88CF5] shrink-0 mt-0.5" />
           <div>
-            <span className="font-semibold text-[#F5F1F5] block">Device Restriction Notice</span>
-            <span className="text-[#A79EAB]">
+            <span className="font-semibold text-[#FAF8FD] block">Device Restriction Notice</span>
+            <span className="text-[#CAC4D1]">
               Only 1 application can be submitted from this phone/device. Please ensure your enrollment number, domain preference, and phone number are correct before submitting.
             </span>
           </div>
@@ -432,11 +432,11 @@ export default function JuniorCorePage() {
 
         {/* Global Submission Error Alert */}
         {submitError && (
-          <div className="mb-8 p-4 rounded-xl bg-[#4A1028]/80 border border-[#7A1833] text-[#F5F1F5] text-sm flex items-start space-x-3 backdrop-blur-md">
-            <AlertCircle className="w-5 h-5 text-[#E07AB0] shrink-0 mt-0.5" />
+          <div className="mb-8 p-4 rounded-xl bg-[#34224E]/80 border border-[#712EB7] text-[#FAF8FD] text-sm flex items-start space-x-3 backdrop-blur-md">
+            <AlertCircle className="w-5 h-5 text-[#D88CF5] shrink-0 mt-0.5" />
             <div>
               <p className="font-semibold">Unable to submit application</p>
-              <p className="text-xs text-[#D8D0DA] mt-0.5">{submitError}</p>
+              <p className="text-xs text-[#CAC4D1] mt-0.5">{submitError}</p>
             </div>
           </div>
         )}
@@ -445,111 +445,111 @@ export default function JuniorCorePage() {
         <form
           onSubmit={handleSubmit}
           noValidate
-          className="rounded-3xl bg-[#121015]/90 border border-[#2A202D] backdrop-blur-2xl p-6 sm:p-10 shadow-2xl space-y-10"
+          className="rounded-3xl bg-[#120E1C]/90 border border-[#231B32] backdrop-blur-2xl p-6 sm:p-10 shadow-2xl space-y-10"
         >
           {/* ----------------------------------------------------------------- */}
           {/* SECTION 1: PERSONAL INFORMATION                                    */}
           {/* ----------------------------------------------------------------- */}
           <div className="space-y-6">
-            <div className="flex items-center space-x-3 border-b border-[#2A202D] pb-3">
-              <User className="w-5 h-5 text-[#C75491]" />
-              <h2 className="text-xl font-bold text-[#F5F1F5]">Personal Information</h2>
+            <div className="flex items-center space-x-3 border-b border-[#231B32] pb-3">
+              <User className="w-5 h-5 text-[#D88CF5]" />
+              <h2 className="text-xl font-bold text-[#FAF8FD]">Personal Information</h2>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {/* Full Name */}
               <div>
-                <label className="block text-xs font-medium text-[#D8D0DA] mb-1.5">
-                  Full Name <span className="text-[#E07AB0]">*</span>
+                <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
+                  Full Name <span className="text-[#D88CF5]">*</span>
                 </label>
                 <input
                   type="text"
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                   placeholder="e.g. Aanya Sharma"
-                  className={`w-full px-4 py-2.5 rounded-xl bg-[#18131B] border text-[#F5F1F5] text-sm placeholder-[#756B7A] focus:outline-none focus:ring-2 transition-all ${
+                  className={`w-full px-4 py-2.5 rounded-xl bg-[#1A1428] border text-[#FAF8FD] text-sm placeholder-[#797380] focus:outline-none focus:ring-2 transition-all ${
                     errors.fullName
-                      ? "border-[#7A1833] focus:ring-[#7A1833]/30 field-error"
-                      : "border-[#2A202D] focus:border-[#8F2450] focus:ring-[#8F2450]/20"
+                      ? "border-[#712EB7] focus:ring-[#712EB7]/30 field-error"
+                      : "border-[#231B32] focus:border-[#712EB7] focus:ring-[#712EB7]/20"
                   }`}
                 />
                 {errors.fullName && (
-                  <p className="mt-1 text-xs text-[#E07AB0]">{errors.fullName}</p>
+                  <p className="mt-1 text-xs text-[#D88CF5]">{errors.fullName}</p>
                 )}
               </div>
 
               {/* Enrollment Number */}
               <div>
-                <label className="block text-xs font-medium text-[#D8D0DA] mb-1.5">
-                  Enrollment Number <span className="text-[#E07AB0]">*</span>
+                <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
+                  Enrollment Number <span className="text-[#D88CF5]">*</span>
                 </label>
                 <input
                   type="text"
                   value={formData.enrollmentNumber}
                   onChange={(e) => setFormData({ ...formData, enrollmentNumber: e.target.value })}
                   placeholder="e.g. E24CSEU0101"
-                  className={`w-full px-4 py-2.5 rounded-xl bg-[#18131B] border text-[#F5F1F5] text-sm placeholder-[#756B7A] uppercase focus:outline-none focus:ring-2 transition-all ${
+                  className={`w-full px-4 py-2.5 rounded-xl bg-[#1A1428] border text-[#FAF8FD] text-sm placeholder-[#797380] uppercase focus:outline-none focus:ring-2 transition-all ${
                     errors.enrollmentNumber
-                      ? "border-[#7A1833] focus:ring-[#7A1833]/30 field-error"
-                      : "border-[#2A202D] focus:border-[#8F2450] focus:ring-[#8F2450]/20"
+                      ? "border-[#712EB7] focus:ring-[#712EB7]/30 field-error"
+                      : "border-[#231B32] focus:border-[#712EB7] focus:ring-[#712EB7]/20"
                   }`}
                 />
                 {errors.enrollmentNumber && (
-                  <p className="mt-1 text-xs text-[#E07AB0]">{errors.enrollmentNumber}</p>
+                  <p className="mt-1 text-xs text-[#D88CF5]">{errors.enrollmentNumber}</p>
                 )}
               </div>
 
               {/* University Email */}
               <div>
-                <label className="block text-xs font-medium text-[#D8D0DA] mb-1.5">
-                  University Email <span className="text-[#E07AB0]">*</span>
+                <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
+                  University Email <span className="text-[#D88CF5]">*</span>
                 </label>
                 <input
                   type="email"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="e.g. student@bennett.edu.in"
-                  className={`w-full px-4 py-2.5 rounded-xl bg-[#18131B] border text-[#F5F1F5] text-sm placeholder-[#756B7A] focus:outline-none focus:ring-2 transition-all ${
+                  className={`w-full px-4 py-2.5 rounded-xl bg-[#1A1428] border text-[#FAF8FD] text-sm placeholder-[#797380] focus:outline-none focus:ring-2 transition-all ${
                     errors.email
-                      ? "border-[#7A1833] focus:ring-[#7A1833]/30 field-error"
-                      : "border-[#2A202D] focus:border-[#8F2450] focus:ring-[#8F2450]/20"
+                      ? "border-[#712EB7] focus:ring-[#712EB7]/30 field-error"
+                      : "border-[#231B32] focus:border-[#712EB7] focus:ring-[#712EB7]/20"
                   }`}
                 />
                 {errors.email && (
-                  <p className="mt-1 text-xs text-[#E07AB0]">{errors.email}</p>
+                  <p className="mt-1 text-xs text-[#D88CF5]">{errors.email}</p>
                 )}
               </div>
 
               {/* Phone Number */}
               <div>
-                <label className="block text-xs font-medium text-[#D8D0DA] mb-1.5">
-                  Phone Number <span className="text-[#E07AB0]">*</span>
+                <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
+                  Phone Number <span className="text-[#D88CF5]">*</span>
                 </label>
                 <input
                   type="tel"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   placeholder="+91 9876543210"
-                  className={`w-full px-4 py-2.5 rounded-xl bg-[#18131B] border text-[#F5F1F5] text-sm placeholder-[#756B7A] focus:outline-none focus:ring-2 transition-all ${
+                  className={`w-full px-4 py-2.5 rounded-xl bg-[#1A1428] border text-[#FAF8FD] text-sm placeholder-[#797380] focus:outline-none focus:ring-2 transition-all ${
                     errors.phone
-                      ? "border-[#7A1833] focus:ring-[#7A1833]/30 field-error"
-                      : "border-[#2A202D] focus:border-[#8F2450] focus:ring-[#8F2450]/20"
+                      ? "border-[#712EB7] focus:ring-[#712EB7]/30 field-error"
+                      : "border-[#231B32] focus:border-[#712EB7] focus:ring-[#712EB7]/20"
                   }`}
                 />
                 {errors.phone && (
-                  <p className="mt-1 text-xs text-[#E07AB0]">{errors.phone}</p>
+                  <p className="mt-1 text-xs text-[#D88CF5]">{errors.phone}</p>
                 )}
               </div>
 
               {/* Course */}
               <div>
-                <label className="block text-xs font-medium text-[#D8D0DA] mb-1.5">
-                  Course / Program <span className="text-[#E07AB0]">*</span>
+                <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
+                  Course / Program <span className="text-[#D88CF5]">*</span>
                 </label>
                 <select
                   value={formData.course}
                   onChange={(e) => setFormData({ ...formData, course: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-[#18131B] border border-[#2A202D] text-[#F5F1F5] text-sm focus:outline-none focus:border-[#8F2450] focus:ring-2 focus:ring-[#8F2450]/20"
+                  className="w-full px-4 py-2.5 rounded-xl bg-[#1A1428] border border-[#231B32] text-[#FAF8FD] text-sm focus:outline-none focus:border-[#712EB7] focus:ring-2 focus:ring-[#712EB7]/20"
                 >
                   <option value="B.Tech">B.Tech</option>
                   <option value="BCA">BCA</option>
@@ -563,27 +563,27 @@ export default function JuniorCorePage() {
 
               {/* Branch / Specialization */}
               <div>
-                <label className="block text-xs font-medium text-[#D8D0DA] mb-1.5">
-                  Branch / Specialization <span className="text-[#E07AB0]">*</span>
+                <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
+                  Branch / Specialization <span className="text-[#D88CF5]">*</span>
                 </label>
                 <input
                   type="text"
                   value={formData.branch}
                   onChange={(e) => setFormData({ ...formData, branch: e.target.value })}
                   placeholder="e.g. CSE / ECE / Biotech / Data Science"
-                  className="w-full px-4 py-2.5 rounded-xl bg-[#18131B] border border-[#2A202D] text-[#F5F1F5] text-sm placeholder-[#756B7A] focus:outline-none focus:border-[#8F2450] focus:ring-2 focus:ring-[#8F2450]/20"
+                  className="w-full px-4 py-2.5 rounded-xl bg-[#1A1428] border border-[#231B32] text-[#FAF8FD] text-sm placeholder-[#797380] focus:outline-none focus:border-[#712EB7] focus:ring-2 focus:ring-[#712EB7]/20"
                 />
               </div>
 
               {/* Year */}
               <div>
-                <label className="block text-xs font-medium text-[#D8D0DA] mb-1.5">
-                  Academic Year <span className="text-[#E07AB0]">*</span>
+                <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
+                  Academic Year <span className="text-[#D88CF5]">*</span>
                 </label>
                 <select
                   value={formData.year}
                   onChange={(e) => setFormData({ ...formData, year: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-[#18131B] border border-[#2A202D] text-[#F5F1F5] text-sm focus:outline-none focus:border-[#8F2450] focus:ring-2 focus:ring-[#8F2450]/20"
+                  className="w-full px-4 py-2.5 rounded-xl bg-[#1A1428] border border-[#231B32] text-[#FAF8FD] text-sm focus:outline-none focus:border-[#712EB7] focus:ring-2 focus:ring-[#712EB7]/20"
                 >
                   <option value="1st Year">1st Year</option>
                   <option value="2nd Year">2nd Year</option>
@@ -594,13 +594,13 @@ export default function JuniorCorePage() {
 
               {/* Semester */}
               <div>
-                <label className="block text-xs font-medium text-[#D8D0DA] mb-1.5">
-                  Current Semester <span className="text-[#E07AB0]">*</span>
+                <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
+                  Current Semester <span className="text-[#D88CF5]">*</span>
                 </label>
                 <select
                   value={formData.semester}
                   onChange={(e) => setFormData({ ...formData, semester: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-[#18131B] border border-[#2A202D] text-[#F5F1F5] text-sm focus:outline-none focus:border-[#8F2450] focus:ring-2 focus:ring-[#8F2450]/20"
+                  className="w-full px-4 py-2.5 rounded-xl bg-[#1A1428] border border-[#231B32] text-[#FAF8FD] text-sm focus:outline-none focus:border-[#712EB7] focus:ring-2 focus:ring-[#712EB7]/20"
                 >
                   <option value="1st Semester">1st Semester</option>
                   <option value="2nd Semester">2nd Semester</option>
@@ -615,13 +615,13 @@ export default function JuniorCorePage() {
 
               {/* Gender (Optional) */}
               <div className="sm:col-span-2">
-                <label className="block text-xs font-medium text-[#A79EAB] mb-1.5">
+                <label className="block text-xs font-medium text-[#CAC4D1] mb-1.5">
                   Gender (Optional)
                 </label>
                 <select
                   value={formData.gender}
                   onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-[#18131B] border border-[#2A202D] text-[#F5F1F5] text-sm focus:outline-none focus:border-[#8F2450]"
+                  className="w-full px-4 py-2.5 rounded-xl bg-[#1A1428] border border-[#231B32] text-[#FAF8FD] text-sm focus:outline-none focus:border-[#712EB7]"
                 >
                   <option value="">Prefer not to disclose</option>
                   <option value="Female">Female</option>
@@ -637,15 +637,15 @@ export default function JuniorCorePage() {
           {/* SECTION 2: DOMAIN & APPLICATION DETAILS                          */}
           {/* ----------------------------------------------------------------- */}
           <div className="space-y-6">
-            <div className="flex items-center space-x-3 border-b border-[#2A202D] pb-3">
-              <Layers className="w-5 h-5 text-[#914B91]" />
-              <h2 className="text-xl font-bold text-[#F5F1F5]">Domain & Statement of Purpose</h2>
+            <div className="flex items-center space-x-3 border-b border-[#231B32] pb-3">
+              <Layers className="w-5 h-5 text-[#876DBF]" />
+              <h2 className="text-xl font-bold text-[#FAF8FD]">Domain & Statement of Purpose</h2>
             </div>
 
             {/* Domain Picker Cards */}
             <div>
-              <label className="block text-xs font-medium text-[#D8D0DA] mb-2">
-                Which domain are you interested in? <span className="text-[#E07AB0]">*</span>
+              <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-2">
+                Which domain are you interested in? <span className="text-[#D88CF5]">*</span>
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
                 {domainOptions.map((item) => {
@@ -657,12 +657,12 @@ export default function JuniorCorePage() {
                       onClick={() => setFormData({ ...formData, domain: item.label })}
                       className={`p-3 rounded-xl text-left border transition-all text-xs font-medium flex flex-col justify-between ${
                         isSelected
-                          ? "bg-[#4A1028]/80 border-[#8F2450] text-[#F5F1F5] shadow-md shadow-[#7A1833]/30"
-                          : "bg-[#18131B] border-[#2A202D] text-[#D8D0DA] hover:border-[#39283D] hover:text-[#F5F1F5]"
+                          ? "bg-[#34224E]/80 border-[#712EB7] text-[#FAF8FD] shadow-md shadow-[#712EB7]/30"
+                          : "bg-[#1A1428] border-[#231B32] text-[#FAF8FD]/80 hover:border-[#664BA3] hover:text-[#FAF8FD]"
                       }`}
                     >
                       <span className="font-bold">{item.label}</span>
-                      <span className="text-[10px] text-[#A79EAB] mt-1 line-clamp-2">
+                      <span className="text-[10px] text-[#CAC4D1] mt-1 line-clamp-2">
                         {item.desc}
                       </span>
                     </button>
@@ -673,28 +673,28 @@ export default function JuniorCorePage() {
 
             {/* Why Join */}
             <div>
-              <label className="block text-xs font-medium text-[#D8D0DA] mb-1.5">
-                Why do you want to join IEEE WIE Bennett University? <span className="text-[#E07AB0]">*</span>
+              <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
+                Why do you want to join IEEE WIE Bennett University? <span className="text-[#D88CF5]">*</span>
               </label>
               <textarea
                 rows={4}
                 value={formData.whyJoin}
                 onChange={(e) => setFormData({ ...formData, whyJoin: e.target.value })}
                 placeholder="Share your motivation, what you hope to learn or contribute, and your aspirations..."
-                className={`w-full px-4 py-3 rounded-xl bg-[#18131B] border text-[#F5F1F5] text-sm placeholder-[#756B7A] focus:outline-none focus:ring-2 transition-all ${
+                className={`w-full px-4 py-3 rounded-xl bg-[#1A1428] border text-[#FAF8FD] text-sm placeholder-[#797380] focus:outline-none focus:ring-2 transition-all ${
                   errors.whyJoin
-                    ? "border-[#7A1833] focus:ring-[#7A1833]/30 field-error"
-                    : "border-[#2A202D] focus:border-[#8F2450] focus:ring-[#8F2450]/20"
+                    ? "border-[#712EB7] focus:ring-[#712EB7]/30 field-error"
+                    : "border-[#231B32] focus:border-[#712EB7] focus:ring-[#712EB7]/20"
                 }`}
               />
               {errors.whyJoin && (
-                <p className="mt-1 text-xs text-[#E07AB0]">{errors.whyJoin}</p>
+                <p className="mt-1 text-xs text-[#D88CF5]">{errors.whyJoin}</p>
               )}
             </div>
 
             {/* Previous Experience */}
             <div>
-              <label className="block text-xs font-medium text-[#D8D0DA] mb-1.5">
+              <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
                 Previous Experience / Leadership Roles (Optional)
               </label>
               <textarea
@@ -702,28 +702,28 @@ export default function JuniorCorePage() {
                 value={formData.previousExperience}
                 onChange={(e) => setFormData({ ...formData, previousExperience: e.target.value })}
                 placeholder="Any clubs, hackathons, open source contributions, or school projects you've taken part in..."
-                className="w-full px-4 py-3 rounded-xl bg-[#18131B] border border-[#2A202D] text-[#F5F1F5] text-sm placeholder-[#756B7A] focus:outline-none focus:border-[#8F2450]"
+                className="w-full px-4 py-3 rounded-xl bg-[#1A1428] border border-[#231B32] text-[#FAF8FD] text-sm placeholder-[#797380] focus:outline-none focus:border-[#712EB7]"
               />
             </div>
 
             {/* Skills */}
             <div>
-              <label className="block text-xs font-medium text-[#D8D0DA] mb-1.5">
-                Skills & Technologies <span className="text-[#E07AB0]">*</span>
+              <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
+                Skills & Technologies <span className="text-[#D88CF5]">*</span>
               </label>
               <input
                 type="text"
                 value={formData.skills}
                 onChange={(e) => setFormData({ ...formData, skills: e.target.value })}
                 placeholder="e.g. React, Python, Figma, Public Speaking, Video Editing, Event Management"
-                className={`w-full px-4 py-2.5 rounded-xl bg-[#18131B] border text-[#F5F1F5] text-sm placeholder-[#756B7A] focus:outline-none focus:ring-2 transition-all ${
+                className={`w-full px-4 py-2.5 rounded-xl bg-[#1A1428] border text-[#FAF8FD] text-sm placeholder-[#797380] focus:outline-none focus:ring-2 transition-all ${
                   errors.skills
-                    ? "border-[#7A1833] focus:ring-[#7A1833]/30 field-error"
-                    : "border-[#2A202D] focus:border-[#8F2450] focus:ring-[#8F2450]/20"
+                    ? "border-[#712EB7] focus:ring-[#712EB7]/30 field-error"
+                    : "border-[#231B32] focus:border-[#712EB7] focus:ring-[#712EB7]/20"
                 }`}
               />
               {errors.skills && (
-                <p className="mt-1 text-xs text-[#E07AB0]">{errors.skills}</p>
+                <p className="mt-1 text-xs text-[#D88CF5]">{errors.skills}</p>
               )}
             </div>
           </div>
@@ -732,15 +732,15 @@ export default function JuniorCorePage() {
           {/* SECTION 3: LINKS, CONSENT & SUBMISSION                           */}
           {/* ----------------------------------------------------------------- */}
           <div className="space-y-6">
-            <div className="flex items-center space-x-3 border-b border-[#2A202D] pb-3">
-              <Link2 className="w-5 h-5 text-[#D05A9E]" />
-              <h2 className="text-xl font-bold text-[#F5F1F5]">Links & Declaration</h2>
+            <div className="flex items-center space-x-3 border-b border-[#231B32] pb-3">
+              <Link2 className="w-5 h-5 text-[#D88CF5]" />
+              <h2 className="text-xl font-bold text-[#FAF8FD]">Links & Declaration</h2>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {/* Portfolio */}
               <div>
-                <label className="block text-xs font-medium text-[#D8D0DA] mb-1.5">
+                <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
                   Portfolio / Behance URL
                 </label>
                 <input
@@ -748,13 +748,13 @@ export default function JuniorCorePage() {
                   value={formData.portfolioUrl}
                   onChange={(e) => setFormData({ ...formData, portfolioUrl: e.target.value })}
                   placeholder="https://..."
-                  className="w-full px-3.5 py-2 rounded-xl bg-[#18131B] border border-[#2A202D] text-[#F5F1F5] text-xs placeholder-[#756B7A] focus:outline-none focus:border-[#8F2450]"
+                  className="w-full px-3.5 py-2 rounded-xl bg-[#1A1428] border border-[#231B32] text-[#FAF8FD] text-xs placeholder-[#797380] focus:outline-none focus:border-[#712EB7]"
                 />
               </div>
 
               {/* LinkedIn */}
               <div>
-                <label className="block text-xs font-medium text-[#D8D0DA] mb-1.5">
+                <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
                   LinkedIn Profile URL
                 </label>
                 <input
@@ -762,13 +762,13 @@ export default function JuniorCorePage() {
                   value={formData.linkedinUrl}
                   onChange={(e) => setFormData({ ...formData, linkedinUrl: e.target.value })}
                   placeholder="https://linkedin.com/in/..."
-                  className="w-full px-3.5 py-2 rounded-xl bg-[#18131B] border border-[#2A202D] text-[#F5F1F5] text-xs placeholder-[#756B7A] focus:outline-none focus:border-[#8F2450]"
+                  className="w-full px-3.5 py-2 rounded-xl bg-[#1A1428] border border-[#231B32] text-[#FAF8FD] text-xs placeholder-[#797380] focus:outline-none focus:border-[#712EB7]"
                 />
               </div>
 
               {/* GitHub */}
               <div>
-                <label className="block text-xs font-medium text-[#D8D0DA] mb-1.5">
+                <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
                   GitHub Profile URL
                 </label>
                 <input
@@ -776,14 +776,14 @@ export default function JuniorCorePage() {
                   value={formData.githubUrl}
                   onChange={(e) => setFormData({ ...formData, githubUrl: e.target.value })}
                   placeholder="https://github.com/..."
-                  className="w-full px-3.5 py-2 rounded-xl bg-[#18131B] border border-[#2A202D] text-[#F5F1F5] text-xs placeholder-[#756B7A] focus:outline-none focus:border-[#8F2450]"
+                  className="w-full px-3.5 py-2 rounded-xl bg-[#1A1428] border border-[#231B32] text-[#FAF8FD] text-xs placeholder-[#797380] focus:outline-none focus:border-[#712EB7]"
                 />
               </div>
             </div>
 
             {/* Additional Info */}
             <div>
-              <label className="block text-xs font-medium text-[#D8D0DA] mb-1.5">
+              <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
                 Anything else you&apos;d like us to know?
               </label>
               <textarea
@@ -791,7 +791,7 @@ export default function JuniorCorePage() {
                 value={formData.additionalInfo}
                 onChange={(e) => setFormData({ ...formData, additionalInfo: e.target.value })}
                 placeholder="Time commitments, specific interests, or questions for the core team..."
-                className="w-full px-4 py-2.5 rounded-xl bg-[#18131B] border border-[#2A202D] text-[#F5F1F5] text-sm placeholder-[#756B7A] focus:outline-none focus:border-[#8F2450]"
+                className="w-full px-4 py-2.5 rounded-xl bg-[#1A1428] border border-[#231B32] text-[#FAF8FD] text-sm placeholder-[#797380] focus:outline-none focus:border-[#712EB7]"
               />
             </div>
 
@@ -802,27 +802,27 @@ export default function JuniorCorePage() {
                   type="checkbox"
                   checked={formData.consent}
                   onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
-                  className="mt-1 w-4 h-4 rounded border-[#39283D] bg-[#18131B] accent-[#8F2450] focus:ring-[#8F2450]/40"
+                  className="mt-1 w-4 h-4 rounded border-[#34224E] bg-[#1A1428] accent-[#712EB7] focus:ring-[#712EB7]/40"
                 />
-                <span className="text-xs text-[#D8D0DA] group-hover:text-[#F5F1F5] transition-colors leading-relaxed">
+                <span className="text-xs text-[#FAF8FD]/80 group-hover:text-[#FAF8FD] transition-colors leading-relaxed">
                   I confirm that the information provided by me is accurate. Your information will only be used for IEEE WIE Bennett University recruitment and chapter communication purposes.
                 </span>
               </label>
               {errors.consent && (
-                <p className="mt-1 text-xs text-[#E07AB0] field-error">{errors.consent}</p>
+                <p className="mt-1 text-xs text-[#D88CF5] field-error">{errors.consent}</p>
               )}
             </div>
 
             {/* Submit Action */}
-            <div className="pt-6 border-t border-[#2A202D] flex flex-col sm:flex-row items-center justify-between gap-4">
-              <p className="text-xs text-[#A79EAB]">
-                Fields marked with <span className="text-[#E07AB0]">*</span> are mandatory.
+            <div className="pt-6 border-t border-[#231B32] flex flex-col sm:flex-row items-center justify-between gap-4">
+              <p className="text-xs text-[#CAC4D1]">
+                Fields marked with <span className="text-[#D88CF5]">*</span> are mandatory.
               </p>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-[#5A1025] via-[#7A1833] via-[#8F2450] to-[#7B3F8C] hover:from-[#7A1833] hover:to-[#914B91] disabled:opacity-60 text-[#F5F1F5] font-semibold text-sm shadow-xl shadow-[#7A1833]/35 flex items-center justify-center space-x-2 transition-all duration-300 hover:scale-[1.02]"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#D88CF5] disabled:opacity-60 text-[#FFFFFF] font-semibold text-sm shadow-xl shadow-[#712EB7]/35 flex items-center justify-center space-x-2 transition-all duration-300 hover:scale-[1.02]"
               >
                 {isSubmitting ? (
                   <>
