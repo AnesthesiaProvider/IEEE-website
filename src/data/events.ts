@@ -38,17 +38,21 @@ export const chapterEvents: ChapterEvent[] = [
     slug: "apocalypse",
     category: "Competitions",
     status: "upcoming",
-    date: "24 SEP 2026",
-    time: "To Be Announced",
-    venue: "Bennett University",
+    date: "23 - 24 SEP 2026",
+    time: "PLH 101",
+    venue: "PLH 101, Bennett University",
     shortDescription:
       "An adrenaline-filled experience with challenges, surprises and memories you’ll be talking about long after it ends. Are you ready?",
     fullDescription:
       "Step Into the Unexpected.\n\nAn adrenaline-filled experience with challenges, surprises and memories you’ll be talking about long after it ends. Are you ready?\n\nPrepare for an intense, high-energy competition designed to test quick thinking, teamwork, and resilience under pressure. Gather your squad (minimum 2, maximum 4 members) and step into the arena.",
     image: "/images/events/apocalypse.png",
+    galleryImages: [
+      "/images/events/apocalypse.png",
+      "/images/events/apocalypse-2.jpg",
+    ],
     registrationOpen: true,
     registrationLink: "#register-team",
-    tags: ["Apocalypse WIE X BC3", "Challenges", "Competition", "Squad (2-4)", "Adrenaline"],
+    tags: ["Apocalypse WIE X BC3", "Challenges", "Competition", "Squad (2-4)", "Adrenaline", "PLH 101"],
   },
   {
     id: "ieee-day-2026",

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import confetti from "canvas-confetti";
 import {
   Users,
@@ -435,6 +436,32 @@ export function ApocalypseRegistrationModal({
       ) : (
         /* Registration Form */
         <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Dual Official Posters Banner */}
+          <div className="grid grid-cols-2 gap-3 p-2 rounded-xl bg-[#120E1C] border border-[#231B32]">
+            <div className="relative h-32 sm:h-44 rounded-lg overflow-hidden bg-[#0A0C15] border border-[#34224E]/50">
+              <Image
+                src="/images/events/apocalypse.png"
+                alt="Apocalypse WIE X BC3 Official Banner"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-[#0A0C15]/85 text-[10px] text-[#D88CF5] font-semibold border border-[#34224E]">
+                Poster 1
+              </div>
+            </div>
+            <div className="relative h-32 sm:h-44 rounded-lg overflow-hidden bg-[#0A0C15] border border-[#34224E]/50">
+              <Image
+                src="/images/events/apocalypse-2.jpg"
+                alt="Apocalypse WIE X BC3 Resident Evil Poster"
+                fill
+                className="object-contain"
+              />
+              <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-[#0A0C15]/85 text-[10px] text-[#D88CF5] font-semibold border border-[#34224E]">
+                Poster 2
+              </div>
+            </div>
+          </div>
+
           {/* Policy Banner */}
           <div className="p-3 rounded-xl bg-[#1A1428] border border-[#664BA3] text-xs text-[#FAF8FD]/90 flex items-start space-x-2.5">
             <Smartphone className="w-4 h-4 text-[#D88CF5] shrink-0 mt-0.5" />
