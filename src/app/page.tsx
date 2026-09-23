@@ -32,7 +32,7 @@ import { impactStats } from "@/data/stats";
 const statIconMap: Record<string, React.ReactNode> = {
   Users: <Users className="w-5 h-5 text-[#712EB7]" />,
   Calendar: <Calendar className="w-5 h-5 text-[#876DBF]" />,
-  Terminal: <Terminal className="w-5 h-5 text-[#D88CF5]" />,
+  Terminal: <Terminal className="w-5 h-5 text-[#8A38D4]" />,
   Rocket: <Rocket className="w-5 h-5 text-[#712EB7]" />,
 };
 
@@ -43,7 +43,7 @@ const aboutPillars = [
       "Explore emerging technologies, build meaningful solutions, and turn conceptual blueprints into deployed systems.",
     icon: <Code2 className="w-6 h-6 text-[#712EB7]" />,
     gradient: "from-[#712EB7]/20 to-transparent",
-    border: "group-hover:border-[#4B326D]",
+    border: "group-hover:border-[#712EB7]/60",
   },
   {
     title: "Learn",
@@ -51,15 +51,15 @@ const aboutPillars = [
       "Participate in cutting-edge bootcamps, technical masterclasses, and hands-on experiences across AI, Web3, and IoT.",
     icon: <BookOpen className="w-6 h-6 text-[#876DBF]" />,
     gradient: "from-[#34224E]/20 to-transparent",
-    border: "group-hover:border-[#34224E]",
+    border: "group-hover:border-[#8A38D4]/60",
   },
   {
     title: "Lead",
     description:
       "Develop executive leadership, project management, and public speaking skills while steering campus-wide technical events.",
-    icon: <Crown className="w-6 h-6 text-[#D88CF5]" />,
+    icon: <Crown className="w-6 h-6 text-[#8A38D4]" />,
     gradient: "from-[#664BA3]/20 to-transparent",
-    border: "group-hover:border-[#664BA3]",
+    border: "group-hover:border-[#712EB7]/60",
   },
   {
     title: "Connect",
@@ -92,9 +92,9 @@ export default function HomePage() {
 
   return (
     <div className="relative overflow-hidden">
-      {/* Dynamic Background Glows */}
-      <div className="glow-orb-wine w-96 h-96 top-20 -left-20" />
-      <div className="glow-orb-purple w-[450px] h-[450px] top-80 -right-20" />
+      {/* Pure Royal Purple Ambient Glows */}
+      <div className="glow-orb-purple w-[520px] h-[520px] top-10 -left-20" />
+      <div className="glow-orb-cyan w-[480px] h-[480px] top-64 -right-20" />
 
       {/* Background Interactive Technological Network Simulation */}
       <div className="absolute inset-x-0 top-0 h-[1050px] sm:h-[1150px] lg:h-[1350px] overflow-hidden pointer-events-none -z-0 opacity-60">
@@ -114,13 +114,13 @@ export default function HomePage() {
             className="space-y-6 flex flex-col items-center"
           >
             {/* Badge */}
-            <div className="inline-flex items-center space-x-2.5 px-4 py-1.5 rounded-full bg-[#1A1428] border border-[#34224E] text-xs font-semibold text-[#D88CF5] backdrop-blur-md shadow-sm">
+            <div className="inline-flex items-center space-x-2.5 px-4 py-1.5 rounded-full bg-[#1A1428] border border-[#712EB7]/50 text-xs font-semibold text-[#C4B5FD] backdrop-blur-md shadow-sm shadow-[#712EB7]/20">
               <Image
                 src="/images/wie-logo.png"
                 alt="IEEE WIE Logo"
                 width={18}
                 height={18}
-                className="w-4 h-4 object-contain filter drop-shadow-[0_0_3px_rgba(216,140,245,0.4)]"
+                className="w-4 h-4 object-contain filter drop-shadow-[0_0_4px_rgba(138,56,212,0.5)]"
               />
               <span>IEEE WIE • Bennett University</span>
             </div>
@@ -128,7 +128,7 @@ export default function HomePage() {
             {/* Main Heading */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#FAF8FD] leading-[1.1]">
               Empowering Women. <br />
-              <span className="bg-gradient-to-r from-[#FAF8FD] via-[#D88CF5] to-[#876DBF] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#FAF8FD] via-[#A855F7] to-[#712EB7] bg-clip-text text-transparent">
                 Engineering the Future.
               </span>
             </h1>
@@ -145,7 +145,7 @@ export default function HomePage() {
                 <span>National Hackathons & Tech Conferences</span>
               </div>
               <div className="flex items-center space-x-2 bg-[#1A1428]/60 px-4 py-2 rounded-full border border-[#231B32]">
-                <CheckCircle2 className="w-4 h-4 text-[#876DBF] shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-[#8A38D4] shrink-0" />
                 <span>Industry Mentorship & Research Circles</span>
               </div>
             </div>
@@ -154,9 +154,9 @@ export default function HomePage() {
             <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
               <Link
                 href="/junior-core"
-                className="px-7 py-3.5 rounded-full bg-gradient-to-r from-[#34224E] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#D88CF5] text-[#FAF8FD] font-semibold text-sm shadow-xl shadow-[#712EB7]/30 flex items-center space-x-2 transition-all duration-300 hover:scale-[1.03]"
+                className="px-7 py-3.5 rounded-full bg-gradient-to-r from-[#712EB7] via-[#8A38D4] to-[#712EB7] hover:from-[#8A38D4] hover:to-[#A855F7] text-[#FFFFFF] font-semibold text-sm shadow-xl shadow-[#712EB7]/35 flex items-center space-x-2 transition-all duration-300 hover:scale-[1.03]"
               >
-                <Sparkles className="w-4 h-4 text-[#D88CF5]" />
+                <Sparkles className="w-4 h-4 text-[#C4B5FD]" />
                 <span>Join Junior Core</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
@@ -164,9 +164,9 @@ export default function HomePage() {
               <button
                 type="button"
                 onClick={() => setIsApocalypseModalOpen(true)}
-                className="px-7 py-3.5 rounded-full bg-[#120E1C] hover:bg-[#1A1428] text-[#CAC4D1] hover:text-[#FAF8FD] font-semibold text-sm border border-[#34224E] hover:border-[#712EB7] backdrop-blur-md transition-all duration-300 hover:scale-[1.03] flex items-center space-x-2.5 shadow-lg shadow-[#712EB7]/20 cursor-pointer group"
+                className="px-7 py-3.5 rounded-full bg-[#120E1C] hover:bg-[#1A1428] text-[#FAF8FD] font-semibold text-sm border border-[#712EB7]/60 hover:border-[#8A38D4] backdrop-blur-md transition-all duration-300 hover:scale-[1.03] flex items-center space-x-2.5 shadow-lg shadow-[#712EB7]/25 cursor-pointer group"
               >
-                <Flame className="w-4 h-4 text-[#D88CF5] group-hover:text-[#FAF8FD] transition-colors" />
+                <Flame className="w-4 h-4 text-[#8A38D4] group-hover:text-[#C4B5FD] transition-colors" />
                 <span>
                   {hasRegisteredOnDevice ? "View Apocalypse WIE X BC3 Team" : "Register for Apocalypse WIE X BC3"}
                 </span>
@@ -191,7 +191,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#D88CF5] bg-[#1A1428] px-3 py-1 rounded-full border border-[#34224E]">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#C4B5FD] bg-[#1A1428] px-3.5 py-1.5 rounded-full border border-[#712EB7]/60">
               Our Vision & Community
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#FAF8FD] tracking-tight">
@@ -219,7 +219,7 @@ export default function HomePage() {
                   {pillar.icon}
                 </div>
 
-                <h3 className="text-xl font-bold text-[#FAF8FD] mb-2 group-hover:text-[#D88CF5] transition-colors">
+                <h3 className="text-xl font-bold text-[#FAF8FD] mb-2 group-hover:text-[#A855F7] transition-colors">
                   {pillar.title}
                 </h3>
                 <p className="text-sm text-[#797380] leading-relaxed">
@@ -239,8 +239,8 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="rounded-3xl bg-[#1A1428]/80 border border-[#34224E] backdrop-blur-2xl p-8 sm:p-12 shadow-2xl relative overflow-hidden">
             
-            {/* Radiant glow accent */}
-            <div className="absolute -right-16 -top-16 w-64 h-64 bg-[#712EB7]/15 rounded-full blur-3xl pointer-events-none" />
+            {/* Radiant purple glow accent */}
+            <div className="absolute -right-16 -top-16 w-64 h-64 bg-[#712EB7]/20 rounded-full blur-3xl pointer-events-none" />
 
             <div className="text-center mb-10">
               <h2 className="text-2xl sm:text-3xl font-bold text-[#FAF8FD]">
@@ -259,7 +259,7 @@ export default function HomePage() {
                       {statIconMap[stat.iconName]}
                     </div>
                   </div>
-                  <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-[#FAF8FD] via-[#D88CF5] to-[#876DBF] bg-clip-text text-transparent">
+                  <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-[#FAF8FD] via-[#A855F7] to-[#712EB7] bg-clip-text text-transparent">
                     <StatCounter value={stat.numericValue} suffix={stat.suffix} />
                   </div>
                   <h4 className="text-sm font-semibold text-[#FAF8FD] tracking-wide">
@@ -284,7 +284,7 @@ export default function HomePage() {
           
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-[#D88CF5] bg-[#1A1428] px-3 py-1 rounded-full border border-[#34224E]">
+              <span className="text-xs font-bold uppercase tracking-widest text-[#C4B5FD] bg-[#1A1428] px-3.5 py-1.5 rounded-full border border-[#712EB7]/60">
                 Leadership
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-[#FAF8FD] mt-2">
@@ -297,7 +297,7 @@ export default function HomePage() {
 
             <Link
               href="/team"
-              className="inline-flex items-center space-x-2 text-sm font-semibold text-[#712EB7] hover:text-[#D88CF5] transition-colors group self-start md:self-auto"
+              className="inline-flex items-center space-x-2 text-sm font-semibold text-[#8A38D4] hover:text-[#C4B5FD] transition-colors group self-start md:self-auto"
             >
               <span>Meet the Full Team</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -321,7 +321,7 @@ export default function HomePage() {
           
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-[#D88CF5] bg-[#1A1428] px-3 py-1 rounded-full border border-[#34224E]">
+              <span className="text-xs font-bold uppercase tracking-widest text-[#C4B5FD] bg-[#1A1428] px-3.5 py-1.5 rounded-full border border-[#712EB7]/60">
                 What&apos;s Happening
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-[#FAF8FD] mt-2">
@@ -334,7 +334,7 @@ export default function HomePage() {
 
             <Link
               href="/events"
-              className="inline-flex items-center space-x-2 text-sm font-semibold text-[#712EB7] hover:text-[#D88CF5] transition-colors group self-start md:self-auto"
+              className="inline-flex items-center space-x-2 text-sm font-semibold text-[#8A38D4] hover:text-[#C4B5FD] transition-colors group self-start md:self-auto"
             >
               <span>View All Events</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -358,10 +358,10 @@ export default function HomePage() {
           <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#1D162A]/90 via-[#161024]/95 to-[#120E1C] border border-[#34224E] p-8 sm:p-14 text-center space-y-6 shadow-2xl">
             
             {/* Abstract decorative rings */}
-            <div className="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-[#712EB7]/20 blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-[#34224E]/20 blur-3xl pointer-events-none" />
+            <div className="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-[#712EB7]/25 blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-[#8A38D4]/20 blur-3xl pointer-events-none" />
 
-            <span className="relative z-10 inline-block text-xs font-bold uppercase tracking-widest text-[#D88CF5] bg-[#1A1428]/80 px-3 py-1 rounded-full border border-[#4B326D]">
+            <span className="relative z-10 inline-block text-xs font-bold uppercase tracking-widest text-[#C4B5FD] bg-[#1A1428]/80 px-3.5 py-1.5 rounded-full border border-[#712EB7]/60">
               Your Next Step
             </span>
 
@@ -382,9 +382,9 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/junior-core"
-                className="px-8 py-3.5 rounded-full bg-gradient-to-r from-[#34224E] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#D88CF5] text-[#FAF8FD] font-semibold text-sm shadow-xl shadow-[#712EB7]/35 flex items-center space-x-2 transition-all hover:scale-105"
+                className="px-8 py-3.5 rounded-full bg-gradient-to-r from-[#712EB7] via-[#8A38D4] to-[#712EB7] hover:from-[#8A38D4] hover:to-[#A855F7] text-[#FFFFFF] font-semibold text-sm shadow-xl shadow-[#712EB7]/35 flex items-center space-x-2 transition-all hover:scale-105"
               >
-                <Sparkles className="w-4 h-4 text-[#D88CF5]" />
+                <Sparkles className="w-4 h-4 text-[#C4B5FD]" />
                 <span>Apply for Junior Core</span>
               </Link>
             </div>

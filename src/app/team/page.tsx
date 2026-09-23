@@ -28,14 +28,14 @@ export default function TeamPage() {
     <div className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
       {/* Dynamic ambient glow */}
       <div className="glow-orb-purple w-96 h-96 top-10 -left-20" />
-      <div className="glow-orb-wine w-96 h-96 top-96 -right-20" />
+      <div className="glow-orb-purple w-96 h-96 top-96 -right-20" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Header Title Section */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#1A1428] border border-[#34224E] text-xs font-semibold text-[#D88CF5] backdrop-blur-md">
-            <Users className="w-3.5 h-3.5 text-[#D88CF5]" />
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#1A1428] border border-[#34224E] text-xs font-semibold text-[#C4B5FD] backdrop-blur-md">
+            <Users className="w-3.5 h-3.5 text-[#C4B5FD]" />
             <span>Executive Board & Leads</span>
           </div>
 

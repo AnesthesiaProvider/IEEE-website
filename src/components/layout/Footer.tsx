@@ -16,14 +16,14 @@ export function Footer() {
           {/* Brand & Mission Column */}
           <div className="md:col-span-2 space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#34224E] via-[#712EB7] to-[#D88CF5] p-[1.5px] shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#34224E] via-[#712EB7] to-[#8A38D4] p-[1.5px] shrink-0">
                 <div className="w-full h-full rounded-[10px] bg-[#0A0C15] flex items-center justify-center p-1">
                   <Image
                     src="/images/wie-logo.png"
                     alt="IEEE Women in Engineering Bennett University"
                     width={36}
                     height={36}
-                    className="w-full h-full object-contain filter drop-shadow-[0_0_4px_rgba(216,140,245,0.3)]"
+                    className="w-full h-full object-contain filter drop-shadow-[0_0_4px_rgba(138,56,212,0.4)]"
                   />
                 </div>
               </div>
@@ -31,7 +31,7 @@ export function Footer() {
                 <h4 className="font-bold text-base text-[#FAF8FD] tracking-tight">
                   IEEE Women in Engineering
                 </h4>
-                <p className="text-xs text-[#D88CF5] font-medium">
+                <p className="text-xs text-[#C4B5FD] font-medium">
                   Bennett University Student Affinity Group
                 </p>
               </div>
@@ -48,7 +48,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="IEEE WIE BU Instagram"
-                className="p-2.5 rounded-xl bg-[#120E1C] border border-[#231B32] text-[#CAC4D1] hover:text-[#D88CF5] hover:border-[#D88CF5]/40 transition-all hover:scale-105"
+                className="p-2.5 rounded-xl bg-[#120E1C] border border-[#231B32] text-[#CAC4D1] hover:text-[#C4B5FD] hover:border-[#8A38D4]/50 transition-all hover:scale-105"
               >
                 <InstagramIcon className="w-4 h-4" />
               </a>
@@ -57,7 +57,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="IEEE WIE BU LinkedIn"
-                className="p-2.5 rounded-xl bg-[#120E1C] border border-[#231B32] text-[#CAC4D1] hover:text-[#D88CF5] hover:border-[#D88CF5]/40 transition-all hover:scale-105"
+                className="p-2.5 rounded-xl bg-[#120E1C] border border-[#231B32] text-[#CAC4D1] hover:text-[#C4B5FD] hover:border-[#8A38D4]/50 transition-all hover:scale-105"
               >
                 <LinkedinIcon className="w-4 h-4" />
               </a>
@@ -66,7 +66,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="IEEE WIE BU GitHub"
-                className="p-2.5 rounded-xl bg-[#120E1C] border border-[#231B32] text-[#CAC4D1] hover:text-[#D88CF5] hover:border-[#D88CF5]/40 transition-all hover:scale-105"
+                className="p-2.5 rounded-xl bg-[#120E1C] border border-[#231B32] text-[#CAC4D1] hover:text-[#C4B5FD] hover:border-[#8A38D4]/50 transition-all hover:scale-105"
               >
                 <GithubIcon className="w-4 h-4" />
               </a>
@@ -87,29 +87,29 @@ export function Footer() {
             </h5>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link href="/" className="text-[#CAC4D1] hover:text-[#D88CF5] transition-colors">
+                <Link href="/" className="text-[#CAC4D1] hover:text-[#C4B5FD] transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/team" className="text-[#CAC4D1] hover:text-[#D88CF5] transition-colors">
+                <Link href="/team" className="text-[#CAC4D1] hover:text-[#C4B5FD] transition-colors">
                   Senior Core Team
                 </Link>
               </li>
               <li>
-                <Link href="/events" className="text-[#CAC4D1] hover:text-[#D88CF5] transition-colors">
+                <Link href="/events" className="text-[#CAC4D1] hover:text-[#C4B5FD] transition-colors">
                   Events & Hackathons
                 </Link>
               </li>
               <li>
-                <Link href="/join" className="text-[#CAC4D1] hover:text-[#D88CF5] transition-colors">
+                <Link href="/join" className="text-[#CAC4D1] hover:text-[#C4B5FD] transition-colors">
                   Join Community
                 </Link>
               </li>
               <li>
                 <Link
                   href="/junior-core"
-                  className="text-[#712EB7] hover:text-[#D88CF5] font-medium flex items-center space-x-1"
+                  className="text-[#8A38D4] hover:text-[#C4B5FD] font-medium flex items-center space-x-1"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>Join Junior Core</span>
@@ -141,7 +141,7 @@ export function Footer() {
           </p>
           <div className="flex items-center space-x-1">
             <span>Engineered with passion by</span>
-            <span className="text-[#D88CF5] font-medium">IEEE WIE BU Technical Team</span>
+            <span className="text-[#C4B5FD] font-medium">IEEE WIE BU Technical Team</span>
           </div>
         </div>
       </div>

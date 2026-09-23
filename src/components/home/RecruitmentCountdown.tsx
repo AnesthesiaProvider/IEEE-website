@@ -82,14 +82,14 @@ export function RecruitmentCountdown() {
           <div className="relative z-10 max-w-3xl mx-auto space-y-6">
             
             {/* Catchphrase / Urgency Flame Badge */}
-            <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#1D162A]/80 border border-[#712EB7]/70 text-[#D88CF5] text-xs sm:text-sm font-bold tracking-wide shadow-lg shadow-[#712EB7]/20 animate-pulse">
-              <Flame className="w-4 h-4 text-[#D88CF5] fill-[#D88CF5] animate-bounce" />
+            <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#1D162A]/80 border border-[#712EB7]/70 text-[#C4B5FD] text-xs sm:text-sm font-bold tracking-wide shadow-lg shadow-[#712EB7]/25 animate-pulse">
+              <Flame className="w-4 h-4 text-[#8A38D4] fill-[#8A38D4] animate-bounce" />
               <span>🔥 LESS THAN 50 SEATS LEFT FOR JUNIOR CORE!</span>
             </div>
 
             {/* Main Headings */}
             <div className="space-y-3">
-              <span className="block text-xs font-extrabold uppercase tracking-widest text-[#D88CF5]">
+              <span className="block text-xs font-extrabold uppercase tracking-widest text-[#C4B5FD]">
                 Bennett University Chapter
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#FAF8FD] tracking-tight">
@@ -103,7 +103,7 @@ export function RecruitmentCountdown() {
             {/* Countdown Grid or Closed Banner */}
             {isMounted && timeLeft.isExpired ? (
               <div className="p-6 sm:p-8 rounded-2xl bg-[#1A1428] border border-[#34224E] max-w-lg mx-auto space-y-3">
-                <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#1D162A] border border-[#712EB7] text-[#D88CF5] text-xs font-bold uppercase tracking-wider">
+                <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#1D162A] border border-[#712EB7] text-[#C4B5FD] text-xs font-bold uppercase tracking-wider">
                   <Lock className="w-3.5 h-3.5" />
                   <span>APPLICATIONS CLOSED</span>
                 </div>
@@ -133,9 +133,9 @@ export function RecruitmentCountdown() {
                       className="group relative flex flex-col items-center justify-center p-3 sm:p-5 rounded-2xl bg-[#120E1C]/90 border border-[#34224E] shadow-inner transition-all duration-300 hover:border-[#712EB7] hover:shadow-[0_8px_24px_-8px_rgba(113,46,183,0.4)]"
                     >
                       {/* Subtle Top Gradient Accent */}
-                      <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#D88CF5]/60 to-transparent rounded-t-2xl" />
+                      <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#8A38D4]/60 to-transparent rounded-t-2xl" />
 
-                      <span className="text-2xl sm:text-4xl lg:text-5xl font-black font-mono tracking-tight text-[#FAF8FD] tabular-nums group-hover:text-[#D88CF5] transition-colors">
+                      <span className="text-2xl sm:text-4xl lg:text-5xl font-black font-mono tracking-tight text-[#FAF8FD] tabular-nums group-hover:text-[#A855F7] transition-colors">
                         {unit.value}
                       </span>
                       <span className="mt-1 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#797380] group-hover:text-[#CAC4D1] transition-colors">
@@ -166,11 +166,11 @@ export function RecruitmentCountdown() {
               ) : (
                 <Link
                   href="/junior-core"
-                  className="relative group inline-flex items-center space-x-2.5 px-8 py-3.5 sm:px-10 sm:py-4 rounded-full font-bold text-sm sm:text-base tracking-wide text-[#FAF8FD] uppercase overflow-hidden shadow-xl shadow-[#712EB7]/40 transition-all duration-300 hover:scale-105 hover:shadow-[#712EB7]/60 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#712EB7] focus:ring-offset-2 focus:ring-offset-[#0A0C15]"
+                  className="relative group inline-flex items-center space-x-2.5 px-8 py-3.5 sm:px-10 sm:py-4 rounded-full font-bold text-sm sm:text-base tracking-wide text-[#FFFFFF] uppercase overflow-hidden shadow-xl shadow-[#712EB7]/40 transition-all duration-300 hover:scale-105 hover:shadow-[#712EB7]/60 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#712EB7] focus:ring-offset-2 focus:ring-offset-[#0A0C15]"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#34224E] via-[#712EB7] to-[#876DBF] transition-all duration-300 group-hover:from-[#712EB7] group-hover:to-[#D88CF5]" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#712EB7] via-[#8A38D4] to-[#712EB7] transition-all duration-300 group-hover:from-[#8A38D4] group-hover:to-[#A855F7]" />
                   <span className="relative z-10 flex items-center space-x-2">
-                    <Sparkles className="w-4 h-4 text-[#D88CF5]" />
+                    <Sparkles className="w-4 h-4 text-[#C4B5FD]" />
                     <span>APPLY FOR JUNIOR CORE</span>
                     <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </span>

@@ -78,7 +78,7 @@ export function EventCard({ event }: EventCardProps) {
           )}
 
           {/* Category Tag */}
-          <div className="absolute top-3 left-3 bg-[#120E1C]/90 backdrop-blur-md px-3 py-1 rounded-full border border-[#664BA3]/50 text-xs font-semibold text-[#D88CF5]">
+          <div className="absolute top-3 left-3 bg-[#120E1C]/90 backdrop-blur-md px-3 py-1 rounded-full border border-[#664BA3]/50 text-xs font-semibold text-[#C4B5FD]">
             {event.category}
           </div>
 
@@ -86,7 +86,7 @@ export function EventCard({ event }: EventCardProps) {
           <div className="absolute top-3 right-3">
             {event.status === "upcoming" ? (
               <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-[#34224E]/80 text-[#FAF8FD] border border-[#712EB7] text-[11px] font-semibold">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#D88CF5] mr-1.5 animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#8A38D4] mr-1.5 animate-pulse" />
                 Upcoming
               </span>
             ) : (
@@ -102,7 +102,7 @@ export function EventCard({ event }: EventCardProps) {
           <div className="space-y-3">
             {/* Meta info row */}
             <div className="flex flex-wrap items-center gap-y-1 gap-x-4 text-xs text-[#CAC4D1] font-medium">
-              <div className="flex items-center space-x-1.5 text-[#D88CF5]">
+              <div className="flex items-center space-x-1.5 text-[#C4B5FD]">
                 <Calendar className="w-3.5 h-3.5" />
                 <span>{event.date}</span>
               </div>
@@ -120,7 +120,7 @@ export function EventCard({ event }: EventCardProps) {
 
             {/* Title & Subtitle */}
             <div className="space-y-1">
-              <h3 className="text-xl font-bold text-[#FAF8FD] group-hover:text-[#D88CF5] transition-colors leading-snug">
+              <h3 className="text-xl font-bold text-[#FAF8FD] group-hover:text-[#C4B5FD] transition-colors leading-snug">
                 {event.title}
               </h3>
               {event.subtitle && (
@@ -152,7 +152,7 @@ export function EventCard({ event }: EventCardProps) {
           <div className="pt-3 border-t border-[#231B32] flex items-center justify-between gap-3">
             <button
               onClick={() => setIsDetailsOpen(true)}
-              className="text-xs font-semibold text-[#FAF8FD]/90 hover:text-[#D88CF5] transition-colors flex items-center space-x-1"
+              className="text-xs font-semibold text-[#FAF8FD]/90 hover:text-[#C4B5FD] transition-colors flex items-center space-x-1"
             >
               <span>View Details</span>
               <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
@@ -174,15 +174,15 @@ export function EventCard({ event }: EventCardProps) {
                   hasRegisteredOnDevice ? (
                     <button
                       onClick={() => setIsApocalypseModalOpen(true)}
-                      className="px-3.5 py-1.5 rounded-lg bg-[#1A1428] hover:bg-[#231B32] text-[#D88CF5] border border-[#664BA3] text-xs font-semibold shadow-md flex items-center space-x-1.5 transition-all"
+                      className="px-3.5 py-1.5 rounded-lg bg-[#1A1428] hover:bg-[#231B32] text-[#C4B5FD] border border-[#664BA3] text-xs font-semibold shadow-md flex items-center space-x-1.5 transition-all"
                     >
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#D88CF5]" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#C4B5FD]" />
                       <span>Team Registered</span>
                     </button>
                   ) : (
                     <button
                       onClick={() => setIsApocalypseModalOpen(true)}
-                      className="px-4 py-1.5 rounded-lg bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#D88CF5] text-[#FFFFFF] text-xs font-semibold shadow-md shadow-[#712EB7]/30 flex items-center space-x-1.5 transition-all"
+                      className="px-4 py-1.5 rounded-lg bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#A855F7] text-[#FFFFFF] text-xs font-semibold shadow-md shadow-[#712EB7]/30 flex items-center space-x-1.5 transition-all"
                     >
                       <Users className="w-3.5 h-3.5 text-[#FAF8FD]" />
                       <span>Register Team</span>
@@ -193,7 +193,7 @@ export function EventCard({ event }: EventCardProps) {
                     href={event.registrationLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-1.5 rounded-lg bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#D88CF5] text-[#FFFFFF] text-xs font-semibold shadow-md shadow-[#712EB7]/30 flex items-center space-x-1.5 transition-all"
+                    className="px-4 py-1.5 rounded-lg bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#A855F7] text-[#FFFFFF] text-xs font-semibold shadow-md shadow-[#712EB7]/30 flex items-center space-x-1.5 transition-all"
                   >
                     <span>Register</span>
                     <ExternalLink className="w-3.5 h-3.5" />
@@ -227,14 +227,14 @@ export function EventCard({ event }: EventCardProps) {
                       fill
                       className="object-contain hover:scale-105 transition-transform duration-300"
                     />
-                    <div className="absolute top-2 left-2 px-2.5 py-0.5 rounded-full bg-[#0A0C15]/90 border border-[#34224E] text-[10px] font-semibold text-[#D88CF5]">
+                    <div className="absolute top-2 left-2 px-2.5 py-0.5 rounded-full bg-[#0A0C15]/90 border border-[#34224E] text-[10px] font-semibold text-[#C4B5FD]">
                       Poster {idx + 1}
                     </div>
                   </div>
                 ))}
               </div>
               <div className="flex items-center justify-between text-xs px-1 text-[#CAC4D1]">
-                <span className="px-2.5 py-1 rounded-full bg-[#712EB7]/30 text-[#D88CF5] border border-[#712EB7]/50 font-semibold">
+                <span className="px-2.5 py-1 rounded-full bg-[#712EB7]/30 text-[#C4B5FD] border border-[#712EB7]/50 font-semibold">
                   {event.category}
                 </span>
                 <span className="bg-[#1A1428] px-3 py-1 rounded-full border border-[#231B32]">
@@ -259,11 +259,11 @@ export function EventCard({ event }: EventCardProps) {
 
           <div className="space-y-2">
             {event.subtitle && (
-              <p className="text-sm font-semibold text-[#D88CF5] italic">
+              <p className="text-sm font-semibold text-[#C4B5FD] italic">
                 {event.subtitle}
               </p>
             )}
-            <div className="flex items-center space-x-2 text-sm text-[#D88CF5]">
+            <div className="flex items-center space-x-2 text-sm text-[#C4B5FD]">
               <MapPin className="w-4 h-4" />
               <span>{event.venue}</span>
             </div>
@@ -275,7 +275,7 @@ export function EventCard({ event }: EventCardProps) {
           {/* Featured Leadership / Dignitaries */}
           {event.speakers && event.speakers.length > 0 && (
             <div className="space-y-2.5 p-4 rounded-xl bg-[#1A1428] border border-[#231B32]">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#D88CF5] flex items-center space-x-2">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#C4B5FD] flex items-center space-x-2">
                 <Users className="w-3.5 h-3.5 text-[#876DBF]" />
                 <span>Featured Leadership & Dignitaries</span>
               </h4>
@@ -285,7 +285,7 @@ export function EventCard({ event }: EventCardProps) {
                     key={idx}
                     className="px-3 py-2 rounded-lg bg-[#120E1C] border border-[#231B32] flex items-center space-x-2"
                   >
-                    <div className="w-2 h-2 rounded-full bg-[#D88CF5]" />
+                    <div className="w-2 h-2 rounded-full bg-[#8A38D4]" />
                     <span className="text-xs font-semibold text-[#FAF8FD]">{sp.role}</span>
                     {sp.name && <span className="text-xs text-[#CAC4D1]">— {sp.name}</span>}
                   </div>
@@ -297,14 +297,14 @@ export function EventCard({ event }: EventCardProps) {
           {/* Highlights */}
           {event.highlights && event.highlights.length > 0 && (
             <div className="space-y-2.5 p-4 rounded-xl bg-[#1A1428] border border-[#231B32]">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#D88CF5] flex items-center space-x-2">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#C4B5FD] flex items-center space-x-2">
                 <Sparkles className="w-3.5 h-3.5 text-[#876DBF]" />
                 <span>Event Highlights & Takeaways</span>
               </h4>
               <ul className="space-y-2 text-xs text-[#FAF8FD]/90">
                 {event.highlights.map((highlight, idx) => (
                   <li key={idx} className="flex items-start space-x-2">
-                    <span className="text-[#D88CF5] font-bold mt-0.5">•</span>
+                    <span className="text-[#C4B5FD] font-bold mt-0.5">•</span>
                     <span className="leading-relaxed">{highlight}</span>
                   </li>
                 ))}
@@ -315,7 +315,7 @@ export function EventCard({ event }: EventCardProps) {
           {/* Series Episodes Breakdown */}
           {event.episodes && event.episodes.length > 0 && (
             <div className="space-y-3 p-4 rounded-xl bg-[#1A1428] border border-[#231B32]">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#D88CF5] flex items-center space-x-2">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#C4B5FD] flex items-center space-x-2">
                 <Layers className="w-3.5 h-3.5 text-[#876DBF]" />
                 <span>Series Episodes Breakdown</span>
               </h4>
@@ -326,7 +326,7 @@ export function EventCard({ event }: EventCardProps) {
                     className="p-3 rounded-lg bg-[#120E1C] border border-[#231B32]/80 space-y-1"
                   >
                     <div className="flex items-center space-x-2">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-[#34224E]/80 text-[#D88CF5] border border-[#712EB7]/60">
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-[#34224E]/80 text-[#C4B5FD] border border-[#712EB7]/60">
                         {ep.episode}
                       </span>
                       <span className="text-xs font-bold text-[#FAF8FD]">{ep.title}</span>
@@ -341,7 +341,7 @@ export function EventCard({ event }: EventCardProps) {
           {/* Distinguished External Judges */}
           {event.judges && event.judges.length > 0 && (
             <div className="space-y-3 p-4 rounded-xl bg-[#1A1428] border border-[#231B32]">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#D88CF5] flex items-center space-x-2">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#C4B5FD] flex items-center space-x-2">
                 <Award className="w-3.5 h-3.5 text-[#876DBF]" />
                 <span>Distinguished External Judges</span>
               </h4>
@@ -352,7 +352,7 @@ export function EventCard({ event }: EventCardProps) {
                     className="p-3 rounded-lg bg-[#120E1C] border border-[#231B32] flex flex-col justify-between space-y-1"
                   >
                     <p className="text-xs font-bold text-[#FAF8FD]">{judge.name}</p>
-                    <p className="text-[11px] text-[#D88CF5] font-medium">{judge.role}</p>
+                    <p className="text-[11px] text-[#C4B5FD] font-medium">{judge.role}</p>
                     <p className="text-[11px] text-[#CAC4D1]">{judge.company}</p>
                   </div>
                 ))}
@@ -381,7 +381,7 @@ export function EventCard({ event }: EventCardProps) {
                 }}
                 className="px-3.5 py-1.5 rounded-xl bg-[#1A1428] hover:bg-[#231B32] text-[#FAF8FD] text-xs font-semibold border border-[#231B32] flex items-center space-x-1.5 transition-colors"
               >
-                <ImageIcon className="w-3.5 h-3.5 text-[#D88CF5]" />
+                <ImageIcon className="w-3.5 h-3.5 text-[#C4B5FD]" />
                 <span>View Event Gallery &rarr;</span>
               </button>
             )}
@@ -394,9 +394,9 @@ export function EventCard({ event }: EventCardProps) {
                       setIsDetailsOpen(false);
                       setIsApocalypseModalOpen(true);
                     }}
-                    className="px-6 py-2 rounded-xl bg-[#1A1428] hover:bg-[#231B32] border border-[#664BA3] text-[#D88CF5] text-xs font-semibold shadow-md inline-flex items-center space-x-2 transition-all"
+                    className="px-6 py-2 rounded-xl bg-[#1A1428] hover:bg-[#231B32] border border-[#664BA3] text-[#C4B5FD] text-xs font-semibold shadow-md inline-flex items-center space-x-2 transition-all"
                   >
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#D88CF5]" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#C4B5FD]" />
                     <span>View Registered Squad</span>
                   </button>
                 ) : (
@@ -405,7 +405,7 @@ export function EventCard({ event }: EventCardProps) {
                       setIsDetailsOpen(false);
                       setIsApocalypseModalOpen(true);
                     }}
-                    className="px-6 py-2 rounded-xl bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#D88CF5] text-[#FFFFFF] text-xs font-semibold shadow-lg shadow-[#712EB7]/30 inline-flex items-center space-x-2 transition-all"
+                    className="px-6 py-2 rounded-xl bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#A855F7] text-[#FFFFFF] text-xs font-semibold shadow-lg shadow-[#712EB7]/30 inline-flex items-center space-x-2 transition-all"
                   >
                     <Users className="w-3.5 h-3.5 text-[#FAF8FD]" />
                     <span>Register Squad (2–4 Members)</span>
@@ -416,7 +416,7 @@ export function EventCard({ event }: EventCardProps) {
                   href={event.registrationLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-2 rounded-xl bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#D88CF5] text-[#FFFFFF] text-xs font-semibold shadow-lg shadow-[#712EB7]/30 inline-flex items-center space-x-2"
+                  className="px-6 py-2 rounded-xl bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#A855F7] text-[#FFFFFF] text-xs font-semibold shadow-lg shadow-[#712EB7]/30 inline-flex items-center space-x-2"
                 >
                   <span>Register for this Event</span>
                   <ExternalLink className="w-3.5 h-3.5" />

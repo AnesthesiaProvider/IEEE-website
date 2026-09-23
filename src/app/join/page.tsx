@@ -24,7 +24,7 @@ const benefits = [
     title: "Technical Workshops",
     description:
       "Priority access to hands-on bootcamps in AI/ML, Cloud Architecture, Fullstack Development, and Hardware IoT.",
-    icon: <Code className="w-6 h-6 text-[#D88CF5]" />,
+    icon: <Code className="w-6 h-6 text-[#C4B5FD]" />,
     gradient: "from-[#712EB7]/25 to-transparent",
   },
   {
@@ -38,7 +38,7 @@ const benefits = [
     title: "Leadership Opportunities",
     description:
       "Take charge of national event logistics, lead technical projects, and manage dynamic multi-disciplinary teams.",
-    icon: <Trophy className="w-6 h-6 text-[#D88CF5]" />,
+    icon: <Trophy className="w-6 h-6 text-[#C4B5FD]" />,
     gradient: "from-[#712EB7]/25 to-transparent",
   },
   {
@@ -52,7 +52,7 @@ const benefits = [
     title: "Competitions & Hackathons",
     description:
       "Exclusive squad formations for national hackathons, Smart India Hackathon, and IEEE international student paper contests.",
-    icon: <Briefcase className="w-6 h-6 text-[#D88CF5]" />,
+    icon: <Briefcase className="w-6 h-6 text-[#C4B5FD]" />,
     gradient: "from-[#712EB7]/25 to-transparent",
   },
   {
@@ -66,7 +66,7 @@ const benefits = [
     title: "Industry Exposure",
     description:
       "Direct interactions with engineering directors and founders during tech talks, AMA sessions, and campus visits.",
-    icon: <HeartHandshake className="w-6 h-6 text-[#D88CF5]" />,
+    icon: <HeartHandshake className="w-6 h-6 text-[#C4B5FD]" />,
     gradient: "from-[#712EB7]/25 to-transparent",
   },
   {
@@ -82,15 +82,15 @@ export default function JoinCommunityPage() {
   return (
     <div className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
       {/* Ambient glows */}
-      <div className="glow-orb-wine w-96 h-96 top-10 -left-20" />
+      <div className="glow-orb-purple w-96 h-96 top-10 -left-20" />
       <div className="glow-orb-purple w-96 h-96 top-96 -right-20" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header Title Section */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#1A1428] border border-[#34224E] text-xs font-semibold text-[#D88CF5] backdrop-blur-md">
-            <Sparkles className="w-3.5 h-3.5 text-[#D88CF5]" />
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#1A1428] border border-[#34224E] text-xs font-semibold text-[#C4B5FD] backdrop-blur-md">
+            <Sparkles className="w-3.5 h-3.5 text-[#C4B5FD]" />
             <span>Inclusive Engineering Ecosystem</span>
           </div>
 
@@ -98,7 +98,7 @@ export default function JoinCommunityPage() {
             Be Part of the Community
           </h1>
 
-          <p className="text-xl sm:text-2xl font-semibold bg-gradient-to-r from-[#FAF8FD] via-[#D88CF5] to-[#876DBF] bg-clip-text text-transparent">
+          <p className="text-xl sm:text-2xl font-semibold bg-gradient-to-r from-[#FAF8FD] via-[#8A38D4] to-[#876DBF] bg-clip-text text-transparent">
             Learn. Build. Lead. Inspire.
           </p>
 
@@ -124,7 +124,7 @@ export default function JoinCommunityPage() {
               <div className="w-12 h-12 rounded-xl bg-[#1A1428] border border-[#231B32] flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110">
                 {benefit.icon}
               </div>
-              <h3 className="text-lg font-bold text-[#FAF8FD] mb-2 group-hover:text-[#D88CF5] transition-colors">
+              <h3 className="text-lg font-bold text-[#FAF8FD] mb-2 group-hover:text-[#C4B5FD] transition-colors">
                 {benefit.title}
               </h3>
               <p className="text-sm text-[#CAC4D1] leading-relaxed">
@@ -139,7 +139,7 @@ export default function JoinCommunityPage() {
           {/* Pathway 1: General Community Member */}
           <div className="rounded-3xl bg-[#120E1C]/90 border border-[#231B32] backdrop-blur-xl p-8 sm:p-10 flex flex-col justify-between space-y-6">
             <div className="space-y-4">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#D88CF5] bg-[#1A1428] px-3 py-1 rounded-full border border-[#34224E]">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#C4B5FD] bg-[#1A1428] px-3 py-1 rounded-full border border-[#34224E]">
                 Open to All Bennett Students
               </span>
               <h2 className="text-2xl sm:text-3xl font-bold text-[#FAF8FD]">
@@ -150,15 +150,15 @@ export default function JoinCommunityPage() {
               </p>
               <ul className="space-y-2 text-xs sm:text-sm text-[#FAF8FD]/80 pt-2">
                 <li className="flex items-center space-x-2">
-                  <CheckCircle className="w-4 h-4 text-[#D88CF5] shrink-0" />
+                  <CheckCircle className="w-4 h-4 text-[#C4B5FD] shrink-0" />
                   <span>Instant event reminders & registration links</span>
                 </li>
                 <li className="flex items-center space-x-2">
-                  <CheckCircle className="w-4 h-4 text-[#D88CF5] shrink-0" />
+                  <CheckCircle className="w-4 h-4 text-[#C4B5FD] shrink-0" />
                   <span>Hackathon team formation channel</span>
                 </li>
                 <li className="flex items-center space-x-2">
-                  <CheckCircle className="w-4 h-4 text-[#D88CF5] shrink-0" />
+                  <CheckCircle className="w-4 h-4 text-[#C4B5FD] shrink-0" />
                   <span>Peer study resources and technical query support</span>
                 </li>
               </ul>
@@ -170,7 +170,7 @@ export default function JoinCommunityPage() {
               rel="noopener noreferrer"
               className="w-full py-3.5 rounded-full bg-[#1A1428] hover:bg-[#231B32] text-[#CAC4D1] hover:text-[#FAF8FD] border border-[#34224E] hover:border-[#664BA3] font-semibold text-sm flex items-center justify-center space-x-2 transition-all"
             >
-              <MessageCircle className="w-4 h-4 text-[#D88CF5]" />
+              <MessageCircle className="w-4 h-4 text-[#C4B5FD]" />
               <span>Join WhatsApp Community</span>
             </a>
           </div>
@@ -180,7 +180,7 @@ export default function JoinCommunityPage() {
             <div className="absolute top-0 right-0 w-48 h-48 bg-[#712EB7]/20 rounded-full blur-3xl pointer-events-none" />
 
             <div className="space-y-4 relative z-10">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#D88CF5] bg-[#1A1428]/90 px-3 py-1 rounded-full border border-[#664BA3]">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#C4B5FD] bg-[#1A1428]/90 px-3 py-1 rounded-full border border-[#664BA3]">
                 Official Recruitment
               </span>
               <h2 className="text-2xl sm:text-3xl font-bold text-[#FAF8FD]">
@@ -191,15 +191,15 @@ export default function JoinCommunityPage() {
               </p>
               <ul className="space-y-2 text-xs sm:text-sm text-[#FAF8FD]/80 pt-2">
                 <li className="flex items-center space-x-2">
-                  <CheckCircle className="w-4 h-4 text-[#D88CF5] shrink-0" />
+                  <CheckCircle className="w-4 h-4 text-[#C4B5FD] shrink-0" />
                   <span>Official Certificate of Contribution & Letter of Recommendation</span>
                 </li>
                 <li className="flex items-center space-x-2">
-                  <CheckCircle className="w-4 h-4 text-[#D88CF5] shrink-0" />
+                  <CheckCircle className="w-4 h-4 text-[#C4B5FD] shrink-0" />
                   <span>Direct mentorship from Senior Core and Faculty Advisors</span>
                 </li>
                 <li className="flex items-center space-x-2">
-                  <CheckCircle className="w-4 h-4 text-[#D88CF5] shrink-0" />
+                  <CheckCircle className="w-4 h-4 text-[#C4B5FD] shrink-0" />
                   <span>Organize national hackathons and symposiums</span>
                 </li>
               </ul>
@@ -207,7 +207,7 @@ export default function JoinCommunityPage() {
 
             <Link
               href="/junior-core"
-              className="w-full py-3.5 rounded-full bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#D88CF5] text-[#FFFFFF] font-semibold text-sm flex items-center justify-center space-x-2 shadow-lg shadow-[#712EB7]/35 transition-all hover:scale-[1.02] relative z-10"
+              className="w-full py-3.5 rounded-full bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#A855F7] text-[#FFFFFF] font-semibold text-sm flex items-center justify-center space-x-2 shadow-lg shadow-[#712EB7]/35 transition-all hover:scale-[1.02] relative z-10"
             >
               <Sparkles className="w-4 h-4 text-[#FAF8FD]" />
               <span>Apply for Junior Core Now</span>

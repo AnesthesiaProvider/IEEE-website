@@ -20,7 +20,7 @@ export async function sendApplicationConfirmationEmail(
         <style>
           body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #0A0C15; color: #FAF8FD; padding: 24px; margin: 0; }
           .container { max-width: 600px; margin: 0 auto; background: #120E1C; border: 1px solid #231B32; border-radius: 16px; padding: 32px; box-shadow: 0 10px 25px rgba(0,0,0,0.7); }
-          .badge { display: inline-block; background: #1A1428; color: #D88CF5; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid #664BA3; margin-bottom: 16px; }
+          .badge { display: inline-block; background: #1A1428; color: #8A38D4; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid #664BA3; margin-bottom: 16px; }
           h1 { color: #FAF8FD; font-size: 24px; font-weight: 700; margin: 0 0 12px; }
           p { color: #CAC4D1; font-size: 15px; line-height: 1.6; margin: 0 0 16px; }
           .details-card { background: #1A1428; border-radius: 12px; padding: 20px; border: 1px solid #231B32; margin: 24px 0; }
@@ -62,7 +62,7 @@ export async function sendApplicationConfirmationEmail(
             </div>
             <div class="detail-row">
               <span class="label">Application Status:</span>
-              <span class="value" style="color: #D88CF5;">${app.status}</span>
+              <span class="value" style="color: #8A38D4;">${app.status}</span>
             </div>
           </div>
 

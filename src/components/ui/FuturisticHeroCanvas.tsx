@@ -30,7 +30,7 @@ export function FuturisticHeroCanvas({ className = "" }: FuturisticHeroCanvasPro
     let width = (canvas.width = canvas.parentElement?.clientWidth || 600);
     let height = (canvas.height = canvas.parentElement?.clientHeight || 600);
 
-    const colors = ["#712EB7", "#664BA3", "#876DBF", "#D88CF5", "#34224E", "#FAF8FD"];
+    const colors = ["#712EB7", "#8A38D4", "#664BA3", "#9D4EDD", "#A855F7", "#FAF8FD"];
     const nodeCount = Math.min(Math.floor((width * height) / 14000), 75);
     const maxDistance = 140;
 
@@ -104,7 +104,7 @@ export function FuturisticHeroCanvas({ className = "" }: FuturisticHeroCanvasPro
 
           if (distance < maxDistance) {
             const alpha = (1 - distance / maxDistance) * 0.35;
-            ctx.strokeStyle = `rgba(216, 140, 245, ${alpha})`;
+            ctx.strokeStyle = `rgba(138, 56, 212, ${alpha})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
@@ -164,11 +164,11 @@ export function FuturisticHeroCanvas({ className = "" }: FuturisticHeroCanvasPro
   return (
     <div className={`relative w-full h-full flex items-center justify-center pointer-events-none ${className}`}>
       {/* Glow backing */}
-      <div className="absolute inset-0 bg-radial from-[#712EB7]/15 via-[#34224E]/10 to-transparent blur-3xl pointer-events-none" />
+      <div className="absolute inset-0 bg-radial from-[#712EB7]/20 via-[#4C1D95]/10 to-transparent blur-3xl pointer-events-none" />
 
       {/* Decorative IEEE WIE central emblem ring */}
       <div className="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full border border-[#664BA3]/25 animate-[spin_45s_linear_infinite] pointer-events-none flex items-center justify-center opacity-50">
-        <div className="w-56 h-56 sm:w-72 sm:h-72 rounded-full border border-dashed border-[#D88CF5]/30 animate-[spin_30s_linear_infinite_reverse]" />
+        <div className="w-56 h-56 sm:w-72 sm:h-72 rounded-full border border-dashed border-[#8A38D4]/30 animate-[spin_30s_linear_infinite_reverse]" />
       </div>
 
       {/* Interactive canvas */}

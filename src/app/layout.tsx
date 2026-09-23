@@ -66,7 +66,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${plusJakartaSans.variable} dark scroll-smooth`}>
-      <body className="min-h-screen flex flex-col bg-[#0A0C15] text-[#FAF8FD] font-sans selection:bg-[#712EB7]/40 selection:text-[#D88CF5]">
+      <body className="min-h-screen flex flex-col bg-[#0A0C15] text-[#FAF8FD] font-sans selection:bg-[#712EB7]/60 selection:text-[#FFFFFF]">
         <Navbar />
         <main className="flex-1 pt-20">{children}</main>
         <Footer />

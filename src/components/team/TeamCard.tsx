@@ -30,7 +30,7 @@ export function TeamCard({ member }: TeamCardProps) {
         aria-label={`View profile of ${member.name}, ${member.role}`}
       >
         {/* Animated Gradient Glow Border on Hover */}
-        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#712EB7]/0 via-[#664BA3]/0 to-[#D88CF5]/0 opacity-0 transition-opacity duration-300 group-hover:from-[#712EB7]/30 group-hover:via-[#664BA3]/20 group-hover:to-[#D88CF5]/30 group-hover:opacity-100 blur-sm" />
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#712EB7]/0 via-[#664BA3]/0 to-[#8A38D4]/0 opacity-0 transition-opacity duration-300 group-hover:from-[#712EB7]/30 group-hover:via-[#664BA3]/20 group-hover:to-[#8A38D4]/30 group-hover:opacity-100 blur-sm" />
 
         {/* Card Content Container */}
         <div className="relative h-full flex flex-col justify-between rounded-2xl bg-[#120E1C]/90 border border-[#231B32] backdrop-blur-xl p-6 transition-all duration-300 group-hover:border-[#664BA3] group-hover:shadow-[0_10px_30px_-10px_rgba(113,46,183,0.3)]">
@@ -54,10 +54,10 @@ export function TeamCard({ member }: TeamCardProps) {
 
             {/* Role & Name */}
             <div className="space-y-1">
-              <p className="text-xs font-semibold uppercase tracking-wider text-[#D88CF5]">
+              <p className="text-xs font-semibold uppercase tracking-wider text-[#C4B5FD]">
                 {member.role}
               </p>
-              <h3 className="text-xl font-bold text-[#FAF8FD] group-hover:text-[#D88CF5] transition-colors">
+              <h3 className="text-xl font-bold text-[#FAF8FD] group-hover:text-[#C4B5FD] transition-colors">
                 {member.name}
               </h3>
               <p className="text-xs text-[#CAC4D1] font-medium">
@@ -80,7 +80,7 @@ export function TeamCard({ member }: TeamCardProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${member.name}'s LinkedIn`}
-                  className="p-2 text-[#CAC4D1] hover:text-[#D88CF5] hover:bg-white/5 rounded-lg transition-colors"
+                  className="p-2 text-[#CAC4D1] hover:text-[#C4B5FD] hover:bg-white/5 rounded-lg transition-colors"
                 >
                   <LinkedinIcon className="w-4 h-4" />
                 </a>
@@ -91,7 +91,7 @@ export function TeamCard({ member }: TeamCardProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${member.name}'s GitHub`}
-                  className="p-2 text-[#CAC4D1] hover:text-[#D88CF5] hover:bg-white/5 rounded-lg transition-colors"
+                  className="p-2 text-[#CAC4D1] hover:text-[#C4B5FD] hover:bg-white/5 rounded-lg transition-colors"
                 >
                   <GithubIcon className="w-4 h-4" />
                 </a>
@@ -100,14 +100,14 @@ export function TeamCard({ member }: TeamCardProps) {
                 <a
                   href={`mailto:${member.email}`}
                   aria-label={`Email ${member.name}`}
-                  className="p-2 text-[#CAC4D1] hover:text-[#D88CF5] hover:bg-white/5 rounded-lg transition-colors"
+                  className="p-2 text-[#CAC4D1] hover:text-[#C4B5FD] hover:bg-white/5 rounded-lg transition-colors"
                 >
                   <Mail className="w-4 h-4" />
                 </a>
               )}
             </div>
 
-            <span className="inline-flex items-center text-xs font-medium text-[#CAC4D1] group-hover:text-[#D88CF5] transition-colors">
+            <span className="inline-flex items-center text-xs font-medium text-[#CAC4D1] group-hover:text-[#C4B5FD] transition-colors">
               Bio
               <ExternalLink className="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-0.5" />
             </span>
@@ -133,7 +133,7 @@ export function TeamCard({ member }: TeamCardProps) {
 
           <div className="flex-1 space-y-3">
             <div>
-              <span className="inline-block text-xs font-semibold uppercase tracking-wider text-[#D88CF5] bg-[#34224E]/60 px-2.5 py-0.5 rounded-full border border-[#664BA3] mb-1.5">
+              <span className="inline-block text-xs font-semibold uppercase tracking-wider text-[#C4B5FD] bg-[#34224E]/60 px-2.5 py-0.5 rounded-full border border-[#664BA3] mb-1.5">
                 {member.role}
               </span>
               <h3 className="text-2xl font-bold text-[#FAF8FD]">{member.name}</h3>
@@ -168,7 +168,7 @@ export function TeamCard({ member }: TeamCardProps) {
               {member.email && (
                 <a
                   href={`mailto:${member.email}`}
-                  className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-[#712EB7]/20 text-[#D88CF5] border border-[#712EB7]/50 text-xs font-medium hover:bg-[#712EB7]/30 transition-colors"
+                  className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-[#712EB7]/20 text-[#C4B5FD] border border-[#712EB7]/50 text-xs font-medium hover:bg-[#712EB7]/30 transition-colors"
                 >
                   <Mail className="w-3.5 h-3.5" />
                   <span>Email</span>

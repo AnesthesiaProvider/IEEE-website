@@ -43,14 +43,14 @@ export function Navbar() {
             aria-label="IEEE Women in Engineering Bennett University Home"
           >
             {/* Custom IEEE WIE Emblem */}
-            <div className="relative w-11 h-11 rounded-xl bg-gradient-to-tr from-[#34224E] via-[#712EB7] to-[#D88CF5] p-[1.5px] shadow-lg shadow-[#712EB7]/25 group-hover:shadow-[#712EB7]/40 transition-all duration-300 group-hover:scale-105 shrink-0 overflow-hidden">
+            <div className="relative w-11 h-11 rounded-xl bg-gradient-to-tr from-[#34224E] via-[#712EB7] to-[#8A38D4] p-[1.5px] shadow-lg shadow-[#712EB7]/25 group-hover:shadow-[#712EB7]/40 transition-all duration-300 group-hover:scale-105 shrink-0 overflow-hidden">
               <div className="w-full h-full rounded-[10px] bg-[#0A0C15] flex items-center justify-center p-1">
                 <Image
                   src="/images/wie-logo.png"
                   alt="IEEE WIE Bennett University"
                   width={38}
                   height={38}
-                  className="w-full h-full object-contain filter drop-shadow-[0_0_4px_rgba(216,140,245,0.35)]"
+                  className="w-full h-full object-contain filter drop-shadow-[0_0_4px_rgba(138,56,212,0.4)]"
                   priority
                 />
               </div>
@@ -58,10 +58,10 @@ export function Navbar() {
 
             <div className="flex flex-col">
               <div className="flex items-center space-x-1.5">
-                <span className="font-bold text-base tracking-tight text-[#FAF8FD] group-hover:text-[#D88CF5] transition-colors">
+                <span className="font-bold text-base tracking-tight text-[#FAF8FD] group-hover:text-[#C4B5FD] transition-colors">
                   IEEE WIE
                 </span>
-                <span className="text-[10px] font-semibold uppercase px-1.5 py-0.5 rounded bg-[#1A1428] border border-[#34224E] text-[#D88CF5]">
+                <span className="text-[10px] font-semibold uppercase px-1.5 py-0.5 rounded bg-[#1A1428] border border-[#712EB7]/60 text-[#C4B5FD]">
                   BU
                 </span>
               </div>
@@ -79,16 +79,16 @@ export function Navbar() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`relative px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                  className={`relative px-4 py-2 rounded-full text-xs font-semibold transition-colors duration-200 ${
                     isActive
-                      ? "text-[#FAF8FD] font-semibold"
+                      ? "text-[#FAF8FD]"
                       : "text-[#CAC4D1] hover:text-[#FAF8FD] hover:bg-white/5"
                   }`}
                 >
                   {isActive && (
                     <motion.div
                       layoutId="nav-active-pill"
-                      className="absolute inset-0 rounded-full bg-[#712EB7]/30 border border-[#876DBF]/40 -z-10"
+                      className="absolute inset-0 rounded-full bg-[#712EB7]/30 border border-[#712EB7]/50 -z-10"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -113,9 +113,9 @@ export function Navbar() {
               href="/junior-core"
               className="relative group inline-flex items-center space-x-2 px-5 py-2.5 rounded-full font-semibold text-xs tracking-wide uppercase overflow-hidden shadow-lg shadow-[#712EB7]/30 transition-all duration-300 hover:shadow-[#712EB7]/50 hover:scale-[1.02] focus:outline-none"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-[#34224E] via-[#712EB7] to-[#876DBF] transition-all duration-300 group-hover:from-[#712EB7] group-hover:to-[#D88CF5]" />
-              <span className="relative z-10 text-[#FAF8FD] flex items-center space-x-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-[#D88CF5]" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#712EB7] via-[#8A38D4] to-[#712EB7] transition-all duration-300 group-hover:from-[#8A38D4] group-hover:to-[#A855F7]" />
+              <span className="relative z-10 text-[#FFFFFF] flex items-center space-x-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-[#C4B5FD]" />
                 <span>Join Junior Core</span>
                 <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
@@ -154,12 +154,12 @@ export function Navbar() {
                     href={item.href}
                     className={`px-4 py-3 rounded-xl text-base font-medium flex items-center justify-between ${
                       isActive
-                        ? "bg-[#712EB7]/25 text-[#FAF8FD] border border-[#876DBF]/40"
+                        ? "bg-[#712EB7]/25 text-[#FAF8FD] border border-[#712EB7]/50"
                         : "text-[#CAC4D1] hover:bg-white/5"
                     }`}
                   >
                     <span>{item.name}</span>
-                    {isActive && <div className="w-2 h-2 rounded-full bg-[#D88CF5]" />}
+                    {isActive && <div className="w-2 h-2 rounded-full bg-[#8A38D4]" />}
                   </Link>
                 );
               })}
@@ -168,9 +168,9 @@ export function Navbar() {
             <div className="pt-3 border-t border-[#231B32] flex flex-col space-y-3">
               <Link
                 href="/junior-core"
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-[#34224E] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#D88CF5] text-[#FAF8FD] font-semibold text-center text-sm shadow-md shadow-[#712EB7]/25 flex items-center justify-center space-x-2"
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-[#712EB7] via-[#8A38D4] to-[#712EB7] hover:from-[#8A38D4] hover:to-[#A855F7] text-[#FFFFFF] font-semibold text-center text-sm shadow-md shadow-[#712EB7]/25 flex items-center justify-center space-x-2"
               >
-                <Sparkles className="w-4 h-4 text-[#D88CF5]" />
+                <Sparkles className="w-4 h-4 text-[#C4B5FD]" />
                 <span>Apply for Junior Core</span>
               </Link>
 

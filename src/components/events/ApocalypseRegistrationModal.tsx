@@ -244,7 +244,7 @@ export function ApocalypseRegistrationModal({
         particleCount: 80,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ["#712EB7", "#664BA3", "#876DBF", "#D88CF5", "#FAF8FD"],
+        colors: ["#712EB7", "#664BA3", "#876DBF", "#8A38D4", "#FAF8FD"],
       });
 
       setSubmittedData(savedData);
@@ -282,14 +282,14 @@ export function ApocalypseRegistrationModal({
       {submittedData ? (
         /* Fresh Confirmation Screen */
         <div className="space-y-6 py-2 text-center">
-          <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#664BA3] via-[#712EB7] to-[#D88CF5] p-0.5 mx-auto flex items-center justify-center shadow-lg shadow-[#712EB7]/40">
+          <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#664BA3] via-[#712EB7] to-[#8A38D4] p-0.5 mx-auto flex items-center justify-center shadow-lg shadow-[#712EB7]/40">
             <div className="w-full h-full bg-[#120E1C] rounded-full flex items-center justify-center">
-              <CheckCircle2 className="w-8 h-8 text-[#D88CF5]" />
+              <CheckCircle2 className="w-8 h-8 text-[#C4B5FD]" />
             </div>
           </div>
 
           <div className="space-y-2">
-            <span className="px-3 py-1 rounded-full bg-[#1A1428] border border-[#664BA3] text-xs font-semibold text-[#D88CF5]">
+            <span className="px-3 py-1 rounded-full bg-[#1A1428] border border-[#664BA3] text-xs font-semibold text-[#C4B5FD]">
               Official Registration Confirmed
             </span>
             <h3 className="text-2xl font-bold text-[#FAF8FD]">
@@ -304,11 +304,11 @@ export function ApocalypseRegistrationModal({
             <div className="flex justify-between items-center pb-2 border-b border-[#231B32]">
               <span className="text-[#CAC4D1]">Registration ID:</span>
               <div className="flex items-center space-x-1.5">
-                <span className="font-mono text-[#D88CF5] font-bold">{submittedData.id}</span>
+                <span className="font-mono text-[#C4B5FD] font-bold">{submittedData.id}</span>
                 <button
                   type="button"
                   onClick={() => copyRegistrationId(submittedData.id)}
-                  className="p-1 rounded hover:bg-[#1A1428] text-[#CAC4D1] hover:text-[#D88CF5] transition-colors"
+                  className="p-1 rounded hover:bg-[#1A1428] text-[#CAC4D1] hover:text-[#C4B5FD] transition-colors"
                   title="Copy ID"
                 >
                   {copiedId ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
@@ -337,7 +337,7 @@ export function ApocalypseRegistrationModal({
                   <span className="font-medium text-[#FAF8FD]">
                     {i + 1}. {m.name}
                   </span>
-                  <span className="font-mono text-[#D88CF5]">{m.enrollmentNumber}</span>
+                  <span className="font-mono text-[#C4B5FD]">{m.enrollmentNumber}</span>
                   <span className="text-[#CAC4D1]">{m.phone}</span>
                 </div>
               ))}
@@ -347,7 +347,7 @@ export function ApocalypseRegistrationModal({
           <div className="pt-2 flex justify-center gap-3">
             <button
               onClick={handleClose}
-              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#D88CF5] text-[#FFFFFF] font-semibold text-xs transition-all shadow-md shadow-[#712EB7]/30"
+              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#A855F7] text-[#FFFFFF] font-semibold text-xs transition-all shadow-md shadow-[#712EB7]/30"
             >
               Done & Close
             </button>
@@ -356,15 +356,15 @@ export function ApocalypseRegistrationModal({
       ) : existingDeviceRegistration ? (
         /* Device Already Registered Screen */
         <div className="space-y-6 py-2 text-center">
-          <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#664BA3] via-[#712EB7] to-[#D88CF5] p-0.5 mx-auto flex items-center justify-center shadow-lg shadow-[#712EB7]/40">
+          <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#664BA3] via-[#712EB7] to-[#8A38D4] p-0.5 mx-auto flex items-center justify-center shadow-lg shadow-[#712EB7]/40">
             <div className="w-full h-full bg-[#120E1C] rounded-full flex items-center justify-center">
-              <Smartphone className="w-8 h-8 text-[#D88CF5]" />
+              <Smartphone className="w-8 h-8 text-[#C4B5FD]" />
             </div>
           </div>
 
           <div className="space-y-2">
-            <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#1A1428] border border-[#664BA3] text-xs font-semibold text-[#D88CF5] space-x-1.5">
-              <ShieldAlert className="w-3.5 h-3.5 mr-1 text-[#D88CF5]" />
+            <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#1A1428] border border-[#664BA3] text-xs font-semibold text-[#C4B5FD] space-x-1.5">
+              <ShieldAlert className="w-3.5 h-3.5 mr-1 text-[#C4B5FD]" />
               1 Team Per Phone Enforced
             </span>
             <h3 className="text-2xl font-bold text-[#FAF8FD]">
@@ -380,11 +380,11 @@ export function ApocalypseRegistrationModal({
             <div className="flex justify-between items-center pb-2 border-b border-[#231B32]">
               <span className="text-[#CAC4D1]">Registration ID:</span>
               <div className="flex items-center space-x-1.5">
-                <span className="font-mono text-[#D88CF5] font-bold">{existingDeviceRegistration.id}</span>
+                <span className="font-mono text-[#C4B5FD] font-bold">{existingDeviceRegistration.id}</span>
                 <button
                   type="button"
                   onClick={() => copyRegistrationId(existingDeviceRegistration.id)}
-                  className="p-1 rounded hover:bg-[#1A1428] text-[#CAC4D1] hover:text-[#D88CF5] transition-colors"
+                  className="p-1 rounded hover:bg-[#1A1428] text-[#CAC4D1] hover:text-[#C4B5FD] transition-colors"
                   title="Copy ID"
                 >
                   {copiedId ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
@@ -413,7 +413,7 @@ export function ApocalypseRegistrationModal({
                   <span className="font-medium text-[#FAF8FD]">
                     {i + 1}. {m.name}
                   </span>
-                  <span className="font-mono text-[#D88CF5]">{m.enrollmentNumber}</span>
+                  <span className="font-mono text-[#C4B5FD]">{m.enrollmentNumber}</span>
                   <span className="text-[#CAC4D1]">{m.phone}</span>
                 </div>
               ))}
@@ -427,7 +427,7 @@ export function ApocalypseRegistrationModal({
           <div className="pt-2 flex justify-center">
             <button
               onClick={handleClose}
-              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#D88CF5] text-[#FFFFFF] font-semibold text-xs transition-all shadow-md shadow-[#712EB7]/30"
+              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#A855F7] text-[#FFFFFF] font-semibold text-xs transition-all shadow-md shadow-[#712EB7]/30"
             >
               Close
             </button>
@@ -445,7 +445,7 @@ export function ApocalypseRegistrationModal({
                 fill
                 className="object-cover"
               />
-              <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-[#0A0C15]/85 text-[10px] text-[#D88CF5] font-semibold border border-[#34224E]">
+              <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-[#0A0C15]/85 text-[10px] text-[#C4B5FD] font-semibold border border-[#34224E]">
                 Poster 1
               </div>
             </div>
@@ -456,7 +456,7 @@ export function ApocalypseRegistrationModal({
                 fill
                 className="object-contain"
               />
-              <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-[#0A0C15]/85 text-[10px] text-[#D88CF5] font-semibold border border-[#34224E]">
+              <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-[#0A0C15]/85 text-[10px] text-[#C4B5FD] font-semibold border border-[#34224E]">
                 Poster 2
               </div>
             </div>
@@ -464,7 +464,7 @@ export function ApocalypseRegistrationModal({
 
           {/* Policy Banner */}
           <div className="p-3 rounded-xl bg-[#1A1428] border border-[#664BA3] text-xs text-[#FAF8FD]/90 flex items-start space-x-2.5">
-            <Smartphone className="w-4 h-4 text-[#D88CF5] shrink-0 mt-0.5" />
+            <Smartphone className="w-4 h-4 text-[#C4B5FD] shrink-0 mt-0.5" />
             <div>
               <span className="font-semibold text-[#FAF8FD] block">Device Restriction Policy</span>
               <span className="text-[#CAC4D1]">
@@ -474,14 +474,14 @@ export function ApocalypseRegistrationModal({
           </div>
           {/* Submission Error Banner */}
           {submitError && (
-            <div className="p-3 rounded-xl bg-[#34224E]/70 border border-[#712EB7] text-[#D88CF5] text-xs flex items-start space-x-2">
+            <div className="p-3 rounded-xl bg-[#34224E]/70 border border-[#712EB7] text-[#C4B5FD] text-xs flex items-start space-x-2">
               <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
               <span>{submitError}</span>
             </div>
           )}
 
           {errors.general && (
-            <div className="p-3 rounded-xl bg-[#34224E]/70 border border-[#712EB7] text-[#D88CF5] text-xs flex items-center space-x-2">
+            <div className="p-3 rounded-xl bg-[#34224E]/70 border border-[#712EB7] text-[#C4B5FD] text-xs flex items-center space-x-2">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{errors.general}</span>
             </div>
@@ -490,7 +490,7 @@ export function ApocalypseRegistrationModal({
           {/* 1. Team Name Input */}
           <div className="space-y-1.5">
             <label className="block text-xs font-bold uppercase tracking-wider text-[#FAF8FD]/90">
-              Team Name <span className="text-[#D88CF5]">*</span>
+              Team Name <span className="text-[#C4B5FD]">*</span>
             </label>
             <input
               type="text"
@@ -507,7 +507,7 @@ export function ApocalypseRegistrationModal({
               className="w-full px-4 py-2.5 rounded-xl bg-[#120E1C] border border-[#231B32] text-[#FAF8FD] placeholder-[#797380] text-xs focus:outline-none focus:border-[#712EB7] focus:ring-1 focus:ring-[#712EB7]"
             />
             {errors.teamName && (
-              <p className="text-[11px] text-[#D88CF5]">{errors.teamName}</p>
+              <p className="text-[11px] text-[#C4B5FD]">{errors.teamName}</p>
             )}
           </div>
 
@@ -515,7 +515,7 @@ export function ApocalypseRegistrationModal({
           <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#120E1C] border border-[#231B32]">
             <div>
               <div className="flex items-center space-x-2">
-                <Users className="w-4 h-4 text-[#D88CF5]" />
+                <Users className="w-4 h-4 text-[#C4B5FD]" />
                 <span className="text-xs font-bold text-[#FAF8FD]">Number of Candidates</span>
               </div>
               <span className="text-[11px] text-[#CAC4D1] mt-0.5 block">
@@ -529,7 +529,7 @@ export function ApocalypseRegistrationModal({
                 type="button"
                 onClick={handleSubtractCandidate}
                 disabled={members.length <= 2}
-                className="w-8 h-8 rounded-lg bg-[#1A1428] hover:bg-[#231B32] active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-[#1A1428] text-[#D88CF5] hover:text-[#FAF8FD] flex items-center justify-center font-bold text-lg transition-all"
+                className="w-8 h-8 rounded-lg bg-[#1A1428] hover:bg-[#231B32] active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-[#1A1428] text-[#C4B5FD] hover:text-[#FAF8FD] flex items-center justify-center font-bold text-lg transition-all"
                 title="Subtract candidate (min 2)"
                 aria-label="Subtract candidate"
               >
@@ -549,7 +549,7 @@ export function ApocalypseRegistrationModal({
                 type="button"
                 onClick={handleAddCandidate}
                 disabled={members.length >= 4}
-                className="w-8 h-8 rounded-lg bg-[#1A1428] hover:bg-[#231B32] active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-[#1A1428] text-[#D88CF5] hover:text-[#FAF8FD] flex items-center justify-center font-bold text-lg transition-all"
+                className="w-8 h-8 rounded-lg bg-[#1A1428] hover:bg-[#231B32] active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-[#1A1428] text-[#C4B5FD] hover:text-[#FAF8FD] flex items-center justify-center font-bold text-lg transition-all"
                 title="Add candidate (max 4)"
                 aria-label="Add candidate"
               >
@@ -568,7 +568,7 @@ export function ApocalypseRegistrationModal({
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
-                      <span className="w-5 h-5 rounded-full bg-[#1A1428] border border-[#34224E] text-[11px] font-bold text-[#D88CF5] flex items-center justify-center">
+                      <span className="w-5 h-5 rounded-full bg-[#1A1428] border border-[#34224E] text-[11px] font-bold text-[#C4B5FD] flex items-center justify-center">
                         {idx + 1}
                       </span>
                       <span className="text-xs font-bold text-[#FAF8FD]">
@@ -581,7 +581,7 @@ export function ApocalypseRegistrationModal({
                       <button
                         type="button"
                         onClick={() => handleRemoveCandidate(idx)}
-                        className="p-1 rounded-lg text-[#797380] hover:text-[#D88CF5] hover:bg-[#34224E]/40 transition-colors"
+                        className="p-1 rounded-lg text-[#797380] hover:text-[#C4B5FD] hover:bg-[#34224E]/40 transition-colors"
                         title="Remove Candidate"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
@@ -594,7 +594,7 @@ export function ApocalypseRegistrationModal({
                     {/* Member's Name */}
                     <div className="space-y-1">
                       <label className="block text-[11px] font-medium text-[#FAF8FD]/90">
-                        Member Name <span className="text-[#D88CF5]">*</span>
+                        Member Name <span className="text-[#C4B5FD]">*</span>
                       </label>
                       <input
                         type="text"
@@ -604,14 +604,14 @@ export function ApocalypseRegistrationModal({
                         className="w-full px-3 py-2 rounded-xl bg-[#0A0C15] border border-[#231B32] text-[#FAF8FD] placeholder-[#797380] text-xs focus:outline-none focus:border-[#712EB7]"
                       />
                       {errors[`name_${idx}`] && (
-                        <p className="text-[10px] text-[#D88CF5]">{errors[`name_${idx}`]}</p>
+                        <p className="text-[10px] text-[#C4B5FD]">{errors[`name_${idx}`]}</p>
                       )}
                     </div>
 
                     {/* Member Enrollment Number */}
                     <div className="space-y-1">
                       <label className="block text-[11px] font-medium text-[#FAF8FD]/90">
-                        Enrollment Number <span className="text-[#D88CF5]">*</span>
+                        Enrollment Number <span className="text-[#C4B5FD]">*</span>
                       </label>
                       <input
                         type="text"
@@ -623,14 +623,14 @@ export function ApocalypseRegistrationModal({
                         className="w-full px-3 py-2 rounded-xl bg-[#0A0C15] border border-[#231B32] text-[#FAF8FD] placeholder-[#797380] text-xs font-mono uppercase focus:outline-none focus:border-[#712EB7]"
                       />
                       {errors[`enroll_${idx}`] && (
-                        <p className="text-[10px] text-[#D88CF5]">{errors[`enroll_${idx}`]}</p>
+                        <p className="text-[10px] text-[#C4B5FD]">{errors[`enroll_${idx}`]}</p>
                       )}
                     </div>
 
                     {/* Member Phone Number */}
                     <div className="space-y-1">
                       <label className="block text-[11px] font-medium text-[#FAF8FD]/90">
-                        Phone Number <span className="text-[#D88CF5]">*</span>
+                        Phone Number <span className="text-[#C4B5FD]">*</span>
                       </label>
                       <input
                         type="tel"
@@ -640,7 +640,7 @@ export function ApocalypseRegistrationModal({
                         className="w-full px-3 py-2 rounded-xl bg-[#0A0C15] border border-[#231B32] text-[#FAF8FD] placeholder-[#797380] text-xs focus:outline-none focus:border-[#712EB7]"
                       />
                       {errors[`phone_${idx}`] && (
-                        <p className="text-[10px] text-[#D88CF5]">{errors[`phone_${idx}`]}</p>
+                        <p className="text-[10px] text-[#C4B5FD]">{errors[`phone_${idx}`]}</p>
                       )}
                     </div>
                   </div>
@@ -662,7 +662,7 @@ export function ApocalypseRegistrationModal({
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-7 py-2.5 rounded-xl bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#D88CF5] disabled:opacity-60 text-[#FFFFFF] font-semibold text-xs shadow-lg shadow-[#712EB7]/30 flex items-center space-x-2 transition-all"
+              className="px-7 py-2.5 rounded-xl bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#A855F7] disabled:opacity-60 text-[#FFFFFF] font-semibold text-xs shadow-lg shadow-[#712EB7]/30 flex items-center space-x-2 transition-all"
             >
               {isSubmitting ? (
                 <>

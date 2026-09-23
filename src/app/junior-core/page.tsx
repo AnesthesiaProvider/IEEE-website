@@ -204,7 +204,7 @@ export default function JuniorCorePage() {
           particleCount: 120,
           spread: 70,
           origin: { y: 0.6 },
-          colors: ["#712EB7", "#664BA3", "#876DBF", "#D88CF5", "#FAF8FD"],
+          colors: ["#712EB7", "#664BA3", "#876DBF", "#8A38D4", "#FAF8FD"],
         });
       } catch {
         // ignore if canvas unavailable
@@ -225,7 +225,7 @@ export default function JuniorCorePage() {
   if (submittedData) {
     return (
       <div className="relative min-h-[75vh] flex items-center justify-center py-16 px-4">
-        <div className="glow-orb-wine w-96 h-96 top-20 -left-20" />
+        <div className="glow-orb-purple w-96 h-96 top-20 -left-20" />
         <div className="glow-orb-purple w-96 h-96 top-40 -right-20" />
 
         <motion.div
@@ -234,9 +234,9 @@ export default function JuniorCorePage() {
           transition={{ duration: 0.5 }}
           className="relative z-10 max-w-xl w-full rounded-3xl bg-[#1A1428]/95 border border-[#664BA3] backdrop-blur-2xl p-8 sm:p-12 text-center shadow-2xl space-y-6"
         >
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#664BA3] via-[#712EB7] to-[#D88CF5] p-0.5 mx-auto shadow-lg shadow-[#712EB7]/30 flex items-center justify-center">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#664BA3] via-[#712EB7] to-[#8A38D4] p-0.5 mx-auto shadow-lg shadow-[#712EB7]/30 flex items-center justify-center">
             <div className="w-full h-full bg-[#120E1C] rounded-[14px] flex items-center justify-center">
-              <Check className="w-8 h-8 text-[#D88CF5]" />
+              <Check className="w-8 h-8 text-[#C4B5FD]" />
             </div>
           </div>
 
@@ -260,7 +260,7 @@ export default function JuniorCorePage() {
             </div>
             <div className="flex justify-between border-b border-[#231B32] py-2">
               <span className="text-[#CAC4D1]">Enrollment No:</span>
-              <span className="font-semibold text-[#D88CF5]">{submittedData.enrollmentNumber}</span>
+              <span className="font-semibold text-[#C4B5FD]">{submittedData.enrollmentNumber}</span>
             </div>
             <div className="flex justify-between border-b border-[#231B32] py-2">
               <span className="text-[#CAC4D1]">Selected Domain:</span>
@@ -273,7 +273,7 @@ export default function JuniorCorePage() {
                 <button
                   type="button"
                   onClick={() => copyRefId(submittedData.id)}
-                  className="p-1 rounded hover:bg-[#1A1428] text-[#CAC4D1] hover:text-[#D88CF5] transition-colors"
+                  className="p-1 rounded hover:bg-[#1A1428] text-[#CAC4D1] hover:text-[#C4B5FD] transition-colors"
                   title="Copy Reference ID"
                 >
                   {copiedRef ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
@@ -289,7 +289,7 @@ export default function JuniorCorePage() {
           <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/"
-              className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#D88CF5] text-[#FFFFFF] font-semibold text-sm shadow-lg shadow-[#712EB7]/30 transition-all text-center"
+              className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#A855F7] text-[#FFFFFF] font-semibold text-sm shadow-lg shadow-[#712EB7]/30 transition-all text-center"
             >
               Back to Home
             </Link>
@@ -311,7 +311,7 @@ export default function JuniorCorePage() {
   if (existingDeviceApplication) {
     return (
       <div className="relative min-h-[75vh] flex items-center justify-center py-16 px-4">
-        <div className="glow-orb-wine w-96 h-96 top-20 -left-20" />
+        <div className="glow-orb-purple w-96 h-96 top-20 -left-20" />
         <div className="glow-orb-purple w-96 h-96 top-40 -right-20" />
 
         <motion.div
@@ -320,15 +320,15 @@ export default function JuniorCorePage() {
           transition={{ duration: 0.5 }}
           className="relative z-10 max-w-xl w-full rounded-3xl bg-[#1A1428]/95 border border-[#664BA3] backdrop-blur-2xl p-8 sm:p-12 text-center shadow-2xl space-y-6"
         >
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#664BA3] via-[#712EB7] to-[#D88CF5] p-0.5 mx-auto shadow-lg shadow-[#712EB7]/30 flex items-center justify-center">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#664BA3] via-[#712EB7] to-[#8A38D4] p-0.5 mx-auto shadow-lg shadow-[#712EB7]/30 flex items-center justify-center">
             <div className="w-full h-full bg-[#120E1C] rounded-[14px] flex items-center justify-center">
-              <Smartphone className="w-8 h-8 text-[#D88CF5]" />
+              <Smartphone className="w-8 h-8 text-[#C4B5FD]" />
             </div>
           </div>
 
           <div className="space-y-2">
-            <span className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-[#D88CF5] bg-[#1A1428] px-3.5 py-1 rounded-full border border-[#664BA3] space-x-1.5">
-              <ShieldAlert className="w-3.5 h-3.5 mr-1 text-[#D88CF5]" />
+            <span className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-[#C4B5FD] bg-[#1A1428] px-3.5 py-1 rounded-full border border-[#664BA3] space-x-1.5">
+              <ShieldAlert className="w-3.5 h-3.5 mr-1 text-[#C4B5FD]" />
               1 Application Per Phone Enforced
             </span>
             <h1 className="text-3xl font-extrabold text-[#FAF8FD]">
@@ -347,7 +347,7 @@ export default function JuniorCorePage() {
             </div>
             <div className="flex justify-between border-b border-[#231B32] py-2">
               <span className="text-[#CAC4D1]">Enrollment No:</span>
-              <span className="font-semibold text-[#D88CF5] font-mono">{existingDeviceApplication.enrollmentNumber}</span>
+              <span className="font-semibold text-[#C4B5FD] font-mono">{existingDeviceApplication.enrollmentNumber}</span>
             </div>
             <div className="flex justify-between border-b border-[#231B32] py-2">
               <span className="text-[#CAC4D1]">Selected Domain:</span>
@@ -360,7 +360,7 @@ export default function JuniorCorePage() {
                 <button
                   type="button"
                   onClick={() => copyRefId(existingDeviceApplication.id)}
-                  className="p-1 rounded hover:bg-[#1A1428] text-[#CAC4D1] hover:text-[#D88CF5] transition-colors"
+                  className="p-1 rounded hover:bg-[#1A1428] text-[#CAC4D1] hover:text-[#C4B5FD] transition-colors"
                   title="Copy Reference ID"
                 >
                   {copiedRef ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
@@ -376,7 +376,7 @@ export default function JuniorCorePage() {
           <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/"
-              className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#D88CF5] text-[#FFFFFF] font-semibold text-sm shadow-lg shadow-[#712EB7]/30 transition-all text-center"
+              className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#A855F7] text-[#FFFFFF] font-semibold text-sm shadow-lg shadow-[#712EB7]/30 transition-all text-center"
             >
               Back to Home
             </Link>
@@ -398,15 +398,15 @@ export default function JuniorCorePage() {
   return (
     <div className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
       {/* Ambient glows */}
-      <div className="glow-orb-wine w-96 h-96 top-10 -left-20" />
+      <div className="glow-orb-purple w-96 h-96 top-10 -left-20" />
       <div className="glow-orb-purple w-96 h-96 top-96 -right-20" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header Title Section */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#1A1428] border border-[#34224E] text-xs font-semibold text-[#D88CF5] backdrop-blur-md">
-            <Sparkles className="w-3.5 h-3.5 text-[#D88CF5]" />
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#1A1428] border border-[#34224E] text-xs font-semibold text-[#C4B5FD] backdrop-blur-md">
+            <Sparkles className="w-3.5 h-3.5 text-[#C4B5FD]" />
             <span>Official Chapter Recruitment</span>
           </div>
 
@@ -421,7 +421,7 @@ export default function JuniorCorePage() {
 
         {/* Device Restriction Policy Banner */}
         <div className="mb-8 p-4 rounded-2xl bg-[#1A1428] border border-[#664BA3] text-xs text-[#FAF8FD]/90 flex items-start space-x-3">
-          <Smartphone className="w-4 h-4 text-[#D88CF5] shrink-0 mt-0.5" />
+          <Smartphone className="w-4 h-4 text-[#C4B5FD] shrink-0 mt-0.5" />
           <div>
             <span className="font-semibold text-[#FAF8FD] block">Device Restriction Notice</span>
             <span className="text-[#CAC4D1]">
@@ -433,7 +433,7 @@ export default function JuniorCorePage() {
         {/* Global Submission Error Alert */}
         {submitError && (
           <div className="mb-8 p-4 rounded-xl bg-[#34224E]/80 border border-[#712EB7] text-[#FAF8FD] text-sm flex items-start space-x-3 backdrop-blur-md">
-            <AlertCircle className="w-5 h-5 text-[#D88CF5] shrink-0 mt-0.5" />
+            <AlertCircle className="w-5 h-5 text-[#C4B5FD] shrink-0 mt-0.5" />
             <div>
               <p className="font-semibold">Unable to submit application</p>
               <p className="text-xs text-[#CAC4D1] mt-0.5">{submitError}</p>
@@ -452,7 +452,7 @@ export default function JuniorCorePage() {
           {/* ----------------------------------------------------------------- */}
           <div className="space-y-6">
             <div className="flex items-center space-x-3 border-b border-[#231B32] pb-3">
-              <User className="w-5 h-5 text-[#D88CF5]" />
+              <User className="w-5 h-5 text-[#C4B5FD]" />
               <h2 className="text-xl font-bold text-[#FAF8FD]">Personal Information</h2>
             </div>
 
@@ -460,7 +460,7 @@ export default function JuniorCorePage() {
               {/* Full Name */}
               <div>
                 <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
-                  Full Name <span className="text-[#D88CF5]">*</span>
+                  Full Name <span className="text-[#C4B5FD]">*</span>
                 </label>
                 <input
                   type="text"
@@ -474,14 +474,14 @@ export default function JuniorCorePage() {
                   }`}
                 />
                 {errors.fullName && (
-                  <p className="mt-1 text-xs text-[#D88CF5]">{errors.fullName}</p>
+                  <p className="mt-1 text-xs text-[#C4B5FD]">{errors.fullName}</p>
                 )}
               </div>
 
               {/* Enrollment Number */}
               <div>
                 <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
-                  Enrollment Number <span className="text-[#D88CF5]">*</span>
+                  Enrollment Number <span className="text-[#C4B5FD]">*</span>
                 </label>
                 <input
                   type="text"
@@ -495,14 +495,14 @@ export default function JuniorCorePage() {
                   }`}
                 />
                 {errors.enrollmentNumber && (
-                  <p className="mt-1 text-xs text-[#D88CF5]">{errors.enrollmentNumber}</p>
+                  <p className="mt-1 text-xs text-[#C4B5FD]">{errors.enrollmentNumber}</p>
                 )}
               </div>
 
               {/* University Email */}
               <div>
                 <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
-                  University Email <span className="text-[#D88CF5]">*</span>
+                  University Email <span className="text-[#C4B5FD]">*</span>
                 </label>
                 <input
                   type="email"
@@ -516,14 +516,14 @@ export default function JuniorCorePage() {
                   }`}
                 />
                 {errors.email && (
-                  <p className="mt-1 text-xs text-[#D88CF5]">{errors.email}</p>
+                  <p className="mt-1 text-xs text-[#C4B5FD]">{errors.email}</p>
                 )}
               </div>
 
               {/* Phone Number */}
               <div>
                 <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
-                  Phone Number <span className="text-[#D88CF5]">*</span>
+                  Phone Number <span className="text-[#C4B5FD]">*</span>
                 </label>
                 <input
                   type="tel"
@@ -537,14 +537,14 @@ export default function JuniorCorePage() {
                   }`}
                 />
                 {errors.phone && (
-                  <p className="mt-1 text-xs text-[#D88CF5]">{errors.phone}</p>
+                  <p className="mt-1 text-xs text-[#C4B5FD]">{errors.phone}</p>
                 )}
               </div>
 
               {/* Course */}
               <div>
                 <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
-                  Course / Program <span className="text-[#D88CF5]">*</span>
+                  Course / Program <span className="text-[#C4B5FD]">*</span>
                 </label>
                 <select
                   value={formData.course}
@@ -564,7 +564,7 @@ export default function JuniorCorePage() {
               {/* Branch / Specialization */}
               <div>
                 <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
-                  Branch / Specialization <span className="text-[#D88CF5]">*</span>
+                  Branch / Specialization <span className="text-[#C4B5FD]">*</span>
                 </label>
                 <input
                   type="text"
@@ -578,7 +578,7 @@ export default function JuniorCorePage() {
               {/* Year */}
               <div>
                 <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
-                  Academic Year <span className="text-[#D88CF5]">*</span>
+                  Academic Year <span className="text-[#C4B5FD]">*</span>
                 </label>
                 <select
                   value={formData.year}
@@ -595,7 +595,7 @@ export default function JuniorCorePage() {
               {/* Semester */}
               <div>
                 <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
-                  Current Semester <span className="text-[#D88CF5]">*</span>
+                  Current Semester <span className="text-[#C4B5FD]">*</span>
                 </label>
                 <select
                   value={formData.semester}
@@ -645,7 +645,7 @@ export default function JuniorCorePage() {
             {/* Domain Picker Cards */}
             <div>
               <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-2">
-                Which domain are you interested in? <span className="text-[#D88CF5]">*</span>
+                Which domain are you interested in? <span className="text-[#C4B5FD]">*</span>
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
                 {domainOptions.map((item) => {
@@ -674,7 +674,7 @@ export default function JuniorCorePage() {
             {/* Why Join */}
             <div>
               <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
-                Why do you want to join IEEE WIE Bennett University? <span className="text-[#D88CF5]">*</span>
+                Why do you want to join IEEE WIE Bennett University? <span className="text-[#C4B5FD]">*</span>
               </label>
               <textarea
                 rows={4}
@@ -688,7 +688,7 @@ export default function JuniorCorePage() {
                 }`}
               />
               {errors.whyJoin && (
-                <p className="mt-1 text-xs text-[#D88CF5]">{errors.whyJoin}</p>
+                <p className="mt-1 text-xs text-[#C4B5FD]">{errors.whyJoin}</p>
               )}
             </div>
 
@@ -709,7 +709,7 @@ export default function JuniorCorePage() {
             {/* Skills */}
             <div>
               <label className="block text-xs font-medium text-[#FAF8FD]/90 mb-1.5">
-                Skills & Technologies <span className="text-[#D88CF5]">*</span>
+                Skills & Technologies <span className="text-[#C4B5FD]">*</span>
               </label>
               <input
                 type="text"
@@ -723,7 +723,7 @@ export default function JuniorCorePage() {
                 }`}
               />
               {errors.skills && (
-                <p className="mt-1 text-xs text-[#D88CF5]">{errors.skills}</p>
+                <p className="mt-1 text-xs text-[#C4B5FD]">{errors.skills}</p>
               )}
             </div>
           </div>
@@ -733,7 +733,7 @@ export default function JuniorCorePage() {
           {/* ----------------------------------------------------------------- */}
           <div className="space-y-6">
             <div className="flex items-center space-x-3 border-b border-[#231B32] pb-3">
-              <Link2 className="w-5 h-5 text-[#D88CF5]" />
+              <Link2 className="w-5 h-5 text-[#C4B5FD]" />
               <h2 className="text-xl font-bold text-[#FAF8FD]">Links & Declaration</h2>
             </div>
 
@@ -809,20 +809,20 @@ export default function JuniorCorePage() {
                 </span>
               </label>
               {errors.consent && (
-                <p className="mt-1 text-xs text-[#D88CF5] field-error">{errors.consent}</p>
+                <p className="mt-1 text-xs text-[#C4B5FD] field-error">{errors.consent}</p>
               )}
             </div>
 
             {/* Submit Action */}
             <div className="pt-6 border-t border-[#231B32] flex flex-col sm:flex-row items-center justify-between gap-4">
               <p className="text-xs text-[#CAC4D1]">
-                Fields marked with <span className="text-[#D88CF5]">*</span> are mandatory.
+                Fields marked with <span className="text-[#C4B5FD]">*</span> are mandatory.
               </p>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#D88CF5] disabled:opacity-60 text-[#FFFFFF] font-semibold text-sm shadow-xl shadow-[#712EB7]/35 flex items-center justify-center space-x-2 transition-all duration-300 hover:scale-[1.02]"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-[#664BA3] via-[#712EB7] to-[#876DBF] hover:from-[#712EB7] hover:to-[#A855F7] disabled:opacity-60 text-[#FFFFFF] font-semibold text-sm shadow-xl shadow-[#712EB7]/35 flex items-center justify-center space-x-2 transition-all duration-300 hover:scale-[1.02]"
               >
                 {isSubmitting ? (
                   <>
